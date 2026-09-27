@@ -1,33 +1,44 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Activate - STARLIFE</title><style>body{margin:0;background:#0a0e1a;color:#fff;font-family:sans-serif;padding:15px;display:flex;justify-content:center}.card{background:#151b2d;padding:25px;border-radius:20px;max-width:380px;width:100%;border:1px solid #f59e0b;margin-top:20px;text-align:center}.input{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none;background:#0f172a;color:#fff;box-sizing:border-box;text-align:center}.btn{width:100%;padding:16px;border:none;border-radius:12px;font-weight:bold;margin-top:10px;cursor:pointer}.yellow{background:#f59e0b;color:#000}.paybox{background:#0a0e1a;border:2px dashed #f59e0b;padding:15px;border-radius:12px;margin:15px 0;text-align:left}.payrow{display:flex;justify-content:space-between;background:#1e293b;padding:10px;border-radius:8px;margin:6px 0;font-size:14px}</style></head><body>
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE - Join & Earn</title><style>body{margin:0;background:#0a0e1a;color:#fff;font-family:sans-serif;padding:12px;display:flex;justify-content:center} .card{background:#151b2d;padding:20px;border-radius:18px;max-width:380px;width:100%;border:1px solid #00ff88;margin-top:10px} .input{width:100%;padding:14px;margin:7px 0;border-radius:10px;border:none;background:#0f172a;color:#fff;box-sizing:border-box} .btn{width:100%;padding:15px;border:none;border-radius:12px;font-weight:bold;margin-top:8px;cursor:pointer} .green{background:#00ff88;color:#000} .yellow{background:#f59e0b;color:#000} .paybox{background:#0a0e1a;border:2px dashed #f59e0b;padding:12px;border-radius:12px;margin:10px 0} .payrow{display:flex;justify-content:space-between;background:#1e293b;padding:8px;border-radius:6px;margin:4px 0;font-size:13px} .hidden{display:none}</style></head><body>
 <div class="card">
-<h1 style="color:#f59e0b">🔒 Lipa KSH 200</h1>
-<p style="font-size:13px;color:#94a3b8">Habari <b id="uname" style="color:#00ff88"></b>! Lipa ndio ufungue Dashboard</p>
-<div class="paybox">
-<p style="color:#f59e0b;font-weight:bold;text-align:center;margin:5px;font-size:18px">💰 FEE: KSH 200</p>
-<div class="payrow"><span>Paybill:</span><b style="color:#00ff88">714777</b></div>
-<div class="payrow"><span>Account:</span><b style="color:#00ff88">440200282954</b></div>
-<div class="payrow"><span>Amount:</span><b>KSH 200</b></div>
-<p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:10px">M-Pesa > Lipa na M-Pesa > Paybill > 714777 > Acc 440200282954 > 200</p>
+
+<!-- STEP 1: SIGNUP -->
+<div id="step1"><h1 style="color:#00ff88;text-align:center;margin:5px">STARLIFE AGENCIES</h1><p style="text-align:center;color:#94a3b8;font-size:11px" id="refMsg"></p><h3 style="text-align:center">Step 1: Create Account</h3><input id="fullname" class="input" placeholder="Full Name"><input id="username" class="input" placeholder="Username (itaonekana kwa account)"><input id="email" class="input" placeholder="Email" type="email"><input id="phone" class="input" placeholder="M-Pesa Number 07..." type="tel"><input id="pass" class="input" placeholder="Password" type="password"><input id="cpass" class="input" placeholder="Confirm Password" type="password"><button class="btn green" onclick="doSignup()">🚀 CREATE ACCOUNT</button><p style="text-align:center;font-size:11px;margin-top:10px">Already have account? <a href="#" onclick="showLogin()" style="color:#00ff88">Login</a></p></div>
+
+<!-- STEP 2: PAYMENT -->
+<div id="step2" class="hidden"><h1 style="color:#f59e0b;text-align:center">🔒 Step 2: Activate KSH 200</h1><p style="text-align:center;font-size:12px">Habari <b id="u1" style="color:#00ff88"></b>! Lipa ndio ufungue Dashboard</p><div class="paybox"><p style="color:#f59e0b;font-weight:bold;text-align:center;margin:5px">💰 FEE: KSH 200</p><div class="payrow"><span>Paybill:</span><b style="color:#00ff88">714777</b></div><div class="payrow"><span>Account:</span><b style="color:#00ff88">440200282954</b></div><div class="payrow"><span>Amount:</span><b>KSH 200</b></div><p style="font-size:10px;color:#94a3b8;text-align:center">M-Pesa > Lipa na M-Pesa > Paybill > 714777 > Acc 440200282954 > 200</p></div><input id="mpesa" class="input" placeholder="Weka M-Pesa Code e.g SH12..." style="text-align:center"><button class="btn yellow" onclick="doPay()">✅ NIME LIPA - FUNGUA DASHBOARD</button></div>
+
+<!-- STEP 3: DASHBOARD -->
+<div id="step3" class="hidden"><h1 style="color:#00ff88;text-align:center;margin:5px">STARLIFE DASHBOARD</h1><p style="text-align:center;font-size:11px">👤 <span id="u2" style="color:#00ff88"></span> | <a href="#" onclick="logout()" style="color:red;font-size:11px">Logout</a></p><div style="background:#0a0e1a;padding:15px;border-radius:12px;text-align:center;margin:10px 0"><p>Balance</p><h1 style="color:#00ff88;font-size:32px;margin:5px">KSH <span id="bal">0</span></h1><p style="font-size:11px">Ads: <span id="ads">0</span></p></div><button class="btn green" onclick="watchAd()">📺 VIEW AD & EARN 50</button><button class="btn" style="background:#2563eb;color:#fff" onclick="copyLink()">👥 COPY MY LINK - EARN 300</button><button class="btn yellow" onclick="openW()">💰 Withdraw M-Pesa</button><div style="background:#0a0e1a;border:2px dashed #00ff88;padding:10px;border-radius:10px;margin-top:12px"><p style="font-size:11px;color:#00ff88;font-weight:bold;text-align:center">🔗 YOUR LINK:</p><input id="mylink" style="width:100%;padding:8px;border-radius:6px;border:none;background:#1e293b;color:#00ff88;font-size:10px;text-align:center" readonly><button onclick="copyLink()" style="margin-top:6px;background:#00ff88;color:#000;border:none;padding:8px 15px;border-radius:6px;font-weight:bold;width:100%">📋 COPY & SHARE</button></div></div>
+
+<!-- LOGIN -->
+<div id="loginDiv" class="hidden"><h1 style="color:#00ff88;text-align:center">LOGIN</h1><input id="luser" class="input" placeholder="Username or Email"><input id="lpass" class="input" placeholder="Password" type="password"><button class="btn green" onclick="doLogin()">🔓 LOGIN</button><p style="text-align:center;font-size:11px;margin-top:10px">No account? <a href="#" onclick="showSignup()" style="color:#00ff88">Sign Up</a></p></div>
+
 </div>
-<input id="mpesa" class="input" placeholder="M-Pesa Code e.g SH12...">
-<button class="btn yellow" onclick="activate()">✅ NIME LIPA - FUNGUA ACCOUNT</button>
-<p style="font-size:11px;margin-top:10px"><a href="#" onclick="logout()" style="color:red">Logout</a></p>
-</div>
+
+<div id="adM" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99;justify-content:center;align-items:center;flex-direction:column"><h2>Ad... <span id="tm">5</span>s</h2><div style="width:80%;height:10px;background:#334155;border-radius:10px"><div id="bar" style="height:100%;width:0%;background:#00ff88;transition:width 1s"></div></div></div>
+
 <script>
-let current=localStorage.getItem('current_user');if(!current)location.href='login.html';
-let users=JSON.parse(localStorage.getItem('star_users')||'[]');let me=users.find(u=>u.username===current);
-document.getElementById('uname').innerText=me.username;
-if(me.activated)location.href='dashboard.html';
-function activate(){
- let code=document.getElementById('mpesa').value.trim().toUpperCase();
- if(code.length<6) return alert('Weka Code sahihi!');
- me.activated=true;me.activation_code=code;me.activated_time=new Date().toLocaleString();
- localStorage.setItem('star_users',JSON.stringify(users));
- let pays=JSON.parse(localStorage.getItem('payments')||'[]');
- pays.push({username:me.username,fullname:me.fullname,phone:me.phone,mpesa:code,time:new Date().toLocaleString()});
- localStorage.setItem('payments',JSON.stringify(pays));
- alert('✅ KSH 200 Received! Code '+code+'\\nAccount imefunguliwa!');
- location.href='dashboard.html';
+let ref=new URLSearchParams(location.search).get('ref');let cur=localStorage.getItem('current_user');let users=JSON.parse(localStorage.getItem('star_users')||'[]');let me=users.find(u=>u.username===cur);
+if(ref){document.getElementById('refMsg').innerHTML='🎉 Invited by: <b style="color:#00ff88">'+ref+'</b>';}
+function refresh(){users=JSON.parse(localStorage.getItem('star_users')||'[]');me=users.find(u=>u.username===localStorage.getItem('current_user'));}
+function showStep(n){['step1','step2','step3','loginDiv'].forEach(id=>document.getElementById(id).classList.add('hidden'));document.getElementById(n).classList.remove('hidden');}
+if(cur&&me){if(!me.activated){showStep('step2');document.getElementById('u1').innerText=me.username;}else{showStep('step3');loadDash();}}else{showStep('step1');}
+function showLogin(){showStep('loginDiv');}function showSignup(){showStep('step1');}
+function doSignup(){
+ let fn=document.getElementById('fullname').value.trim(),un=document.getElementById('username').value.trim().toLowerCase(),em=document.getElementById('email').value.trim(),ph=document.getElementById('phone').value.trim(),p=document.getElementById('pass').value,cp=document.getElementById('cpass').value;
+ if(!fn||!un||!em||!ph||!p) return alert('Jaza zote!'); if(p!==cp) return alert('Password hazifanani!'); if(users.find(u=>u.username===un)) return alert('Username imeshachukuliwa!');
+ let nu={fullname:fn,username:un,email:em,phone:ph,password:p,ref:ref||'',balance:0,ads:0,activated:false,joined:new Date().toLocaleString()}; users.push(nu); localStorage.setItem('star_users',JSON.stringify(users)); localStorage.setItem('current_user',un); refresh(); showStep('step2'); document.getElementById('u1').innerText=un;
 }
-function logout(){localStorage.removeItem('current_user');location.href='login.html';}
+function doPay(){
+ let code=document.getElementById('mpesa').value.trim().toUpperCase(); if(code.length<6) return alert('Weka M-Pesa Code!');
+ refresh(); me.activated=true; me.activation_code=code; me.activated_time=new Date().toLocaleString(); localStorage.setItem('star_users',JSON.stringify(users));
+ let pays=JSON.parse(localStorage.getItem('payments')||'[]'); pays.push({username:me.username,fullname:me.fullname,phone:me.phone,mpesa:code,time:new Date().toLocaleString()}); localStorage.setItem('payments',JSON.stringify(pays));
+ alert('✅ KSH 200 Received! Dashboard inafunguka!'); showStep('step3'); loadDash();
+}
+function loadDash(){refresh(); document.getElementById('u2').innerText=me.username; document.getElementById('bal').innerText=me.balance; document.getElementById('ads').innerText=me.ads; let link=location.origin+location.pathname+'?ref='+me.username; document.getElementById('mylink').value=link;}
+function watchAd(){let m=document.getElementById('adM');m.style.display='flex';let t=5;let iv=setInterval(()=>{t--;document.getElementById('tm').innerText=t;document.getElementById('bar').style.width=(5-t)*20+'%';if(t<=0){clearInterval(iv);m.style.display='none';me.balance+=50;me.ads++;localStorage.setItem('star_users',JSON.stringify(users));loadDash();alert('✅ KSH 50 Added!');}},1000)}
+function copyLink(){let i=document.getElementById('mylink');i.select();navigator.clipboard.writeText(i.value);alert('✅ LINK COPIED:\\n'+i.value);}
+function openW(){let am=prompt('Weka Amount ku-withdraw (Min 200)\\nBalance: '+me.balance); if(!am) return; am=parseInt(am); if(am<200||am>me.balance) return alert('Amount sio sahihi!'); me.balance-=am; localStorage.setItem('star_users',JSON.stringify(users)); let w=JSON.parse(localStorage.getItem('withdraws')||'[]'); w.push({username:me.username,amount:am,phone:me.phone,time:new Date().toLocaleString()}); localStorage.setItem('withdraws',JSON.stringify(w)); loadDash(); alert('✅ Withdraw ya KSH '+am+' imetumwa kwa '+me.phone);}
+function doLogin(){let un=document.getElementById('luser').value.trim().toLowerCase(),p=document.getElementById('lpass').value; let f=users.find(u=>(u.username===un||u.email===un)&&u.password===p); if(!f) return alert('Wrong username/password'); localStorage.setItem('current_user',f.username); refresh(); if(!f.activated){showStep('step2');document.getElementById('u1').innerText=f.username;}else{showStep('step3');loadDash();}}
+function logout(){localStorage.removeItem('current_user');location.reload();}
 </script></body></html>
