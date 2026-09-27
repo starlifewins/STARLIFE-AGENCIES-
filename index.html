@@ -1,44 +1,153 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE - Join & Earn</title><style>body{margin:0;background:#0a0e1a;color:#fff;font-family:sans-serif;padding:12px;display:flex;justify-content:center} .card{background:#151b2d;padding:20px;border-radius:18px;max-width:380px;width:100%;border:1px solid #00ff88;margin-top:10px} .input{width:100%;padding:14px;margin:7px 0;border-radius:10px;border:none;background:#0f172a;color:#fff;box-sizing:border-box} .btn{width:100%;padding:15px;border:none;border-radius:12px;font-weight:bold;margin-top:8px;cursor:pointer} .green{background:#00ff88;color:#000} .yellow{background:#f59e0b;color:#000} .paybox{background:#0a0e1a;border:2px dashed #f59e0b;padding:12px;border-radius:12px;margin:10px 0} .payrow{display:flex;justify-content:space-between;background:#1e293b;padding:8px;border-radius:6px;margin:4px 0;font-size:13px} .hidden{display:none}</style></head><body>
-<div class="card">
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE AGENCIES</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{font-family:'Poppins',sans-serif;box-sizing:border-box}
+body{margin:0;background:#f3f4f8;color:#111827}
+.topbar{background:#009688;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.topbar.logo{color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;gap:8px}
+.card-wrap{max-width:420px;margin:0 auto;padding:12px}
+.input{width:100%;padding:14px;margin:7px 0;border-radius:12px;border:1px solid #e5e7eb;background:#fff;color:#111}
+.btn{width:100%;padding:15px;border:none;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer}
+.hidden{display:none}
+.dash-title{font-size:26px;font-weight:800;margin:10px 0 2px}
+.breadcrumb{font-size:12px;color:#6b7280;margin-bottom:12px}
+.breadcrumb b{color:#6366f1}
 
-<!-- STEP 1: SIGNUP -->
-<div id="step1"><h1 style="color:#00ff88;text-align:center;margin:5px">STARLIFE AGENCIES</h1><p style="text-align:center;color:#94a3b8;font-size:11px" id="refMsg"></p><h3 style="text-align:center">Step 1: Create Account</h3><input id="fullname" class="input" placeholder="Full Name"><input id="username" class="input" placeholder="Username (itaonekana kwa account)"><input id="email" class="input" placeholder="Email" type="email"><input id="phone" class="input" placeholder="M-Pesa Number 07..." type="tel"><input id="pass" class="input" placeholder="Password" type="password"><input id="cpass" class="input" placeholder="Confirm Password" type="password"><button class="btn green" onclick="doSignup()">🚀 CREATE ACCOUNT</button><p style="text-align:center;font-size:11px;margin-top:10px">Already have account? <a href="#" onclick="showLogin()" style="color:#00ff88">Login</a></p></div>
+/* CHATWAVE CARDS */
+.welcome{background:linear-gradient(135deg,#8b7cf8,#7c6ef2);border-radius:18px;padding:16px;color:#fff;position:relative}
+.av{width:48px;height:48px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#7c6ef2;font-weight:800;font-size:20px}
+.badge{background:#fff;color:#111;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;margin-left:8px}
+.profit-exp{display:flex;gap:10px;margin-top:14px}
+.p-card{flex:1;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px}
+.p-green{background:#10b981}
+.p-red{background:#ff5a5f}
+.p-card.icon{width:36px;height:36px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.p-card b{font-size:15px;display:block}
+.p-card span{font-size:11px;opacity:.9}
+.grow{background:#fff;border-radius:14px;padding:12px;margin-top:14px;color:#111}
+.grow-top{display:flex;justify-content:space-between;font-weight:700;font-size:13px}
+.bar{height:8px;background:#e5e7eb;border-radius:10px;margin-top:8px}
+.bar-fill{height:100%;background:#8b7cf8;border-radius:10px;width:0%}
 
-<!-- STEP 2: PAYMENT -->
-<div id="step2" class="hidden"><h1 style="color:#f59e0b;text-align:center">🔒 Step 2: Activate KSH 200</h1><p style="text-align:center;font-size:12px">Habari <b id="u1" style="color:#00ff88"></b>! Lipa ndio ufungue Dashboard</p><div class="paybox"><p style="color:#f59e0b;font-weight:bold;text-align:center;margin:5px">💰 FEE: KSH 200</p><div class="payrow"><span>Paybill:</span><b style="color:#00ff88">714777</b></div><div class="payrow"><span>Account:</span><b style="color:#00ff88">440200282954</b></div><div class="payrow"><span>Amount:</span><b>KSH 200</b></div><p style="font-size:10px;color:#94a3b8;text-align:center">M-Pesa > Lipa na M-Pesa > Paybill > 714777 > Acc 440200282954 > 200</p></div><input id="mpesa" class="input" placeholder="Weka M-Pesa Code e.g SH12..." style="text-align:center"><button class="btn yellow" onclick="doPay()">✅ NIME LIPA - FUNGUA DASHBOARD</button></div>
+.info-card{border-radius:16px;padding:18px;color:#fff;margin-top:14px;display:flex;justify-content:space-between;align-items:center}
+.blue{background:linear-gradient(90deg,#2563eb,#2ec4f1)}
+.purple{background:linear-gradient(90deg,#7c3aed,#a855f7)}
+.orange{background:linear-gradient(90deg,#ea580c,#f97316)}
+.info-card.label{font-size:14px;opacity:.9}
+.info-card.val{font-size:26px;font-weight:800;margin-top:4px}
+.paybox{background:#fff;border:2px dashed #f59e0b;padding:12px;border-radius:12px;margin:10px 0;color:#111}
+</style>
+</head>
+<body>
+<div class="topbar"><div>☰</div><div class="logo"><div style="width:32px;height:32px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#009688;font-weight:800">C</div> CHATWAVE</div><div>⋮</div></div>
 
-<!-- STEP 3: DASHBOARD -->
-<div id="step3" class="hidden"><h1 style="color:#00ff88;text-align:center;margin:5px">STARLIFE DASHBOARD</h1><p style="text-align:center;font-size:11px">👤 <span id="u2" style="color:#00ff88"></span> | <a href="#" onclick="logout()" style="color:red;font-size:11px">Logout</a></p><div style="background:#0a0e1a;padding:15px;border-radius:12px;text-align:center;margin:10px 0"><p>Balance</p><h1 style="color:#00ff88;font-size:32px;margin:5px">KSH <span id="bal">0</span></h1><p style="font-size:11px">Ads: <span id="ads">0</span></p></div><button class="btn green" onclick="watchAd()">📺 VIEW AD & EARN 50</button><button class="btn" style="background:#2563eb;color:#fff" onclick="copyLink()">👥 COPY MY LINK - EARN 300</button><button class="btn yellow" onclick="openW()">💰 Withdraw M-Pesa</button><div style="background:#0a0e1a;border:2px dashed #00ff88;padding:10px;border-radius:10px;margin-top:12px"><p style="font-size:11px;color:#00ff88;font-weight:bold;text-align:center">🔗 YOUR LINK:</p><input id="mylink" style="width:100%;padding:8px;border-radius:6px;border:none;background:#1e293b;color:#00ff88;font-size:10px;text-align:center" readonly><button onclick="copyLink()" style="margin-top:6px;background:#00ff88;color:#000;border:none;padding:8px 15px;border-radius:6px;font-weight:bold;width:100%">📋 COPY & SHARE</button></div></div>
+<div class="card-wrap">
 
-<!-- LOGIN -->
-<div id="loginDiv" class="hidden"><h1 style="color:#00ff88;text-align:center">LOGIN</h1><input id="luser" class="input" placeholder="Username or Email"><input id="lpass" class="input" placeholder="Password" type="password"><button class="btn green" onclick="doLogin()">🔓 LOGIN</button><p style="text-align:center;font-size:11px;margin-top:10px">No account? <a href="#" onclick="showSignup()" style="color:#00ff88">Sign Up</a></p></div>
+<!-- STEP 1 SIGNUP -->
+<div id="step1">
+<h2 style="text-align:center;color:#009688">STARLIFE AGENCIES</h2>
+<p style="text-align:center;font-size:12px;color:#6b7280" id="refMsg"></p>
+<input id="fullname" class="input" placeholder="Full Name">
+<input id="username" class="input" placeholder="Username">
+<input id="email" class="input" placeholder="Email">
+<input id="phone" class="input" placeholder="07... M-Pesa">
+<input id="pass" class="input" placeholder="Password" type="password">
+<input id="cpass" class="input" placeholder="Confirm Password" type="password">
+<button class="btn" style="background:#009688;color:#fff" onclick="doSignup()">CREATE ACCOUNT</button>
+<p style="text-align:center;font-size:12px">Have account? <a href="#" onclick="showLogin()" style="color:#009688">Login</a></p>
+</div>
+
+<!-- STEP 2 PAYMENT -->
+<div id="step2" class="hidden">
+<h2 style="color:#f59e0b;text-align:center">Activate KSH 200</h2>
+<p style="text-align:center">Habari <b id="u1"></b></p>
+<div class="paybox">
+<p style="text-align:center;font-weight:800;color:#f59e0b">Paybill 714777 | Acc 440200282954</p>
+<p style="text-align:center;font-size:12px">Amount: KSH 200</p>
+</div>
+<input id="mpesa" class="input" placeholder="M-Pesa Code SH..." style="text-align:center">
+<button class="btn" style="background:#f59e0b;color:#000" onclick="doPay()">NIMELIPA - FUNGUA</button>
+</div>
+
+<!-- STEP 3 DASHBOARD - CHATWAVE LOOK -->
+<div id="step3" class="hidden">
+<div class="dash-title">Dashboard</div>
+<div class="breadcrumb">Home / <b>Dashboard</b></div>
+
+<div class="welcome">
+<div style="display:flex;align-items:center">
+<div class="av" id="avLetter">A</div>
+<div style="margin-left:10px">
+<div style="font-weight:700;display:flex;align-items:center">Hi, <span id="uName" style="margin-left:4px"></span> 👋 <span class="badge">Starter</span></div>
+<div style="font-size:12px;opacity:.9">Welcome back to your dashboard</div>
+</div>
+</div>
+
+<div class="profit-exp">
+<div class="p-card p-green"><div class="icon">📈</div><div><span>NET PROFIT</span><b id="profit">KES 200</b></div></div>
+<div class="p-card p-red"><div class="icon">📉</div><div><span>EXPENSES</span><b>KES 150</b></div></div>
+</div>
+
+<div class="grow">
+<div class="grow-top"><span>GROW YOUR NETWORK</span><span>0/5</span></div>
+<div class="bar"><div class="bar-fill" id="growBar"></div></div>
+<div style="font-size:12px;color:#6b7280;margin-top:8px">No new members yet today. Share your referral link and start building your team now!</div>
+</div>
+</div>
+
+<div class="info-card blue">
+<div><div class="label">Available Balance</div><div class="val">KES. <span id="bal">100</span></div></div><div style="font-size:32px">💳</div>
+</div>
+
+<div class="info-card purple">
+<div><div class="label">Total Withdrawals</div><div class="val">KES. <span id="totalW">0</span></div></div><div style="font-size:32px">⬆️</div>
+</div>
+
+<div class="info-card orange">
+<div><div class="label">Pending Withdrawals</div><div class="val">KES. 0</div></div><div style="font-size:32px">🕒</div>
+</div>
+
+<div style="background:#fff;padding:12px;border-radius:14px;margin-top:14px">
+<p style="font-size:11px;font-weight:700;color:#009688;text-align:center">🔗 YOUR REFERRAL LINK</p>
+<input id="mylink" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e5e7eb;background:#f9fafb;color:#009688;font-size:11px;text-align:center" readonly>
+<button class="btn" style="background:#009688;color:#fff" onclick="copyLink()">COPY & SHARE - EARN 300</button>
+<button class="btn" style="background:#111;color:#fff" onclick="watchAd()">📺 VIEW ADS - EARN 50</button>
+<button class="btn" style="background:#f59e0b;color:#000" onclick="openW()">💰 WITHDRAW M-PESA</button>
+<p style="text-align:center;margin-top:10px"><a href="#" onclick="logout()" style="color:red;font-size:12px">Logout</a></p>
+</div>
+</div>
+
+<div id="loginDiv" class="hidden">
+<h2 style="text-align:center;color:#009688">LOGIN</h2>
+<input id="luser" class="input" placeholder="Username">
+<input id="lpass" class="input" placeholder="Password" type="password">
+<button class="btn" style="background:#009688;color:#fff" onclick="doLogin()">LOGIN</button>
+</div>
 
 </div>
 
-<div id="adM" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99;justify-content:center;align-items:center;flex-direction:column"><h2>Ad... <span id="tm">5</span>s</h2><div style="width:80%;height:10px;background:#334155;border-radius:10px"><div id="bar" style="height:100%;width:0%;background:#00ff88;transition:width 1s"></div></div></div>
-
 <script>
-let ref=new URLSearchParams(location.search).get('ref');let cur=localStorage.getItem('current_user');let users=JSON.parse(localStorage.getItem('star_users')||'[]');let me=users.find(u=>u.username===cur);
-if(ref){document.getElementById('refMsg').innerHTML='🎉 Invited by: <b style="color:#00ff88">'+ref+'</b>';}
+let ref=new URLSearchParams(location.search).get('ref');
+let cur=localStorage.getItem('current_user');
+let users=JSON.parse(localStorage.getItem('star_users')||'[]');
+let me=users.find(u=>u.username===cur);
+if(ref) document.getElementById('refMsg').innerHTML='Invited by <b style="color:#009688">'+ref+'</b>';
 function refresh(){users=JSON.parse(localStorage.getItem('star_users')||'[]');me=users.find(u=>u.username===localStorage.getItem('current_user'));}
 function showStep(n){['step1','step2','step3','loginDiv'].forEach(id=>document.getElementById(id).classList.add('hidden'));document.getElementById(n).classList.remove('hidden');}
-if(cur&&me){if(!me.activated){showStep('step2');document.getElementById('u1').innerText=me.username;}else{showStep('step3');loadDash();}}else{showStep('step1');}
-function showLogin(){showStep('loginDiv');}function showSignup(){showStep('step1');}
-function doSignup(){
- let fn=document.getElementById('fullname').value.trim(),un=document.getElementById('username').value.trim().toLowerCase(),em=document.getElementById('email').value.trim(),ph=document.getElementById('phone').value.trim(),p=document.getElementById('pass').value,cp=document.getElementById('cpass').value;
- if(!fn||!un||!em||!ph||!p) return alert('Jaza zote!'); if(p!==cp) return alert('Password hazifanani!'); if(users.find(u=>u.username===un)) return alert('Username imeshachukuliwa!');
- let nu={fullname:fn,username:un,email:em,phone:ph,password:p,ref:ref||'',balance:0,ads:0,activated:false,joined:new Date().toLocaleString()}; users.push(nu); localStorage.setItem('star_users',JSON.stringify(users)); localStorage.setItem('current_user',un); refresh(); showStep('step2'); document.getElementById('u1').innerText=un;
-}
-function doPay(){
- let code=document.getElementById('mpesa').value.trim().toUpperCase(); if(code.length<6) return alert('Weka M-Pesa Code!');
- refresh(); me.activated=true; me.activation_code=code; me.activated_time=new Date().toLocaleString(); localStorage.setItem('star_users',JSON.stringify(users));
- let pays=JSON.parse(localStorage.getItem('payments')||'[]'); pays.push({username:me.username,fullname:me.fullname,phone:me.phone,mpesa:code,time:new Date().toLocaleString()}); localStorage.setItem('payments',JSON.stringify(pays));
- alert('✅ KSH 200 Received! Dashboard inafunguka!'); showStep('step3'); loadDash();
-}
-function loadDash(){refresh(); document.getElementById('u2').innerText=me.username; document.getElementById('bal').innerText=me.balance; document.getElementById('ads').innerText=me.ads; let link=location.origin+location.pathname+'?ref='+me.username; document.getElementById('mylink').value=link;}
-function watchAd(){let m=document.getElementById('adM');m.style.display='flex';let t=5;let iv=setInterval(()=>{t--;document.getElementById('tm').innerText=t;document.getElementById('bar').style.width=(5-t)*20+'%';if(t<=0){clearInterval(iv);m.style.display='none';me.balance+=50;me.ads++;localStorage.setItem('star_users',JSON.stringify(users));loadDash();alert('✅ KSH 50 Added!');}},1000)}
-function copyLink(){let i=document.getElementById('mylink');i.select();navigator.clipboard.writeText(i.value);alert('✅ LINK COPIED:\\n'+i.value);}
-function openW(){let am=prompt('Weka Amount ku-withdraw (Min 200)\\nBalance: '+me.balance); if(!am) return; am=parseInt(am); if(am<200||am>me.balance) return alert('Amount sio sahihi!'); me.balance-=am; localStorage.setItem('star_users',JSON.stringify(users)); let w=JSON.parse(localStorage.getItem('withdraws')||'[]'); w.push({username:me.username,amount:am,phone:me.phone,time:new Date().toLocaleString()}); localStorage.setItem('withdraws',JSON.stringify(w)); loadDash(); alert('✅ Withdraw ya KSH '+am+' imetumwa kwa '+me.phone);}
-function doLogin(){let un=document.getElementById('luser').value.trim().toLowerCase(),p=document.getElementById('lpass').value; let f=users.find(u=>(u.username===un||u.email===un)&&u.password===p); if(!f) return alert('Wrong username/password'); localStorage.setItem('current_user',f.username); refresh(); if(!f.activated){showStep('step2');document.getElementById('u1').innerText=f.username;}else{showStep('step3');loadDash();}}
+if(cur&&me){if(!me.activated){showStep('step2');u1.innerText=me.username;}else{showStep('step3');loadDash();}}
+function showLogin(){showStep('loginDiv');}
+function doSignup(){let fn=fullname.value.trim(),un=username.value.trim().toLowerCase(),em=email.value.trim(),ph=phone.value.trim(),p=pass.value,cp=cpass.value;if(!fn||!un||!em||!ph||!p)return alert('Jaza zote');if(p!==cp)return alert('Password hazifanani');if(users.find(u=>u.username===un))return alert('Username taken');let nu={fullname:fn,username:un,email:em,phone:ph,password:p,ref:ref||'',balance:100,ads:0,totalW:0,activated:false};users.push(nu);localStorage.setItem('star_users',JSON.stringify(users));localStorage.setItem('current_user',un);refresh();showStep('step2');u1.innerText=un;}
+function doPay(){let code=mpesa.value.trim();if(code.length<6)return alert('Weka M-Pesa Code');refresh();me.activated=true;localStorage.setItem('star_users',JSON.stringify(users));showStep('step3');loadDash();}
+function loadDash(){refresh();uName.innerText=me.fullname.split(' ')[0];avLetter.innerText=me.username[0].toUpperCase();bal.innerText=me.balance;totalW.innerText=me.totalW||0;profit.innerText='KES '+(me.balance+100);mylink.value=location.origin+location.pathname+'?ref='+me.username;}
+function copyLink(){mylink.select();navigator.clipboard.writeText(mylink.value);alert('Link Copied: '+mylink.value);}
+function watchAd(){me.balance+=50;me.ads++;localStorage.setItem('star_users',JSON.stringify(users));loadDash();alert('KSH 50 Added!');}
+function openW(){let am=prompt('Amount Min 100 Balance:'+me.balance);am=parseInt(am);if(!am||am>me.balance||am<100)return alert('Invalid');me.balance-=am;me.totalW=(me.totalW||0)+am;localStorage.setItem('star_users',JSON.stringify(users));loadDash();alert('Withdraw KSH '+am+' to '+me.phone+' sent!');}
+function doLogin(){let un=luser.value.trim().toLowerCase(),p=lpass.value;let f=users.find(u=>u.username===un&&u.password===p);if(!f)return alert('Wrong');localStorage.setItem('current_user',f.username);refresh();if(!f.activated){showStep('step2');u1.innerText=f.username;}else{showStep('step3');loadDash();}}
 function logout(){localStorage.removeItem('current_user');location.reload();}
-</script></body></html>
+</script>
+</body>
+</html>
