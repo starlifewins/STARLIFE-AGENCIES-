@@ -1,50 +1,35 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Starlife - Auto Withdraw</title>
-<style>body{margin:0;background:#0a0e1a;color:#fff;font-family:sans-serif;padding:12px;text-align:center}.card{background:#151b2d;padding:20px;border-radius:16px;max-width:380px;margin:10px auto;border:1px solid #00ff88}.btn{width:100%;padding:16px;border:none;border-radius:12px;font-weight:bold;font-size:15px;margin:6px 0;cursor:pointer}.green{background:#00ff88;color:#000}.blue{background:#2563eb;color:#fff}.yellow{background:#f59e0b;color:#000}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99;justify-content:center;align-items:center;flex-direction:column;padding:15px}.input{width:90%;padding:14px;margin:8px 0;border-radius:10px;border:none;font-size:16px}</style></head>
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES</title>
+<style>body{margin:0;background:#0a0e1a;color:#fff;font-family:sans-serif;padding:12px;text-align:center}.card{background:#151b2d;padding:20px;border-radius:18px;max-width:380px;margin:10px auto;border:1px solid #00ff88}.btn{width:100%;padding:16px;border:none;border-radius:12px;font-weight:bold;font-size:15px;margin:7px 0;cursor:pointer}.green{background:#00ff88;color:#000}.blue{background:#2563eb;color:#fff}.yellow{background:#f59e0b;color:#000}.refbox{background:#0a0e1a;border:2px dashed #00ff88;padding:12px;border-radius:12px;margin-top:15px}.refinput{width:100%;padding:10px;border-radius:8px;border:none;background:#1e293b;color:#00ff88;text-align:center;font-size:11px;margin:8px 0}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:99;justify-content:center;align-items:center;flex-direction:column;padding:15px}.input{width:90%;padding:14px;margin:8px 0;border-radius:10px;border:none;font-size:16px}</style></head>
 <body>
 <h1 style="color:#00ff88">STARLIFE AGENCIES</h1>
-<p style="color:#22c55e;font-size:12px">✅ Auto Withdraw Enabled</p>
+<p style="color:#22c55e;font-size:12px">✅ Logged In</p>
 <div class="card">
-<h2>Karibu! 🎉</h2><p>Balance Yako</p>
-<h1 style="color:#00ff88">KSH <span id="bal">0</span></h1>
-<p style="font-size:11px;color:#94a3b8">Ads: <span id="ads">0</span> | Min Withdraw: 500</p>
+<h2>Karibu! 🎉</h2><p>Balance</p>
+<h1 style="color:#00ff88;font-size:36px">KSH <span id="bal">0</span></h1>
+<p style="font-size:11px;color:#94a3b8">Ads: <span id="ads">0</span> | Min Withdraw 200</p>
 <button class="btn green" onclick="watchAd()">📺 VIEW AD & EARN 50</button>
 <button class="btn blue" onclick="invite()">👥 Invite - Earn 300</button>
-<button class="btn yellow" onclick="openW()">💰 Withdraw M-Pesa AUTO</button>
-<input id="link" style="width:90%;padding:8px;border-radius:6px;border:none;text-align:center;font-size:10px;margin-top:10px" readonly>
+<button class="btn yellow" onclick="openW()">💰 Withdraw M-Pesa</button>
+<div class="refbox">
+<p style="font-size:12px;color:#00ff88;font-weight:bold">🔗 YOUR REFERRAL LINK:</p>
+<input id="link" class="refinput" readonly>
+<button onclick="copyLink()" style="background:#00ff88;color:#000;border:none;padding:10px 20px;border-radius:8px;font-weight:bold">📋 COPY LINK</button>
+<p style="font-size:10px;color:#94a3b8">Share WhatsApp u earn 300!</p>
 </div>
-
-<div id="adM" class="modal"><h2>📺 Ad... <span id="tm">5</span>s</h2><div style="width:80%;height:8px;background:#334155;border-radius:10px"><div id="bar" style="height:100%;width:0%;background:#00ff88;transition:width 1s"></div></div></div>
-
-<div id="wM" class="modal">
-<div class="card" style="width:90%"><h3>Withdraw M-Pesa</h3>
-<p style="font-size:12px">Balance: KSH <span id="wb">0</span></p>
-<input id="phone" class="input" placeholder="M-Pesa Number 07..." type="tel">
-<input id="amount" class="input" placeholder="Amount" type="number">
-<button class="btn yellow" onclick="doWithdraw()">Tuma Request</button>
-<button class="btn" style="background:#334155;color:#fff" onclick="closeW()">Cancel</button>
-<p style="font-size:10px;color:#94a3b8;margin-top:10px">Pesa itatumwa ndani ya 5 mins automatically</p></div>
 </div>
-
+<div id="adM" class="modal"><h2>📺 Ad... <span id="tm">5</span>s</h2><div style="width:80%;height:10px;background:#334155;border-radius:10px"><div id="bar" style="height:100%;width:0%;background:#00ff88;transition:width 1s"></div></div></div>
+<div id="wM" class="modal"><div class="card" style="width:90%"><h3>Withdraw</h3><p>Balance: KSH <span id="wb">0</span></p><input id="phone" class="input" placeholder="M-Pesa 07..." type="tel"><input id="amount" class="input" placeholder="Min 200" type="number"><button class="btn yellow" onclick="doWithdraw()">Tuma</button><button class="btn" style="background:#334155;color:#fff" onclick="closeW()">Cancel</button></div></div>
 <script>
-let bal=parseInt(localStorage.getItem('bal')||2000);let ads=parseInt(localStorage.getItem('ads')||0);
-let mycode=localStorage.getItem('mycode')||'STAR'+Math.floor(Math.random()*9000+1000);localStorage.setItem('mycode',mycode);
-function upd(){document.getElementById('bal').innerText=bal;document.getElementById('wb').innerText=bal;document.getElementById('ads').innerText=ads;localStorage.setItem('bal',bal);localStorage.setItem('ads',ads);document.getElementById('link').value=location.origin+location.pathname+'?ref='+mycode} 
-function watchAd(){let m=document.getElementById('adM');m.style.display='flex';let t=5;let iv=setInterval(()=>{t--;document.getElementById('tm').innerText=t;document.getElementById('bar').style.width=(5-t)*20+'%';if(t<=0){clearInterval(iv);m.style.display='none';bal+=50;ads++;upd();alert('✅ KSH 50 Added!')} },1000)}
-function openW(){if(bal<500)return alert('Min KSH 500! Balance yako '+bal);document.getElementById('wM').style.display='flex';document.getElementById('amount').value=bal;upd()} 
+let bal=parseInt(localStorage.getItem('bal')||'0');let ads=parseInt(localStorage.getItem('ads')||'0');
+let mycode=localStorage.getItem('mycode');if(!mycode){mycode='STAR'+Math.floor(Math.random()*90000+10000);localStorage.setItem('mycode',mycode)}
+let ref=new URLSearchParams(location.search).get('ref');if(ref && ref!==mycode && !localStorage.getItem('used_ref')){bal+=50;localStorage.setItem('used_ref',ref);alert('Bonus KSH 50 from '+ref)}
+function upd(){document.getElementById('bal').innerText=bal;document.getElementById('wb').innerText=bal;document.getElementById('ads').innerText=ads;localStorage.setItem('bal',bal);localStorage.setItem('ads',ads);document.getElementById('link').value=location.origin+location.pathname+'?ref='+mycode;}
+function watchAd(){let m=document.getElementById('adM');m.style.display='flex';let t=5;let iv=setInterval(()=>{t--;document.getElementById('tm').innerText=t;document.getElementById('bar').style.width=(5-t)*20+'%';if(t<=0){clearInterval(iv);m.style.display='none';bal+=50;ads++;upd();alert('KSH 50 Added!')} },1000)}
+function openW(){if(bal<200)return alert('Min 200! Bal '+bal);document.getElementById('wM').style.display='flex';document.getElementById('amount').value=bal;upd()} 
 function closeW(){document.getElementById('wM').style.display='none'}
-function doWithdraw(){
-let ph=document.getElementById('phone').value;let am=parseInt(document.getElementById('amount').value);
-if(!ph||ph.length<10)return alert('Weka number sahihi');if(am>bal)return alert('Balance ndogo');if(am<500)return alert('Min 500');
-// SAVE REQUEST
-let req={phone:ph,amount:am,code:mycode,time:new Date().toLocaleString(),id:Date.now()};
-let all=JSON.parse(localStorage.getItem('withdraws')||'[]');all.push(req);localStorage.setItem('withdraws',JSON.stringify(all));
-bal-=am;upd();closeW();
-// AUTO SEND TO YOUR WHATSAPP
-let msg=`*NEW WITHDRAW - STARLIFE*%0APhone: ${ph}%0AAmount: KSH ${am}%0ACode: ${mycode}%0ATime: ${req.time}`;
-window.open(`https://wa.me/254796424262?text=${msg}`,'_blank');
-alert('✅ Request imetumwa! Utalipwa kwa '+ph+' ndani ya dakika chache!');
-}
-function invite(){let l=document.getElementById('link').value;navigator.clipboard.writeText(l);alert('Link Copied: '+l+'\nTuma WhatsApp!')}
+function doWithdraw(){let ph=document.getElementById('phone').value;let am=parseInt(document.getElementById('amount').value);if(!ph||ph.length<10)return alert('Number?');if(am>bal)return alert('Low bal');if(am<200)return alert('Min 200');let req={phone:ph,amount:am,code:mycode,time:new Date().toLocaleString()};let all=JSON.parse(localStorage.getItem('withdraws')||'[]');all.push(req);localStorage.setItem('withdraws',JSON.stringify(all));bal-=am;upd();closeW();let msg=`*NEW WITHDRAW*%0APhone: ${ph}%0AAmt: ${am}%0ACode: ${mycode}`;window.open(`https://wa.me/254796424262?text=${msg}`,'_blank');alert('Sent!');}
+function copyLink(){let i=document.getElementById('link');i.select();navigator.clipboard.writeText(i.value);alert('Copied: '+i.value);} 
+function invite(){copyLink()}
 upd();
 </script>
 </body></html>
