@@ -1,50 +1,33 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Join STARLIFE</title><style>body{margin:0;background:#0a0e1a;color:#fff;font-family:sans-serif;padding:15px;display:flex;justify-content:center}.card{background:#151b2d;padding:25px;border-radius:20px;max-width:380px;width:100%;border:1px solid #00ff88;margin-top:20px}.input{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none;background:#0f172a;color:#fff;box-sizing:border-box}.btn{width:100%;padding:16px;border:none;border-radius:12px;font-weight:bold;margin-top:10px;cursor:pointer}.green{background:#00ff88;color:#000}.refbadge{background:#0a0e1a;border:1px dashed #00ff88;padding:8px;border-radius:8px;font-size:11px;color:#00ff88;margin-bottom:10px;text-align:center}</style></head><body>
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Activate - STARLIFE</title><style>body{margin:0;background:#0a0e1a;color:#fff;font-family:sans-serif;padding:15px;display:flex;justify-content:center}.card{background:#151b2d;padding:25px;border-radius:20px;max-width:380px;width:100%;border:1px solid #f59e0b;margin-top:20px;text-align:center}.input{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none;background:#0f172a;color:#fff;box-sizing:border-box;text-align:center}.btn{width:100%;padding:16px;border:none;border-radius:12px;font-weight:bold;margin-top:10px;cursor:pointer}.yellow{background:#f59e0b;color:#000}.paybox{background:#0a0e1a;border:2px dashed #f59e0b;padding:15px;border-radius:12px;margin:15px 0;text-align:left}.payrow{display:flex;justify-content:space-between;background:#1e293b;padding:10px;border-radius:8px;margin:6px 0;font-size:14px}</style></head><body>
 <div class="card">
-<h1 style="color:#00ff88;text-align:center;margin:5px">STARLIFE AGENCIES</h1>
-<p style="text-align:center;color:#94a3b8;font-size:12px">Create Account & Earn KSH 2000 Bonus!</p>
-<div id="refBox" class="refbadge" style="display:none">🎉 Invited by: <span id="refName"></span></div>
-
-<input id="fullname" class="input" placeholder="Full Name e.g John Kamau">
-<input id="username" class="input" placeholder="Username e.g john123 (will show on account)">
-<input id="email" class="input" placeholder="Email e.g john@gmail.com" type="email">
-<input id="phone" class="input" placeholder="M-Pesa Number 07..." type="tel">
-<input id="pass" class="input" placeholder="Password" type="password">
-<input id="cpass" class="input" placeholder="Confirm Password" type="password">
-
-<button class="btn green" onclick="signup()">🚀 SIGN UP & CLAIM BONUS</button>
-<p style="text-align:center;font-size:12px;margin-top:15px">Already have account? <a href="login.html" style="color:#00ff88">Login</a></p>
+<h1 style="color:#f59e0b">🔒 Lipa KSH 200</h1>
+<p style="font-size:13px;color:#94a3b8">Habari <b id="uname" style="color:#00ff88"></b>! Lipa ndio ufungue Dashboard</p>
+<div class="paybox">
+<p style="color:#f59e0b;font-weight:bold;text-align:center;margin:5px;font-size:18px">💰 FEE: KSH 200</p>
+<div class="payrow"><span>Paybill:</span><b style="color:#00ff88">714777</b></div>
+<div class="payrow"><span>Account:</span><b style="color:#00ff88">440200282954</b></div>
+<div class="payrow"><span>Amount:</span><b>KSH 200</b></div>
+<p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:10px">M-Pesa > Lipa na M-Pesa > Paybill > 714777 > Acc 440200282954 > 200</p>
+</div>
+<input id="mpesa" class="input" placeholder="M-Pesa Code e.g SH12...">
+<button class="btn yellow" onclick="activate()">✅ NIME LIPA - FUNGUA ACCOUNT</button>
+<p style="font-size:11px;margin-top:10px"><a href="#" onclick="logout()" style="color:red">Logout</a></p>
 </div>
 <script>
-let ref = new URLSearchParams(location.search).get('ref');
-if(ref){document.getElementById('refBox').style.display='block';document.getElementById('refName').innerText=ref;}
-function signup(){
- let fn=document.getElementById('fullname').value.trim();
- let un=document.getElementById('username').value.trim().toLowerCase();
- let em=document.getElementById('email').value.trim();
- let ph=document.getElementById('phone').value.trim();
- let p=document.getElementById('pass').value;
- let cp=document.getElementById('cpass').value;
- if(!fn||!un||!em||!ph||!p) return alert('Jaza details zote!');
- if(p!==cp) return alert('Passwords hazifanani!');
- if(p.length<4) return alert('Password iwe at least 4 characters');
- if(un.length<3) return alert('Username iwe at least 3 letters');
- let users=JSON.parse(localStorage.getItem('star_users')||'[]');
- if(users.find(u=>u.username===un)) return alert('Username '+un+' imeshachukuliwa! Chagua ingine');
- if(users.find(u=>u.email===em)) return alert('Email imeshatumika!');
- let newUser={fullname:fn,username:un,email:em,phone:ph,password:p,ref:ref||'',balance:ref?50:0,ads:0,joined:new Date().toLocaleString(),mycode:un};
- users.push(newUser);
+let current=localStorage.getItem('current_user');if(!current)location.href='login.html';
+let users=JSON.parse(localStorage.getItem('star_users')||'[]');let me=users.find(u=>u.username===current);
+document.getElementById('uname').innerText=me.username;
+if(me.activated)location.href='dashboard.html';
+function activate(){
+ let code=document.getElementById('mpesa').value.trim().toUpperCase();
+ if(code.length<6) return alert('Weka Code sahihi!');
+ me.activated=true;me.activation_code=code;me.activated_time=new Date().toLocaleString();
  localStorage.setItem('star_users',JSON.stringify(users));
- localStorage.setItem('current_user',un);
- // give referrer bonus
- if(ref){
-   let all=JSON.parse(localStorage.getItem('star_users')||'[]');
-   let referrer=all.find(u=>u.username===ref || u.mycode===ref);
-   // we save referral bonus in separate storage for admin
-   let refs=JSON.parse(localStorage.getItem('referrals')||'[]');
-   refs.push({from:un,to:ref,time:new Date().toLocaleString()});
-   localStorage.setItem('referrals',JSON.stringify(refs));
- }
- alert('✅ Account ya '+un+' imetengenezwa! Bonus KSH '+(ref?50:0)+'! Sasa unaingia Dashboard...');
+ let pays=JSON.parse(localStorage.getItem('payments')||'[]');
+ pays.push({username:me.username,fullname:me.fullname,phone:me.phone,mpesa:code,time:new Date().toLocaleString()});
+ localStorage.setItem('payments',JSON.stringify(pays));
+ alert('✅ KSH 200 Received! Code '+code+'\\nAccount imefunguliwa!');
  location.href='dashboard.html';
 }
+function logout(){localStorage.removeItem('current_user');location.href='login.html';}
 </script></body></html>
