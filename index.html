@@ -1,142 +1,45 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STARLIFE AGENCIES</title>
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f5f7fb;padding-bottom:20px}
-.topbar{background:#009688;padding:12px;display:flex;align-items:center;justify-content:space-between;color:white}
-.logo{font-weight:bold;font-size:20px;display:flex;align-items:center;gap:8px}
-.logo span{background:white;color:#009688;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.card-purple{background:linear-gradient(135deg,#7c5cff,#a68bff);padding:18px;border-radius:14px;color:white;margin:15px}
-.row{display:flex;gap:10px;margin-top:12px}
-.mini{background:rgba(255,255,255,0.9);border-radius:10px;padding:10px 12px;flex:1;display:flex;align-items:center;gap:8px}
-.mini b{color:#222}
-.green{background:#00d084;color:white}
-.red{background:#ff5a5a;color:white}
-.white-box{background:white;border-radius:12px;padding:15px;margin:15px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
-.balance-blue{background:linear-gradient(90deg,#2b5bff,#3ac8ff);color:white;padding:18px;border-radius:12px;margin:12px 15px;display:flex;justify-content:space-between;align-items:center}
-.balance-purple{background:linear-gradient(90deg,#8a4de8,#b07bff);color:white;padding:18px;border-radius:12px;margin:12px 15px;display:flex;justify-content:space-between;align-items:center}
-.balance-orange{background:linear-gradient(90deg,#ff7a18,#ff9f3f);color:white;padding:18px;border-radius:12px;margin:12px 15px;display:flex;justify-content:space-between;align-items:center}
-.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.task{display:flex;align-items:center;gap:10px}
-.icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.btn-withdraw{background:#ffcc00;color:#000;border:none;padding:12px 20px;border-radius:8px;font-weight:bold;width:100%;margin-top:10px;cursor:pointer}
-.btn-copy{background:#6c5ce7;color:white;border:none;padding:10px 14px;border-radius:6px}
-.ref-input{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px 0 0 6px;background:#f8f9ff}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:99}
-.modal-box{background:white;padding:20px;border-radius:12px;width:90%;max-width:340px}
-.modal-box input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
-</style>
-</head>
-<body>
-
-<div class="topbar">
-<div>☰</div>
-<div class="logo"><span>S</span> STARLIFE</div>
-<div>⋮</div>
+body{background:#0a1128;color:white;font-family:Arial;padding:15px;margin:0}
+.box{border:1px solid #ffcc00;border-radius:14px;padding:15px;text-align:center;margin-bottom:15px;background:#111a3a}
+.bonus{color:#00ff88;font-size:32px;font-weight:bold}
+.form{background:#111a3a;padding:15px;border-radius:14px}
+input{width:100%;padding:14px;margin:8px 0;border-radius:8px;border:1px solid #2a3a7a;background:#0a1128;color:white;box-sizing:border-box}
+.btn{background:#ffcc00;color:black;border:none;width:100%;padding:14px;border-radius:8px;font-weight:bold;font-size:16px;margin-top:10px}
+</style></head><body>
+<h2 style="color:#ffcc00">★ STARLIFE</h2>
+<div class="box">
+<div>🚀 JOIN STARLIFE</div><small>Bonus KES 1250 after activation</small>
+<div class="bonus">KES 1,250.00</div><small>WELCOME BONUS</small>
 </div>
-
-<h2 style="padding:15px 15px 0">Dashboard</h2>
-<p style="padding:0 15px;color:#6b7a99;font-size:13px">Home / Dashboard</p>
-
-<div class="card-purple">
-<div style="display:flex;align-items:center;gap:12px">
-<div style="background:white;color:#7c5cff;width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px" id="initial">A</div>
-<div>
-<div style="font-size:18px">Hi, <span id="userName">Abuudrian</span> 👋 <span style="background:white;color:#333;padding:4px 10px;border-radius:6px;font-size:12px;margin-left:6px">Starter</span></div>
-<small style="opacity:0.9">Welcome back to your dashboard</small>
+<div class="form">
+<h3>Create Account</h3>
+<input id="fullname" placeholder="Full Name *">
+<input id="username" placeholder="Username *">
+<input id="phone" placeholder="Safaricom Number * 07...">
+<input id="pass" type="password" placeholder="Password *">
+<input id="cpass" type="password" placeholder="Confirm Password *">
+<button class="btn" onclick="signup()">SIGN UP & CONTINUE</button>
+<p style="text-align:center;margin-top:10px"><small>Have account? <a href="dashboard.html" style="color:#ffcc00">Log In</a></small></p>
 </div>
-</div>
-<div class="row">
-<div class="mini green"><div>📈</div><div><small>NET PROFIT</small><br><b>KES 200</b></div></div>
-<div class="mini red"><div>📉</div><div><small>EXPENSES</small><br><b>KES 150</b></div></div>
-</div>
-<div class="white-box" style="margin:12px 0 0 0;padding:12px">
-<div style="display:flex;justify-content:space-between;font-weight:bold"><span style="font-size:12px;color:#666">GROW YOUR NETWORK</span><span style="font-size:12px">0/5</span></div>
-<div style="background:#eee;height:6px;border-radius:10px;margin:8px 0"></div>
-<small style="color:#666">No new members yet today. Share your referral link and start building your team now!</small>
-</div>
-</div>
-
-<div class="balance-blue">
-<div><small>Available Balance</small><br><b style="font-size:26px">KES. <span id="bal">100</span></b></div>
-<div style="font-size:30px">💳</div>
-</div>
-<button class="btn-withdraw" style="margin:0 15px;width:calc(100% - 30px)" onclick="openWithdraw()">⬆️ WITHDRAW NOW</button>
-
-<div class="balance-purple">
-<div><small>Total Withdrawals</small><br><b style="font-size:26px">KES. 0</b></div>
-<div style="font-size:30px">↑</div>
-</div>
-
-<div class="balance-orange">
-<div><small>Pending Withdrawals</small><br><b style="font-size:26px">KES. 0</b></div>
-<div style="font-size:30px">🕒</div>
-</div>
-
-<div class="white-box">
-<h3>Refer & Earn <small style="color:#6b7a99;font-weight:normal">Earn commission for every person who activates through your link</small></h3>
-<br>
-<small style="color:#6b7a99;font-weight:bold">YOUR UNIQUE REFERRAL LINK</small>
-<div style="display:flex;margin-top:8px">
-<input class="ref-input" id="refLink" value="https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=Abuudrian">
-<button class="btn-copy" onclick="copyLink()">📋 Copy</button>
-</div>
-<button style="background:#009688;color:white;border:none;padding:8px 14px;border-radius:6px;margin-top:10px">💬 Share on WhatsApp</button>
-</div>
-
-<div class="white-box">
-<h3>Task Earnings <small style="color:#6b7a99;font-weight:normal">All activity income</small></h3>
-<br>
-<div class="task-grid">
-<div class="task"><div class="icon" style="background:#d1f5e0">💬</div><div><small>Foreign Chat</small><br><b>KES 0</b></div></div>
-<div class="task"><div class="icon" style="background:#e0f7e9">🎵</div><div><small>Spotify</small><br><b>KES 0</b></div></div>
-<div class="task"><div class="icon" style="background:#ffdde0">▶️</div><div><small>YouTube</small><br><b>KES 0</b></div></div>
-<div class="task"><div class="icon" style="background:#e8dcff">📹</div><div><small>TikTok</small><br><b>KES 0</b></div></div>
-<div class="task"><div class="icon" style="background:#d1f5e0">%</div><div><small>Math Challenge</small><br><b>KES 0</b></div></div>
-<div class="task"><div class="icon" style="background:#fff3c4">🎰</div><div><small>Casino & Spin</small><br><b>KES 0</b></div></div>
-<div class="task"><div class="icon" style="background:#d1f5e0">✓</div><div><small>Tap Earnings</small><br><b>KES 0</b></div></div>
-<div class="task"><div class="icon" style="background:#dce8ff">📺</div><div><small>Ad Tasks</small><br><b>KES 0</b></div></div>
-</div>
-</div>
-
-<!-- WITHDRAW MODAL -->
-<div class="modal" id="withdrawModal">
-<div class="modal-box">
-<h3>Withdraw Funds</h3>
-<p style="color:#666;font-size:13px;margin:8px 0">Minimum KES 100</p>
-<input type="number" id="amount" placeholder="Enter Amount (KES)">
-<input type="text" id="phone" placeholder="Mpesa Number 07...">
-<button class="btn-withdraw" onclick="doWithdraw()">Request Withdrawal</button>
-<button style="width:100%;padding:10px;margin-top:8px;border:none;background:#eee;border-radius:8px" onclick="closeWithdraw()">Cancel</button>
-</div>
-</div>
-
 <script>
-let user = "Abuudrian";
-document.getElementById('userName').innerText = user;
-document.getElementById('initial').innerText = user.charAt(0);
-document.getElementById('refLink').value = "https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref="+user;
-
-// Greeting logic
-const h = new Date().getHours();
-let g = h < 12 ? "Good Morning" : h < 17 ? "Good Afternoon" : "Good Evening";
-// unaweza kuweka hapo juu kama unataka
-
-function openWithdraw(){document.getElementById('withdrawModal').style.display='flex'}
-function closeWithdraw(){document.getElementById('withdrawModal').style.display='none'}
-function copyLink(){navigator.clipboard.writeText(document.getElementById('refLink').value);alert("Link Copied!")}
-function doWithdraw(){
- let amt = document.getElementById('amount').value;
- let phone = document.getElementById('phone').value;
- if(!amt || amt < 100){alert("Minimum ni 100");return}
- if(!phone){alert("Weka namba ya Mpesa");return}
- alert("Withdrawal request ya KES "+amt+" kwa "+phone+" imetumwa! Itaingia Pending. Utathibitisha kwenye Google Sheet yako.");
- closeWithdraw();
- // Hapa ndipo inaenda kwenye Google Sheet yako automatic
+function signup(){
+ let n=document.getElementById('fullname').value;
+ let u=document.getElementById('username').value;
+ let p=document.getElementById('phone').value;
+ let pw=document.getElementById('pass').value;
+ let cpw=document.getElementById('cpass').value;
+ if(!n||!u||!p||!pw){alert("Jaza kila kitu!");return}
+ if(pw!=cpw){alert("Password hazifanani!");return}
+ if(p.length<10){alert("Weka namba sahihi ya Safaricom");return}
+ localStorage.setItem('starlife_name',n);
+ localStorage.setItem('starlife_user',u);
+ localStorage.setItem('starlife_phone',p);
+ localStorage.setItem('starlife_paid','no');
+ localStorage.setItem('starlife_balance','0');
+ // Peleka kwenye payment
+ window.location.href="activate.html";
 }
 </script>
-</body>
-</html>
+</body></html>
