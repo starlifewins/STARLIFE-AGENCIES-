@@ -1,44 +1,34 @@
-<!DOCTYPE html>
-<html><head><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<style>
-body{background:#0a1128;color:white;font-family:Arial;padding:15px;margin:0}
-.box{border:1px solid #ffcc00;border-radius:14px;padding:15px;text-align:center;margin-bottom:15px;background:#111a3a}
-.bonus{color:#00ff88;font-size:32px;font-weight:bold}
-.form{background:#111a3a;padding:15px;border-radius:14px}
-input{width:100%;padding:14px;margin:8px 0;border-radius:8px;border:1px solid #2a3a7a;background:#0a1128;color:white;box-sizing:border-box}
-.btn{background:#ffcc00;color:black;border:none;width:100%;padding:14px;border-radius:8px;font-weight:bold;font-size:16px;margin-top:10px}
-</style></head><body>
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<style>body{background:#0a1128;color:white;font-family:Arial;padding:15px}
+.box{border:1px solid #ffcc00;border-radius:14px;padding:15px;text-align:center;background:#111a3a}
+.bonus{color:#00ff88;font-size:28px;font-weight:bold}
+.form{background:#111a3a;padding:15px;border-radius:14px;margin-top:12px}
+input{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #334;background:#0a1128;color:white;box-sizing:border-box}
+.btn{background:#ffcc00;color:black;border:none;width:100%;padding:13px;border-radius:8px;font-weight:bold;margin-top:10px}</style></head><body>
 <h2 style="color:#ffcc00">★ STARLIFE</h2>
-<div class="box">
-<div>🚀 JOIN STARLIFE</div><small>Bonus KES 1250 after activation</small>
-<div class="bonus">KES 1,250.00</div><small>WELCOME BONUS</small>
-</div>
-<div class="form">
-<h3>Create Account</h3>
+<div class="box"><div>🚀 JOIN STARLIFE</div><small>Bonus 1250 after activation</small><div class="bonus">KES 1,250</div></div>
+<div class="form"><h3>Create Account</h3>
 <input id="fullname" placeholder="Full Name *">
 <input id="username" placeholder="Username *">
-<input id="phone" placeholder="Safaricom Number * 07...">
+<input id="phone" placeholder="Safaricom 07... *">
 <input id="pass" type="password" placeholder="Password *">
-<input id="cpass" type="password" placeholder="Confirm Password *">
+<input id="cpass" type="password" placeholder="Confirm *">
 <button class="btn" onclick="signup()">SIGN UP & CONTINUE</button>
 </div>
 <script>
 function signup(){
- let n=document.getElementById('fullname').value;
- let u=document.getElementById('username').value;
- let p=document.getElementById('phone').value;
- let pw=document.getElementById('pass').value;
- let cpw=document.getElementById('cpass').value;
- if(!n||!u||!p||!pw){alert("Jaza kila kitu!");return}
- if(pw!=cpw){alert("Password hazifanani!");return}
- if(p.length<10){alert("Weka namba sahihi");return}
- localStorage.setItem('starlife_name',n);
- localStorage.setItem('starlife_user',u);
- localStorage.setItem('starlife_phone',p);
- localStorage.setItem('starlife_paid','no');
- localStorage.setItem('starlife_balance','0');
- // HAPA NDIO MUHIMU - LAZIMA IENDE ACTIVATE
- window.location.href="activate.html";
+let n=document.getElementById('fullname').value;
+let u=document.getElementById('username').value;
+let p=document.getElementById('phone').value;
+let pw=document.getElementById('pass').value;
+let cp=document.getElementById('cpass').value;
+if(!n||!u||!p||!pw){alert("Jaza kila kitu!");return}
+if(pw!=cp){alert("Password hazifanani");return}
+if(p.length<10){alert("Namba si sahihi");return}
+localStorage.setItem('starlife_user',u);
+localStorage.setItem('starlife_phone',p);
+localStorage.setItem('starlife_paid','no');
+localStorage.setItem('starlife_balance','0');
+window.location.href="activate.html";
 }
-</script>
-</body></html>
+</script></body></html>
