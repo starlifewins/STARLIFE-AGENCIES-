@@ -2,126 +2,124 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard - STARLIFE</title>
+<title>STARLIFE AGENCIES</title>
 <style>
-body{background:#0a1128;color:#fff;font-family:Arial;margin:0;padding:0}
-.top{background:#111a3a;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.logo{color:#ffcc00;font-weight:bold;font-size:18px}
-.menu{font-size:26px;cursor:pointer}
-.drawer{position:fixed;top:0;right:-260px;width:240px;height:100%;background:#0f1d3f;border-left:2px solid #00ff88;transition:0.3s;padding:20px;z-index:20}
-.drawer.open{right:0}
-.drawer a{display:block;padding:12px;color:#fff;text-decoration:none;border-bottom:1px solid #223;cursor:pointer}
-.wrap{padding:16px;max-width:420px;margin:auto}
-.card{background:#111a3a;border:1px solid #223;padding:14px;border-radius:14px;margin-top:12px}
-.stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1e2a5a;font-size:14px}
-.stat b{color:#00ff88}
-.stat .red{color:#ff6666}
-.stat .yellow{color:#ffcc00}
-.linkbox{background:#0f1d3f;border:1px dashed #00ff88;padding:12px;border-radius:10px;margin-top:12px;word-break:break-all;font-size:13px}
-.btn{background:linear-gradient(90deg,#00ff88,#00cc6a);color:#000;border:0;width:100%;padding:13px;border-radius:10px;font-weight:bold;margin-top:10px}
-.btn2{background:#ffcc00;color:#000;border:0;width:100%;padding:12px;border-radius:10px;font-weight:bold;margin-top:8px}
-.task{background:#151f4a;padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin-top:10px;border-left:4px solid #00ff88}
-.task small{color:#aaa}
-.task button{background:#00ff88;border:0;padding:8px 14px;border-radius:8px;font-weight:bold}
+body{margin:0;font-family:Arial;background:#f5f7ff}
+.top{background:#0a7a6b;color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.top .icon{width:38px;height:38px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0a7a6b;font-size:22px;cursor:pointer}
+.logo{font-weight:bold;font-size:18px;letter-spacing:1px}
+.logo span{color:#ffcc00}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;z-index:15}
+.overlay.show{display:block}
+.drawer{position:fixed;left:-300px;top:0;width:78%;max-width:300px;height:100%;background:#fff;z-index:20;transition:0.3s;overflow-y:auto;box-shadow:2px 0 10px rgba(0,0,0,0.2)}
+.drawer.open{left:0}
+.d-head{padding:18px;background:#fff;border-bottom:1px solid #eee;font-weight:bold;color:#0a7a6b}
+.section{padding:10px 16px 4px 16px;font-size:11px;color:#999;letter-spacing:1px;font-weight:bold}
+.item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;color:#3a3f63;cursor:pointer}
+.item:hover{background:#f0f0ff}
+.item.active{background:#7a5cff;color:#fff;border-radius:0 25px 25px 0;margin-right:12px}
+.badge{font-size:10px;padding:3px 8px;border-radius:12px;color:#fff}
+.badge.new{background:#00b894}
+.badge.hot{background:#ff3b5a}
+.main{padding:14px;max-width:480px;margin:auto}
+.card{border-radius:16px;padding:16px;color:#fff;margin-top:14px;position:relative;overflow:hidden}
+.card.red{background:linear-gradient(135deg,#ff5a5a,#ff3b3b)}
+.card.blue{background:linear-gradient(135deg,#3a9cff,#3a6eff)}
+.card.purple{background:linear-gradient(135deg,#a56bff,#7a5cff)}
+.card.orange{background:linear-gradient(135deg,#ff9a3c,#ff7a18)}
+.card .iconR{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:32px;opacity:0.9}
+.label{font-size:11px;opacity:0.9}
+.value{font-size:22px;font-weight:bold;margin-top:4px}
+.linkbox{background:#fff;border-radius:14px;padding:14px;margin-top:16px;box-shadow:0 2px 10px rgba(0,0,0,0.06);word-break:break-all}
+.linkbox b{font-size:13px;color:#333}
+.link{font-size:12px;color:#7a5cff;margin-top:8px;background:#f3f0ff;padding:10px;border-radius:8px}
+.btn{background:#7a5cff;color:#fff;border:0;width:100%;padding:12px;border-radius:10px;font-weight:bold;margin-top:10px}
 </style>
 </head>
 <body>
-<div class="top"><div class="logo">★ STARLIFE</div><div class="menu" onclick="toggle()">☰</div></div>
+
+<div class="top">
+<div class="icon" onclick="openD()">☰</div>
+<div class="logo">★ STAR<span>LIFE</span></div>
+<div class="icon" style="font-size:18px">⋮</div>
+</div>
+
+<div id="over" class="overlay" onclick="closeD()"></div>
 
 <div id="drawer" class="drawer">
-<div style="text-align:right;font-size:22px" onclick="toggle()">✕</div>
-<a onclick="home()">🏠 Dashboard</a>
-<a onclick="copyLink()">🔗 Copy Invite Link</a>
-<a onclick="withdraw()">💰 Withdraw</a>
-<a onclick="logout()">🚪 Log Out</a>
-<div style="margin-top:20px;font-size:12px;color:#888" id="userInfo"></div>
+<div class="d-head">★ STARLIFE AGENCIES</div>
+
+<div class="section">DASHBOARD</div>
+<div class="item active" onclick="closeD()">🏠 Home</div>
+
+<div class="section">ACCOUNTS</div>
+<div class="item" onclick="goVoucher()">🏷️ Vouchers <span>›</span></div>
+<div class="item" onclick="alert('Deposit: Paybill 714777')">💳 Deposit <span>›</span></div>
+<div class="item" onclick="claimBonus()">🎁 Claim Bonus</div>
+<div class="item" onclick="alert('Leaderboard Coming Soon')">🏆 Leaderboard</div>
+<div class="item" onclick="payClient()">👤 Pay For Client</div>
+<div class="item" onclick="withdraw()">⬆️ Withdraw <span>›</span></div>
+<div class="item" onclick="team()">👥 Team <span>›</span></div>
+
+<div class="section">PRODUCTS</div>
+<div class="item" onclick="task('Spins',20)">🎯 Spins <span>›</span></div>
+<div class="item" onclick="task('Click Ads',20)">🖱️ Click Ads <span class="badge new">NEW</span></div>
+<div class="item" onclick="task('YouTube Add',30)">▶️ YouTube Add <span class="badge new">NEW</span></div>
+<div class="item" onclick="task('TikTok Add',30)">🎵 TikTok Add <span class="badge hot">HOT</span></div>
+<div class="item" onclick="doMath()">🔢 Maths For Funny <span class="badge new">NEW</span></div>
+<div class="item" onclick="doTrivia()">❓ Trivia Questions <span class="badge new">NEW</span></div>
+<div class="item" onclick="logout()">🚪 Log Out</div>
+
+<div style="height:30px"></div>
 </div>
 
-<div class="wrap">
-<h2 style="color:#ffcc00;margin:10px 0">Dashboard</h2>
+<div class="main">
+<!-- CARDS - ONLY WHAT YOU WANT -->
+<div class="card red"><div class="label">EXPENSES</div><div class="value">KES 150</div><div class="iconR">💳</div></div>
 
-<div class="card">
-<div class="stat"><span>Total Profit</span><b id="profit">KES 0</b></div>
-<div class="stat"><span>Expenses (Activation Fee)</span><b class="red">KES 150</b></div>
-<div class="stat"><span>Balance</span><b class="yellow" id="bal">KES 0</b></div>
-<div class="stat"><span>Pending Withdrawal</span><b id="pend">KES 0</b></div>
-<div class="stat"><span>Total Withdrawal</span><b id="totalW">KES 0</b></div>
-</div>
+<div class="card blue"><div class="label">TOTAL PROFIT</div><div class="value" id="profit">KES 0</div><div class="iconR">💰</div><div style="font-size:11px;margin-top:6px" id="balanceLine">Balance: KES 0</div></div>
 
-<div class="card">
+<div class="card purple"><div class="label">PENDING WITHDRAWAL</div><div class="value" id="pend">KES 0</div><div class="iconR">⬆️</div></div>
+
+<div class="card orange"><div class="label">TOTAL WITHDRAWAL</div><div class="value" id="totalW">KES 0</div><div class="iconR">🕒</div></div>
+
+<!-- LINK DOWN -->
+<div class="linkbox">
 <b>🔗 Your Invite Link</b>
-<div class="linkbox" id="reflink">Loading...</div>
-<button class="btn2" onclick="copyLink()">Copy Link</button>
-<p style="font-size:11px;color:#aaa">Share and earn KES 100 per referral!</p>
+<div class="link" id="reflink">Loading...</div>
+<button class="btn" onclick="copyLink()">Copy Link</button>
+<p style="font-size:11px;color:#888;margin-top:8px">Share and earn KES 100 per referral!</p>
 </div>
 
-<div class="card">
-<b>💼 Tasks - Earn Daily</b>
-
-<div class="task"><div><b>Click Ads</b><br><small>Earn 20 per click</small></div><button onclick="doTask(20,'Click Ads')">CLICK</button></div>
-
-<div class="task"><div><b>YouTube Add</b><br><small>Watch & Earn 30</small></div><button onclick="doTask(30,'YouTube')">WATCH</button></div>
-
-<div class="task"><div><b>TikTok Add</b><br><small>Watch & Earn 30</small></div><button onclick="doTask(30,'TikTok')">WATCH</button></div>
-
-<div class="task"><div><b>Maths For Funny</b><br><small>Solve & Earn 50</small></div><button onclick="doMath()">PLAY</button></div>
-
-<div class="task"><div><b>Trivia Questions</b><br><small>Answer & Earn 40</small></div><button onclick="doTrivia()">ANSWER</button></div>
-
-</div>
-
-<div class="card">
-<button class="btn" onclick="withdraw()">💸 WITHDRAW</button>
-<button class="btn2" onclick="pay()">💳 Pay To Client</button>
-</div>
-
+<div style="height:50px"></div>
 </div>
 
 <script>
-if(localStorage.getItem('starlife_paid')!=='yes'){alert('Please Activate First!');location.href='activate.html';}
-
+if(localStorage.getItem('starlife_paid')!=='yes'){location.href='activate.html';}
 var user=localStorage.getItem('starlife_user')||'User';
-var bal=parseInt(localStorage.getItem('starlife_balance')||'0');
+var bal=parseInt(localStorage.getItem('starlife_balance')||'200');
 var pend=parseInt(localStorage.getItem('starlife_pending')||'0');
 var totalW=parseInt(localStorage.getItem('starlife_total_withdraw')||'0');
-
 function refresh(){
 var profit=bal+pend+totalW;
-document.getElementById('bal').innerText='KES '+bal;
+document.getElementById('profit').innerText='KES '+profit;
 document.getElementById('pend').innerText='KES '+pend;
 document.getElementById('totalW').innerText='KES '+totalW;
-document.getElementById('profit').innerText='KES '+profit;
+document.getElementById('balanceLine').innerText='Balance: KES '+bal+' | Pending: KES '+pend;
 document.getElementById('reflink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+user;
-document.getElementById('userInfo').innerText='User: '+user+'\n'+(localStorage.getItem('starlife_email')||'');
 }
 refresh();
-
-function toggle(){document.getElementById('drawer').classList.toggle('open');}
-function home(){toggle();window.scrollTo(0,0);}
-function copyLink(){var l=document.getElementById('reflink').innerText;navigator.clipboard.writeText(l);alert('Link Copied: '+l);}
-function doTask(amount,name){bal+=amount;localStorage.setItem('starlife_balance',bal);refresh();alert('✅ '+name+' Completed! +KES '+amount);}
-
-function doMath(){
-var a=Math.floor(Math.random()*10)+1;var b=Math.floor(Math.random()*10)+1;
-var ans=prompt('Maths: What is '+a+' + '+b+' ?');
-if(parseInt(ans)===(a+b)){doTask(50,'Maths');}else{alert('Wrong! Try again');}
-}
-function doTrivia(){
-var q=prompt('Trivia: Capital of Kenya?\nA) Mombasa\nB) Nairobi\nC) Kisumu\nWrite B');
-if(q&&q.toUpperCase().trim()==='B'){doTask(40,'Trivia');}else{alert('Wrong! Answer is B - Nairobi');}
-}
-function withdraw(){
-if(bal<300){alert('Minimum withdraw is KES 300. Your Balance: '+bal);return}
-var phone=prompt('Enter M-Pesa Number to withdraw KES '+bal);
-if(!phone)return;
-pend+=bal;totalW+=0;
-localStorage.setItem('starlife_pending',pend);
-localStorage.setItem('starlife_balance','0');
-localStorage.setItem('starlife_total_withdraw',bal);
-bal=0;refresh();
-alert('✅ Withdrawal Request Sent! KES '+pend+' Pending...');
-}
-function pay(){alert('Pay To Client: Contact Admin 0714777...');}
+function openD(){document.getElementById('drawer').classList.add('open');document.getElementById('over').classList.add('show');}
+function closeD(){document.getElementById('drawer').classList.remove('open');document.getElementById('over').classList.remove('show');}
+function copyLink(){navigator.clipboard.writeText(document.getElementById('reflink').innerText);alert('Link Copied!');}
+function task(name,amt){closeD();bal+=amt;localStorage.setItem('starlife_balance',bal);refresh();alert('✅ '+name+' Completed! +KES '+amt);}
+function doMath(){closeD();var a=Math.floor(Math.random()*10)+1;var b=Math.floor(Math.random()*10)+1;var ans=prompt('Maths: '+a+' + '+b+' = ?');if(parseInt(ans)===(a+b)){task('Maths For Funny',50);}else{alert('Wrong!');}}
+function doTrivia(){closeD();var q=prompt('Trivia: Capital of Kenya? A)Mombasa B)Nairobi C)Kisumu \nAnswer B');if(q&&q.toUpperCase().trim()==='B'){task('Trivia',40);}else{alert('Wrong! Answer B');}}
+function withdraw(){closeD();if(bal<300){alert('Min withdraw KES 300. Balance: '+bal);return}var ph=prompt('Enter M-Pesa Number to withdraw KES '+bal);if(!ph)return;pend+=bal;localStorage.setItem('starlife_pending',pend);localStorage.setItem('starlife_balance','0');bal=0;refresh();alert('Withdrawal Pending KES '+pend);}
+function claimBonus(){closeD();alert('Bonus Claimed! +KES 50');task('Bonus',50);}
+function goVoucher(){closeD();alert('Vouchers: 0/5 referrals. Share link to earn!');}
+function payClient(){closeD();alert('Pay For Client: Contact Admin 0714777...');}
+function team(){closeD();alert('Team: 0 members. Share your link!');}
 function logout(){localStorage.clear();location.href='index.html';}
 </script>
 </body>
