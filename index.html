@@ -1,1 +1,38 @@
-<!DOCTYPE html><html><head><meta name=viewport content="width=device-width,initial-scale=1"><style>body{background:#0a1128;color:#fff;font-family:Arial;padding:15px}.b{border:1px solid #ffcc00;border-radius:14px;padding:12px;text-align:center;background:#111a3a}.bo{color:#00ff88;font-size:28px;font-weight:bold}.f{background:#111a3a;padding:12px;border-radius:12px;margin-top:10px}input{width:100%;padding:12px;margin:5px 0;border-radius:8px;border:1px solid #334;background:#0a1128;color:#fff;box-sizing:border-box}.btn{background:#ffcc00;color:#000;border:0;width:100%;padding:13px;border-radius:8px;font-weight:bold}</style></head><body><h2 style=color:#ffcc00>★ STARLIFE</h2><div class=b><div>🚀 JOIN STARLIFE</div><small>Bonus 1250 after activation</small><div class=bo>KES 1,250</div></div><div class=f><h3>Create Account</h3><input id=a placeholder="Full Name *"><input id=b placeholder="Username *"><input id=c placeholder="Safaricom 07... *"><input id=d type=password placeholder="Password *"><input id=e type=password placeholder="Confirm *"><button class=btn onclick="s()">SIGN UP & CONTINUE</button></div><script>function s(){let x=a.value,y=b.value,z=c.value,p=d.value,q=e.value;if(!x||!y||!z||!p){alert("Jaza kila kitu");return}if(p!=q){alert("Password hazifanani");return}if(z.length<10){alert("Namba si sahihi");return}localStorage.setItem("starlife_user",y);localStorage.setItem("starlife_phone",z);localStorage.setItem("starlife_paid","no");localStorage.setItem("starlife_balance","0");location.href="activate.html"}</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE</title>
+<style>
+body{background:#0a1128;color:#fff;font-family:Arial;margin:0;padding:0;text-align:center}
+.box{padding:25px;max-width:380px;margin:auto}
+input{width:100%;padding:14px;border-radius:12px;border:0;margin-top:12px;box-sizing:border-box;font-size:16px}
+.btn{background:#00ff88;color:#000;border:0;width:100%;padding:15px;border-radius:12px;font-weight:bold;margin-top:18px;font-size:17px}
+h1{color:#ffcc00;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>★ STARLIFE AGENCIES</h1>
+<p>Earn by advertising</p>
+<input id="u" placeholder="Username">
+<input id="p" type="password" placeholder="Password">
+<input id="ph" placeholder="Phone 07...">
+<button class="btn" onclick="goActivate()">CREATE ACCOUNT</button>
+</div>
+<script>
+function goActivate(){
+var user=document.getElementById("u").value;
+var pass=document.getElementById("p").value;
+var phone=document.getElementById("ph").value;
+if(!user||!pass||!phone){alert("Jaza zote!");return}
+localStorage.clear();
+localStorage.setItem("starlife_user",user);
+localStorage.setItem("starlife_paid","no");
+localStorage.setItem("starlife_balance","0");
+localStorage.setItem("starlife_pending","0");
+window.location.href="activate.html?v="+Date.now();
+}
+</script>
+</body>
+</html>
