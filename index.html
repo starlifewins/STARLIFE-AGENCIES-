@@ -2,36 +2,72 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE</title>
+<title>STARLIFE AGENCIES</title>
 <style>
-body{background:#0a1128;color:#fff;font-family:Arial;margin:0;padding:0;text-align:center}
-.box{padding:25px;max-width:380px;margin:auto}
-input{width:100%;padding:14px;border-radius:12px;border:0;margin-top:12px;box-sizing:border-box;font-size:16px}
-.btn{background:#00ff88;color:#000;border:0;width:100%;padding:15px;border-radius:12px;font-weight:bold;margin-top:18px;font-size:17px}
-h1{color:#ffcc00;margin-top:40px}
+body{background:linear-gradient(180deg,#0a1128,#0d1b4a);color:#fff;font-family:Arial;margin:0;padding:20px;min-height:100vh}
+.card{background:rgba(255,255,255,0.07);backdrop-filter:blur(10px);border:1px solid rgba(0,255,136,0.3);padding:24px;border-radius:20px;width:100%;max-width:400px;margin:20px auto;box-shadow:0 0 30px rgba(0,255,136,0.15)}
+h1{color:#ffcc00;margin:0;text-align:center;font-size:26px}
+.sub{color:#aaa;text-align:center;margin:8px 0 18px 0;font-size:13px}
+label{font-size:12px;color:#aaa;display:block;text-align:left;margin-top:12px;margin-bottom:4px}
+input{width:100%;padding:13px;border-radius:10px;border:1px solid #2a3a6a;background:#0f1d3f;color:#fff;box-sizing:border-box;font-size:14px;outline:none}
+input:focus{border-color:#00ff88}
+.btn{background:linear-gradient(90deg,#00ff88,#00cc6a);color:#000;border:0;width:100%;padding:14px;border-radius:12px;font-weight:bold;margin-top:20px;font-size:16px;cursor:pointer}
+.login{text-align:center;margin-top:16px;font-size:13px;color:#888}
+.login a{color:#00ff88;text-decoration:none;font-weight:bold}
 </style>
 </head>
 <body>
-<div class="box">
-<h1>★ STARLIFE AGENCIES</h1>
-<p>Earn by advertising</p>
-<input id="u" placeholder="Username">
-<input id="p" type="password" placeholder="Password">
-<input id="ph" placeholder="Phone 07...">
-<button class="btn" onclick="goActivate()">CREATE ACCOUNT</button>
+<div class="card">
+<h1>★ STARLIFE</h1>
+<div class="sub">Earn by advertising - Create Account</div>
+
+<label>Full Name</label>
+<input id="fullname" placeholder="John Doe">
+
+<label>Username</label>
+<input id="username" placeholder="johndoe123">
+
+<label>Phone Number</label>
+<input id="phone" placeholder="07...">
+
+<label>Email</label>
+<input id="email" type="email" placeholder="email@example.com">
+
+<label>Password</label>
+<input id="pass" type="password" placeholder="Password">
+
+<label>Confirm Password</label>
+<input id="cpass" type="password" placeholder="Confirm Password">
+
+<button class="btn" onclick="signup()">SIGN UP</button>
+
+<div class="login">Already have account? <a href="dashboard.html">Log In</a></div>
 </div>
+
 <script>
-function goActivate(){
-var user=document.getElementById("u").value;
-var pass=document.getElementById("p").value;
-var phone=document.getElementById("ph").value;
-if(!user||!pass||!phone){alert("Jaza zote!");return}
+function signup(){
+var fn=document.getElementById('fullname').value.trim();
+var un=document.getElementById('username').value.trim();
+var ph=document.getElementById('phone').value.trim();
+var em=document.getElementById('email').value.trim();
+var p=document.getElementById('pass').value;
+var cp=document.getElementById('cpass').value;
+
+if(!fn||!un||!ph||!em||!p||!cp){alert('Jaza fields zote!');return}
+if(p!==cp){alert('Password na Confirm Password hazifanani!');return}
+if(p.length<4){alert('Password fupi sana!');return}
+
 localStorage.clear();
-localStorage.setItem("starlife_user",user);
-localStorage.setItem("starlife_paid","no");
-localStorage.setItem("starlife_balance","0");
-localStorage.setItem("starlife_pending","0");
-window.location.href="activate.html?v="+Date.now();
+localStorage.setItem('starlife_fullname',fn);
+localStorage.setItem('starlife_user',un);
+localStorage.setItem('starlife_phone',ph);
+localStorage.setItem('starlife_email',em);
+localStorage.setItem('starlife_pass',p);
+localStorage.setItem('starlife_paid','no');
+localStorage.setItem('starlife_balance','0');
+localStorage.setItem('starlife_pending','0');
+
+window.location.href='activate.html';
 }
 </script>
 </body>
