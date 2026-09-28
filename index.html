@@ -2,78 +2,141 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STARLIFE AGENCIES</title>
 <style>
-body { background:#0a0f2c; color:white; font-family:Arial; margin:0; padding:15px; }
-.header { background:#101840; padding:15px; border-radius:12px; border:1.5px solid #00ff88; text-align:center; margin-bottom:15px;}
-.greeting { background:#121a3d; padding:15px; border-radius:10px; margin-bottom:15px; border-left:4px solid #ffcc00; }
-.stats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px; }
-.card { background:#151f4a; padding:12px; border-radius:10px; border:1px solid #2a3a7a; }
-.card small { color:#8a9ac5; font-size:11px; text-transform:uppercase; }
-.card b { color:#ffcc00; font-size:18px; display:block; margin-top:5px; }
-.divider { border:none; border-top:1px solid #2a3a7a; margin:20px 0; }
-.divider2 { border:none; border-top:1px dashed #ffcc00; margin:10px 0; opacity:0.3; }
-.menu { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.menu-item { background:#101840; padding:15px; text-align:center; border-radius:10px; border:1px solid #2a3a7a; color:#ffcc00; font-weight:bold; cursor:pointer; }
-.menu-item.active { background:#ffcc00; color:#0a0f2c; }
-.ref-box { background:#101840; padding:12px; border-radius:10px; margin-top:15px; }
-.ref-link { background:#0a0f2c; padding:10px; border:1px dashed #ffcc00; border-radius:6px; color:#ffcc00; font-size:12px; word-break:break-all; }
-.btn { background:#ffcc00; color:#000; border:none; width:100%; padding:12px; border-radius:8px; font-weight:bold; margin-top:10px; }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f7fb;padding-bottom:20px}
+.topbar{background:#009688;padding:12px;display:flex;align-items:center;justify-content:space-between;color:white}
+.logo{font-weight:bold;font-size:20px;display:flex;align-items:center;gap:8px}
+.logo span{background:white;color:#009688;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.card-purple{background:linear-gradient(135deg,#7c5cff,#a68bff);padding:18px;border-radius:14px;color:white;margin:15px}
+.row{display:flex;gap:10px;margin-top:12px}
+.mini{background:rgba(255,255,255,0.9);border-radius:10px;padding:10px 12px;flex:1;display:flex;align-items:center;gap:8px}
+.mini b{color:#222}
+.green{background:#00d084;color:white}
+.red{background:#ff5a5a;color:white}
+.white-box{background:white;border-radius:12px;padding:15px;margin:15px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.balance-blue{background:linear-gradient(90deg,#2b5bff,#3ac8ff);color:white;padding:18px;border-radius:12px;margin:12px 15px;display:flex;justify-content:space-between;align-items:center}
+.balance-purple{background:linear-gradient(90deg,#8a4de8,#b07bff);color:white;padding:18px;border-radius:12px;margin:12px 15px;display:flex;justify-content:space-between;align-items:center}
+.balance-orange{background:linear-gradient(90deg,#ff7a18,#ff9f3f);color:white;padding:18px;border-radius:12px;margin:12px 15px;display:flex;justify-content:space-between;align-items:center}
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.task{display:flex;align-items:center;gap:10px}
+.icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.btn-withdraw{background:#ffcc00;color:#000;border:none;padding:12px 20px;border-radius:8px;font-weight:bold;width:100%;margin-top:10px;cursor:pointer}
+.btn-copy{background:#6c5ce7;color:white;border:none;padding:10px 14px;border-radius:6px}
+.ref-input{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px 0 0 6px;background:#f8f9ff}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:99}
+.modal-box{background:white;padding:20px;border-radius:12px;width:90%;max-width:340px}
+.modal-box input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h2 style="color:#00ff88; margin:0;">✅ Account Active!</h2>
-  <p id="welcomeText" style="color:#8a9ac5;">Welcome Abuu</p>
+<div class="topbar">
+<div>☰</div>
+<div class="logo"><span>S</span> STARLIFE</div>
+<div>⋮</div>
 </div>
 
-<div class="greeting">
-  <h3 id="greetingText" style="margin:0; color:#ffcc00;">Good Morning, Abuu ☀️</h3>
-  <small id="dateText" style="color:#8a9ac5;">Today</small>
+<h2 style="padding:15px 15px 0">Dashboard</h2>
+<p style="padding:0 15px;color:#6b7a99;font-size:13px">Home / Dashboard</p>
+
+<div class="card-purple">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="background:white;color:#7c5cff;width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px" id="initial">A</div>
+<div>
+<div style="font-size:18px">Hi, <span id="userName">Abuudrian</span> 👋 <span style="background:white;color:#333;padding:4px 10px;border-radius:6px;font-size:12px;margin-left:6px">Starter</span></div>
+<small style="opacity:0.9">Welcome back to your dashboard</small>
+</div>
+</div>
+<div class="row">
+<div class="mini green"><div>📈</div><div><small>NET PROFIT</small><br><b>KES 200</b></div></div>
+<div class="mini red"><div>📉</div><div><small>EXPENSES</small><br><b>KES 150</b></div></div>
+</div>
+<div class="white-box" style="margin:12px 0 0 0;padding:12px">
+<div style="display:flex;justify-content:space-between;font-weight:bold"><span style="font-size:12px;color:#666">GROW YOUR NETWORK</span><span style="font-size:12px">0/5</span></div>
+<div style="background:#eee;height:6px;border-radius:10px;margin:8px 0"></div>
+<small style="color:#666">No new members yet today. Share your referral link and start building your team now!</small>
+</div>
 </div>
 
-<div class="stats">
-  <div class="card"><small>Balance</small><b>KES 1,250</b></div>
-  <div class="card"><small>Total Withdrawal</small><b>KES 480</b></div>
-  <div class="card"><small>Pending Withdrawal</small><b style="color:orange;">KES 75</b></div>
-  <div class="card"><small>Welcome Bonus</small><b style="color:#00ff88;">KES 50</b></div>
+<div class="balance-blue">
+<div><small>Available Balance</small><br><b style="font-size:26px">KES. <span id="bal">100</span></b></div>
+<div style="font-size:30px">💳</div>
+</div>
+<button class="btn-withdraw" style="margin:0 15px;width:calc(100% - 30px)" onclick="openWithdraw()">⬆️ WITHDRAW NOW</button>
+
+<div class="balance-purple">
+<div><small>Total Withdrawals</small><br><b style="font-size:26px">KES. 0</b></div>
+<div style="font-size:30px">↑</div>
 </div>
 
-<hr class="divider">
-<hr class="divider2">
-
-<div class="menu">
-  <div class="menu-item active">📊 Dashboard</div>
-  <div class="menu-item">🏠 Home</div>
-  <div class="menu-item">🎯 Trivia Quest</div>
-  <div class="menu-item">🎵 TikTok Ads</div>
-  <div class="menu-item">▶️ YouTube Ads</div>
-  <div class="menu-item">👥 Referrals</div>
+<div class="balance-orange">
+<div><small>Pending Withdrawals</small><br><b style="font-size:26px">KES. 0</b></div>
+<div style="font-size:30px">🕒</div>
 </div>
 
-<div class="ref-box">
-  <small>YOUR REFERRAL LINK</small>
-  <div class="ref-link" id="refLink">https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=Abuu</div>
-  <button class="btn" onclick="copyLink()">Copy Link</button>
+<div class="white-box">
+<h3>Refer & Earn <small style="color:#6b7a99;font-weight:normal">Earn commission for every person who activates through your link</small></h3>
+<br>
+<small style="color:#6b7a99;font-weight:bold">YOUR UNIQUE REFERRAL LINK</small>
+<div style="display:flex;margin-top:8px">
+<input class="ref-input" id="refLink" value="https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=Abuudrian">
+<button class="btn-copy" onclick="copyLink()">📋 Copy</button>
+</div>
+<button style="background:#009688;color:white;border:none;padding:8px 14px;border-radius:6px;margin-top:10px">💬 Share on WhatsApp</button>
+</div>
+
+<div class="white-box">
+<h3>Task Earnings <small style="color:#6b7a99;font-weight:normal">All activity income</small></h3>
+<br>
+<div class="task-grid">
+<div class="task"><div class="icon" style="background:#d1f5e0">💬</div><div><small>Foreign Chat</small><br><b>KES 0</b></div></div>
+<div class="task"><div class="icon" style="background:#e0f7e9">🎵</div><div><small>Spotify</small><br><b>KES 0</b></div></div>
+<div class="task"><div class="icon" style="background:#ffdde0">▶️</div><div><small>YouTube</small><br><b>KES 0</b></div></div>
+<div class="task"><div class="icon" style="background:#e8dcff">📹</div><div><small>TikTok</small><br><b>KES 0</b></div></div>
+<div class="task"><div class="icon" style="background:#d1f5e0">%</div><div><small>Math Challenge</small><br><b>KES 0</b></div></div>
+<div class="task"><div class="icon" style="background:#fff3c4">🎰</div><div><small>Casino & Spin</small><br><b>KES 0</b></div></div>
+<div class="task"><div class="icon" style="background:#d1f5e0">✓</div><div><small>Tap Earnings</small><br><b>KES 0</b></div></div>
+<div class="task"><div class="icon" style="background:#dce8ff">📺</div><div><small>Ad Tasks</small><br><b>KES 0</b></div></div>
+</div>
+</div>
+
+<!-- WITHDRAW MODAL -->
+<div class="modal" id="withdrawModal">
+<div class="modal-box">
+<h3>Withdraw Funds</h3>
+<p style="color:#666;font-size:13px;margin:8px 0">Minimum KES 100</p>
+<input type="number" id="amount" placeholder="Enter Amount (KES)">
+<input type="text" id="phone" placeholder="Mpesa Number 07...">
+<button class="btn-withdraw" onclick="doWithdraw()">Request Withdrawal</button>
+<button style="width:100%;padding:10px;margin-top:8px;border:none;background:#eee;border-radius:8px" onclick="closeWithdraw()">Cancel</button>
+</div>
 </div>
 
 <script>
-// Good Morning / Afternoon / Evening Logic
-const hour = new Date().getHours();
-let greet = "Good Morning";
-if(hour >= 12 && hour < 17) greet = "Good Afternoon";
-else if(hour >= 17) greet = "Good Evening";
+let user = "Abuudrian";
+document.getElementById('userName').innerText = user;
+document.getElementById('initial').innerText = user.charAt(0);
+document.getElementById('refLink').value = "https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref="+user;
 
-const username = "Abuu"; // itachukua jina la client automatic
-document.getElementById('greetingText').innerHTML = greet + ", " + username + (hour < 12 ? " ☀️" : hour < 17 ? " 🌤️" : " 🌙");
-document.getElementById('welcomeText').innerHTML = "Welcome " + username;
-document.getElementById('dateText').innerHTML = new Date().toDateString();
+// Greeting logic
+const h = new Date().getHours();
+let g = h < 12 ? "Good Morning" : h < 17 ? "Good Afternoon" : "Good Evening";
+// unaweza kuweka hapo juu kama unataka
 
-function copyLink(){
-  navigator.clipboard.writeText(document.getElementById('refLink').innerText);
-  alert("Link Copied!");
+function openWithdraw(){document.getElementById('withdrawModal').style.display='flex'}
+function closeWithdraw(){document.getElementById('withdrawModal').style.display='none'}
+function copyLink(){navigator.clipboard.writeText(document.getElementById('refLink').value);alert("Link Copied!")}
+function doWithdraw(){
+ let amt = document.getElementById('amount').value;
+ let phone = document.getElementById('phone').value;
+ if(!amt || amt < 100){alert("Minimum ni 100");return}
+ if(!phone){alert("Weka namba ya Mpesa");return}
+ alert("Withdrawal request ya KES "+amt+" kwa "+phone+" imetumwa! Itaingia Pending. Utathibitisha kwenye Google Sheet yako.");
+ closeWithdraw();
+ // Hapa ndipo inaenda kwenye Google Sheet yako automatic
 }
 </script>
-
 </body>
 </html>
