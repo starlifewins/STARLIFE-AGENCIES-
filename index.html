@@ -21,7 +21,6 @@ input{width:100%;padding:14px;margin:8px 0;border-radius:8px;border:1px solid #2
 <input id="pass" type="password" placeholder="Password *">
 <input id="cpass" type="password" placeholder="Confirm Password *">
 <button class="btn" onclick="signup()">SIGN UP & CONTINUE</button>
-<p style="text-align:center;margin-top:10px"><small>Have account? <a href="dashboard.html" style="color:#ffcc00">Log In</a></small></p>
 </div>
 <script>
 function signup(){
@@ -32,13 +31,13 @@ function signup(){
  let cpw=document.getElementById('cpass').value;
  if(!n||!u||!p||!pw){alert("Jaza kila kitu!");return}
  if(pw!=cpw){alert("Password hazifanani!");return}
- if(p.length<10){alert("Weka namba sahihi ya Safaricom");return}
+ if(p.length<10){alert("Weka namba sahihi");return}
  localStorage.setItem('starlife_name',n);
  localStorage.setItem('starlife_user',u);
  localStorage.setItem('starlife_phone',p);
  localStorage.setItem('starlife_paid','no');
  localStorage.setItem('starlife_balance','0');
- // Peleka kwenye payment
+ // HAPA NDIO MUHIMU - LAZIMA IENDE ACTIVATE
  window.location.href="activate.html";
 }
 </script>
