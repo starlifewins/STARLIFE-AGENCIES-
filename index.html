@@ -1,1 +1,107 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE WINS - Earn Daily</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh}.header{background:#111;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222;position:sticky;top:0}.logo{color:#fde68a;font-weight:900;font-size:18px}.card{max-width:420px;margin:16px auto;background:#171717;border:1px solid #2a2a2a;border-radius:20px;padding:18px}.paybox{background:linear-gradient(135deg,#fde68a,#f59e0b);color:#000;border-radius:14px;padding:14px;text-align:center;font-weight:900;margin:12px 0}.stat{display:flex;gap:10px;margin:12px 0}.stat div{flex:1;background:#0f0f0f;border:1px solid #2a2a2a;border-radius:12px;padding:12px;text-align:center}.stat b{font-size:22px;color:#fde68a}input{width:100%;padding:12px;margin:7px 0;border-radius:10px;border:1px solid #333;background:#0f0f0f;color:#fff}.btn{width:100%;padding:13px;border:0;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}.btn-gold{background:#fde68a;color:#000}.btn-green{background:#25D366;color:#fff}.linkbox{background:#fff;color:#000;padding:10px;border-radius:10px;font-size:12px;word-break:break-all;margin:8px 0;font-weight:700}.badge{background:#22c55e22;color:#22c55e;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block}.refbanner{background:#fde68a22;border:1px solid #fde68a55;color:#fde68a;padding:10px;border-radius:10px;font-size:13px;text-align:center;margin-bottom:10px}.hidden{display:none}</style></head><body><div class="header"><div class="logo">★ STARLIFE WINS</div><div style="font-size:11px">0720119990</div></div><div class="card" id="registerView"><div id="refBanner" class="refbanner hidden">🎉 Umealetwa na <b id="refName"></b></div><h2>Join & Earn 100 / Referral</h2><p style="color:#888;font-size:13px;margin:8px 0">Lipa 150 mara moja, pata link yako.</p><div class="paybox">PAYBILL 714777<br>ACCOUNT 440200282954<br>AMOUNT 150</div><input id="fullname" placeholder="Full Name"><input id="phone" placeholder="M-Pesa Phone"><input id="username" placeholder="Username e.g brian254"><div style="font-size:12px;color:#888;margin:6px 0">Referred By: <b id="referredBy" style="color:#fde68a">None</b></div><button class="btn btn-gold" onclick="register()">I HAVE PAID 150 - ACTIVATE</button></div><div class="card hidden" id="dashboardView"><h2>Hi, <span id="dashName" style="color:#fde68a"></span> 👋</h2><div style="margin:10px 0"><span class="badge">● ACTIVE</span></div><div class="stat"><div><div style="font-size:12px;color:#888">Earnings</div><b id="earn">KSH 0</b></div><div><div style="font-size:12px;color:#888">Referrals</div><b id="refCount">0</b></div></div><div style="margin:14px 0"><b>Your Referral Link</b><div class="linkbox" id="myLink"></div><button class="btn btn-gold" onclick="copyLink()">📋 Copy Link</button><button class="btn btn-green" onclick="shareWA()">Share WhatsApp</button></div><button class="btn" style="background:#222;color:#fff" onclick="logout()">Logout</button></div><script>let refFromUrl=new URLSearchParams(location.search).get('ref');let saved=localStorage.getItem('sl_ref');let cur=refFromUrl||saved||'None';if(refFromUrl)localStorage.setItem('sl_ref',refFromUrl);if(cur!=='None'){referredBy.innerText=cur;refName.innerText=cur;refBanner.classList.remove('hidden')}function check(){let u=JSON.parse(localStorage.getItem('sl_user')||'null');if(u)show(u)}check();function register(){let fn=fullname.value.trim(),ph=phone.value.trim(),un=username.value.trim().toLowerCase().replace(/\s/g,'');if(!fn||!ph||!un){alert('Jaza zote');return}let user={name:fn,phone:ph,username:un,ref:cur,earnings:0,referrals:0};localStorage.setItem('sl_user',JSON.stringify(user));let msg=`NEW STARLIFE PAYMENT%0AName:${fn}%0APhone:${ph}%0AUsername:${un}%0ARef:${cur}%0ANimelipa 150 Paybill 714777 Acc 440200282954`;window.open('https://wa.me/254720119990?text='+msg,'_blank');setTimeout(()=>show(user),1000)}function show(u){registerView.classList.add('hidden');dashboardView.classList.remove('hidden');dashName.innerText=u.username;earn.innerText='KSH '+u.earnings;refCount.innerText=u.referrals;myLink.innerText='https://starlifewins.github.io/?ref='+u.username}function copyLink(){navigator.clipboard.writeText(myLink.innerText);alert('Copied!')}function shareWA(){let l=myLink.innerText;let t=`🔥 JOIN STARLIFE WINS! LIPA 150 UANZE KU-EARN 100 PER REFERRAL%0APAYBILL 714777 ACCOUNT 440200282954%0AJoin: ${l}`;window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')}function logout(){localStorage.removeItem('sl_user');location.reload()}</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE WINS DASHBOARD</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#f5f7fb;color:#111}
+.top{background:#111827;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.top b{color:#facc15}
+.card{max-width:480px;margin:14px auto;background:#fff;border-radius:18px;padding:18px;box-shadow:0 8px 24px #0001}
+.pay{background:#fef08a;border:2px dashed #eab308;border-radius:12px;padding:12px;text-align:center;font-weight:800;line-height:1.5}
+input{width:100%;padding:12px;border:1.5px solid #e5e7eb;border-radius:10px;margin:8px 0;font-size:15px}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;margin-top:10px}
+.gold{background:#facc15} .black{background:#111827;color:#fff} .green{background:#22c55e;color:#fff}
+.linkbox{background:#111827;color:#facc15;padding:12px;border-radius:10px;font-weight:700;word-break:break-all;font-size:13px;margin:8px 0}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+.stats div{background:#f9fafb;border-radius:12px;padding:12px;text-align:center;border:1px solid #eee}
+.stats b{display:block;font-size:20px}
+.badge{background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="top"><b>★ STARLIFE WINS</b><span id="topUser" style="font-size:12px;opacity:.7">Guest</span></div>
+
+<!-- REGISTER -->
+<div class="card" id="regBox">
+<h2>Join & Earn KSH 100 Per Referral</h2>
+<p style="color:#666;font-size:13px;margin:6px 0 10px">Lipa mara moja KSH 150, pata link yako ya kudumu.</p>
+<div class="pay">PAYBILL: 714777<br>ACCOUNT: 440200282954<br>AMOUNT: 150<br><small style="font-weight:400">WhatsApp: 0720119990</small></div>
+<div id="refShow" style="margin:10px 0;font-size:13px;display:none">Referred by: <b id="refBy" style="color:#eab308"></b> ✅</div>
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Mpesa Number 07...">
+<input id="user" placeholder="Choose Username e.g kevo254">
+<button class="btn gold" onclick="register()">I HAVE PAID - ACTIVATE NOW</button>
+<p style="font-size:11px;color:#888;text-align:center;margin-top:8px">Utaletwa WhatsApp 0720119990 for verification</p>
+</div>
+
+<!-- DASHBOARD - CHATWAVE STYLE -->
+<div class="card hidden" id="dashBox">
+<div style="display:flex;justify-content:space-between"><h3>Hi, <span id="dName" style="color:#eab308"></span> 👋</h3><span class="badge">ACTIVE</span></div>
+<div class="stats">
+<div><small>Balance</small><b id="bal">KSH 0</b></div>
+<div><small>Referrals</small><b id="refs">0</b></div>
+<div><small>Views</small><b id="views">12</b></div>
+</div>
+
+<b>Your Referral Link 🔗</b>
+<div class="linkbox" id="myLink">https://starlifewins.github.io/?ref=username</div>
+<button class="btn gold" onclick="copy()">📋 COPY LINK</button>
+<button class="btn green" onclick="postWA()">📲 POST NOW ON WHATSAPP</button>
+<button class="btn black" onclick="shareGroups()">SHARE TO GROUPS</button>
+
+<div style="margin-top:16px;background:#f9fafb;border-radius:12px;padding:12px;font-size:12px;color:#555;line-height:1.6">
+<b style="color:#111">How Chatwave Works:</b><br>
+1. Copy your link above<br>
+2. Post on Status, Groups, TikTok<br>
+3. Friend pays 150 via Paybill 714777<br>
+4. You earn 100 instantly - Withdraw to Mpesa
+</div>
+
+<div style="margin-top:14px">
+<b>My Referrals 👥</b>
+<div id="refList" style="font-size:12px;color:#888;margin-top:6px">No referrals yet. Share your link!</div>
+</div>
+
+<button class="btn" style="background:#f3f4f6;margin-top:16px" onclick="logout()">Logout</button>
+</div>
+
+<script>
+const WA_NUMBER="254720119990";
+let urlRef=new URLSearchParams(location.search).get('ref');
+if(urlRef){localStorage.setItem('sl_ref',urlRef);document.getElementById('refShow').style.display='block';document.getElementById('refBy').innerText=urlRef}
+let ref=localStorage.getItem('sl_ref')||'None';
+let userData=JSON.parse(localStorage.getItem('sl_user')||'null');
+if(userData) showDash(userData);
+
+function register(){
+let n=name.value.trim(),p=phone.value.trim(),u=user.value.trim().toLowerCase().replace(/\s/g,'');
+if(!n||!p||!u) return alert('Jaza zote');
+if(u.length<3) return alert('Username fupi');
+let data={name:n,phone:p,username:u,ref:ref,bal:0,refs:0,list:[]};
+localStorage.setItem('sl_user',JSON.stringify(data));
+let msg=`NEW PAYMENT STARLIFE%0AName:${n}%0APhone:${p}%0AUsername:${u}%0AReferredBy:${ref}%0ANimelipa 150 - Paybill 714777 Acc 440200282954`;
+window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`,'_blank');
+showDash(data);
+}
+function showDash(d){
+regBox.classList.add('hidden');dashBox.classList.remove('hidden');
+dName.innerText=d.username;topUser.innerText='@'+d.username;
+bal.innerText='KSH '+d.bal;refs.innerText=d.refs;
+myLink.innerText=`https://starlifewins.github.io/?ref=${d.username}`;
+if(d.list.length){refList.innerHTML=d.list.map(x=>`• ${x} - KSH 100`).join('<br>')}
+}
+function copy(){navigator.clipboard.writeText(myLink.innerText);alert('Link Copied! ✅\n'+myLink.innerText)}
+function postWA(){
+let link=myLink.innerText;
+let text=`🔥 STARLIFE WINS - EARN DAILY!%0A%0ALipa 150 tu uanze ku-earn 100 kwa kila mtu unaeinvite!%0A%0APAYBILL: 714777%0AACCOUNT: 440200282954%0A%0AJoin via my link hapa:%0A${link}%0A%0AWhatsApp: 0720119990`;
+window.open(`https://wa.me/?text=${text}`,'_blank');
+}
+function shareGroups(){postWA()}
+function logout(){if(confirm('Logout?')){localStorage.removeItem('sl_user');location.reload()}}
+</script>
+</body>
+</html>
