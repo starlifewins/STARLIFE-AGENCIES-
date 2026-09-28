@@ -1,103 +1,31 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE ADMIN - Paybill 714777</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a1229;color:#fff;padding:15px}.h{background:#111d3a;padding:15px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.logo{color:#ffcc00;font-weight:900}.c{background:#111d3a;border:1px solid #1e2d5a;border-radius:12px;padding:15px;margin-bottom:12px}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{padding:10px 6px;border-bottom:1px solid #1e2d5a;text-align:left;font-size:12px}th{color:#ffcc00;font-size:11px}tr.pending{background:rgba(255,204,0,.08)}tr.approved{background:rgba(74,222,128,.08)}tr.rejected{background:rgba(255,107,107,.08)}.btn{padding:6px 10px;border-radius:6px;border:0;font-weight:700;font-size:11px;cursor:pointer;margin:2px}.b-approve{background:#4ade80;color:#000}.b-reject{background:#ff6b6b;color:#fff}.b-del{background:#2a3a6a;color:#fff}.inp{padding:10px;border-radius:8px;border:1px solid #2a3a6a;background:#0a1229;color:#fff;width:100%;margin:5px 0}.badge{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800}.badge-pending{background:#ffcc00;color:#000}.badge-approved{background:#4ade80;color:#000}.badge-rejected{background:#ff6b6b;color:#fff}</style></head><body>
-<div class="h"><div class="logo">★ ADMIN - Paybill 714777</div><div style="color:#8ea0c8;font-size:12px">Acc: 440200282954</div></div>
-
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE ADMIN 714777</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a1229;color:#fff;padding:12px}.h{background:#111d3a;padding:14px;border-radius:12px;display:flex;justify-content:space-between;margin-bottom:12px}.logo{color:#ffcc00;font-weight:900}.c{background:#111d3a;border:1px solid #1e2d5a;border-radius:12px;padding:14px;margin-bottom:12px}table{width:100%;border-collapse:collapse}th,td{padding:9px 6px;border-bottom:1px solid #1e2d5a;text-align:left;font-size:12px}th{color:#ffcc00;font-size:10px}tr.pending{background:rgba(255,204,0,.07)}tr.approved{background:rgba(74,222,128,.07)}tr.rejected{background:rgba(255,107,107,.07)}.btn{padding:6px 10px;border-radius:6px;border:0;font-weight:700;font-size:11px;cursor:pointer;margin:2px}.b-approve{background:#4ade80;color:#000}.b-reject{background:#ff6b6b;color:#fff}.b-del{background:#2a3a6a;color:#fff}.inp{padding:10px;border-radius:8px;border:1px solid #2a3a6a;background:#0a1229;color:#fff;margin:4px 0}.badge{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800}.badge-pending{background:#ffcc00;color:#000}.badge-approved{background:#4ade80;color:#000}.badge-rejected{background:#ff6b6b;color:#fff}</style></head><body>
+<div class="h"><div class="logo">★ ADMIN - 714777</div><div style="color:#8ea0c8;font-size:11px">Acc 440200282954</div></div>
 <div class="c">
 <h3 style="color:#ffcc00">💰 Payments Overview</h3>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px">
-<div style="background:#0a1229;padding:10px;border-radius:8px;text-align:center"><div style="color:#8ea0c8;font-size:10px">PENDING</div><div id="countPending" style="font-size:22px;font-weight:900;color:#ffcc00">0</div></div>
-<div style="background:#0a1229;padding:10px;border-radius:8px;text-align:center"><div style="color:#8ea0c8;font-size:10px">APPROVED</div><div id="countApproved" style="font-size:22px;font-weight:900;color:#4ade80">0</div></div>
-<div style="background:#0a1229;padding:10px;border-radius:8px;text-align:center"><div style="color:#8ea0c8;font-size:10px">FAKE/REJECTED</div><div id="countRejected" style="font-size:22px;font-weight:900;color:#ff6b6b">0</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px">
+<div style="background:#0a1229;padding:10px;border-radius:8px;text-align:center"><div style="font-size:10px;color:#8ea0c8">PENDING</div><div id="countPending" style="font-size:20px;font-weight:900;color:#ffcc00">0</div></div>
+<div style="background:#0a1229;padding:10px;border-radius:8px;text-align:center"><div style="font-size:10px;color:#8ea0c8">APPROVED</div><div id="countApproved" style="font-size:20px;font-weight:900;color:#4ade80">0</div></div>
+<div style="background:#0a1229;padding:10px;border-radius:8px;text-align:center"><div style="font-size:10px;color:#8ea0c8">FAKE</div><div id="countRejected" style="font-size:20px;font-weight:900;color:#ff6b6b">0</div></div>
 </div>
 </div>
-
 <div class="c">
-<div style="display:flex;gap:8px;flex-wrap:wrap">
-<select id="filterStatus" class="inp" style="width:130px" onchange="render()"><option value="all">All Status</option><option value="pending">Pending Only</option><option value="approved">Approved Only</option><option value="rejected">Fake/Rejected</option></select>
-<select id="sortBy" class="inp" style="width:130px" onchange="render()"><option value="newest">Newest First</option><option value="oldest">Oldest First</option><option value="code">Sort by Code</option><option value="user">Sort by Username</option></select>
-<input id="search" class="inp" style="width:180px" placeholder="Search code, user, phone..." onkeyup="render()">
-<button class="btn b-del" onclick="if(confirm('Futa zote?')){localStorage.removeItem('allPayments');render()}" style="padding:10px">Clear All</button>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+<select id="filterStatus" class="inp" style="width:120px" onchange="render()"><option value="all">All</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Fake</option></select>
+<select id="sortBy" class="inp" style="width:130px" onchange="render()"><option value="newest">Newest First</option><option value="oldest">Oldest First</option><option value="code">Sort by Code</option><option value="user">Sort by User</option></select>
+<input id="search" class="inp" placeholder="Search..." onkeyup="render()" style="flex:1;min-width:120px">
 </div>
-
-<div style="overflow:auto">
-<table><thead><tr><th>Date</th><th>User / Phone</th><th>M-PESA Code</th><th>Paybill Info</th><th>Status</th><th>Action</th></tr></thead><tbody id="tbody"></tbody></table>
+<div style="overflow:auto"><table><thead><tr><th>Date</th><th>User/Phone</th><th>Code</th><th>Paybill</th><th>Status</th><th>Action</th></tr></thead><tbody id="tbody"></tbody></table></div>
+<p id="empty" style="text-align:center;color:#8ea0c8;margin-top:15px;display:none">Hakuna payments bado</p>
 </div>
-<p id="emptyMsg" style="text-align:center;color:#8ea0c8;margin-top:20px;display:none">Hakuna payments bado. Payments zitaonekana hapa baada ya watu kulipa.</p>
+<div class="c">
+<h4 style="font-size:13px;color:#8ea0c8">➕ Add Manually kutoka WhatsApp</h4>
+<input id="mUser" class="inp" placeholder="Username"><input id="mPhone" class="inp" placeholder="Phone"><input id="mCode" class="inp" placeholder="Code SH..."><button class="btn b-approve" style="width:100%;padding:11px" onclick="addManually()">Add Payment</button>
 </div>
-
-<div class="c" style="border:1px dashed #2a3a6a">
-<h4 style="color:#8ea0c8;font-size:13px">➕ Add Payment Manually (kutoka WhatsApp)</h4>
-<input id="mUser" class="inp" placeholder="Username e.g Abuu"><input id="mPhone" class="inp" placeholder="Phone e.g 0720..."><input id="mCode" class="inp" placeholder="Code e.g SH12..."><button class="btn b-approve" style="width:100%;padding:12px;margin-top:5px" onclick="addManually()">Add to List</button>
-<p style="color:#8ea0c8;font-size:11px;margin-top:8px">Tumia hii ukipata WhatsApp ya malipo, add hapa ndio u-sort.</p>
-</div>
-
 <script>
-function getPayments(){return JSON.parse(localStorage.getItem('allPayments')||'[]')}
-function savePayments(arr){localStorage.setItem('allPayments',JSON.stringify(arr))}
-
-function addManually(){
-var u=document.getElementById('mUser').value.trim()||'Unknown';
-var p=document.getElementById('mPhone').value.trim()||'-';
-var c=document.getElementById('mCode').value.trim().toUpperCase();
-if(!c||c.length!=10){alert('Weka Code sahihi ya herufi 10');return}
-var arr=getPayments();
-arr.push({id:Date.now(),username:u,phone:p,code:c,paybill:'714777',acc:'440200282954',amount:150,status:'pending',date:new Date().toLocaleString()});
-savePayments(arr);render();
-document.getElementById('mUser').value='';document.getElementById('mPhone').value='';document.getElementById('mCode').value='';
-}
-
-function updateStatus(id,newStatus){
-var arr=getPayments();
-var item=arr.find(x=>x.id==id);
-if(!item)return;
-item.status=newStatus;
-savePayments(arr);
-if(newStatus=='approved'){
- // Activate user if same browser
- try{var cur=JSON.parse(localStorage.getItem('starUser')||'null'); if(cur && cur.code==item.code){cur.status='active';localStorage.setItem('starUser',JSON.stringify(cur))}}catch(e){}
-}
+function getP(){return JSON.parse(localStorage.getItem('allPayments')||'[]')}
+function saveP(a){localStorage.setItem('allPayments',JSON.stringify(a))}
+function addManually(){var u=document.getElementById('mUser').value.trim()||'Unknown';var p=document.getElementById('mPhone').value.trim()||'-';var c=document.getElementById('mCode').value.trim().toUpperCase();if(c.length!=10){alert('Code lazima 10');return}var arr=getP();arr.push({id:Date.now(),username:u,phone:p,code:c,paybill:'714777',acc:'440200282954',amount:150,status:'pending',date:new Date().toLocaleString()});saveP(arr);render();document.getElementById('mUser').value='';document.getElementById('mPhone').value='';document.getElementById('mCode').value='';}
+function updateStatus(id,s){var arr=getP();var it=arr.find(x=>x.id==id);if(!it)return;it.status=s;saveP(arr);render();}
+function render(){var arr=getP();var f=document.getElementById('filterStatus').value;var so=document.getElementById('sortBy').value;var q=document.getElementById('search').value.toLowerCase();if(f!='all')arr=arr.filter(x=>x.status==f);if(q)arr=arr.filter(x=>(x.username+x.phone+x.code).toLowerCase().includes(q));if(so=='newest')arr.sort((a,b)=>b.id-a.id);if(so=='oldest')arr.sort((a,b)=>a.id-b.id);if(so=='code')arr.sort((a,b)=>a.code.localeCompare(b.code));if(so=='user')arr.sort((a,b)=>a.username.localeCompare(b.username));document.getElementById('countPending').innerText=getP().filter(x=>x.status=='pending').length;document.getElementById('countApproved').innerText=getP().filter(x=>x.status=='approved').length;document.getElementById('countRejected').innerText=getP().filter(x=>x.status=='rejected').length;var tb=document.getElementById('tbody');tb.innerHTML='';document.getElementById('empty').style.display=arr.length?'none':'block';arr.forEach(p=>{var tr=document.createElement('tr');tr.className=p.status;tr.innerHTML='<td style="font-size:10px;color:#8ea0c8">'+p.date+'</td><td><b>'+p.username+'</b><br><span style="font-size:10px;color:#8ea0c8">'+p.phone+'</span></td><td><b style="color:#ffcc00">'+p.code+'</b></td><td style="font-size:10px">714777<br><span style="color:#4ade80">'+p.acc+'</span></td><td><span class="badge badge-'+p.status+'">'+p.status.toUpperCase()+'</span></td><td>'+(p.status=='pending'?'<button class="btn b-approve" onclick="updateStatus('+p.id+',\'approved\')">APPROVE</button><button class="btn b-reject" onclick="updateStatus('+p.id+',\'rejected\')">FAKE</button>':'<button class="btn b-del" onclick="updateStatus('+p.id+',\'pending\')">Undo</button>')+' <button class="btn b-del" onclick="if(confirm(\'Delete?\')){saveP(getP().filter(x=>x.id!='+p.id+'));render()}">X</button></td>';tb.appendChild(tr);})}
 render();
-}
-
-function render(){
-var arr=getPayments();
-var filter=document.getElementById('filterStatus').value;
-var sort=document.getElementById('sortBy').value;
-var q=document.getElementById('search').value.toLowerCase();
-
-if(filter!='all') arr=arr.filter(x=>x.status==filter);
-if(q) arr=arr.filter(x=>(x.username+x.phone+x.code).toLowerCase().includes(q));
-
-if(sort=='newest') arr.sort((a,b)=>b.id-a.id);
-if(sort=='oldest') arr.sort((a,b)=>a.id-b.id);
-if(sort=='code') arr.sort((a,b)=>a.code.localeCompare(b.code));
-if(sort=='user') arr.sort((a,b)=>a.username.localeCompare(b.username));
-
-document.getElementById('countPending').innerText=getPayments().filter(x=>x.status=='pending').length;
-document.getElementById('countApproved').innerText=getPayments().filter(x=>x.status=='approved').length;
-document.getElementById('countRejected').innerText=getPayments().filter(x=>x.status=='rejected').length;
-
-var tbody=document.getElementById('tbody'); tbody.innerHTML='';
-if(arr.length==0){document.getElementById('emptyMsg').style.display='block'}else{document.getElementById('emptyMsg').style.display='none'}
-
-arr.forEach(function(p){
-var tr=document.createElement('tr'); tr.className=p.status;
-tr.innerHTML='<td style="font-size:10px;color:#8ea0c8">'+p.date+'</td><td><b style="color:#fff">'+p.username+'</b><br><span style="color:#8ea0c8;font-size:10px">'+p.phone+'</span></td><td><b style="color:#ffcc00">'+p.code+'</b></td><td style="font-size:10px"><b>714777</b><br><span style="color:#4ade80">'+p.acc+'</span><br>KES '+p.amount+'</td><td><span class="badge badge-'+p.status+'">'+p.status.toUpperCase()+'</span></td><td>'+(p.status=='pending'?'<button class="btn b-approve" onclick="updateStatus('+p.id+',\'approved\')">APPROVE</button><button class="btn b-reject" onclick="updateStatus('+p.id+',\'rejected\')">FAKE</button>':'<button class="btn b-del" onclick="updateStatus('+p.id+',\'pending\')">Undo</button>')+' <button class="btn b-del" onclick="if(confirm(\'Delete?\')){var a=getPayments();savePayments(a.filter(x=>x.id!='+p.id+'));render()}">X</button></td>';
-tbody.appendChild(tr);
-});
-}
-render();
-
-// Auto-capture from current payment page if user just paid
-try{
-var cur=JSON.parse(localStorage.getItem('starUser')||'null');
-if(cur && cur.code){
-var arr=getPayments();
-if(!arr.find(x=>x.code==cur.code)){
-arr.push({id:Date.now(),username:cur.username,phone:cur.phonePay||cur.phone||'',code:cur.code,paybill:'714777',acc:'440200282954',amount:150,status:cur.status||'pending',date:new Date().toLocaleString()});
-savePayments(arr);
-}
-}
-}catch(e){}
-</script>
-</body></html>Id('authPage').classList.remove('hide')}})();
 </script></body></html>
