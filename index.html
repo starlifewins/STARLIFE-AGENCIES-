@@ -1,1 +1,30 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE DASHBOARD</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a1229;color:#fff}.h{background:#111d3a;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}.logo{color:#ffcc00;font-weight:900}.m{background:#ffcc00;border:0;padding:6px 12px;border-radius:8px;font-weight:900}.main{padding:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.c{background:#111d3a;border:1px solid #1e2d5a;border-radius:14px;padding:14px}.c h4{color:#8ea0c8;font-size:10px}.a{font-size:20px;font-weight:900;margin-top:6px}.bal{color:#ffcc00}.pen{color:#ff8c42}.tot{color:#4ade80}.act{color:#60a5fa}.ref{border:1px dashed #ffcc00;padding:10px;border-radius:8px;color:#ffcc00;font-size:12px;word-break:break-all;margin-top:8px}.btn{background:#ffcc00;color:#000;padding:10px;border-radius:8px;width:100%;border:0;font-weight:800;margin-top:8px}</style></head><body><div class="h"><div class="logo">★ STARLIFE</div><button class="m">☰</button></div><div class="main"><div class="c" style="margin-bottom:10px"><h2>Dashboard LIVE ✅</h2><p style="color:#8ea0c8;font-size:12px;margin-top:4px">4 Balances Added</p></div><div class="grid"><div class="c"><h4>💰 BALANCE</h4><div class="a bal">KES 1,250.00</div></div><div class="c"><h4>⏳ PENDING WITHDRAWAL</h4><div class="a pen">KES 0.00</div></div><div class="c"><h4>✅ TOTAL WITHDRAWAL</h4><div class="a tot">KES 500.00</div></div><div class="c"><h4>📊 ACTIVITIES BALANCE</h4><div class="a act">KES 450.00</div></div></div><div class="c" style="margin-top:10px"><h4>🔗 REFERRAL LINK</h4><div class="ref" id="r">https://starlifewins.github.io/?ref=starlifewins</div><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('r').innerText);alert('Copied!')">Copy Link</button></div></div></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE Dashboard</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a1229;color:#fff;overflow-x:hidden}.h{background:#111d3a;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;border-bottom:1px solid #1e2d5a}.logo{color:#ffcc00;font-weight:900;font-size:20px}.m{background:#ffcc00;border:0;padding:8px 14px;border-radius:10px;font-weight:900;font-size:20px;cursor:pointer}.sb{position:fixed;top:0;left:-100%;width:280px;height:100%;background:#111d3a;z-index:9999;transition:0.3s ease;padding:20px;border-right:1px solid #1e2d5a}.sb.active{left:0}.ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9998;display:none}.ov.active{display:block}.sb h2{color:#ffcc00;margin-bottom:20px}.sb a{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#aab8d8;text-decoration:none;border-radius:10px;margin:6px 0;transition:0.2s}.sb a:hover,.sb a.active{background:#1e2d5a;color:#ffcc00}.main{padding:12px;max-width:1100px;margin:auto}.c{background:#111d3a;border:1px solid #1e2d5a;border-radius:16px;padding:16px;margin-bottom:10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.h4{color:#8ea0c8;font-size:11px;text-transform:uppercase}.a{font-size:20px;font-weight:900;margin-top:6px}.bal{color:#ffcc00}.pen{color:#ff8c42}.tot{color:#4ade80}.act{color:#60a5fa}.ref{border:1px dashed #ffcc00;padding:10px;border-radius:10px;color:#ffcc00;font-size:13px;word-break:break-all;margin-top:8px}.btn{background:#ffcc00;color:#000;padding:11px;border-radius:10px;border:0;font-weight:800;width:100%;margin-top:10px;cursor:pointer}.btn2{background:#1e2d5a;color:#fff;border:1px solid #2a3d7a;padding:11px;border-radius:10px;width:100%;margin-top:8px;font-weight:700;cursor:pointer}</style></head><body>
+<div class="h"><div class="logo">★ STARLIFE</div><button class="m" onclick="openMenu()">☰</button></div>
+<div class="ov" id="ov" onclick="closeMenu()"></div>
+<div class="sb" id="sb"><h2>★ MENU</h2>
+<a href="#" class="active" onclick="closeMenu()">🏠 Dashboard</a>
+<a href="#" onclick="alert('Activities coming soon!');closeMenu()">💼 Activities</a>
+<a href="#" onclick="alert('My Team - Referrals: '+localStorage.getItem('refCount')||0);closeMenu()">👥 My Team</a>
+<a href="#" onclick="alert('Withdraw - Balance: KES 1,250');closeMenu()">💰 Withdraw</a>
+<a href="#" onclick="document.getElementById('refSection').scrollIntoView({behavior:'smooth'});closeMenu()">🔗 Referral Link</a>
+<a href="#" onclick="alert('Settings coming soon!');closeMenu()">⚙️ Settings</a>
+<a href="#" onclick="alert('Logout!');closeMenu()" style="margin-top:20px;color:#ff6b6b">🚪 Logout</a>
+<button class="btn2" onclick="closeMenu()">✕ Close</button>
+</div>
+<div class="main">
+<div class="c"><h2>Dashboard LIVE ✅</h2><p style="color:#8ea0c8;font-size:13px;margin-top:4px">4 Balances Added - Menu Active</p></div>
+<div class="grid">
+<div class="c"><div class="h4">💰 BALANCE</div><div class="a bal">KES 1,250.00</div></div>
+<div class="c"><div class="h4">⏳ PENDING WITHDRAWAL</div><div class="a pen">KES 0.00</div></div>
+<div class="c"><div class="h4">✅ TOTAL WITHDRAWAL</div><div class="a tot">KES 500.00</div></div>
+<div class="c"><div class="h4">📊 ACTIVITIES BALANCE</div><div class="a act">KES 450.00</div></div>
+</div>
+<div class="c" id="refSection"><div class="h4">🔗 REFERRAL LINK</div><div class="ref" id="rl">https://starlifewins.github.io/?ref=starlifewins</div><button class="btn" onclick="copyL()">Copy Link</button><button class="btn2" onclick="shareW()">Share via WhatsApp</button></div>
+</div>
+<script>
+function openMenu(){document.getElementById('sb').classList.add('active');document.getElementById('ov').classList.add('active')}
+function closeMenu(){document.getElementById('sb').classList.remove('active');document.getElementById('ov').classList.remove('active')}
+function copyL(){navigator.clipboard.writeText(document.getElementById('rl').innerText);alert('Link Copied! ✅')}
+function shareW(){window.open('https://wa.me/?text='+encodeURIComponent('Join STARLIFE and earn! 🚀 '+document.getElementById('rl').innerText))}
+</script>
+</body></html>
