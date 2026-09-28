@@ -1,56 +1,48 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#f3f4f6}.top{background:#0f172a;color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:9}.top .s{width:38px;height:38px;background:#22f59b;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#000}.wrap{max-width:480px;margin:auto;padding:10px}.dash-title{font-size:26px;font-weight:900;margin:10px 0 2px}.sub{font-size:12px;color:#888;margin-bottom:10px}.hi-card{background:#0f172a;color:#fff;border-radius:20px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:12px}.hi-card .s{width:52px;height:52px;background:#22f59b;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#000;font-size:20px}.admin{border:2px solid #22f59b;background:#fff;border-radius:16px;padding:12px;margin-bottom:12px}.admin b{color:#16a34a}.userline{font-size:12px;background:#f9fafb;border-radius:8px;padding:6px;margin:4px 0;word-break:break-all}.card-bal{border-radius:18px;padding:14px 16px;color:#fff;margin-bottom:12px}.blue{background:linear-gradient(90deg,#2563eb,#22d3ee)}.purple{background:linear-gradient(90deg,#7c3aed,#a855f7)}.orange{background:linear-gradient(90deg,#ea580c,#f97316)}.linkbox{width:100%;padding:10px;border:1px solid #333;border-radius:8px;font-size:12px;margin:10px 0}.btn{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;cursor:pointer;margin-bottom:10px}.btn-dark{background:#0f172a;color:#fff}.btn-green{background:#22f59b;color:#000}.hidden{display:none}input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}</style></head><body>
-<div class="top"><span style="font-size:22px">☰</span><div style="display:flex;align-items:center;gap:8px"><div class="s">S</div><b>STARLIFE AGENCIES</b></div><span>⋮</span></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES - Chatwave Style</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#f3f4f6;overflow-x:hidden}.top{background:#0f172a;color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}.slogo{width:36px;height:36px;background:#22f59b;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#000}.wrap{max-width:480px;margin:auto;padding:12px}.overlay{position:fixed;inset:0;background:#0006;display:none;z-index:20}.sidebar{position:fixed;left:-300px;top:0;bottom:0;width:280px;background:#fff;z-index:21;transition:.3s;overflow:auto}.sidebar.open{left:0}.side-head{padding:18px;border-bottom:1px solid #eee;font-size:12px;color:#94a3b8;letter-spacing:1px}.menu-item{display:flex;justify-content:space-between;align-items:center;padding:13px 18px;font-size:14px;color:#334155;cursor:pointer}.menu-item.active{background:#7c3aed;color:#fff;border-radius:0 24px 24px 0;margin-right:16px}.badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:800}.new{background:#0d9488;color:#fff}.hot{background:#ef4444;color:#fff}.card-bal{border-radius:18px;padding:16px;color:#fff;margin-bottom:12px;position:relative}.blue{background:linear-gradient(90deg,#2563eb,#38bdf8)}.purple{background:linear-gradient(90deg,#7c3aed,#a78bfa)}.orange{background:linear-gradient(90deg,#f97316,#fb923c)}.hi-card{background:#0f172a;color:#fff;border-radius:20px;padding:14px;display:flex;gap:12px;margin-bottom:12px}.admin{border:2px solid #22f59b;background:#fff;border-radius:16px;padding:12px;margin-bottom:12px}.btn{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;margin-bottom:10px}.btn-dark{background:#0f172a;color:#fff}.btn-green{background:#22f59b}.linkbox{width:100%;padding:10px;border:1px solid #333;border-radius:8px;font-size:12px}.hidden{display:none}input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}</style></head><body>
+<div class="top"><span onclick="openSide()" style="font-size:24px;cursor:pointer">☰</span><div style="display:flex;gap:8px;align-items:center"><div class="slogo">S</div><b>STARLIFE AGENCIES</b></div><span>⋮</span></div>
+
+<div class="overlay" id="overlay" onclick="closeSide()"></div>
+<div class="sidebar" id="side">
+<div style="padding:16px;display:flex;gap:10px;align-items:center;border-bottom:1px solid #eee"><div class="slogo">C</div><b style="color:#0f766e">CHAT<span style="color:#0f172a">WAVE</span></b></div>
+<div class="side-head">DASHBOARD</div>
+<div class="menu-item active"><span>🏠 Home</span></div>
+<div class="side-head">ACCOUNTS</div>
+<div class="menu-item" onclick="alert('Vouchers - Coming: Buy voucher for client')"><span>🏷️ Vouchers</span><span>›</span></div>
+<div class="menu-item" onclick="alert('Deposit: PAYBILL 714777 ACC 440200282954')"><span>💳 Deposit</span><span>›</span></div>
+<div class="menu-item" onclick="claimBonus()"><span>📦 Claim Bonus</span></div>
+<div class="menu-item"><span>🏆 Leaderboard</span></div>
+<div class="menu-item"><span>👤 Pay For Client</span></div>
+<div class="menu-item" onclick="alert('Withdraw to Mpesa 0720119990')"><span>⬆️ Withdraw</span><span>›</span></div>
+<div class="menu-item"><span>👥 Team</span><span>›</span></div>
+<div class="side-head">PRODUCTS</div>
+<div class="menu-item"><span>🎯 Spins</span><span>›</span></div>
+<div class="menu-item"><span>🎵 Earn with Spotify</span><span class="badge new">NEW</span></div>
+<div class="menu-item"><span>🛒 Marketplace</span><span class="badge hot">HOT</span></div>
+<div class="menu-item"><span>🎯 Fix Tap</span><span class="badge new">NEW</span></div>
+<div class="menu-item"><span>💬 Chat foreigners</span><span class="badge new">NEW</span></div>
+</div>
+
 <div class="wrap">
-<!-- LOGIN/REGISTER -->
-<div id="authBox"><div style="background:#fff;border-radius:16px;padding:16px;margin-top:10px"><h3>Join STARLIFE AGENCIES</h3><p style="font-size:12px;color:#666;margin:6px 0">Lipa 150 PAYBILL 714777 ACC 440200282954</p><div id="refInfo" style="font-size:12px;color:#eab308;display:none">Referred by: <b id="rb"></b></div><input id="fname" placeholder="Full Name e.g ABRAHAM"><input id="fphone" placeholder="Phone 0720119990"><input id="funame" placeholder="Username e.g starlifewins"><button class="btn btn-green" onclick="reg()">I HAVE PAID 150 - JOIN</button></div></div>
+<div id="authBox"><div style="background:#fff;border-radius:16px;padding:16px"><h3>Join STARLIFE</h3><p style="font-size:12px;color:#666">PAYBILL 714777 ACC 440200282954 AMOUNT 150 - WA 0720119990</p><div id="refInfo" style="font-size:12px;display:none">Ref by <b id="rb"></b></div><input id="funame" placeholder="Username e.g starlifewins"><input id="fphone" placeholder="Phone"><button class="btn btn-green" onclick="reg()">I HAVE PAID</button></div></div>
 
-<!-- DASHBOARD -->
 <div id="dashBox" class="hidden">
-<div class="dash-title">Dashboard</div><div class="sub">Home / Dashboard</div>
-
-<div class="hi-card"><div class="s">S</div><div><div style="font-weight:800;font-size:18px">Hi, <span id="hname">ABRAHAM</span> 👋 <span id="admBadge" style="background:#22f59b;color:#000;font-size:11px;padding:3px 8px;border-radius:20px;display:none">SUPER ADMIN</span></div><div style="font-size:13px;opacity:.8">Welcome to STARLIFE</div></div></div>
-
-<div class="admin" id="adminPanel"><div style="font-weight:900;color:#16a34a;font-size:18px">👑 ADMIN PANEL</div><div style="font-size:13px;margin:6px 0">Users: <b id="uCount">2</b> | Earn: <b>KES <span id="uEarn">400</span></b></div><div id="uList" style="margin:6px 0"></div><button class="btn btn-green" onclick="exportWA()">EXPORT WHATSAPP</button></div>
-
-<div class="card-bal blue"><div style="font-size:13px;opacity:.9">Available Balance 💳</div><div style="font-size:28px;font-weight:900">KES <span id="bal">50000</span></div></div>
-<div class="card-bal purple"><div style="font-size:13px;opacity:.9">Total Referrals 👥</div><div style="font-size:28px;font-weight:900"><span id="trefs">0</span> Users</div></div>
-<div class="card-bal orange"><div style="font-size:13px;opacity:.9">Today Earnings 💰</div><div style="font-size:28px;font-weight:900">KES <span id="today">0</span></div></div>
-
-<input class="linkbox" id="myLink" readonly value="https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=starlifewins">
+<div style="font-size:26px;font-weight:900;margin-top:6px">Dashboard</div><div style="font-size:12px;color:#888;margin-bottom:10px">Home / Dashboard</div>
+<div class="hi-card"><div class="slogo" style="width:52px;height:52px;font-size:20px">S</div><div><div style="font-weight:800">Hi, <span id="hname">ABRAHAM</span> 👋 <span id="admB" style="background:#22f59b;color:#000;padding:3px 8px;border-radius:12px;font-size:10px;display:none">SUPER ADMIN</span></div><div style="font-size:12px;opacity:.7">Welcome to STARLIFE</div></div></div>
+<div class="admin" id="adminPanel"><b style="color:#16a34a">👑 ADMIN PANEL</b><div style="font-size:13px">Users: <b id="uC">2</b> | Earn: KES <span id="uE">400</span></div><div id="uL" style="font-size:11px;margin:6px 0"></div><button class="btn btn-green" onclick="exportWA()">EXPORT WHATSAPP</button></div>
+<div class="card-bal blue"><small>Available Balance</small><div style="font-size:26px;font-weight:900">KES <span id="bal">50000</span></div></div>
+<div class="card-bal purple"><small>Total Referrals</small><div style="font-size:26px;font-weight:900"><span id="trefs">0</span> Users</div></div>
+<div class="card-bal orange"><small>Today Earnings</small><div style="font-size:26px;font-weight:900">KES <span id="today">0</span></div></div>
+<input class="linkbox" id="myLink" readonly>
 <button class="btn btn-dark" onclick="copyLink()">COPY MY LINK EARN 150</button>
 <button class="btn btn-green" onclick="viewAds()">VIEW ADS +50</button>
-<button class="btn" style="background:#fff;border:1px solid #ddd" onclick="postWA()">POST ON WHATSAPP</button>
-<button class="btn" style="background:#f1f5f9" onclick="logout()">Logout</button>
+<button class="btn" style="background:#fff" onclick="postWA()">📲 POST NOW ON WHATSAPP</button>
 </div>
 </div>
 <script>
-const WA="254720119990";
-let refUrl=new URLSearchParams(location.search).get('ref');
-if(refUrl){localStorage.setItem('sl_ref',refUrl);document.getElementById('refInfo').style.display='block';document.getElementById('rb').innerText=refUrl}
-let curRef=localStorage.getItem('sl_ref')||'';
-let users=JSON.parse(localStorage.getItem('sl_all_users')||'[]');
-if(users.length==0){users=[{name:'abuudrian',phone:'+254 720 119990',bal:50,ref:'USERNAME_YAKO'},{name:'starlifewins',phone:'+254 720 119990',bal:50000,ref:''}];localStorage.setItem('sl_all_users',JSON.stringify(users))}
-let me=JSON.parse(localStorage.getItem('sl_user')||'null');
-if(me) show(me);
-
-function reg(){
-let n=fname.value.trim()||'ABRAHAM',p=fphone.value.trim()||'0720119990',u=funame.value.trim().toLowerCase()||'starlifewins';
-let exists=users.find(x=>x.name.toLowerCase()==u.toLowerCase());
-if(!exists){users.push({name:u,phone:p,bal:0,ref:curRef});localStorage.setItem('sl_all_users',JSON.stringify(users))}
-let obj={name:u,username:u,phone:p,ref:curRef,bal:u=='starlifewins'||u=='abraham'?50000:0,refs:0};
-localStorage.setItem('sl_user',JSON.stringify(obj));
-let msg=`NEW STARLIFE PAYMENT%0AName:${n}%0APhone:${p}%0AUsername:${u}%0ARef:${curRef}%0ANimelipa 150`;
-window.open(`https://wa.me/${WA}?text=${msg}`,'_blank');show(obj);
-}
-function show(d){
-authBox.classList.add('hidden');dashBox.classList.remove('hidden');hname.innerText=d.username.toUpperCase();bal.innerText=d.bal;trefs.innerText=d.refs;
-myLink.value=`https://starlifewins.github.io/?ref=${d.username}`;
-if(d.username=='starlifewins'||d.username=='abraham'){admBadge.style.display='inline-block';adminPanel.style.display='block';renderUsers()}else{adminPanel.style.display='none'}
-}
-function renderUsers(){uCount.innerText=users.length;uList.innerHTML=users.map(u=>`<div class=userline>${u.name} | ${u.phone} | Bal:${u.bal} | Ref:${u.ref}</div>`).join('')}
-function copyLink(){navigator.clipboard.writeText(myLink.value);alert('Link Copied! Earn 150 per referral\n'+myLink.value)}
-function viewAds(){let m=JSON.parse(localStorage.getItem('sl_user'));m.bal+=50;m.refs+=0;localStorage.setItem('sl_user',JSON.stringify(m));bal.innerText=m.bal;today.innerText=50;alert('You earned KES 50! Watch more ads to earn more')}
-function exportWA(){let txt=users.map(u=>`${u.name}, ${u.phone}, Bal:${u.bal}`).join('%0A');window.open(`https://wa.me/${WA}?text=STARLIFE USERS:%0A${txt}`,'_blank')}
-function postWA(){let l=myLink.value;let t=`🔥 JOIN STARLIFE AGENCIES EARN 150 PER REF!%0APAYBILL 714777 ACC 440200282954%0AJoin: ${l}%0AWhatsApp: 0720119990`;window.open(`https://wa.me/?text=${t}`,'_blank')}
-function logout(){localStorage.removeItem('sl_user');location.reload()}
+const WA="254720119990";let refP=new URLSearchParams(location.search).get('ref');if(refP){localStorage.setItem('sl_ref',refP);authBox.querySelector('#refInfo').style.display='block';document.getElementById('rb').innerText=refP}let curRef=localStorage.getItem('sl_ref')||'';let users=JSON.parse(localStorage.getItem('sl_all_users')||'[]');if(!users.length){users=[{name:'abuudrian',phone:'+254 720 119990',bal:50,ref:'USERNAME_YAKO'},{name:'starlifewins',phone:'+254 720 119990',bal:50000,ref:''}];localStorage.setItem('sl_all_users',JSON.stringify(users))}let me=JSON.parse(localStorage.getItem('sl_user')||'null');if(me)show(me);
+function openSide(){side.classList.add('open');overlay.style.display='block'}function closeSide(){side.classList.remove('open');overlay.style.display='none'}
+function reg(){let u=funame.value.trim().toLowerCase()||'starlifewins',p=fphone.value.trim()||'0720119990';if(!users.find(x=>x.name==u)){users.push({name:u,phone:p,bal:0,ref:curRef});localStorage.setItem('sl_all_users',JSON.stringify(users))}let o={username:u,phone:p,ref:curRef,bal:u=='starlifewins'||u=='abraham'?50000:0,refs:0};localStorage.setItem('sl_user',JSON.stringify(o));window.open(`https://wa.me/${WA}?text=NEW PAY ${u} ${p} Ref:${curRef}`,'_blank');show(o)}
+function show(d){authBox.classList.add('hidden');dashBox.classList.remove('hidden');hname.innerText=d.username.toUpperCase();bal.innerText=d.bal;myLink.value=`https://starlifewins.github.io/?ref=${d.username}`;if(d.username=='starlifewins'||d.username=='abraham'){admB.style.display='inline-block';render()}else adminPanel.style.display='none'}
+function render(){uC.innerText=users.length;uL.innerHTML=users.map(u=>`${u.name} | ${u.phone} | Bal:${u.bal} | Ref:${u.ref}`).join('<br>')}
+function copyLink(){navigator.clipboard.writeText(myLink.value);alert('Copied! '+myLink.value)}function viewAds(){let m=JSON.parse(localStorage.getItem('sl_user'));m.bal+=50;localStorage.setItem('sl_user',JSON.stringify(m));bal.innerText=m.bal;today.innerText=50;alert('Earned KES 50!')}function exportWA(){let t=users.map(u=>`${u.name} ${u.phone}`).join('%0A');window.open(`https://wa.me/${WA}?text=${t}`,'_blank')}function postWA(){let t=`JOIN STARLIFE AGENCIES%0APAYBILL 714777 ACC 440200282954%0ALink:${myLink.value}%0AWA 0720119990`;window.open(`https://wa.me/?text=${t}`,'_blank')}function claimBonus(){alert('Bonus Claimed! KES 50 added');viewAds()}
 </script></body></html>
