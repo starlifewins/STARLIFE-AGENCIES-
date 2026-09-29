@@ -1,115 +1,68 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES</title><style>*{box-sizing:border-box}body{background:#080b1e;color:#fff;font-family:sans-serif;margin:0}.h{background:#0f1230;padding:15px;text-align:center;color:#ffcc00;font-weight:bold;position:sticky;top:0;z-index:9}.c{max-width:420px;margin:15px auto;background:#11142d;border:1px solid #23274a;border-radius:16px;padding:18px}input{width:100%;padding:13px;margin:6px 0;border-radius:10px;border:1px solid #2a2e55;background:#0d1020;color:#fff}button{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;margin:7px 0;cursor:pointer}.g{background:linear-gradient(90deg,#00c853,#00e676);color:#000}.y{background:#ffcc00;color:#000}.d{background:#1c1f35;color:#fff;border:1px solid #333}.box{background:#1a1d33;border-radius:10px;padding:12px;margin:8px 0;border:1px solid #23274a}.hide{display:none}.badge{background:#ffcc00;color:#000;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:bold}.big{font-size:34px;font-weight:bold;color:#ffcc00;text-align:center}.link{word-break:break-all;font-size:12px;color:#ffcc00}.hist{font-size:12px;border-bottom:1px solid #222;padding:7px 0;display:flex;justify-content:space-between;color:#999}.err{color:#ff4444;font-size:12px;text-align:center}</style></head><body>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES</title><style>*{box-sizing:border-box}body{background:#080b1e;color:#fff;font-family:sans-serif;margin:0}.h{background:#0f1230;padding:15px;text-align:center;color:#ffcc00;font-weight:bold;position:sticky;top:0}.c{max-width:420px;margin:15px auto;background:#11142d;border:1px solid #23274a;border-radius:16px;padding:18px}input{width:100%;padding:13px;margin:6px 0;border-radius:10px;border:1px solid #2a2e55;background:#0d1020;color:#fff}button{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;margin:7px 0}.g{background:linear-gradient(90deg,#00c853,#00e676);color:#000}.y{background:#ffcc00;color:#000}.d{background:#1c1f35;color:#fff;border:1px solid #333}.box{background:#1a1d33;border-radius:10px;padding:12px;margin:8px 0;border:1px solid #23274a}.hide{display:none}.badge{background:#ffcc00;color:#000;padding:4px 10px;border-radius:20px;font-size:11px}.big{font-size:34px;font-weight:bold;color:#ffcc00;text-align:center}.hist{font-size:12px;border-bottom:1px solid #222;padding:7px 0;display:flex;justify-content:space-between;color:#999}.err{color:#ff4444;font-size:12px;text-align:center}.pending{background:#332200;border:1px solid #ffaa00;padding:12px;border-radius:10px;text-align:center;color:#ffcc00}</style></head><body>
 <div class="h">★ STARLIFE AGENCIES ★</div>
 
-<!-- SIGNUP / LOGIN -->
-<div class="c" id="authPage">
-<h2 style="text-align:center" id="authTitle">Create Account</h2>
-<div id="signupForm">
-<input id="s_fullname" placeholder="Full Name">
-<input id="s_username" placeholder="Username (e.g. john123)">
-<input id="s_email" placeholder="Email - for withdrawal notifications">
-<input id="s_phone" placeholder="Phone 07...">
-<input id="s_pass" type="password" placeholder="Password">
-<input id="s_pass2" type="password" placeholder="Confirm Password">
-<div class="err" id="s_err"></div>
-<button class="g" onclick="signup()">SIGN UP</button>
-<p style="text-align:center;font-size:13px">Already have account? <b style="color:#ffcc00;cursor:pointer" onclick="showLogin()">Log In</b></p>
-</div>
-<div id="loginForm" class="hide">
-<input id="l_username" placeholder="Username">
-<input id="l_pass" type="password" placeholder="Password">
-<div class="err" id="l_err"></div>
-<button class="g" onclick="login()">LOG IN</button>
-<p style="text-align:center;font-size:13px">No account? <b style="color:#ffcc00;cursor:pointer" onclick="showSignup()">Sign Up</b></p>
-</div>
-<div id="refNote" class="hide" style="background:#16260f;border:1px solid #2f5a1a;padding:10px;border-radius:10px;text-align:center;font-size:13px">👋 Invited by <b id="refByName"></b></div>
+<div class="c" id="authPage"><h2 style="text-align:center" id="authTitle">Create Account</h2>
+<div id="signupForm"><input id="s_fullname" placeholder="Full Name"><input id="s_username" placeholder="Username"><input id="s_email" placeholder="Email for withdrawal"><input id="s_phone" placeholder="Phone 07..."><input id="s_pass" type="password" placeholder="Password"><input id="s_pass2" type="password" placeholder="Confirm Password"><div class="err" id="s_err"></div><button class="g" onclick="signup()">SIGN UP</button><p style="text-align:center;font-size:13px">Have account? <b style="color:#ffcc00" onclick="showLogin()">Log In</b></p></div>
+<div id="loginForm" class="hide"><input id="l_username" placeholder="Username"><input id="l_pass" type="password" placeholder="Password"><div class="err" id="l_err"></div><button class="g" onclick="login()">LOG IN</button><p style="text-align:center;font-size:13px">No account? <b style="color:#ffcc00" onclick="showSignup()">Sign Up</b></p></div>
 </div>
 
-<!-- ACTIVATION - LOCKED -->
-<div class="c hide" id="activatePage">
-<h3 style="text-align:center;color:#ff4444">⚠️ Account Not Active</h3>
-<div class="box" style="text-align:center"><div>Welcome <b id="actName"></b></div><div style="font-size:12px;color:#888">You must activate to unlock dashboard</div></div>
-<div class="box"><b>How to Activate:</b><br>1. Go to M-PESA<br>2. Lipa na M-PESA > Paybill: <b>714777</b><br>3. Account: <b>STARLIFE</b><br>4. Amount: <b>KES 150</b><br><small style="color:#aaa">Money goes to Admin 0720119990</small></div>
-<input id="mpesaCode" placeholder="Enter M-Pesa Transaction Code (e.g. QGH7... )">
-<button class="y" onclick="activate()">✅ I HAVE PAID - ACTIVATE NOW</button>
-<button class="d" onclick="logout()">Logout</button>
-<p style="font-size:11px;color:#666;text-align:center">Account cannot proceed to dashboard before payment. System will verify code.</p>
-</div>
+<div class="c hide" id="activatePage"><h3 style="text-align:center;color:#ff4444">Account Not Active</h3>
+<div class="box">Welcome <b id="actName"></b> - Activate to unlock dashboard</div>
+<div class="box">Pay: Lipa M-PESA > Paybill <b>714777</b> Account <b>STARLIFE</b> Amount <b>150</b><br><small>Money to Admin 0720119990</small></div>
+<input id="mpesaCode" placeholder="Enter M-Pesa CODE e.g. QH78X9Y12Z"><button class="y" onclick="activate()">SUBMIT CODE FOR VERIFICATION</button>
+<div id="pendingBox" class="hide"><div class="pending">⏳ CODE SUBMITTED: <b id="codeShow"></b><br>Waiting Admin verification (0720119990).<br>Your account will be active after Admin confirms payment on Paybill 714777.<br><br>Contact Admin on WhatsApp with screenshot.</div><button class="d" onclick="contactAdmin()">Contact Admin WhatsApp</button></div>
+<button class="d" onclick="logout()">Logout</button></div>
 
-<!-- REAL DASHBOARD - ONLY AFTER PAYMENT -->
-<div class="c hide" id="dashPage">
-<div style="display:flex;justify-content:space-between;align-items:center"><b>Dashboard</b><span class="badge" id="dashUser"></span></div>
-<div class="box" style="text-align:center"><div>Available Balance</div><div class="big" id="bal">KES 0</div><small>Min withdraw KES 300</small></div>
-<div class="box"><b>📊 Earnings Levels</b><br><div class="hist"><span>Level 1 Referral (Direct)</span><span style="color:#00ff88">KES 100</span></div><div class="hist"><span>Level 2 Referral</span><span style="color:#00ff88">KES 50</span></div><div class="hist"><span>Level 3 Referral</span><span style="color:#00ff88">KES 30</span></div><small style="color:#888">You earn when someone joins via your link</small></div>
-<div class="box"><b>🔗 Your Affiliate Link</b><br><div class="link" id="myLink"></div><input id="myLinkInput" readonly class="hide"><button class="y" onclick="copyLink()">📋 COPY LINK & SHARE</button><div style="font-size:11px;margin-top:5px">Invites: <b id="invCount">0</b> | Email: <span id="dashEmail"></span></div></div>
-<div class="box"><b>💸 Withdraw</b><br><small>Email for notification: <b id="withdrawEmail"></b></small><br><button class="g" onclick="withdraw()">REQUEST WITHDRAWAL</button><small style="color:#888">Notification goes to your Email & Admin WhatsApp 0720119990</small></div>
-<div class="box"><b>📜 Transaction Proof</b><div id="histList"></div></div>
-<button class="d" onclick="logout()">Logout</button>
-</div>
+<div class="c hide" id="dashPage"><div style="display:flex;justify-content:space-between"><b>Dashboard</b><span class="badge" id="dashUser"></span></div>
+<div class="box" style="text-align:center"><div>Balance</div><div class="big" id="bal"></div><small>Min withdraw 300</small></div>
+<div class="box"><b>🔗 Your Link (L1=100, L2=50, L3=30)</b><br><div id="myLink" style="font-size:11px;color:#ffcc00;word-break:break-all"></div><input id="myLinkInput" readonly class="hide"><button class="y" onclick="copyLink()">COPY LINK</button><div>Invites: <b id="invCount">0</b></div></div>
+<div class="box"><b>Withdraw</b><br><small>To: <span id="dashEmail"></span></small><br><button class="g" onclick="withdraw()">REQUEST WITHDRAWAL</button></div>
+<div class="box"><b>Proof History</b><div id="histList"></div></div>
+<button class="d" onclick="logout()">Logout</button></div>
 
 <script>
-function getRef(){let p=new URLSearchParams(location.search);return p.get('ref')||''}
+function getRef(){return new URLSearchParams(location.search).get('ref')||''}
 function getUsers(){return JSON.parse(localStorage.getItem('sl_users')||'{}')}
 function saveUsers(u){localStorage.setItem('sl_users',JSON.stringify(u))}
-window.onload=function(){
- let r=getRef();
- if(r){document.getElementById('refNote').classList.remove('hide');document.getElementById('refByName').innerText=r;}
- let cur=localStorage.getItem('sl_current');
- if(cur){let users=getUsers();let u=users[cur];if(u){if(!u.active){showActivate(u)}else{showDash(u)}return;}}
-}
-function showSignup(){document.getElementById('signupForm').classList.remove('hide');document.getElementById('loginForm').classList.add('hide');document.getElementById('authTitle').innerText='Create Account'}
-function showLogin(){document.getElementById('signupForm').classList.add('hide');document.getElementById('loginForm').classList.remove('hide');document.getElementById('authTitle').innerText='Login'}
+window.onload=function(){let c=localStorage.getItem('sl_current');if(c){let u=getUsers()[c];if(u){if(u.status==='pending'){showPending(u)}else if(!u.active){showActivate(u)}else{showDash(u)}return}}}
+function showSignup(){document.getElementById('signupForm').classList.remove('hide');document.getElementById('loginForm').classList.add('hide')}
+function showLogin(){document.getElementById('signupForm').classList.add('hide');document.getElementById('loginForm').classList.remove('hide')}
 function signup(){
- let fn=document.getElementById('s_fullname').value.trim(), un=document.getElementById('s_username').value.trim().toLowerCase(), em=document.getElementById('s_email').value.trim(), ph=document.getElementById('s_phone').value.trim(), p=document.getElementById('s_pass').value, p2=document.getElementById('s_pass2').value, err=document.getElementById('s_err');
- if(!fn||!un||!em||!ph||!p){err.innerText='Fill all fields';return}
- if(p!==p2){err.innerText='Passwords do not match';return}
- let users=getUsers();
- if(users[un]){err.innerText='Username taken';return}
- let ref=getRef();
- users[un]={fullname:fn,username:un,email:em,phone:ph,password:p,active:false,balance:0,invites:0,history:[],refBy:ref,joined:new Date().toLocaleString()};
- saveUsers(users);
- // add invite to referrer
- if(ref && users[ref]){users[ref].invites++;users[ref].balance+=100;users[ref].history.push({type:'Level 1 - '+un,amt:100,time:new Date().toLocaleString()});saveUsers(users);}
- localStorage.setItem('sl_current',un);
- showActivate(users[un]);
+ let fn=s_fullname.value.trim(),un=s_username.value.trim().toLowerCase(),em=s_email.value.trim(),ph=s_phone.value.trim(),p=s_pass.value,p2=s_pass2.value;
+ if(!fn||!un||!em||!ph||!p){s_err.innerText='Fill all fields';return}
+ if(p!==p2){s_err.innerText='Passwords mismatch';return}
+ if(!em.includes('@')){s_err.innerText='Invalid email';return}
+ let users=getUsers();if(users[un]){s_err.innerText='Username taken';return}
+ users[un]={fullname:fn,username:un,email:em,phone:ph,password:p,active:false,status:'inactive',balance:0,invites:0,history:[],refBy:getRef(),mpesaCode:''};
+ saveUsers(users);localStorage.setItem('sl_current',un);showActivate(users[un]);
 }
 function login(){
- let un=document.getElementById('l_username').value.trim().toLowerCase(), p=document.getElementById('l_pass').value, err=document.getElementById('l_err');
- let users=getUsers();
- if(!users[un]||users[un].password!==p){err.innerText='Wrong username or password';return}
- localStorage.setItem('sl_current',un);
- if(!users[un].active) showActivate(users[un]); else showDash(users[un]);
+ let un=l_username.value.trim().toLowerCase(),p=l_pass.value;let users=getUsers();
+ if(!users[un]||users[un].password!==p){l_err.innerText='Wrong login';return}
+ localStorage.setItem('sl_current',un);let u=users[un];
+ if(u.status==='pending')showPending(u);else if(!u.active)showActivate(u);else showDash(u);
 }
-function showActivate(u){
- document.getElementById('authPage').classList.add('hide');document.getElementById('activatePage').classList.remove('hide');document.getElementById('dashPage').classList.add('hide');
- document.getElementById('actName').innerText=u.fullname;
-}
+function showActivate(u){authPage.classList.add('hide');activatePage.classList.remove('hide');dashPage.classList.add('hide');actName.innerText=u.fullname;pendingBox.classList.add('hide')}
+function showPending(u){authPage.classList.add('hide');activatePage.classList.remove('hide');dashPage.classList.add('hide');actName.innerText=u.fullname;codeShow.innerText=u.mpesaCode;pendingBox.classList.remove('hide')}
 function activate(){
- let code=document.getElementById('mpesaCode').value.trim();
- if(code.length<5){alert('Enter valid M-Pesa code');return}
+ let code=mpesaCode.value.trim().toUpperCase();
+ if(code.length<8||code.length>11){alert('Invalid M-Pesa code. Must be like QGH7J8K9L0 - 10 characters');return}
+ if(!/^[A-Z0-9]{8,11}$/.test(code)){alert('Code must be capital letters and numbers only');return}
  let cur=localStorage.getItem('sl_current');let users=getUsers();let u=users[cur];
- u.active=true;u.balance=50;u.mpesaCode=code;u.activatedAt=new Date().toLocaleString();u.history.push({type:'Welcome Bonus',amt:50,time:u.activatedAt});
- saveUsers(users);
- alert('Payment verified! Welcome bonus KES 50 added.');
- showDash(u);
- // notify admin via whatsapp log
- let logs=JSON.parse(localStorage.getItem('sl_logs')||'[]');logs.push({user:u.username,name:u.fullname,phone:u.phone,email:u.email,code:code,refBy:u.refBy,time:u.activatedAt});localStorage.setItem('sl_logs',JSON.stringify(logs));
+ u.mpesaCode=code;u.status='pending';saveUsers(users);
+ let logs=JSON.parse(localStorage.getItem('sl_logs')||'[]');logs.push({user:u.username,name:u.fullname,phone:u.phone,email:u.email,code:code,refBy:u.refBy,time:new Date().toLocaleString(),status:'pending'});localStorage.setItem('sl_logs',JSON.stringify(logs));
+ showPending(u);
+ // auto notify you
+ window.open(`https://wa.me/254720119990?text=*NEW PAYMENT PENDING*%0AUser:${u.username}%0AName:${u.fullname}%0APhone:${u.phone}%0ACode:${code}%0APlease verify on Paybill 714777`,'_blank');
 }
-function showDash(u){
- document.getElementById('authPage').classList.add('hide');document.getElementById('activatePage').classList.add('hide');document.getElementById('dashPage').classList.remove('hide');
- document.getElementById('dashUser').innerText=u.username;document.getElementById('bal').innerText='KES '+u.balance;
- document.getElementById('dashEmail').innerText=u.email;document.getElementById('withdrawEmail').innerText=u.email;
- document.getElementById('invCount').innerText=u.invites;
- let link=location.origin+location.pathname+'?ref='+u.username;document.getElementById('myLink').innerText=link;document.getElementById('myLinkInput').value=link;
- let html='';u.history.slice().reverse().forEach(h=>{html+=`<div class=hist><span>${h.type} - ${h.time}</span><span style=color:#00ff88>+${h.amt}</span></div>`});document.getElementById('histList').innerHTML=html;
-}
-function copyLink(){let i=document.getElementById('myLinkInput');i.classList.remove('hide');i.select();document.execCommand('copy');i.classList.add('hide');alert('Link copied! Share to earn Level 1: 100, Level 2: 50');}
+function contactAdmin(){let u=getUsers()[localStorage.getItem('sl_current')];window.open(`https://wa.me/254720119990?text=Hi Admin, I paid 150. My username ${u.username} Code ${u.mpesaCode}`,'_blank')}
+function showDash(u){authPage.classList.add('hide');activatePage.classList.add('hide');dashPage.classList.remove('hide');dashUser.innerText=u.username;bal.innerText='KES '+u.balance;dashEmail.innerText=u.email;invCount.innerText=u.invites;let link=location.origin+location.pathname+'?ref='+u.username;myLink.innerText=link;myLinkInput.value=link;let html='';u.history.slice().reverse().forEach(h=>{html+=`<div class=hist><span>${h.type}</span><span style=color:#00ff88>+${h.amt}</span></div>`});histList.innerHTML=html}
+function copyLink(){myLinkInput.classList.remove('hide');myLinkInput.select();document.execCommand('copy');myLinkInput.classList.add('hide');alert('Copied!')}
 function withdraw(){
- let cur=localStorage.getItem('sl_current');let users=getUsers();let u=users[cur];
- if(u.balance<300){alert('Minimum withdraw is 300. Your balance '+u.balance);return}
- let msg=`*STARLIFE WITHDRAW*%0AUser:${u.username}%0AName:${u.fullname}%0APhone:${u.phone}%0AEmail:${u.email}%0AAmount:KES ${u.balance}%0ARefBy:${u.refBy}`;
- if(confirm(`Withdraw KES ${u.balance} to ${u.phone}? Notification will go to ${u.email}`)){window.open(`https://wa.me/254720119990?text=${msg}`,'_blank');alert('Request sent to Admin 0720119990 and to your email '+u.email)}
+ let users=getUsers();let u=users[localStorage.getItem('sl_current')];
+ if(u.balance<300){alert('Min 300, you have '+u.balance);return}
+ let msg=`*WITHDRAW* User:${u.username} Phone:${u.phone} Email:${u.email} Amount:${u.balance}`;
+ window.open(`https://wa.me/254720119990?text=${msg}`,'_blank');
 }
-function logout(){localStorage.removeItem('sl_current');location.href=location.pathname;}
-</script>
-</body></html>
+function logout(){localStorage.removeItem('sl_current');location.href=location.pathname}
+</script></body></html>
