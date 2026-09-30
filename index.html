@@ -1,165 +1,147 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name=viewport content="width=device-width,initial-scale=1"><title>Starlife Agencies</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
-body{background:#0a0a0a;color:#fff;min-height:100vh}
-.header{background:#111;border-bottom:2px solid #c9a227;padding:14px 16px;display:flex;justify-content:space-between}
-.header h1{color:#c9a227;font-size:18px;font-weight:900}
+body{background:#0b0f1e;color:#fff;min-height:100vh}
 .wrap{max-width:420px;margin:0 auto;padding:16px}
-.card{background:#151515;border:1px solid #2a2a2a;border-radius:16px;padding:20px;margin-top:14px}
-.title{color:#facc15;text-align:center;font-weight:800;font-size:18px;margin-bottom:6px}
-.sub{opacity:.5;text-align:center;font-size:13px;margin-bottom:16px}
-.input{width:100%;padding:13px;border-radius:10px;border:1px solid #2a2a2a;background:#232323;color:#fff;outline:none;margin-bottom:11px;font-size:14px}
-.btn{width:100%;padding:15px;border:none;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;font-size:15px;cursor:pointer}
-.paybox{background:rgba(202,162,39,.1);border:1.5px solid #c9a227;border-radius:12px;padding:16px;text-align:center;margin-bottom:16px}
-.dash{display:none;max-width:460px;margin:0 auto;padding:16px}
-.dash.active{display:block}
-.kpi{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:14px;padding:14px;margin-top:12px}
+.card{background:#131a2b;border:1px solid #1f2a44;border-radius:16px;padding:18px;margin-top:14px}
+.input{width:100%;padding:13px;border-radius:10px;border:1px solid #1f2a44;background:#1a233a;color:#fff;outline:none;margin-bottom:10px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(90deg,#00e5ff,#7c3aed);color:#fff;font-weight:800;cursor:pointer}
+.kpi{background:#131a2b;border:1px solid #1f2a44;border-radius:16px;padding:16px;position:relative;overflow:hidden;margin-top:12px}
+.kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.kpi.bal::before{background:#00e5ff}.kpi.exp::before{background:#f59e0b}.kpi.tot::before{background:#10b981}.kpi.pend::before{background:#ef4444}.kpi.earn::before{background:#8b5cf6}
+.kpi p{font-size:11px;opacity:.6;letter-spacing:1px}.kpi h2{font-size:26px;font-weight:900;margin:4px 0}.kpi small{opacity:.5;font-size:11px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.welcome{background:linear-gradient(135deg,#1a1a1a,#151515);border:1px solid #c9a227;border-radius:14px;padding:18px;margin-bottom:14px}
-.welcome h1{font-size:20px;margin-top:4px}
-.linkbox{background:rgba(34,197,94,.08);border:1px dashed #22c55e;border-radius:12px;padding:14px;text-align:center;margin-top:14px;word-break:break-all}
-.linkbox a{color:#22c55e;font-weight:700;font-size:12px;text-decoration:none}
+.ref{background:rgba(16,185,129,.06);border:1px dashed #0f3d2e;border-radius:14px;padding:14px;text-align:center;margin-top:14px}
+.ref a{color:#00e5ff;font-size:12px;word-break:break-all;font-weight:700;text-decoration:none}
 .hidden{display:none}
-.tab{display:flex;gap:8px;margin-bottom:14px}
-.tab button{flex:1;padding:10px;border-radius:10px;border:1px solid #2a2a2a;background:#1a1a1a;color:#888;font-weight:700}
-.tab button.on{background:#c9a227;color:#000}
-.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:18px;z-index:99}
-.modal.show{display:flex}
-.congrats{text-align:center}
-.congrats .icon{font-size:48px;margin-bottom:10px}
-.infoBox{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:10px;padding:12px;margin:10px 0;font-size:13px;text-align:left}
-.infoBox b{color:#facc15}
+.tab{display:flex;gap:8px;margin-bottom:12px}.tab button{flex:1;padding:10px;border-radius:10px;border:1px solid #1f2a44;background:#131a2b;color:#888;font-weight:700;cursor:pointer}.tab button.on{background:#c9a227;color:#000}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:18px;z-index:99}.modal.show{display:flex}
 </style></head><body>
-<div class=header><h1>★ STARLIFE AGENCIES</h1><span id=stepTxt>Join</span></div>
 
-<div id=authSec class=wrap>
+<div id=auth class=wrap>
 <div class=card>
-<div class=title>JOIN STARLIFE AGENCIES</div><div class=sub>Create account to start earning KES 100 per referral</div>
-<div class=tab><button id=tSign class=on onclick="showTab('signup')">Sign Up</button><button id=tLog onclick="showTab('login')">Log In</button></div>
-<div id=signupForm>
+<h3 style=color:#facc15;text-align:center>JOIN STARLIFE AGENCIES</h3><p style=opacity:.5;text-align:center;font-size:12px;margin:6px 0 14px>Earn KES 100 per referral</p>
+<div class=tab><button id=tS class=on onclick="tab('s')">Sign Up</button><button id=tL onclick="tab('l')">Log In</button></div>
+<div id=sForm>
 <input id=fName class=input placeholder="Full Name">
 <input id=uName class=input placeholder="Username">
 <input id=sPhone class=input placeholder="Phone Number" type=tel>
-<input id=sEmail class=input placeholder="Email" type=email>
+<input id=sEmail class=input placeholder="Email">
 <input id=sPass class=input placeholder="Password" type=password>
 <input id=sPass2 class=input placeholder="Confirm Password" type=password>
-<button class=btn onclick="doSignup()">Sign Up & Continue</button>
+<button class=btn onclick="signup()">Sign Up & Continue</button>
 </div>
-<div id=loginForm class=hidden>
-<input id=lUser class=input placeholder="Username or Phone">
-<input id=lPass class=input placeholder="Password" type=password>
-<button class=btn onclick="doLogin()">Log In</button>
-<button class=btn style="background:none;border:1px solid #2a2a2a;color:#aaa;margin-top:10px" onclick="showTab('signup')">Create New Account</button>
+<div id=lForm class=hidden>
+<input id=lU class=input placeholder="Username or Phone">
+<input id=lP class=input placeholder="Password" type=password>
+<button class=btn onclick="login()">Log In</button>
 </div>
 </div>
 </div>
 
-<div id=paySec class=wrap hidden>
+<div id=pay class=wrap hidden>
 <div class=card>
-<div class=title>STEP 2: ACTIVATE - KES 150</div>
-<div class=paybox><div style=font-weight:800;margin-bottom:8px>LIPA NA M-PESA</div><div>Paybill: <b>714777</b></div><div style=margin:6px 0>Account: <b>440200282954</b></div><div>Amount: <span style=color:#22c55e;font-weight:900;font-size:24px>KES 150</span></div></div>
+<h3 style=color:#facc15;text-align:center>STEP 2: ACTIVATE - KES 150</h3>
+<div style=background:rgba(202,162,39,.08);border:1px solid #c9a227;border-radius:12px;padding:14px;text-align:center;margin:14px 0><b>LIPA NA M-PESA</b><br>Paybill: <b>714777</b><br>Account: <b>440200282954</b><br>Amount: <b style=color:#22c55e;font-size:20px>KES 150</b></div>
 <input id=sCode class=input placeholder="M-Pesa Code">
-<button class=btn onclick="doActivate()">SUBMIT CODE & ACCESS DASHBOARD</button>
+<button class=btn onclick="activate()">SUBMIT CODE & ACCESS DASHBOARD</button>
 </div>
 </div>
 
-<div id=dashSec class=dash>
-<div class=welcome>
-<p style=color:#facc15;font-size:13px;font-weight:600>Welcome back to Starlife Agencies</p>
-<h1 id=welcomeUser>Good Evening, User!</h1>
-<small id=welcomeSub style=opacity:.6></small>
+<div id=dash class=wrap hidden>
+<div style=display:flex;justify-content:space-between;align-items:center>
+<div>
+<h2>MY <span style=color:#00e5ff>DASHBOARD</span></h2>
+<p id=dWelcome style=font-size:14px;margin-top:4px;color:#facc15;font-weight:700></p>
+<small id=dSub style=opacity:.6;font-size:12px></small>
 </div>
-<div class=g2><div class=kpi><p style=font-size:10px;opacity:.5>BALANCE</p><h3 id=dBal>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>EXPENSES</p><h3>KES 150</h3></div></div>
-<div class=g2><div class=kpi><p style=font-size:10px;opacity:.5>TOTAL WITHDRAWAL</p><h3 id=dTotal>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>PENDING</p><h3 id=dPend>KES 0</h3></div></div>
-<div class=kpi><p style=font-size:10px;opacity:.5>TOTAL EARNINGS <span id=dRefC></span></p><h3 id=dEarn>KES 0</h3></div>
-<div style=margin-top:14px><button type=button class=btn onclick="openWithdraw()">WITHDRAW BALANCE</button></div>
-<div class=linkbox><p style=font-size:11px;opacity:.6>YOUR REFERRAL LINK</p><a id=dLink></a><br><br><button type=button class=btn onclick="copyLink()">Copy Link</button><br><br><button type=button onclick="logout()" style=background:none;border:none;color:#fff;opacity:.5">Logout</button></div>
+<button onclick="logout()" style=background:#1f2937;border:none;color:#fff;padding:8px 14px;border-radius:20px;font-size:12px>Logout</button>
 </div>
 
-<!-- WITHDRAW MODAL - NO TIME -->
-<div id=wModal class=modal>
-<div class=card>
-<div class=title>Withdraw Funds</div>
-<div class=sub>Minimum KES 300 • M-Pesa</div>
-<p style=font-size:13px;margin:10px 0>Available: <b id=wAvail style=color:#22c55e>KES 0</b></p>
-<input id=wAmount class=input placeholder="Amount (Min 300)" type=number>
-<input id=wPhone class=input placeholder="Withdraw to which number? e.g 0720..." type=tel>
-<button class=btn onclick="doWithdraw()">Confirm Withdrawal</button>
-<button class=btn style="background:#2a2a2a;margin-top:8px" onclick="closeWithdraw()">Cancel</button>
+<div class=g2>
+<div class="kpi bal"><p>BALANCE</p><h2 id=bBal>KES 0</h2><small>Available to withdraw</small></div>
+<div class="kpi exp"><p>EXPENSES</p><h2>KES 150</h2><small>Registration fee</small></div>
 </div>
+<div class=g2>
+<div class="kpi tot"><p>TOTAL WITHDRAWAL</p><h2 id=bTot>KES 0</h2><small>Paid out</small></div>
+<div class="kpi pend"><p>PENDING WITHDRAWAL</p><h2 id=bPend>KES 0</h2><small>Awaiting approval</small></div>
+</div>
+<div class="kpi earn"><p>TOTAL EARNINGS <span id=bRef style=background:#0a2a2a;color:#00e5ff;padding:2px 8px;border-radius:10px;font-size:10px>0 REFERRALS</span></p><h2 id=bEarn>KES 0</h2><small>100 per referral • 20 & 10 indirect</small></div>
+
+<div class=kpi><button class=btn onclick="openW()">WITHDRAW BALANCE</button><p style=text-align:center;margin-top:10px;font-size:11px;opacity:.5>Minimum withdrawal KES 300 • 24hrs processing</p></div>
+
+<div class=ref><p style=font-size:11px;opacity:.6>YOUR REFERRAL LINK (Share uanze kupata 100)</p><a id=rLink></a><br><br><button class=btn onclick="copy()" style=background:#1f2a44>📋 Copy Link</button><p style=font-size:11px;opacity:.4;margin-top:10px>Invite friends • Earn KES 100 each</p></div>
 </div>
 
-<!-- CONGRATS MODAL - NO TIME -->
-<div id=cModal class=modal>
-<div class=card>
-<div class=congrats>
-<div class=icon>🎉</div>
-<div class=title>Congratulations!</div>
-<div class=sub>Withdrawal Successful</div>
-<div class=infoBox>
-<div>💸 Amount: <b id=cAmt style=color:#22c55e>KES 0</b></div>
-<div style=margin-top:8px>📱 To Number: <b id=cNum style=color:#fff>0720...</b></div>
-<div style=margin-top:8px>⏳ Status: <b style=color:#facc15>Pending</b></div>
+<!-- WITHDRAW MODAL -->
+<div id=wM class=modal><div class=card style=width:100%;max-width:360px>
+<h3 style=color:#facc15;text-align:center>Withdraw Funds</h3>
+<p style=opacity:.6;text-align:center;font-size:12px;margin:6px 0>Minimum KES 300</p>
+<p style=font-size:13px;margin:10px 0>Available: <b id=wAv style=color:#00e5ff>KES 0</b></p>
+<label style=font-size:12px;opacity:.7>Amount to Withdraw</label>
+<input id=wAmt class=input placeholder="e.g 500" type=number>
+<label style=font-size:12px;opacity:.7>Withdraw to which number?</label>
+<input id=wPh class=input placeholder="e.g 0720119990" type=tel>
+<button class=btn onclick="doW()">Confirm Withdrawal</button>
+<button class=btn style=background:#1f2a44;margin-top:8px onclick="cW()">Cancel</button>
+</div></div>
+
+<!-- CONGRATS WITH CONFIRMATION MESSAGE -->
+<div id=cM class=modal><div class=card style=width:100%;max-width:360px;text-align:center>
+<div style=font-size:48px>🎉</div>
+<h3 style=color:#22c55e>Withdrawal Successful!</h3>
+<p id=cMsg style=font-size:14px;margin:10px 0;line-height:1.5></p>
+<div style=background:#1a233a;border-radius:10px;padding:12px;margin:10px 0;text-align:left;font-size:13px>
+<div>💸 Amount: <b id=cA style=color:#22c55e>KES 0</b></div>
+<div style=margin-top:6px>📱 To: <b id=cN>0720...</b></div>
+<div style=margin-top:6px>⏳ Status: <b style=color:#facc15>Pending Approval</b></div>
 </div>
-<p style=font-size:12px;opacity:.7;margin:12px 0>Your withdrawal has been received and is being processed. You will receive M-Pesa shortly.</p>
-<button class=btn onclick="closeCongrats()">Awesome, Thanks!</button>
-</div>
-</div>
-</div>
+<button class=btn style=margin-top:10px onclick="cC()">Awesome, Thanks!</button>
+</div></div>
 
 <script>
-function showTab(t){signupForm.classList.toggle('hidden',t!=='signup');loginForm.classList.toggle('hidden',t!=='login');tSign.classList.toggle('on',t==='signup');tLog.classList.toggle('on',t==='login');}
-function getUsers(){return JSON.parse(localStorage.getItem('sl_users_v2')||'[]')}
-function saveUsers(u){localStorage.setItem('sl_users_v2',JSON.stringify(u))}
-function getCur(){return JSON.parse(localStorage.getItem('sl_cur_v2')||'null')}
-function doSignup(){
+function tab(t){sForm.classList.toggle('hidden',t!=='s');lForm.classList.toggle('hidden',t!=='l');tS.classList.toggle('on',t==='s');tL.classList.toggle('on',t==='l');}
+function getU(){return JSON.parse(localStorage.getItem('sl_u')||'[]')}function saveU(u){localStorage.setItem('sl_u',JSON.stringify(u))}function getC(){return JSON.parse(localStorage.getItem('sl_c')||'null')}
+function signup(){
  let fn=fName.value.trim(),un=uName.value.trim(),ph=sPhone.value.trim(),em=sEmail.value.trim(),p=sPass.value,p2=sPass2.value;
- if(!fn||!un||!ph||!em||!p||!p2){alert('Jaza kila kitu');return}
- if(p!==p2){alert('Password mismatch');return}
- let users=getUsers(); if(users.find(u=>u.username===un)){alert('Username taken');return}
- if(users.find(u=>u.phone===ph)){alert('Phone taken');return}
- let nu={fullname:fn,username:un,phone:ph,email:em,password:p,earnings:0,balance:0,totalW:0,pendW:0,refs:[],activated:false};
- users.push(nu);saveUsers(users);localStorage.setItem('sl_temp',JSON.stringify(nu));
- authSec.classList.add('hidden');paySec.classList.remove('hidden');paySec.removeAttribute('hidden');stepTxt.innerText='Activate';
- let ref=new URLSearchParams(location.search).get('ref'); if(ref) localStorage.setItem('sl_ref',ref);
+ if(!fn||!un||!ph||!em||!p||!p2){alert('Jaza kila kitu');return}if(p!==p2){alert('Password mismatch');return}
+ let us=getU();if(us.find(x=>x.username===un)){alert('Username taken');return}if(us.find(x=>x.phone===ph)){alert('Phone taken');return}
+ let nu={fullname:fn,username:un,phone:ph,email:em,password:p,balance:0,earnings:0,totalW:0,pendW:0,refs:[],activated:false};
+ us.push(nu);saveU(us);localStorage.setItem('sl_t',JSON.stringify(nu));auth.classList.add('hidden');pay.classList.remove('hidden');pay.hidden=false;
+ let ref=new URLSearchParams(location.search).get('ref');if(ref)localStorage.setItem('sl_r',ref);
 }
-function doActivate(){
- let code=sCode.value.trim(); if(!code){alert('Weka Code');return}
- let temp=JSON.parse(localStorage.getItem('sl_temp')); let users=getUsers(); let me=users.find(u=>u.username===temp.username);
- me.activated=true; me.code=code;
- let ref=localStorage.getItem('sl_ref'); if(ref){let r=users.find(u=>u.username===ref||u.phone===ref); if(r){r.earnings+=100;r.balance+=100;r.refs.push(me.username)}}
- saveUsers(users);localStorage.setItem('sl_cur_v2',JSON.stringify(me));localStorage.removeItem('sl_temp');localStorage.removeItem('sl_ref'); showDash();
+function activate(){
+ let cd=sCode.value.trim();if(!cd){alert('Weka Code');return}let t=JSON.parse(localStorage.getItem('sl_t'));let us=getU();let me=us.find(x=>x.username===t.username);me.activated=true;me.code=cd;
+ let ref=localStorage.getItem('sl_r');if(ref){let r=us.find(x=>x.username===ref||x.phone===ref);if(r){r.balance+=100;r.earnings+=100;r.refs.push(me.username)}}
+ saveU(us);localStorage.setItem('sl_c',JSON.stringify(me));localStorage.removeItem('sl_t');localStorage.removeItem('sl_r');showD();
 }
-function doLogin(){
- let u=lUser.value.trim(),p=lPass.value; let me=getUsers().find(x=>(x.username===u||x.phone===u)&&x.password===p);
- if(!me){alert('Wrong login');return} if(!me.activated){alert('Not activated');return}
- localStorage.setItem('sl_cur_v2',JSON.stringify(me)); showDash();
+function login(){
+ let u=lU.value.trim(),p=lP.value;let me=getU().find(x=>(x.username===u||x.phone===u)&&x.password===p);
+ if(!me){alert('Wrong login');return}if(!me.activated){alert('Not activated');return}localStorage.setItem('sl_c',JSON.stringify(me));showD();
 }
-function showDash(){
- let cur=getCur(); if(!cur) return;
- authSec.classList.add('hidden');paySec.classList.add('hidden');dashSec.classList.add('active');stepTxt.innerText='Dashboard';
- let h=new Date().getHours(); let g=h<12?'Good Morning':h<18?'Good Afternoon':'Good Evening';
- welcomeUser.innerText=g+', '+cur.username+'!'; welcomeSub.innerText=cur.fullname+' • '+cur.email;
- let me=getUsers().find(u=>u.username===cur.username)||cur;
- dBal.innerText='KES '+me.balance; dEarn.innerText='KES '+me.earnings; dTotal.innerText='KES '+(me.totalW||0); dPend.innerText='KES '+(me.pendW||0);
- dRefC.innerText=me.refs.length+' referrals'; let link='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+me.username; dLink.innerText=link; dLink.href=link;
+function showD(){
+ let cur=getC();if(!cur)return;auth.classList.add('hidden');pay.classList.add('hidden');pay.hidden=true;dash.classList.remove('hidden');dash.hidden=false;
+ let h=new Date().getHours();let greet=h<12?'Good Morning':h<18?'Good Afternoon':'Good Evening';
+ let me=getU().find(x=>x.username===cur.username)||cur;
+ // WELCOME WITH USERNAME ONLY - NO NUMBER
+ dWelcome.innerText='Welcome, '+me.username+'!';
+ dSub.innerText=greet+' • Welcome back to Starlife Agencies';
+ bBal.innerText='KES '+me.balance;bEarn.innerText='KES '+me.earnings;bTot.innerText='KES '+(me.totalW||0);bPend.innerText='KES '+(me.pendW||0);bRef.innerText=me.refs.length+' REFERRALS';
+ let link='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+me.username;rLink.innerText=link;rLink.href=link;
 }
-function openWithdraw(){
- let me=getUsers().find(u=>u.username===getCur().username); if(me.balance<300){alert('Minimum withdraw ni KES 300. Balance yako ni KES '+me.balance+' - Invite watu 3');return}
- wAvail.innerText='KES '+me.balance; wAmount.value=me.balance; wPhone.value=me.phone; wModal.classList.add('show');
+function openW(){let me=getU().find(x=>x.username===getC().username);if(me.balance<300){alert('Min ni KES 300. Balance ni KES '+me.balance+' - Invite watu 3');return}wAv.innerText='KES '+me.balance;wAmt.value='';wPh.value=me.phone;wM.classList.add('show');}
+function cW(){wM.classList.remove('show')}
+function doW(){
+ let me=getU().find(x=>x.username===getC().username);let amt=parseInt(wAmt.value);let ph=wPh.value.trim();
+ if(!amt||amt<300){alert('Minimum ni KES 300');return}if(amt>me.balance){alert('Balance haitoshi');return}if(!ph){alert('Weka namba ya kupokea');return}
+ me.balance-=amt;me.pendW=(me.pendW||0)+amt;me.totalW=(me.totalW||0)+amt;
+ let us=getU();us[us.findIndex(x=>x.username===me.username)]=me;saveU(us);localStorage.setItem('sl_c',JSON.stringify(me));cW();showD();
+ // CONFIRMATION MESSAGE AS YOU WANTED
+ cA.innerText='KES '+amt;cN.innerText=ph;
+ cMsg.innerHTML='You have successfully withdrawn <b style=color:#22c55e>KES '+amt+'</b> to <b>'+ph+'</b>. Your withdrawal is now pending.';
+ cM.classList.add('show');
 }
-function closeWithdraw(){wModal.classList.remove('show')}
-function doWithdraw(){
- let me=getUsers().find(u=>u.username===getCur().username); let amt=parseInt(wAmount.value); let ph=wPhone.value.trim();
- if(!amt||amt<300){alert('Minimum ni KES 300');return} if(amt>me.balance){alert('Balance haitoshi');return} if(!ph){alert('Weka namba ya kupokea');return}
- me.balance-=amt; me.pendW=(me.pendW||0)+amt; me.totalW=(me.totalW||0)+amt;
- let users=getUsers(); users[users.findIndex(u=>u.username===me.username)]=me; saveUsers(users); localStorage.setItem('sl_cur_v2',JSON.stringify(me));
- closeWithdraw(); showDash();
- cAmt.innerText='KES '+amt; cNum.innerText=ph; cModal.classList.add('show');
-}
-function closeCongrats(){cModal.classList.remove('show')}
-function copyLink(){navigator.clipboard.writeText(dLink.innerText);alert('Copied!')}
-function logout(){localStorage.removeItem('sl_cur_v2');location.reload()}
-if(getCur()) showDash();
+function cC(){cM.classList.remove('show')}function copy(){navigator.clipboard.writeText(rLink.innerText);alert('Copied!')}function logout(){localStorage.removeItem('sl_c');location.reload()}
+if(getC())showD();
 </script>
 </body></html>
