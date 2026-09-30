@@ -1,103 +1,44 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name=viewport content="width=device-width,initial-scale=1">
-<title>Starlife Agencies</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
-body{background:#0a0a0a;color:#fff;min-height:100vh}
-.header{background:#111;border-bottom:2px solid #c9a227;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
-.header h1{color:#c9a227;font-size:18px;font-weight:900;letter-spacing:.5px}
-.header span{opacity:.7;font-size:14px}
-.wrap{max-width:420px;margin:0 auto;padding:18px}
-.card{background:#151515;border:1px solid #2a2a2a;border-radius:16px;padding:18px;margin-top:14px}
-.title{color:#facc15;text-align:center;font-weight:800;font-size:17px;margin-bottom:14px}
-.paybox{background:rgba(202,162,39,.1);border:1.5px solid #c9a227;border-radius:12px;padding:18px;text-align:center;margin-bottom:18px}
-.paybox b{color:#fff}
-.paybox .amt{color:#22c55e;font-weight:900;font-size:26px}
-.input{width:100%;padding:14px;border-radius:10px;border:1px solid #2a2a2a;background:#2a2a2a;color:#fff;outline:none;margin-bottom:12px;font-size:15px}
-.input::placeholder{color:#777}
-.btn{width:100%;padding:16px;border:none;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;font-size:15px;cursor:pointer;line-height:1.3}
-.btn:active{transform:scale(.98)}
-.dash{display:none;max-width:480px;margin:0 auto;padding:18px}
-.dash.active{display:block}
-.reg.hidden{display:none}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.kpi{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:14px}
-.kpi p{font-size:10px;opacity:.5;text-transform:uppercase;margin-bottom:6px}
-.kpi h3{font-size:18px}
-.linkbox{background:rgba(34,197,94,.08);border:1px dashed #22c55e;border-radius:12px;padding:14px;text-align:center;margin-top:14px;word-break:break-all}
-.linkbox a{color:#22c55e;text-decoration:none;font-weight:700;font-size:12px}
-</style></head><body>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name=viewport content="width=device-width,initial-scale=1"><title>Starlife</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#0a0a0a;color:#fff}.header{background:#111;border-bottom:2px solid #c9a227;padding:14px 16px;display:flex;justify-content:space-between}.header h1{color:#c9a227;font-size:18px;font-weight:900}.wrap{max-width:420px;margin:0 auto;padding:18px}.card{background:#151515;border:1px solid #2a2a2a;border-radius:16px;padding:18px;margin-top:14px}.title{color:#facc15;text-align:center;font-weight:800;margin-bottom:14px}.paybox{background:rgba(202,162,39,.1);border:1.5px solid #c9a227;border-radius:12px;padding:18px;text-align:center;margin-bottom:18px}.paybox .amt{color:#22c55e;font-weight:900;font-size:26px}.input{width:100%;padding:14px;border-radius:10px;border:1px solid #2a2a2a;background:#2a2a2a;color:#fff;margin-bottom:12px;font-size:15px}.btn{display:block;width:100%;padding:16px;border:none;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;font-size:16px;text-align:center;text-decoration:none;cursor:pointer}.dash{display:none;max-width:420px;margin:0 auto;padding:18px}.kpi{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:14px;margin-top:10px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}/* MAGIC: when dashboard is targeted, hide registration */#dash:target{display:block}#dash:target ~ #reg{display:none}body:has(#dash:target) #reg{display:none}</style></head><body>
 <div class=header><h1>★ STARLIFE AGENCIES</h1><span>Step 2/3</span></div>
 
-<div id=regSec class="wrap reg">
-<div class=card>
-<div class=title>STEP 2: ACTIVATE - KES 150</div>
-<div class=paybox>
-<div style=font-weight:800;font-size:18px;margin-bottom:8px>LIPA NA M-PESA</div>
-<div>Paybill: <b>714777</b></div>
-<div style=margin:6px 0>Account: <b>440200282954</b></div>
-<div>Amount: <span class=amt>KES 150</span></div>
-</div>
-<input id=sName class=input placeholder="Pinkie">
-<input id=sPhone class=input placeholder="0745269017">
-<input id=sCode class=input placeholder="M-Pesa Code">
-<button class=btn onclick=doReg()>SUBMIT CODE & ACCESS<br>DASHBOARD</button>
-</div>
+<!-- DASHBOARD COMES FIRST FOR CSS TRICK -->
+<div id=dash class=dash>
+<h2 style=color:#c9a227>MY DASHBOARD</h2><small id=phoneShow></small>
+<div class=g2 style=margin-top:14px><div class=kpi><p style=font-size:10px;opacity:.5>BALANCE</p><h3 id=bal>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>EXPENSES</p><h3>KES 150</h3></div></div>
+<div class=g2><div class=kpi><p style=font-size:10px;opacity:.5>TOTAL WITHDRAWAL</p><h3>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>PENDING</p><h3>KES 0</h3></div></div>
+<div class=kpi><p style=font-size:10px;opacity:.5>TOTAL EARNINGS</p><h3>KES 0</h3><small>KES 100 per referral</small></div>
+<div style=margin-top:14px><a class=btn href="#">WITHDRAW BALANCE</a></div>
+<div class=kpi style=text-align:center;border:1px dashed #22c55e;word-break:break-all><p style=font-size:11px>YOUR REFERRAL LINK</p><a id=refLink style=color:#22c55e;font-weight:700;font-size:12px;word-break:break-all></a><br><br><a class=btn href="#" onclick="navigator.clipboard.writeText(document.getElementById('refLink').innerText);alert('Copied!');return false">Copy Link</a></div>
+<br><a href="#" onclick="localStorage.clear();location.href=location.pathname;return false" style=color:#fff;opacity:.5;text-align:center;display:block>Logout</a>
 </div>
 
-<div id=dashSec class=dash>
-<h2 style=color:#c9a227>MY DASHBOARD</h2><small id=dPhone style=opacity:.5></small>
-<div class=g2><div class=kpi><p>Balance</p><h3 id=dBal>KES 0</h3></div><div class=kpi><p>Expenses</p><h3>KES 150</h3></div></div>
-<div class=g2><div class=kpi><p>Total Withdrawal</p><h3 id=dTotal>KES 0</h3></div><div class=kpi><p>Pending</p><h3 id=dPend>KES 0</h3></div></div>
-<div class=kpi><p>Total Earnings <span id=dRefC>0</span></p><h3 id=dEarn>KES 0</h3><small style=opacity:.6>KES 100 per referral</small></div>
-<div style=margin-top:14px><button class=btn onclick=doWithdraw()>WITHDRAW BALANCE</button><p style=text-align:center;font-size:11px;opacity:.5;margin-top:6px>Min KES 300 • 24hrs</p></div>
-<div class=linkbox><p style=font-size:11px;opacity:.6>YOUR REFERRAL LINK</p><a id=dLink href=#></a><br><br><button class=btn onclick=copyL()>Copy Link</button><br><button onclick=logout() style=margin-top:10px;background:none;border:none;color:#fff;opacity:.5>Logout</button></div>
-</div>
+<div id=reg class=wrap><div class=card><div class=title>STEP 2: ACTIVATE - KES 150</div><div class=paybox><div style=font-weight:800;margin-bottom:8px>LIPA NA M-PESA</div><div>Paybill: <b>714777</b></div><div style=margin:6px 0>Account: <b>440200282954</b></div><div>Amount: <span class=amt>KES 150</span></div></div>
+<input id=sName class=input placeholder="Abraham">
+<input id=sPhone class=input placeholder="0720119990">
+<input id=sCode class=input placeholder="QRSHSDFQG">
+<!-- THIS IS A LINK, NOT A BUTTON - MUST WORK -->
+<a class=btn href="#dash" onclick="saveAndGo()">SUBMIT CODE & ACCESS DASHBOARD</a>
+</div></div>
 
 <script>
-function getUsers(){return JSON.parse(localStorage.getItem('sl_users')||'[]')}
-function saveUsers(u){localStorage.setItem('sl_users',JSON.stringify(u))}
-function getCur(){return JSON.parse(localStorage.getItem('sl_cur')||'null')}
-function doReg(){
- let n=document.getElementById('sName').value.trim();
- let p=document.getElementById('sPhone').value.trim();
- let c=document.getElementById('sCode').value.trim();
- if(!n||!p||!c){alert('Jaza zote');return}
- let users=getUsers();
- let ref=new URLSearchParams(location.search).get('ref');
- let nu={name:n,phone:p,code:c,earnings:0,balance:0,totalW:0,pendW:0,refs:[],date:Date.now()};
- users.push(nu);
- if(ref){
-  let r=users.find(u=>u.phone===ref);
-  if(r){r.earnings+=100;r.balance+=100;r.refs.push(p)}
-  let l2=users.find(u=>u.refs&&u.refs.includes(ref));
-  if(l2){l2.earnings+=20;l2.balance+=20}
- }
- saveUsers(users);
- localStorage.setItem('sl_cur',JSON.stringify(nu));
- showDash();
+function saveAndGo(){
+ var n=document.getElementById('sName').value;
+ var p=document.getElementById('sPhone').value;
+ var c=document.getElementById('sCode').value;
+ if(!n||!p||!c){alert('Jaza zote!');return false}
+ try{
+  localStorage.setItem('sl_name',n);
+  localStorage.setItem('sl_phone',p);
+  document.getElementById('phoneShow').innerText=p;
+  document.getElementById('refLink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+p;
+  document.getElementById('refLink').href=document.getElementById('refLink').innerText;
+ }catch(e){}
+ location.hash='dash';
+ return false;
 }
-function showDash(){
- let cur=getCur(); if(!cur) return;
- document.getElementById('regSec').classList.add('hidden');
- document.getElementById('dashSec').classList.add('active');
- let users=getUsers(); let me=users.find(u=>u.phone===cur.phone)||cur;
- document.getElementById('dBal').innerText='KES '+me.balance;
- document.getElementById('dEarn').innerText='KES '+me.earnings;
- document.getElementById('dTotal').innerText='KES '+(me.totalW||0);
- document.getElementById('dPend').innerText='KES '+(me.pendW||0);
- document.getElementById('dRefC').innerText=(me.refs?me.refs.length:0)+' referrals';
- document.getElementById('dPhone').innerText=me.phone;
- document.getElementById('dLink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+me.phone;
- document.getElementById('dLink').href=document.getElementById('dLink').innerText;
-}
-function copyL(){navigator.clipboard.writeText(document.getElementById('dLink').innerText);alert('Copied!')}
-function doWithdraw(){
- let cur=getCur(); let users=getUsers(); let me=users.find(u=>u.phone===cur.phone);
- if(me.balance<300){alert('Balance ndogo! Min 300');return}
- me.pendW=(me.pendW||0)+me.balance; me.balance=0; saveUsers(users); localStorage.setItem('sl_cur',JSON.stringify(me)); showDash(); alert('Withdrawal sent!');
-}
-function logout(){localStorage.removeItem('sl_cur');location.reload()}
-if(getCur()){showDash()}
+try{
+ var ph=localStorage.getItem('sl_phone');
+ if(ph){document.getElementById('phoneShow').innerText=ph;document.getElementById('refLink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+ph;}
+}catch(e){}
 </script>
 </body></html>
