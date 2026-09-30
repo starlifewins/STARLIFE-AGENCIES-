@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starlife Wins</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#060a14;color:#fff;min-height:100vh}
+.page{display:none;min-height:100vh;padding:20px}
+.active{display:block}
+.center{max-width:420px;margin:0 auto;padding-top:30px}
+.logo{text-align:center;margin-bottom:25px}
+.logo h1{font-size:32px;background:linear-gradient(90deg,#00f5ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.logo p{opacity:0.5;font-size:13px;margin-top:5px}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:18px;margin-bottom:14px}
+.card p{font-size:11px;opacity:0.5;text-transform:uppercase;margin-bottom:8px}
+.card h3{font-size:24px;font-weight:800}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.input{width:100%;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(0,0,0,0.35);color:#fff;outline:none;margin-bottom:12px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(90deg,#00f5ff,#7c3aed);color:#fff;font-weight:bold;cursor:pointer}
+.paybox{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px;margin:16px 0}
+.linkbox{background:rgba(0,245,255,0.08);border:1px dashed rgba(0,245,255,0.3);border-radius:14px;padding:14px;text-align:center;margin-top:18px;word-break:break-all}
+</style>
+</head>
+<body>
+<div id="regPage" class="page active">
+<div class="center">
+<div class="logo"><h1>STARLIFE</h1><p>LIPA NA M-PESA • WIN DAILY</p></div>
+<input id="name" class="input" placeholder="Jina Kamili">
+<input id="phone" class="input" placeholder="Namba ya Simu 07...">
+<div class="paybox">
+<p style="text-align:center;font-size:12px;opacity:0.7">Lipa KES 150 ili uanze</p>
+<p style="text-align:center;margin:8px 0"><b>Paybill: 714777</b><br><b>Account: 440200282954</b></p>
+<input id="code" class="input" placeholder="Weka Transaction Code">
+</div>
+<button class="btn" onclick="register()">CREATE ACCOUNT</button>
+</div>
+</div>
+<div id="dashPage" class="page">
+<div class="center" style="max-width:500px">
+<h2>MY <span style="color:#00f5ff">DASHBOARD</span></h2>
+<small id="userPhone" style="opacity:0.5"></small>
+<div class="grid2" style="margin-top:20px">
+<div class="card"><p>Balance</p><h3 id="bal">KES 0</h3><small>Available</small></div>
+<div class="card"><p>Expenses</p><h3>KES 150</h3><small>Registration</small></div>
+</div>
+<div class="grid2">
+<div class="card"><p>Total Withdrawal</p><h3 id="totalW">KES 0</h3><small>Paid</small></div>
+<div class="card"><p>Pending</p><h3 id="pendW">KES 0</h3><small>Awaiting</small></div>
+</div>
+<div class="card"><p>Total Earnings <span id="refCount">0</span></p><h3 id="earn">KES 0</h3><small>KES 100 per referral</small></div>
+<div class="paybox" style="text-align:center">
+<button class="btn" onclick="withdraw()">WITHDRAW BALANCE</button>
+<p style="font-size:11px;opacity:0.5;margin-top:8px">Min 300 • 24hrs</p>
+</div>
+<div class="linkbox">
+<p style="font-size:11px;opacity:0.6">YOUR REFERRAL LINK</p>
+<a id="myLink" href="#"></a><br><br>
+<button class="btn" onclick="copyLink()">Copy Link</button>
+<button onclick="logout()" style="margin-top:10px;background:none;border:none;color:#fff;opacity:0.5">Logout</button>
+</div>
+</div>
+</div>
+<script>
+function getUsers(){return JSON.parse(localStorage.getItem('starlife_users')||'[]')}
+function saveUsers(u){localStorage.setItem('starlife_users',JSON.stringify(u))}
+function getCurrent(){return JSON.parse(localStorage.getItem('starlife_current')||'null')}
+function register(){
+let n=document.getElementById('name').value.trim();
+let p=document.getElementById('phone').value.trim();
+let c=document.getElementById('code').value.trim();
+if(!n||!p||!c){alert('Jaza zote');return}
+let users=getUsers();
+let ref=new URLSearchParams(location.search).get('ref');
+let nu={name:n,phone:p,code:c,earnings:0,balance:0,totalW:0,pendW:0,refs:[],date:Date.now()};
+users.push(nu);
+if(ref){
+let r=users.find(u=>u.phone===ref);
+if(r){r.earnings+=100;r.balance+=100;r.refs.push(p)}
+let l2=users.find(u=>u.refs&&u.refs.includes(ref));
+if(l2){l2.earnings+=20;l2.balance+=20}
+let l3=users.find(u=>{return l2&&u.refs&&u.refs.includes(l2.phone)});
+if(l3){l3.earnings+=10;l3.balance+=10}
+}
+saveUsers(users);
+localStorage.setItem('starlife_current',JSON.stringify(nu));
+showDash();
+}
+function showDash(){
+let cur=getCurrent();
+if(!cur){document.getElementById('regPage').classList.add('active');document.getElementById('dashPage').classList.remove('active');return}
+document.getElementById('regPage').classList.remove('active');
+document.getElementById('dashPage').classList.add('active');
+let users=getUsers();
+let me=users.find(u=>u.phone===cur.phone)||cur;
+document.getElementById('bal').innerText='KES '+me.balance;
+document.getElementById('earn').innerText='KES '+me.earnings;
+document.getElementById('totalW').innerText='KES '+(me.totalW||0);
+document.getElementById('pendW').innerText='KES '+(me.pendW||0);
+document.getElementById('refCount').innerText=(me.refs?me.refs.length:0)+' referrals';
+document.getElementById('userPhone').innerText=me.phone;
+document.getElementById('myLink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+me.phone;
+document.getElementById('myLink').href='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+me.phone;
+}
+function copyLink(){navigator.clipboard.writeText(document.getElementById('myLink').innerText);alert('Copied!')}
+function withdraw(){
+let cur=getCurrent();let users=getUsers();let me=users.find(u=>u.phone===cur.phone);
+if(me.balance<300){alert('Balance ndogo! Min 300');return}
+me.pendW=(me.pendW||0)+me.balance;me.balance=0;saveUsers(users);localStorage.setItem('starlife_current',JSON.stringify(me));showDash();alert('Withdrawal sent!');
+}
+function logout(){localStorage.removeItem('starlife_current');location.reload()}
+if(getCurrent()){showDash()}
+</script>
+</body>
+</html>
