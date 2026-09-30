@@ -1,3 +1,18 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name=viewport content="width=device-width,initial-scale=1"><title>Starlife Agencies</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}body{background:#0b0f1e;color:#fff;min-height:100vh}.wrap{max-width:420px;margin:0 auto;padding:16px}.card{background:#131a2b;border:1px solid #1f2a44;border-radius:16px;padding:18px;margin-top:14px}.input{width:100%;padding:13px;border-radius:10px;border:1px solid #1f2a44;background:#1a233a;color:#fff;outline:none;margin-bottom:10px}.btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(90deg,#00e5ff,#7c3aed);color:#fff;font-weight:800;cursor:pointer}.kpi{background:#131a2b;border:1px solid #1f2a44;border-radius:16px;padding:16px;margin-top:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ref{background:rgba(16,185,129,.06);border:1px dashed #0f3d2e;border-radius:14px;padding:14px;text-align:center;margin-top:14px}.ref a{color:#00e5ff;font-size:12px;word-break:break-all;font-weight:700}.hidden{display:none}.tab{display:flex;gap:8px;margin-bottom:12px}.tab button{flex:1;padding:10px;border-radius:10px;border:1px solid #1f2a44;background:#131a2b;color:#888;font-weight:700;cursor:pointer}.tab button.on{background:#c9a227;color:#000}.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:18px;z-index:99}.modal.show{display:flex}.adminRow{background:#1a233a;border:1px solid #1f2a44;border-radius:10px;padding:12px;margin-top:10px;display:flex;justify-content:space-between;align-items:center}</style></head><body>
-<div id=auth class=wrap><div class=card><h3 id=logo style=color:#facc15;text-align:center} onclick="adminClick()">JOIN STARLIFE</h3><p style=opacity:.4;font-size:10px;text-align:center;margin:4px 0>Tap logo 5x for admin</p><div class=tab><button id=tS class=on onclick="tab('s')">Sign Up</button><button id=tL onclick="tab('l')">Log In</button></div><div id=sForm><input id=fName class=input placeholder="Full Name"><input id=uName class=input placeholder="Username"><input id=sPhone class=input placeholder="Phone"><input id=sEmail class=input placeholder="Email"><input id=sPass class=input placeholder="Password" type=password><input id=sPass2 class=input placeholder="Confirm Password" type=password><button class=btn onclick="signup()">Sign Up</button></div><div id=lForm class=hidden><input id=lU class=input placeholder="Username or Phone"><input id=lP class=input placeholder="Password" type=password><button class=btn onclick="login()">Log In</button><p style=text-align:center;margin-top:12px;font-size:12px;opacity:.5>Admin? <span style=color:#facc15;text-decoration:underline;cursor:pointer} onclick="showAdmin()">Login here</span></p></div></div></div>
-<div id=pay class=wrap hidden><div class=card><h3 style=color:#facc15;text-align:center>ACTIVATE KES 150</h3><div style=background:rgba(202,162,39,.08);border:
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Starlife Agencies</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{background:#0b0f1e;color:#fff;min-height:100vh}
+.wrap{max-width:420px;margin:0 auto;padding:16px}
+.card{background:#131a2b;border:1px solid #1f2a44;border-radius:16px;padding:18px;margin-top:14px}
+.input{width:100%;padding:13px;border-radius:10px;border:1px solid #1f2a44;background:#1a233a;color:#fff;outline:none;margin-bottom:10px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(90deg,#00e5ff,#7c3aed);color:#fff;font-weight:800;cursor:pointer}
+.kpi{background:#131a2b;border:1px solid #1f2a44;border-radius:16px;padding:16px;margin-top:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hidden{display:none}
+.tab{display:flex;gap:8px;margin-bottom:12px}
+.tab button{flex:1;padding:10px;border-radius:10px;border:1px solid #1f2a44;background:#131a2
