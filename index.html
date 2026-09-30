@@ -1,65 +1,182 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name=viewport content="width=device-width,initial-scale=1"><title>Starlife Agencies</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name=viewport content="width=device-width,initial-scale=1"><title>Starlife Agencies</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
 body{background:#0a0a0a;color:#fff;min-height:100vh}
 .header{background:#111;border-bottom:2px solid #c9a227;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
 .header h1{color:#c9a227;font-size:18px;font-weight:900}
-.header span{opacity:.6;font-size:13px}
 .wrap{max-width:420px;margin:0 auto;padding:16px}
-.card{background:#151515;border:1px solid #2a2a2a;border-radius:16px;padding:18px;margin-top:14px}
-.title{color:#facc15;text-align:center;font-weight:800;font-size:17px;margin-bottom:14px}
-.paybox{background:rgba(202,162,39,.1);border:1.5px solid #c9a227;border-radius:12px;padding:18px;text-align:center;margin-bottom:18px}
-.paybox .amt{color:#22c55e;font-weight:900;font-size:26px}
-.input{width:100%;padding:14px;border-radius:10px;border:1px solid #2a2a2a;background:#2a2a2a;color:#fff;outline:none;margin-bottom:12px;font-size:15px}
-.btn{display:block;width:100%;padding:16px;border:none;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;font-size:15px;text-align:center;text-decoration:none;cursor:pointer}
-.dash{display:none;max-width:420px;margin:0 auto;padding:16px}
-.kpi{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:14px;margin-top:12px}
+.card{background:#151515;border:1px solid #2a2a2a;border-radius:16px;padding:20px;margin-top:14px}
+.title{color:#facc15;text-align:center;font-weight:800;font-size:18px;margin-bottom:6px}
+.sub{opacity:.5;text-align:center;font-size:13px;margin-bottom:16px}
+.input{width:100%;padding:13px;border-radius:10px;border:1px solid #2a2a2a;background:#232323;color:#fff;outline:none;margin-bottom:11px;font-size:14px}
+.btn{width:100%;padding:15px;border:none;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;font-size:15px;cursor:pointer;margin-top:4px}
+.btn2{background:none;border:1px solid #2a2a2a;color:#aaa;margin-top:10px}
+.paybox{background:rgba(202,162,39,.1);border:1.5px solid #c9a227;border-radius:12px;padding:16px;text-align:center;margin-bottom:16px}
+.paybox .amt{color:#22c55e;font-weight:900;font-size:24px}
+.dash{display:none;max-width:460px;margin:0 auto;padding:16px}
+.dash.active{display:block}
+.kpi{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:14px;padding:14px;margin-top:12px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-#dash:target{display:block}
-body:has(#dash:target) #reg{display:none}
+.welcome{background:linear-gradient(135deg,#1a1a1a,#151515);border:1px solid #c9a227;border-radius:14px;padding:18px;margin-bottom:14px}
+.welcome h2{color:#facc15;font-size:16px;font-weight:700}
+.welcome h1{color:#fff;font-size:22px;margin-top:4px}
+.welcome small{opacity:.6}
 .linkbox{background:rgba(34,197,94,.08);border:1px dashed #22c55e;border-radius:12px;padding:14px;text-align:center;margin-top:14px;word-break:break-all}
 .linkbox a{color:#22c55e;font-weight:700;font-size:12px;text-decoration:none}
+.hidden{display:none}
+.tab{display:flex;gap:8px;margin-bottom:14px}
+.tab button{flex:1;padding:10px;border-radius:10px;border:1px solid #2a2a2a;background:#1a1a1a;color:#888;font-weight:700}
+.tab button.on{background:#c9a227;color:#000;border-color:#c9a227}
 </style></head><body>
-<div class=header><h1>★ STARLIFE AGENCIES</h1><span>Step 2/3</span></div>
+<div class=header><h1>★ STARLIFE AGENCIES</h1><span id=stepTxt>Step 1/3</span></div>
 
-<!-- DASHBOARD -->
-<div id=dash class=dash>
-<h2 style=color:#c9a227>MY DASHBOARD</h2><small id=showPhone style=opacity:.5></small>
-<div class=g2 style=margin-top:14px><div class=kpi><p style=font-size:10px;opacity:.5>BALANCE</p><h3>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>EXPENSES</p><h3>KES 150</h3></div></div>
-<div class=g2><div class=kpi><p style=font-size:10px;opacity:.5>TOTAL WITHDRAWAL</p><h3>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>PENDING</p><h3>KES 0</h3></div></div>
-<div class=kpi><p style=font-size:10px;opacity:.5>TOTAL EARNINGS</p><h3>KES 0</h3><small style=opacity:.6>KES 100 per referral</small></div>
-<div style=margin-top:14px><a class=btn href="#">WITHDRAW BALANCE</a></div>
-<div class=linkbox><p style=font-size:11px;opacity:.6>YOUR REFERRAL LINK</p><a id=refLink href="#"></a><br><br><a class=btn href="#" onclick="navigator.clipboard.writeText(document.getElementById('refLink').innerText);alert('Copied!');return false">Copy Link</a><br><a href="#" onclick="location.href=location.pathname;return false" style=color:#fff;opacity:.5;font-size:13px;margin-top:10px;display:block">Logout</a></div>
+<!-- STEP 1: SIGNUP / LOGIN -->
+<div id=authSec class=wrap>
+<div class=card>
+<div class=title>JOIN STARLIFE AGENCIES</div><div class=sub>Create account to start earning</div>
+<div class=tab><button id=tSign class=on onclick="showTab('signup')">Sign Up</button><button id=tLog onclick="showTab('login')">Log In</button></div>
+
+<div id=signupForm>
+<input id=fName class=input placeholder="Full Name - e.g Abraham Koech">
+<input id=uName class=input placeholder="Username - e.g abraham.ke">
+<input id=sPhone class=input placeholder="Phone Number - 0720119990" type=tel>
+<input id=sEmail class=input placeholder="Email - abraham@gmail.com" type=email>
+<input id=sPass class=input placeholder="Password" type=password>
+<input id=sPass2 class=input placeholder="Confirm Password" type=password>
+<button class=btn onclick="doSignup()">Sign Up & Continue</button>
 </div>
 
-<!-- REGISTRATION - BEST ONE -->
-<div id=reg class=wrap>
+<div id=loginForm class=hidden>
+<input id=lUser class=input placeholder="Username or Phone">
+<input id=lPass class=input placeholder="Password" type=password>
+<button class=btn onclick="doLogin()">Log In</button>
+<button class=btn btn2 onclick="showTab('signup')" style="background:none;border:1px solid #2a2a2a;color:#aaa;margin-top:10px;width:100%;padding:13px;border-radius:10px">Create New Account</button>
+</div>
+</div>
+</div>
+
+<!-- STEP 2: ACTIVATE -->
+<div id=paySec class=wrap hidden>
 <div class=card>
 <div class=title>STEP 2: ACTIVATE - KES 150</div>
-<div class=paybox>
-<div style=font-weight:800;font-size:18px;margin-bottom:8px>LIPA NA M-PESA</div>
-<div>Paybill: <b>714777</b></div>
-<div style=margin:6px 0>Account: <b>440200282954</b></div>
-<div>Amount: <span class=amt>KES 150</span></div>
+<div class=paybox><div style=font-weight:800;margin-bottom:8px>LIPA NA M-PESA</div><div>Paybill: <b>714777</b></div><div style=margin:6px 0>Account: <b>440200282954</b></div><div>Amount: <span class=amt>KES 150</span></div></div>
+<input id=sCode class=input placeholder="Enter M-Pesa Code - e.g QRSH...">
+<button class=btn onclick="doActivate()">SUBMIT CODE & ACCESS DASHBOARD</button>
 </div>
-<input id=sName class=input placeholder="Abraham Koech">
-<input id=sPhone class=input placeholder="0720119990">
-<input id=sCode class=input placeholder="QRSHSDFQG">
-<a class=btn href="#dash" onclick="return go()">SUBMIT CODE & ACCESS DASHBOARD</a>
 </div>
+
+<!-- STEP 3: DASHBOARD -->
+<div id=dashSec class=dash>
+<div class=welcome>
+<h2 id=greet>Welcome back to Starlife Agencies</h2>
+<h1 id=welcomeUser>Good Evening, Abraham!</h1>
+<small id=welcomeSub>Glad to see you again</small>
+</div>
+<div class=g2><div class=kpi><p style=font-size:10px;opacity:.5>BALANCE</p><h3 id=dBal>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>EXPENSES</p><h3>KES 150</h3></div></div>
+<div class=g2><div class=kpi><p style=font-size:10px;opacity:.5>TOTAL WITHDRAWAL</p><h3 id=dTotal>KES 0</h3></div><div class=kpi><p style=font-size:10px;opacity:.5>PENDING</p><h3 id=dPend>KES 0</h3></div></div>
+<div class=kpi><p style=font-size:10px;opacity:.5>TOTAL EARNINGS <span id=dRefC>0 referrals</span></p><h3 id=dEarn>KES 0</h3><small style=opacity:.6>KES 100 per referral</small></div>
+<div style=margin-top:14px><button class=btn onclick="alert('Withdrawal request sent!')">WITHDRAW BALANCE</button></div>
+<div class=linkbox><p style=font-size:11px;opacity:.6>YOUR REFERRAL LINK</p><a id=dLink href="#"></a><br><br><button class=btn onclick="navigator.clipboard.writeText(document.getElementById('dLink').innerText);alert('Link Copied!')">Copy Link</button><br><br><button onclick="logout()" style=background:none;border:none;color:#fff;opacity:.5;font-size:13px">Logout</button></div>
 </div>
 
 <script>
-function go(){
- var n=document.getElementById('sName').value.trim();
- var p=document.getElementById('sPhone').value.trim();
- var c=document.getElementById('sCode').value.trim();
- if(!n||!p||!c){alert('Jaza Jina, Namba na M-Pesa Code');return false}
- document.getElementById('showPhone').innerText=p;
- document.getElementById('refLink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+p;
- document.getElementById('refLink').href=document.getElementById('refLink').innerText;
- return true;
+function showTab(t){
+ document.getElementById('signupForm').classList.toggle('hidden',t!=='signup');
+ document.getElementById('loginForm').classList.toggle('hidden',t!=='login');
+ document.getElementById('tSign').classList.toggle('on',t==='signup');
+ document.getElementById('tLog').classList.toggle('on',t==='login');
 }
+function getUsers(){return JSON.parse(localStorage.getItem('sl_users_v2')||'[]')}
+function saveUsers(u){localStorage.setItem('sl_users_v2',JSON.stringify(u))}
+function getCur(){return JSON.parse(localStorage.getItem('sl_cur_v2')||'null')}
+
+function doSignup(){
+ let fn=document.getElementById('fName').value.trim();
+ let un=document.getElementById('uName').value.trim();
+ let ph=document.getElementById('sPhone').value.trim();
+ let em=document.getElementById('sEmail').value.trim();
+ let p=document.getElementById('sPass').value;
+ let p2=document.getElementById('sPass2').value;
+ if(!fn||!un||!ph||!em||!p||!p2){alert('Jaza kila kitu!');return}
+ if(p!==p2){alert('Password hazifanani!');return}
+ if(p.length<4){alert('Password iwe angalau 4');return}
+ let users=getUsers();
+ if(users.find(u=>u.username===un)){alert('Username already taken!');return}
+ if(users.find(u=>u.phone===ph)){alert('Phone already registered!');return}
+ let ref=new URLSearchParams(location.search).get('ref');
+ let nu={fullname:fn,username:un,phone:ph,email:em,password:p,earnings:0,balance:0,totalW:0,pendW:0,refs:[],activated:false,date:Date.now()};
+ users.push(nu);
+ saveUsers(users);
+ localStorage.setItem('sl_temp',JSON.stringify(nu));
+ // go to activation
+ document.getElementById('authSec').classList.add('hidden');
+ document.getElementById('paySec').classList.remove('hidden');
+ document.getElementById('paySec').removeAttribute('hidden');
+ document.getElementById('stepTxt').innerText='Step 2/3';
+ if(ref){
+   let r=users.find(u=>u.phone===ref||u.username===ref);
+   if(r){localStorage.setItem('sl_ref',ref)}
+ }
+}
+
+function doActivate(){
+ let code=document.getElementById('sCode').value.trim();
+ if(!code){alert('Weka M-Pesa Code');return}
+ let temp=JSON.parse(localStorage.getItem('sl_temp'));
+ let users=getUsers();
+ let me=users.find(u=>u.username===temp.username);
+ me.activated=true;
+ me.code=code;
+ // referral bonus
+ let ref=localStorage.getItem('sl_ref');
+ if(ref){
+  let r=users.find(u=>u.phone===ref||u.username===ref);
+  if(r){r.earnings+=100;r.balance+=100;r.refs.push(me.username)}
+ }
+ saveUsers(users);
+ localStorage.setItem('sl_cur_v2',JSON.stringify(me));
+ localStorage.removeItem('sl_temp');
+ localStorage.removeItem('sl_ref');
+ showDash();
+}
+
+function doLogin(){
+ let u=document.getElementById('lUser').value.trim();
+ let p=document.getElementById('lPass').value;
+ let users=getUsers();
+ let me=users.find(x=>(x.username===u||x.phone===u)&&x.password===p);
+ if(!me){alert('Wrong username or password');return}
+ if(!me.activated){alert('Account not activated - Lipa KES 150 kwanza');return}
+ localStorage.setItem('sl_cur_v2',JSON.stringify(me));
+ showDash();
+}
+
+function showDash(){
+ let cur=getCur();
+ if(!cur)return;
+ document.getElementById('authSec').classList.add('hidden');
+ document.getElementById('paySec').classList.add('hidden');
+ document.getElementById('dashSec').classList.add('active');
+ document.getElementById('stepTxt').innerText='Dashboard';
+ // time greeting
+ let h=new Date().getHours();
+ let greet=h<12?'Good Morning':h<18?'Good Afternoon':'Good Evening';
+ document.getElementById('greet').innerText='Welcome back to Starlife Agencies';
+ document.getElementById('welcomeUser').innerText=greet+', '+cur.username+'!';
+ document.getElementById('welcomeSub').innerText=cur.fullname+' • '+cur.email;
+ let users=getUsers();
+ let me=users.find(u=>u.username===cur.username)||cur;
+ document.getElementById('dBal').innerText='KES '+me.balance;
+ document.getElementById('dEarn').innerText='KES '+me.earnings;
+ document.getElementById('dRefC').innerText=me.refs.length+' referrals';
+ let link='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+me.username;
+ document.getElementById('dLink').innerText=link;
+ document.getElementById('dLink').href=link;
+}
+
+function logout(){localStorage.removeItem('sl_cur_v2');location.reload()}
+
+// auto login
+if(getCur()){showDash()}
 </script>
 </body></html>
