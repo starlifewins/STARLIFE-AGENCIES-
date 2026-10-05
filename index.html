@@ -3,163 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE V2.1</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#060a18;color:#fff;font-family:system-ui;display:flex;min-height:100vh}
-.side{width:250px;background:#0f172a;border-right:2px solid #f59e0b;padding:14px;position:fixed;height:100vh;overflow-y:auto;z-index:20}
-.side h2{color:#f59e0b;font-size:18px;margin:0 0 12px;text-align:center}
-.menu{list-style:none;padding:0;margin:0}
-.menu li{padding:12px;border-radius:10px;margin:4px 0;cursor:pointer;font-size:13px;border:1px solid #1e293b}
-.menu li.active{background:linear-gradient(90deg,#f59e0b,#ff3c00);color:#000;font-weight:800}
-.main{margin-left:250px;flex:1;padding:16px}
-.card{background:#151b2d;border:1px solid #1e293b;border-radius:16px;padding:16px;margin-bottom:12px}
-.head{background:linear-gradient(135deg,#f59e0b,#ff3c00);color:#000;padding:20px;border-radius:16px;margin-bottom:12px;text-align:center;box-shadow:0 0 20px #f59e0b55}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.sbox{background:#0f172a;border:1px solid #f59e0b44;padding:14px;border-radius:12px;text-align:center}
-input{width:100%;padding:12px;margin:5px 0 10px;border-radius:10px;border:1px solid #2a344f;background:#0f172a;color:#fff}
-.btn{padding:12px;border:none;border-radius:10px;font-weight:800;cursor:pointer;width:100%}
-.y{background:linear-gradient(90deg,#f59e0b,#ff3c00);color:#000}
-.g{background:#1e293b;color:#fff;border:1px solid #334155}
-.pay{background:#060a18;border:2px dashed #f59e0b;padding:12px;border-radius:12px;margin:8px 0}
-.hide{display:none}
-#wheel{width:180px;height:180px;border-radius:50%;border:6px solid #f59e0b;margin:10px auto;background:conic-gradient(#f59e0b 0 60deg,#0f172a 60deg 120deg,#ff3c00 120deg 180deg,#00ff88 180deg 240deg,#3b82f6 240deg 300deg,#a855f7 300deg 360deg);transition:transform 4s cubic-bezier(.2,.8,.2,1)}
-.topbar{display:none;background:#0f172a;padding:10px;position:sticky;top:0;z-index:10;border-bottom:1px solid #1e293b}
-@media(max-width:768px){.side{transform:translateX(-100%);transition:.3s}.side.open{transform:translateX(0)}.main{margin-left:0}.topbar{display:flex;justify-content:space-between;align-items:center}}
-</style>
+<title>STARLIFE AGENCIES</title>
 </head>
-<body>
-<div class="side" id="side">
-<h2>★ STARLIFE V2.1</h2>
-<ul class="menu">
-<li class="active" onclick="go('dash')">📊 Dashboard</li>
-<li onclick="go('home')">🏠 Home</li>
-<li onclick="go('withdraw')">💰 Withdraw</li>
-<li onclick="go('youtube')">▶️ YouTube Video</li>
-<li onclick="go('tiktok')">🎵 TikTok Videos</li>
-<li onclick="go('insta')">📸 Instagram Reel</li>
-<li onclick="go('math')">🔢 Math (10Q)</li>
-<li onclick="go('trivia')">🧠 Trivia (10Q)</li>
-<li onclick="go('spin')">🎡 Spin & Win</li>
-<li onclick="go('aviator')">✈️ Aviator Signals</li>
-<li onclick="go('forex')">💹 Free Forex</li>
-<li onclick="go('odds')">⚽ Sure Odds</li>
-<li onclick="logout()" style="color:#ff5a5a">🚪 Logout</li>
-</ul>
-</div>
-<div class="main">
-<div class="topbar"><button class="btn g" style="width:auto" onclick="side.classList.toggle('open')">☰</button><b style="color:#f59e0b">STARLIFE</b><span></span></div>
-
-<div id="auth" class="card" style="max-width:420px;margin:20px auto">
-<h2 style="color:#f59e0b;text-align:center">★ STARLIFE AGENCIES</h2>
-<div id="rb" class="hide" style="background:#060a18;border:1px dashed #00ff88;padding:8px;border-radius:8px;text-align:center;font-size:12px">Referred by: <b id="rbn" style="color:#00ff88"></b> ✅</div>
-<label>Full Name</label><input id="fn" placeholder="Full Name">
-<label>Username Name</label><input id="un" placeholder="Username">
-<label>Email</label><input id="em" type="email" placeholder="Email">
-<label>Phone Number</label><input id="ph" placeholder="07XXXXXXXX">
-<label>Password</label><input id="ps" type="password">
-<label>Confirm Password</label><input id="cps" type="password">
-<button class="btn y" onclick="signup()">SIGN UP - SEND CODE</button>
-<button class="btn g" onclick="loginBox.classList.remove('hide')" style="margin-top:6px">Already have? LOGIN</button>
-<div id="loginBox" class="hide" style="margin-top:12px;border-top:1px solid #333;padding-top:12px">
-<input id="lu" placeholder="Username or Email"><input id="lp" type="password" placeholder="Password">
-<button class="btn y" onclick="login()">LOGIN</button>
-</div>
-<p style="font-size:9px;color:#64748b;text-align:center">Activation 200 | Paybill 714777 Acc 440200282954</p>
-</div>
-
-<div id="app" class="hide">
-<div class="head"><h1 style="margin:0">🎉 Hurray <span id="hu"></span>!</h1><p>Welcome Agent - You Are Official</p></div>
-
-<div id="dash" class="sec">
-<div class="grid">
-<div class="sbox"><small>Expenses</small><div style="font-size:20px;font-weight:800;color:#ff5a5a">KES 200</div></div>
-<div class="sbox"><small>Balance</small><div style="font-size:20px;font-weight:800;color:#00ff88" id="bal">KES 0</div></div>
-<div class="sbox"><small>Total Withdrawal</small><div style="font-size:18px;font-weight:800" id="tw">KES 0</div></div>
-<div class="sbox"><small>Pending Withdrawal</small><div style="font-size:18px;font-weight:800;color:#f59e0b" id="pw">KES 0</div></div>
-</div>
-<div class="card"><small>Link of Agent Down (KES 150 per referral):</small><p id="rl" style="color:#00ff88;word-break:break-all;font-size:12px"></p><button class="btn y" onclick="copyR()">COPY LINK</button></div>
-<div class="card"><h3>👥 Downline - Those You Referred (<span id="rc">0</span>)</h3><div id="rlist" style="background:#0f172a;padding:10px;border-radius:10px;font-size:12px">No downline yet</div></div>
-</div>
-
-<div id="home" class="sec hide"><div class="card"><h3>🏠 Home</h3><p style="color:#94a3b8">Paybill 714777 Account 440200282954 Amount 200. Share link earn 150 each.</p></div></div>
-<div id="withdraw" class="sec hide"><div class="card"><h3>💰 Withdraw</h3><p>Balance: <b id="bal2" style="color:#00ff88">KES 0</b></p><div class="grid"><div class="sbox"><small>Total Withdrawn</small><b id="tw2">0</b></div><div class="sbox"><small>Pending</small><b id="pw2">0</b></div></div><input id="wamt" type="number" placeholder="Amount min 500"><input id="wphone" placeholder="M-Pesa Phone"><button class="btn y" onclick="doW()">REQUEST WITHDRAW</button><h4>Withdraw Activity - Balance</h4><div id="wlist" style="background:#0f172a;padding:10px;border-radius:10px;font-size:12px">No activity</div></div></div>
-<div id="youtube" class="sec hide"><div class="card"><h3>▶️ YouTube Video</h3><iframe width="100%" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="border-radius:12px" allowfullscreen></iframe><button class="btn y" onclick="earn(20,'YouTube')">I WATCHED - ADD KES 20</button></div></div>
-<div id="tiktok" class="sec hide"><div class="card"><h3>🎵 TikTok Videos</h3><div style="background:#000;padding:50px;text-align:center;border-radius:12px">TikTok Playing...</div><button class="btn y" onclick="earn(15,'TikTok')">EARN 15</button></div></div>
-<div id="insta" class="sec hide"><div class="card"><h3>📸 Instagram Reel</h3><div style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:50px;text-align:center;border-radius:12px">Instagram Reel</div><button class="btn y" onclick="earn(15,'Insta')">EARN 15</button></div></div>
-<div id="math" class="sec hide"><div class="card"><h3>🔢 Math - 10 Questions</h3><div id="mathBox"></div><button class="btn y" onclick="subM()">SUBMIT MATH</button><p id="mathRes"></p></div></div>
-<div id="trivia" class="sec hide"><div class="card"><h3>🧠 Trivia - 10 Questions</h3><div id="triviaBox"></div><button class="btn y" onclick="subT()">SUBMIT TRIVIA</button><p id="triviaRes"></p></div></div>
-<div id="spin" class="sec hide"><div class="card" style="text-align:center"><h3>🎡 Spin - Works 100%</h3><div id="wheel"></div><p id="spinRes" style="font-weight:800;color:#f59e0b;font-size:18px"></p><button class="btn y" onclick="spin()">SPIN NOW</button></div></div>
-<div id="aviator" class="sec hide"><div class="card"><h3>✈️ Aviator Signals</h3><div id="aviList"></div><button class="btn y" onclick="genA()">GENERATE NEW</button></div></div>
-<div id="forex" class="sec hide"><div class="card"><h3>💹 Free Forex</h3><div id="forexList"></div><button class="btn y" onclick="genF()">GENERATE</button></div></div>
-<div id="odds" class="sec hide"><div class="card"><h3>⚽ Sure Odds</h3><div id="oddsList"></div><button class="btn y" onclick="genO()">GENERATE</button></div></div>
-
-</div>
-</div>
-
+<body style="background:#060a18;color:#fff;font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0">
+<p>Loading STARLIFE V2.1...</p>
 <script>
-let rp=new URLSearchParams(location.search).get('ref');
-if(rp){rb.classList.remove('hide');rbn.innerText=rp}
-function signup(){
-let f=fn.value.trim(),u=un.value.trim(),e=em.value.trim(),p=ph.value.trim(),pw=ps.value,cw=cps.value;
-if(!f||!u||!e||!p||!pw)return alert('Jaza zote Full Name, Username, Email, Phone, Password, Confirm');
-if(pw!==cw)return alert('Confirm mismatch');
-let us=JSON.parse(localStorage.getItem('star_users')||'[]');
-if(us.find(x=>x.username.toLowerCase()===u.toLowerCase()))return alert('Username taken');
-us.push({fullname:f,username:u,email:e,phone:p,password:pw,referredBy:rp||null,activated:true,extra:0,totalW:0,pendingW:0,time:new Date().toLocaleString()});
-localStorage.setItem('star_users',JSON.stringify(us));
-localStorage.setItem('current_user',u);
-showApp()
-}
-function login(){
-let u=lu.value.trim(),p=lp.value;
-let us=JSON.parse(localStorage.getItem('star_users')||'[]');
-let f=us.find(x=>(x.username.toLowerCase()===u.toLowerCase()||x.email.toLowerCase()===u.toLowerCase())&&x.password===p);
-if(!f)return alert('Wrong');
-localStorage.setItem('current_user',f.username);
-showApp()
-}
-function showApp(){auth.classList.add('hide');app.classList.remove('hide');load()}
-function load(){
-let c=localStorage.getItem('current_user');
-let us=JSON.parse(localStorage.getItem('star_users')||'[]');
-let me=us.find(x=>x.username===c);if(!me)return;
-hu.innerText=me.username;
-let refs=us.filter(x=>x.referredBy===me.username);
-let bVal=refs.length*150+(me.extra||0);
-bal.innerText='KES '+bVal;bal2.innerText='KES '+bVal;
-rc.innerText=refs.length;tw.innerText='KES '+(me.totalW||0);pw.innerText='KES '+(me.pendingW||0);
-tw2.innerText='KES '+(me.totalW||0);pw2.innerText='KES '+(me.pendingW||0);
-let b=location.origin+location.pathname;
-if(b.includes('index.html'))b=b.replace('index.html','');
-if(!b.endsWith('/'))b+='/';
-rl.innerText=b+'?ref='+me.username;
-rlist.innerHTML=refs.map(r=>`• ${r.username} (${r.fullname}) ✅ Paid 200`).join('<br>')||'No downline - Share link!';
-loadW();loadMath();loadTrivia();genA();genF();genO();
-}
-function go(id){
-document.querySelectorAll('.sec').forEach(s=>s.classList.add('hide'));
-document.getElementById(id).classList.remove('hide');
-document.querySelectorAll('.menu li').forEach(l=>l.classList.remove('active'));
-event.target.classList.add('active');
-side.classList.remove('open')
-}
-function copyR(){navigator.clipboard.writeText(rl.innerText);alert('Copied: '+rl.innerText)}
-function earn(a,t){let c=localStorage.getItem('current_user');let us=JSON.parse(localStorage.getItem('star_users')||'[]');let me=us.find(x=>x.username===c);me.extra=(me.extra||0)+a;localStorage.setItem('star_users',JSON.stringify(us));alert('Earned KES '+a+' '+t);load()}
-function doW(){let a=parseInt(wamt.value),ph=wphone.value.trim();if(!a||a<500)return alert('Min 500');let c=localStorage.getItem('current_user');let us=JSON.parse(localStorage.getItem('star_users')||'[]');let me=us.find(x=>x.username===c);let bVal=(us.filter(x=>x.referredBy===me.username).length*150)+(me.extra||0)-(me.totalW||0)-(me.pendingW||0);if(a>bVal)return alert('Insufficient '+bVal);me.pendingW=(me.pendingW||0)+a;let w=JSON.parse(localStorage.getItem('withdraws_'+c)||'[]');w.push({amount:a,phone:ph,time:new Date().toLocaleString(),status:'Pending'});localStorage.setItem('withdraws_'+c,JSON.stringify(w));localStorage.setItem('star_users',JSON.stringify(us));load()}
-function loadW(){let c=localStorage.getItem('current_user');let w=JSON.parse(localStorage.getItem('withdraws_'+c)||'[]');wlist.innerHTML=w.map(x=>`${x.time} - KES ${x.amount} to ${x.phone} - ${x.status}`).join('<br>')||'No activity'}
-let mathQs=[['5+3=?',8],['10-4=?',6],['6x2=?',12],['20/4=?',5],['9+7=?',16],['15-8=?',7],['3x4=?',12],['18/3=?',6],['11+9=?',20],['14-5=?',9]];
-function loadMath(){mathBox.innerHTML=mathQs.map((q,i)=>`<label>${i+1}. ${q[0]}</label><input id="mq${i}" type="number" placeholder="Answer">`).join('')}
-function subM(){let s=0;mathQs.forEach((q,i)=>{if(parseInt(document.getElementById('mq'+i).value)===q[1])s++});mathRes.innerText=`Score ${s}/10`;if(s>=7)earn(50,'Math')}
-let triviaQs=[['Capital of Kenya?','Nairobi'],['2+2=?','4'],['Sky color?','Blue'],['Largest planet?','Jupiter'],['Days in week?','7'],['Currency KE?','KSH'],['First letter?','A'],['5*5=?','25'],['Water formula?','H2O'],['Sun rises?','East']];
-function loadTrivia(){triviaBox.innerHTML=triviaQs.map((q,i)=>`<label>${i+1}. ${q[0]}</label><input id="tq${i}" placeholder="Answer">`).join('')}
-function subT(){let s=0;triviaQs.forEach((q,i)=>{if(document.getElementById('tq'+i).value.trim().toLowerCase()===q[1].toLowerCase())s++});triviaRes.innerText=`Score ${s}/10`;if(s>=7)earn(50,'Trivia')}
-function spin(){let d=Math.floor(Math.random()*360)+1800;wheel.style.transform=`rotate(${d}deg)`;setTimeout(()=>{let w=[10,20,30,50,100][Math.floor(Math.random()*5)];spinRes.innerText=`🎉 Hurray! Won KES ${w}!`;earn(w,'Spin')},4000)}
-function genA(){let m=(Math.random()*5+1.2).toFixed(2);aviList.innerHTML=`<div class="pay">✈️ Cashout at <b style="color:#00ff88">${m}x</b> | Stake 100 Win ${(m*100).toFixed(0)} | ${new Date().toLocaleTimeString()}</div>`}
-function genF(){forexList.innerHTML=`<div class="pay">💹 EUR/USD BUY @1.0845 SL 1.0820 TP 1.0890 85%</div><div class="pay">💹 GBP/JPY SELL @189.20 SL 189.80 TP 188.10</div>`}
-function genO(){oddsList.innerHTML=`<div class="pay">⚽ Man City vs Arsenal Over 1.5 @1.30<br>⚽ Real Madrid Win @1.45<br>Total 2.80 Stake 200 Win 560</div><div class="pay">⚽ Sure 5 Odds 4.5 Total<br>✅ Al Nassr Win<br>✅ Barca Over 2.5</div>`}
-function logout(){localStorage.removeItem('current_user');location.reload()}
-let cur=localStorage.getItem('current_user');if(cur){let us=JSON.parse(localStorage.getItem('star_users')||'[]');if(us.find(x=>x.username===cur))showApp()}
+fetch('https://raw.githubusercontent.com/starlifeWins/STARLIFE-AGENCIES-/main/index.html')
+.then(r=>r.text())
+.then(h=>{
+document.open();
+document.write(h);
+document.close();
+})
+.catch(e=>{
+document.body.innerHTML='<h2 style="color:#f59e0b;text-align:center">Failed to load. Open /STARLIFE-AGENCIES-/ directly:<br><a style="color:#00ff88" href="/STARLIFE-AGENCIES-/">/STARLIFE-AGENCIES-/</a></h2>';
+});
 </script>
 </body>
 </html>
