@@ -1,58 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE AGENCIES</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#f1f5f9}
-.header{background:#7c3aed;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.main{padding:14px;max-width:480px;margin:0 auto}
-.card{border-radius:24px;padding:18px;color:#fff;margin-bottom:14px}
-.purple{background:linear-gradient(135deg,#4c1d95,#7c3aed)}
-.blue{background:linear-gradient(135deg,#1e40af,#3b82f6)}
-.green{background:linear-gradient(135deg,#065f46,#10b981)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.mini{border-radius:22px;padding:18px;color:#fff}
-</style>
-</head>
-<body>
-
-<!-- HEADER -->
-<div class="header">
-<span onclick="openSide()" style="font-size:28px;background:rgba(0,0,0,0.2);padding:4px 10px;border-radius:8px;cursor:pointer">☰</span>
-<b>STARLIFE AGENCIES</b>
-<span>👤</span>
-</div>
-
-<!-- SIDEBAR - SIMPLE -->
-<div id="sidebar" style="position:fixed;top:0;left:-300px;width:280px;height:100%;background:#fff;z-index:99999;transition:0.3s;overflow-y:auto;box-shadow:0 0 30px rgba(0,0,0,0.5)">
-<div style="background:#7c3aed;color:#fff;padding:20px;display:flex;justify-content:space-between;align-items:center">
-<b>⭐ STARLIFE</b>
-<span onclick="closeSide()" style="font-size:24px;cursor:pointer;background:rgba(0,0,0,0.2);padding:2px 10px;border-radius:8px">✕</span>
-</div>
-<div style="padding:10px 20px;font-size:11px;color:#94a3b8">DASHBOARD</div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9;background:#f5f3ff">🏠 Home</div>
-<div style="padding:8px 20px;font-size:11px;color:#94a3b8;margin-top:10px">ACCOUNTS</div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">🎟️ Vouchers <span style="float:right">›</span></div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">💳 Deposit <span style="float:right">›</span></div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">🎁 Claim Bonus</div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">🏆 Leaderboard</div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">👤 Pay For Client</div>
-<div onclick="closeSide();document.getElementById('withdrawBox').scrollIntoView({behavior:'smooth'})" style="padding:14px 20px;border-bottom:1px solid #f1f5f9;cursor:pointer">⬆️ Withdraw <span style="float:right">›</span></div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">👥 Team <span style="float:right">›</span></div>
-<div style="padding:8px 20px;font-size:11px;color:#94a3b8;margin-top:10px">PRODUCTS</div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">🎯 Spins <span style="float:right;background:#10b981;color:#fff;padding:2px 8px;border-radius:10px;font-size:9px">NEW</span></div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">🎵 Earn with Spotify <span style="float:right;background:#10b981;color:#fff;padding:2px 8px;border-radius:10px;font-size:9px">NEW</span></div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">🛍️ Marketplace <span style="float:right;background:#ef4444;color:#fff;padding:2px 8px;border-radius:10px;font-size:9px">HOT</span></div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">🎮 Fix Tap <span style="float:right;background:#10b981;color:#fff;padding:2px 8px;border-radius:10px;font-size:9px">NEW</span></div>
-<div style="padding:14px 20px;border-bottom:1px solid #f1f5f9">💬 Chat foreigners <span style="float:right;background:#10b981;color:#fff;padding:2px 8px;border-radius:10px;font-size:9px">NEW</span></div>
-</div>
-
-<div id="overlay" onclick="closeSide()" style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99998;display:none"></div>
-
-<!-- MAIN DASHBOARD ILE ILE -->
-<div class="main">
-<div style="margin:10px 4px"><small style="color:#64748b">Good morning,</small><b style="font-size:32px;display:block">James 👋</b><div id="notify" style="display:none;background:#10b981;color:#fff;padding:8px 12px;border-radius:12px;margin-top:8px;font-size:13px"></div></div>
-<div class="card purple"><h4>EXPENSES •••</
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES - Earn Daily</title><style>body{margin:0;background:#060a18;color:#fff;font-family:sans-serif;display:flex;justify-content:center;padding:20px}.card{background:#151b2d;padding:24px;border-radius:20px;max-width:420px;width:100%;border:1px solid #f59e0b;text-align:center}input{width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #2a344f;background:#0f172a;color:#fff;box-sizing:border-box}.btn{width:100%;padding:15px;border:none;border-radius:12px;font-weight:bold;cursor:pointer;margin-top:8px}.y{background:linear-gradient(90deg,#f59e0b,#ff3c00);color:#000}.g{background:#1e293b;color:#fff}</style></head><body><div class="card"><h1 style="color:#f59e0b">★ STARLIFE</h1><h3>Earn KES 500-1000 Daily</h3><p id="refShow" style="font-size:13px;color:#94a3b8">Referred by: <b id="refBy" style="color:#00ff88">Direct</b></p><input id="fullname" placeholder="Full Name"><input id="username" placeholder="Choose Username"><input id="phone" placeholder="M-Pesa 07..."><input id="pass" type="password" placeholder="Password"><input id="cpass" type="password" placeholder="Confirm Password"><button class="btn y" onclick="signup()">CREATE ACCOUNT & CONTINUE</button><button class="btn g" onclick="location.href='login.html'">Already have? Login</button></div><script>
+let ref=new URLSearchParams(location.search).get('ref'); if(ref){document.getElementById('refBy').innerText=ref; document.getElementById('refShow').style.display='block';}
+function signup(){let f=fullname.value.trim(),u=username.value.trim(),ph=phone.value.trim(),p=pass.value,cp=cpass.value;
+if(!f||!u||!ph||!p) return alert('Jaza zote'); if(p!==cp) return alert('Password mismatch');
+let users=JSON.parse(localStorage.getItem('star_users')||'[]'); if(users.find(x=>x.username.toLowerCase()===u.toLowerCase())) return alert('Username taken');
+users.push({fullname:f,username:u,phone:ph,password:p,referredBy:ref||null,activated:false,time:new Date().toLocaleString()});
+localStorage.setItem('star_users',JSON.stringify(users)); localStorage.setItem('current_user',u); location.href='activation.html';}
+</script></body></html>
