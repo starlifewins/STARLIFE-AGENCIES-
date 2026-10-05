@@ -1,18 +1,265 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>S</title><style>body{margin:0;background:#060a18;color:#fff;font-family:system-ui;display:flex}.side{width:180px;background:#0f172a;border-right:2px solid #f59e0b;padding:6px;position:fixed;height:100vh}.menu{list-style:none;padding:0}.menu li{padding:6px;border-radius:5px;margin:2px 0;cursor:pointer;background:#151b2d}.menu li.active{background:#f59e0b;color:#000;font-weight:900}.main{margin-left:180px;flex:1;padding:6px}.card{background:#151b2d;border:1px solid #1e293b;border-radius:6px;padding:6px;margin-bottom:5px}.btn{padding:6px;border:none;border-radius:5px;font-weight:800;cursor:pointer;width:100%}.y{background:#f59e0b;color:#000}.g{background:#1e293b;color:#fff}.b{background:#0f8;color:#000}.r{background:#f33;color:#fff}.hide{display:none!important}input{width:100%;padding:6px;margin:2px 0 5px;border-radius:5px;border:1px solid #2a344f;background:#0f172a;color:#fff}@media(max-width:600px){.side{transform:translateX(-100%);transition:.3s}.side.open{transform:translateX(0)}.main{margin-left:0}}</style></head><body><div class="side" id="s"><h4 style="color:#f59e0b;text-align:center">STARLIFE</h4><ul class="menu"><li class="active" onclick="go('d',this)">📊Dash</li><li onclick="go('w',this)">💰Withdraw</li><li id="am" class="hide" onclick="go('a',this)" style="border:1px solid #0f8">👑Admin</li><li onclick="logout()" style="color:#f55">🚪Out</li></ul></div><div class="main"><button class="btn g" style="width:auto" onclick="s.classList.toggle('open')">☰</button><div id="auth" class="card" style="max-width:340px;margin:10px auto"><h3 style="color:#f59e0b;text-align:center">STARLIFE 150</h3><div id="rb" class="hide" style="border:1px dashed #0f8;padding:3px;font-size:10px">Ref:<b id="rbn" style="color:#0f8"></b></div><input id="fn" placeholder="Full Name"><input id="un" placeholder="Username"><input id="ph" placeholder="Phone"><input id="ps" type="password" placeholder="Password"><input id="cps" type="password" placeholder="Confirm"><button class="btn y" onclick="su()">SIGN UP 150</button><button class="btn g" style="margin-top:3px" onclick="lb.classList.remove('hide')">LOGIN</button><div id="lb" class="hide" style="margin-top:5px;border-top:1px solid #333;padding-top:5px"><input id="lu" placeholder="Username"><input id="lp" type="password" placeholder="Pass"><button class="btn y" onclick="li()">LOGIN</button><p style="font-size:8px">admin/admin123</p></div></div><div id="app" class="hide"><div class="card" style="background:linear-gradient(135deg,#f59e0b,#ff3c00);color:#000;text-align:center"><h3 style="margin:0">🎉<span id="hu"></span></h3></div><div id="d" class="sec"><div class="card">Status:<b id="act"></b> Bal:<b id="bal" style="color:#0f8"></b> W:<span id="tw">0</span> P:<span id="pw">0</span></div><div class="card"><small>Link 100/20/30:</small><p id="rl" style="color:#0f8;word-break:break-all;font-size:8px"></p><button class="btn y" onclick="copyR()">COPY</button></div><div class="card">Downline(<span id="rc">0</span>):<div id="rlist" style="font-size:9px">None</div></div><div class="card">Earn:<div id="bd" style="font-size:8px">None</div></div></div><div id="w" class="sec hide"><div class="card"><h3>Withdraw</h3>Bal:<b id="bal2" style="color:#0f8">0</b><input id="wamt" type="number" placeholder="Min300"><input id="wph" placeholder="M-Pesa"><button class="btn y" onclick="doW()">REQUEST</button><div id="wlist" style="font-size:8px">None</div></div></div><div id="a" class="sec hide"><div class="card"><h3>👑Admin 100/20/30</h3>Users:<span id="tu">0</span> Pend:<span id="tp">0</span><h4>Pending Act 150</h4><div id="aal" style="font-size:9px">None</div><h4>Pend W</h4><div id="awl" style="font-size:9px">None</div></div></div></div></div><script>
-let rp=new URLSearchParams(location.search).get('ref');if(rp){rb.classList.remove('hide');rbn.innerText=rp}
-function su(){let f=fn.value.trim(),u=un.value.trim(),p=ph.value.trim(),a=ps.value,b=cps.value;if(!f||!u||!p||!a)return alert('Jaza');if(a!=b)return alert('Mismatch');let us=JSON.parse(localStorage.getItem('u')||'[]');if(us.find(x=>x.u==u))return alert('Taken');us.push({f:u,fn:f,ph:p,pw:a,ref:rp||null,ac:false,ex:0,tw:0,pw:0,ea:[]});localStorage.setItem('u',JSON.stringify(us));localStorage.setItem('c',u);showApp()}
-function li(){let u=lu.value.trim(),p=lp.value;if(u=='admin'&&p=='admin123'){localStorage.setItem('c','admin');showApp();return}let us=JSON.parse(localStorage.getItem('u')||'[]');let f=us.find(x=>x.f==u&&x.pw==p);if(!f)return alert('Wrong');localStorage.setItem('c',f.f);showApp()}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE V2.5 FINAL</title>
+<style>
+body{margin:0;background:#060a18;color:#fff;font-family:system-ui;display:flex}
+.side{width:180px;background:#0f172a;border-right:2px solid #f59e0b;
+padding:6px;position:fixed;height:100vh;overflow:auto}
+.menu{list-style:none;padding:0}
+.menu li{padding:6px;border-radius:5px;margin:2px 0;cursor:pointer;background:#151b2d}
+.menu li.active{background:#f59e0b;color:#000;font-weight:900}
+.main{margin-left:180px;flex:1;padding:6px}
+.card{background:#151b2d;border:1px solid #1e293b;border-radius:6px;padding:6px;margin-bottom:5px}
+.btn{padding:6px;border:none;border-radius:5px;font-weight:800;cursor:pointer;width:100%}
+.y{background:#f59e0b;color:#000}.g{background:#1e293b;color:#fff}
+.b{background:#00ff88;color:#000}.r{background:#ff3333;color:#fff}
+.hide{display:none!important}
+input{width:100%;padding:6px;margin:2px 0 5px;border-radius:5px;
+border:1px solid #2a344f;background:#0f172a;color:#fff}
+@media(max-width:600px){
+.side{transform:translateX(-100%);transition:.3s}
+.side.open{transform:translateX(0)}
+.main{margin-left:0}
+}
+</style>
+</head>
+<body>
+<div class="side" id="s">
+<h4 style="color:#f59e0b;text-align:center">★ STARLIFE</h4>
+<ul class="menu">
+<li class="active" onclick="go('d',this)">📊 Dashboard</li>
+<li onclick="go('w',this)">💰 Withdraw</li>
+<li id="am" class="hide" onclick="go('a',this)" style="border:2px solid #00ff88">👑 Admin</li>
+<li onclick="logout()" style="color:#ff5555">🚪 Logout</li>
+</ul>
+</div>
+<div class="main">
+<button class="btn g" style="width:auto" onclick="s.classList.toggle('open')">☰ Menu</button>
+
+<div id="auth" class="card" style="max-width:340px;margin:10px auto">
+<h3 style="color:#f59e0b;text-align:center">STARLIFE - PAY 150</h3>
+<div id="rb" class="hide" style="border:1px dashed #00ff88;padding:3px;font-size:10px">
+Ref: <b id="rbn" style="color:#00ff88"></b> ✅
+</div>
+<input id="fn" placeholder="Full Name">
+<input id="un" placeholder="Username">
+<input id="ph" placeholder="Phone 07xx">
+<input id="ps" type="password" placeholder="Password">
+<input id="cps" type="password" placeholder="Confirm Password">
+<button class="btn y" onclick="su()">SIGN UP - 150</button>
+<button class="btn g" style="margin-top:3px" onclick="lb.classList.remove('hide')">Already have? LOGIN</button>
+<div id="lb" class="hide" style="margin-top:5px;border-top:1px solid #333;padding-top:5px">
+<input id="lu" placeholder="Username">
+<input id="lp" type="password" placeholder="Password">
+<button class="btn y" onclick="li()">LOGIN</button>
+<p style="font-size:8px">Admin: admin / admin123</p>
+</div>
+</div>
+
+<div id="app" class="hide">
+<div class="card" style="background:linear-gradient(135deg,#f59e0b,#ff3c00);color:#000;text-align:center">
+<h3 style="margin:0">🎉 Hurray <span id="hu"></span>!</h3>
+</div>
+
+<div id="d" class="sec">
+<div class="card">
+Status: <b id="act"></b> | Bal: <b id="bal" style="color:#00ff88"></b> | 
+TotalW: <span id="tw">0</span> | Pend: <span id="pw">0</span>
+</div>
+<div class="card">
+<small>Your Link - Earn 100/20/30:</small>
+<p id="rl" style="color:#00ff88;word-break:break-all;font-size:8px"></p>
+<button class="btn y" onclick="copyR()">COPY LINK</button>
+<p style="font-size:8px;color:#94a3b8">L1=100, L2=20, L3=30 after approval</p>
+</div>
+<div class="card">
+Downline (<span id="rc">0</span>):
+<div id="rlist" style="font-size:9px">None</div>
+</div>
+<div class="card">
+Earnings:
+<div id="bd" style="font-size:8px">None - Share link</div>
+</div>
+</div>
+
+<div id="w" class="sec hide">
+<div class="card">
+<h3>Withdraw</h3>
+Bal: <b id="bal2" style="color:#00ff88">0</b>
+<input id="wamt" type="number" placeholder="Amount min 300">
+<input id="wph" placeholder="M-Pesa Phone">
+<button class="btn y" onclick="doW()">REQUEST WITHDRAW</button>
+<div id="wlist" style="font-size:8px;margin-top:4px">None</div>
+</div>
+</div>
+
+<div id="a" class="sec hide">
+<div class="card">
+<h3>👑 Admin - Approve 100/20/30</h3>
+Users: <span id="tu">0</span> | Pending KES: <span id="tp" style="color:#f59e0b">0</span>
+<h4>🟡 Pending Activations (150)</h4>
+<div id="aal" style="font-size:9px;background:#060a18;padding:4px;border-radius:4px">None</div>
+<h4>💰 Pending Withdraws</h4>
+<div id="awl" style="font-size:9px;background:#060a18;padding:4px;border-radius:4px">None</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+let rp=new URLSearchParams(location.search).get('ref');
+if(rp){rb.classList.remove('hide');rbn.innerText=rp}
+
+function su(){
+let f=fn.value.trim(),u=un.value.trim(),p=ph.value.trim(),a=ps.value,b=cps.value;
+if(!f||!u||!p||!a)return alert('Jaza zote');
+if(a!=b)return alert('Mismatch');
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+if(us.find(x=>x.u==u))return alert('Taken');
+us.push({f:u,fn:f,ph:p,pw:a,ref:rp||null,ac:false,ex:0,tw:0,pw:0,ea:[]});
+localStorage.setItem('u',JSON.stringify(us));
+localStorage.setItem('c',u);
+alert('Created! Wait admin approval - ref gets 100/20/30');
+showApp();
+}
+
+function li(){
+let u=lu.value.trim(),p=lp.value;
+if(u=='admin'&&p=='admin123'){localStorage.setItem('c','admin');showApp();return}
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+let f=us.find(x=>x.f==u&&x.pw==p);
+if(!f)return alert('Wrong');
+localStorage.setItem('c',f.f);showApp();
+}
+
 function showApp(){auth.classList.add('hide');app.classList.remove('hide');load()}
-function load(){let c=localStorage.getItem('c');if(c=='admin'){hu.innerText='ADMIN';am.classList.remove('hide');loadA();return}let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==c);if(!me)return;hu.innerText=me.f;act.innerText=me.ac?'✅ACTIVE':'🟡PENDING';act.style.color=me.ac?'#0f8':'#f59e0b';let av=(me.ex||0)-(me.tw||0)-(me.pw||0);bal.innerText='KES '+av;bal2.innerText='KES '+av;rc.innerText=us.filter(x=>x.ref==me.f&&x.ac).length;tw.innerText=me.tw||0;pw.innerText=me.pw||0;let b=location.origin+location.pathname;if(b.includes('index.html'))b=b.replace('index.html','');if(!b.endsWith('/'))b+='/';rl.innerText=b+'?ref='+me.f;rlist.innerHTML=us.filter(x=>x.ref==me.f).map(r=>r.f+(r.ac?'✅':'🟡')).join(',')||'None';bd.innerHTML=me.ea&&me.ea.length?me.ea.map(e=>e.fr+' L'+e.lv+'+'+e.am).join('<br>'):'Share link';loadW()}
-function go(id,el){document.querySelectorAll('.sec').forEach(s=>s.classList.add('hide'));document.getElementById(id).classList.remove('hide');document.querySelectorAll('.menu li').forEach(l=>l.classList.remove('active'));if(el)el.classList.add('active');s.classList.remove('open');if(id=='a')loadA()}
-function copyR(){navigator.clipboard.writeText(rl.innerText).then(()=>alert('Copied'))}
-function doW(){let a=parseInt(wamt.value),p=wph.value.trim();if(!a||a<300)return alert('Min300');let c=localStorage.getItem('c');let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==c);if(!me.ac)return alert('Not active');let av=(me.ex||0)-(me.tw||0)-(me.pw||0);if(a>av)return alert('No '+av);me.pw+=a;let w=JSON.parse(localStorage.getItem('w_'+c)||'[]');let e={id:Date.now(),u:c,am:a,ph:p,s:'Pending'};w.push(e);localStorage.setItem('w_'+c,JSON.stringify(w));let all=JSON.parse(localStorage.getItem('all')||'[]');all.push(e);localStorage.setItem('all',JSON.stringify(all));localStorage.setItem('u',JSON.stringify(us));load()}
-function loadW(){let c=localStorage.getItem('c');let w=JSON.parse(localStorage.getItem('w_'+c)||'[]');wlist.innerHTML=w.map(x=>x.am+' '+x.s).join('<br>')||'None'}
-function loadA(){let us=JSON.parse(localStorage.getItem('u')||'[]');let all=JSON.parse(localStorage.getItem('all')||'[]');tu.innerText=us.length;tp.innerText=all.filter(x=>x.s=='Pending').reduce((a,b)=>a+b.am,0);let pa=us.filter(x=>!x.ac);aal.innerHTML=pa.length?pa.map(u=>`<div style="border:1px solid #f59e0b;padding:3px;margin:2px 0"><b>${u.f}</b> Ref:${u.ref||'NONE'}<br><button class="btn b" onclick="approveA('${u.f}')">✅100/20/30</button><button class="btn r" onclick="rejectA('${u.f}')">❌</button></div>`).join(''):'No pending';awl.innerHTML=all.length?all.slice().reverse().map(x=>`<div style="border:1px solid #333;padding:2px;margin:1px 0"><b>${x.u}</b> ${x.am} ${x.s} ${x.s=='Pending'?`<button class="btn b" onclick="approveW(${x.id})">OK</button><button class="btn r" onclick="rejectW(${x.id})">X</button>`:''}</div>`).join(''):'None'}
-function approveA(u){let us=JSON.parse(localStorage.getItem('u')||'[]');let user=us.find(x=>x.f==u);if(!user||user.ac)return;user.ac=true;let L1=us.find(x=>x.f==user.ref);if(L1){L1.ex+=100;L1.ea.push({fr:u,lv:1,am:100});let L2=us.find(x=>x.f==L1.ref);if(L2){L2.ex+=20;L2.ea.push({fr:u,lv:2,am:20});let L3=us.find(x=>x.f==L2.ref);if(L3){L3.ex+=30;L3.ea.push({fr:u,lv:3,am:30})}}}localStorage.setItem('u',JSON.stringify(us));loadA()}
-function rejectA(u){let us=JSON.parse(localStorage.getItem('u')||'[]');us=us.filter(x=>x.f!=u);localStorage.setItem('u',JSON.stringify(us));loadA()}
-function approveW(id){let all=JSON.parse(localStorage.getItem('all')||'[]');let it=all.find(x=>x.id==id);if(!it)return;it.s='Approved';localStorage.setItem('all',JSON.stringify(all));let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==it.u);if(me){me.pw-=it.am;me.tw+=it.am}localStorage.setItem('u',JSON.stringify(us));let uw=JSON.parse(localStorage.getItem('w_'+it.u)||'[]');let ui=uw.find(x=>x.id==id);if(ui)ui.s='Approved';localStorage.setItem('w_'+it.u,JSON.stringify(uw));loadA()}
-function rejectW(id){let all=JSON.parse(localStorage.getItem('all')||'[]');let it=all.find(x=>x.id==id);if(!it)return;it.s='Rejected';localStorage.setItem('all',JSON.stringify(all));let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==it.u);if(me)me.pw-=it.am;localStorage.setItem('u',JSON.stringify(us));let uw=JSON.parse(localStorage.getItem('w_'+it.u)||'[]');let ui=uw.find(x=>x.id==id);if(ui)ui.s='Rejected';localStorage.setItem('w_'+it.u,JSON.stringify(uw));loadA()}
+
+function load(){
+let c=localStorage.getItem('c');
+if(c=='admin'){hu.innerText='ADMIN';am.classList.remove('hide');loadA();return}
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+let me=us.find(x=>x.f==c);if(!me)return;
+hu.innerText=me.f;
+act.innerText=me.ac?'✅ ACTIVE':'🟡 PENDING';
+act.style.color=me.ac?'#00ff88':'#f59e0b';
+let av=(me.ex||0)-(me.tw||0)-(me.pw||0);
+bal.innerText='KES '+av;bal2.innerText='KES '+av;
+rc.innerText=us.filter(x=>x.ref==me.f&&x.ac).length;
+tw.innerText=me.tw||0;pw.innerText=me.pw||0;
+let b=location.origin+location.pathname;
+if(b.includes('index.html'))b=b.replace('index.html','');
+if(!b.endsWith('/'))b+='/';
+rl.innerText=b+'?ref='+me.f;
+rlist.innerHTML=us.filter(x=>x.ref==me.f).map(r=>r.f+(r.ac?'✅':'🟡')).join(', ')||'None';
+bd.innerHTML=me.ea&&me.ea.length?me.ea.map(e=>e.fr+' L'+e.lv+'+'+e.am).join('<br>'):'None';
+loadW();
+}
+
+function go(id,el){
+document.querySelectorAll('.sec').forEach(s=>s.classList.add('hide'));
+document.getElementById(id).classList.remove('hide');
+document.querySelectorAll('.menu li').forEach(l=>l.classList.remove('active'));
+if(el)el.classList.add('active');
+s.classList.remove('open');
+if(id=='a')loadA();
+}
+
+function copyR(){navigator.clipboard.writeText(rl.innerText).then(()=>alert('Copied '+rl.innerText))}
+
+function doW(){
+let a=parseInt(wamt.value),p=wph.value.trim();
+if(!a||a<300)return alert('Min 300');
+let c=localStorage.getItem('c');
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+let me=us.find(x=>x.f==c);
+if(!me.ac)return alert('Not active');
+let av=(me.ex||0)-(me.tw||0)-(me.pw||0);
+if(a>av)return alert('Insufficient '+av);
+me.pw+=a;
+let w=JSON.parse(localStorage.getItem('w_'+c)||'[]');
+let e={id:Date.now(),u:c,am:a,ph:p,s:'Pending'};
+w.push(e);localStorage.setItem('w_'+c,JSON.stringify(w));
+let all=JSON.parse(localStorage.getItem('all')||'[]');all.push(e);
+localStorage.setItem('all',JSON.stringify(all));
+localStorage.setItem('u',JSON.stringify(us));
+alert('Request sent!');load();
+}
+
+function loadW(){
+let c=localStorage.getItem('c');
+let w=JSON.parse(localStorage.getItem('w_'+c)||'[]');
+wlist.innerHTML=w.map(x=>x.am+' '+x.s).join('<br>')||'None';
+}
+
+function loadA(){
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+let all=JSON.parse(localStorage.getItem('all')||'[]');
+tu.innerText=us.length;
+tp.innerText=all.filter(x=>x.s=='Pending').reduce((a,b)=>a+b.am,0);
+let pa=us.filter(x=>!x.ac);
+aal.innerHTML=pa.length?pa.map(u=>'<div style="border:1px solid #f59e0b;padding:3px;margin:2px 0"><b>'+u.f+'</b> Ref:'+(u.ref||'NONE')+'<br><button class="btn b" onclick="approveA(\''+u.f+'\')">✅ APPROVE 100/20/30</button> <button class="btn r" onclick="rejectA(\''+u.f+'\')">❌</button></div>').join(''):'No pending ✅';
+awl.innerHTML=all.length?all.slice().reverse().map(x=>'<div style="border:1px solid #333;padding:2px;margin:1px 0"><b>'+x.u+'</b> '+x.am+' '+x.s+' '+(x.s=='Pending'?'<button class="btn b" onclick="approveW('+x.id+')">OK</button><button class="btn r" onclick="rejectW('+x.id+')">X</button>':'')+'</div>').join(''):'None';
+}
+
+function approveA(u){
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+let user=us.find(x=>x.f==u);if(!user||user.ac)return;
+user.ac=true;
+let L1=us.find(x=>x.f==user.ref);
+if(L1){L1.ex+=100;L1.ea.push({fr:u,lv:1,am:100});
+let L2=us.find(x=>x.f==L1.ref);
+if(L2){L2.ex+=20;L2.ea.push({fr:u,lv:2,am:20});
+let L3=us.find(x=>x.f==L2.ref);
+if(L3){L3.ex+=30;L3.ea.push({fr:u,lv:3,am:30})}}}
+localStorage.setItem('u',JSON.stringify(us));
+alert('Approved '+u+' - L1 100, L2 20, L3 30 paid');
+loadA();
+}
+
+function rejectA(u){
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+us=us.filter(x=>x.f!=u);
+localStorage.setItem('u',JSON.stringify(us));loadA();
+}
+
+function approveW(id){
+let all=JSON.parse(localStorage.getItem('all')||'[]');
+let it=all.find(x=>x.id==id);if(!it)return;
+it.s='Approved';localStorage.setItem('all',JSON.stringify(all));
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+let me=us.find(x=>x.f==it.u);if(me){me.pw-=it.am;me.tw+=it.am}
+localStorage.setItem('u',JSON.stringify(us));
+let uw=JSON.parse(localStorage.getItem('w_'+it.u)||'[]');
+let ui=uw.find(x=>x.id==id);if(ui)ui.s='Approved';
+localStorage.setItem('w_'+it.u,JSON.stringify(uw));loadA();
+}
+
+function rejectW(id){
+let all=JSON.parse(localStorage.getItem('all')||'[]');
+let it=all.find(x=>x.id==id);if(!it)return;
+it.s='Rejected';localStorage.setItem('all',JSON.stringify(all));
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+let me=us.find(x=>x.f==it.u);if(me)me.pw-=it.am;
+localStorage.setItem('u',JSON.stringify(us));
+let uw=JSON.parse(localStorage.getItem('w_'+it.u)||'[]');
+let ui=uw.find(x=>x.id==id);if(ui)ui.s='Rejected';
+localStorage.setItem('w_'+it.u,JSON.stringify(uw));loadA();
+}
+
 function logout(){localStorage.removeItem('c');location.reload()}
-let cur=localStorage.getItem('c');if(cur){if(cur=='admin')showApp();else{let us=JSON.parse(localStorage.getItem('u')||'[]');if(us.find(x=>x.f==cur))showApp()}}
-</script></body></html>
+
+let cur=localStorage.getItem('c');
+if(cur){
+if(cur=='admin')showApp();
+else{
+let us=JSON.parse(localStorage.getItem('u')||'[]');
+if(us.find(x=>x.f==cur))showApp()
+}
+}
+</script>
+</body>
+  </html>
