@@ -1,8 +1,76 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES - Earn Daily</title><style>body{margin:0;background:#060a18;color:#fff;font-family:sans-serif;display:flex;justify-content:center;padding:20px}.card{background:#151b2d;padding:24px;border-radius:20px;max-width:420px;width:100%;border:1px solid #f59e0b;text-align:center}input{width:100%;padding:14px;margin:8px 0;border-radius:12px;border:1px solid #2a344f;background:#0f172a;color:#fff;box-sizing:border-box}.btn{width:100%;padding:15px;border:none;border-radius:12px;font-weight:bold;cursor:pointer;margin-top:8px}.y{background:linear-gradient(90deg,#f59e0b,#ff3c00);color:#000}.g{background:#1e293b;color:#fff}</style></head><body><div class="card"><h1 style="color:#f59e0b">★ STARLIFE</h1><h3>Earn KES 500-1000 Daily</h3><p id="refShow" style="font-size:13px;color:#94a3b8">Referred by: <b id="refBy" style="color:#00ff88">Direct</b></p><input id="fullname" placeholder="Full Name"><input id="username" placeholder="Choose Username"><input id="phone" placeholder="M-Pesa 07..."><input id="pass" type="password" placeholder="Password"><input id="cpass" type="password" placeholder="Confirm Password"><button class="btn y" onclick="signup()">CREATE ACCOUNT & CONTINUE</button><button class="btn g" onclick="location.href='login.html'">Already have? Login</button></div><script>
-let ref=new URLSearchParams(location.search).get('ref'); if(ref){document.getElementById('refBy').innerText=ref; document.getElementById('refShow').style.display='block';}
-function signup(){let f=fullname.value.trim(),u=username.value.trim(),ph=phone.value.trim(),p=pass.value,cp=cpass.value;
-if(!f||!u||!ph||!p) return alert('Jaza zote'); if(p!==cp) return alert('Password mismatch');
-let users=JSON.parse(localStorage.getItem('star_users')||'[]'); if(users.find(x=>x.username.toLowerCase()===u.toLowerCase())) return alert('Username taken');
-users.push({fullname:f,username:u,phone:ph,password:p,referredBy:ref||null,activated:false,time:new Date().toLocaleString()});
-localStorage.setItem('star_users',JSON.stringify(users)); localStorage.setItem('current_user',u); location.href='activation.html';}
-</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE AGENCIES - Official</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#060a18;color:#fff;font-family:system-ui,sans-serif;display:flex;justify-content:center;padding:16px}
+.card{background:#151b2d;padding:22px;border-radius:18px;max-width:440px;width:100%;border:1px solid #f59e0b;margin:10px 0}
+h2{color:#f59e0b;text-align:center;margin:0 0 6px}.sub{color:#94a3b8;text-align:center;font-size:12px;margin-bottom:14px}
+label{font-size:11px;color:#94a3b8;margin-left:4px}input{width:100%;padding:13px;margin:4px 0 10px;border-radius:10px;border:1px solid #2a344f;background:#0f172a;color:#fff}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;cursor:pointer;margin-top:8px}.y{background:linear-gradient(90deg,#f59e0b,#ff3c00);color:#000}.g{background:#1e293b;color:#fff}.r{background:#ff3c3c;color:#fff}
+.paybox{background:#060a18;border:1.5px dashed #f59e0b;padding:14px;border-radius:12px;margin:12px 0}
+.refbox{background:#060a18;border:1px dashed #00ff88;padding:10px;border-radius:10px;text-align:center;margin-bottom:12px;font-size:13px}
+.hidden{display:none}.small{font-size:11px;color:#64748b;text-align:center;margin-top:10px}
+.tab{padding:10px 14px;background:#1e293b;border:none;border-radius:8px;color:#fff;cursor:pointer;margin:2px}.active{background:#f59e0b;color:#000}
+</style>
+</head>
+<body>
+<div style="width:100%;max-width:440px">
+
+<!-- NAV -->
+<div id="nav" class="card" style="display:flex;gap:6px;justify-content:center;padding:10px">
+<button class="tab active" onclick="showPage('signup')">Sign Up</button>
+<button class="tab" onclick="showPage('login')">Login</button>
+<button class="tab" onclick="showPage('activation')">Activate</button>
+<button class="tab" onclick="showPage('dashboard')">Dashboard</button>
+<button class="tab" onclick="showPage('adminLogin')">Admin</button>
+</div>
+
+<!-- SIGNUP PAGE -->
+<div id="signup" class="card">
+<h2>★ STARLIFE AGENCIES</h2><p class="sub">Earn KES 500-1000 Daily - Affiliate Program</p>
+<div id="refBox" class="refbox hidden">Referred by: <b id="refBy" style="color:#00ff88"></b> ✅</div>
+<label>Full Name</label><input id="fullname" placeholder="Full Name">
+<label>Username Name</label><input id="username" placeholder="Username">
+<label>Email</label><input id="email" type="email" placeholder="Email Address">
+<label>Phone Number</label><input id="phone" placeholder="07XXXXXXXX">
+<label>Password</label><input id="pass" type="password" placeholder="Password">
+<label>Confirm Password</label><input id="cpass" type="password" placeholder="Confirm Password">
+<button class="btn y" onclick="signup()">SIGN UP - GET CODE</button>
+<button class="btn g" onclick="showPage('login')">Already have? LOGIN</button>
+<p class="small">Activation KES 200 | Paybill 714777 Acc 440200282954</p>
+</div>
+
+<!-- LOGIN PAGE -->
+<div id="login" class="card hidden">
+<h2>Login</h2><p class="sub">Welcome Back</p>
+<input id="lusername" placeholder="Username or Email">
+<input id="lpass" type="password" placeholder="Password">
+<button class="btn y" onclick="login()">LOGIN</button>
+<button class="btn g" onclick="showPage('signup')">No account? SIGN UP</button>
+</div>
+
+<!-- ACTIVATION PAGE -->
+<div id="activation" class="card hidden">
+<h2>🔒 Activate KES 200</h2><p id="hello" style="font-size:13px;color:#94a3b8;text-align:center"></p>
+<div class="paybox">
+<div style="display:flex;justify-content:space-between"><span>PAYBILL:</span><b style="font-size:20px;color:#f59e0b">714777</b></div>
+<div style="display:flex;justify-content:space-between;margin-top:8px"><span>ACCOUNT NO:</span><b style="color:#00ff88">440200282954</b></div>
+<div style="display:flex;justify-content:space-between;margin-top:8px"><span>AMOUNT:</span><b>KES 200</b></div>
+<div style="margin-top:10px;font-size:11px;color:#94a3b8;border-top:1px solid #1e293b;padding-top:8px">M-Pesa > Lipa na M-Pesa > Paybill > 714777 > Account 440200282954 > Amount 200</div>
+</div>
+<input id="mpesaCode" placeholder="M-Pesa Code e.g QGH8...">
+<button class="btn y" onclick="activate()">I'VE PAID 200 - ACTIVATE NOW</button>
+<button class="btn g" onclick="showPage('dashboard')">Already Paid? Dashboard</button>
+<p id="verCodeShow" style="font-size:11px;color:#00ff88;text-align:center"></p>
+</div>
+
+<!-- DASHBOARD PAGE -->
+<div id="dashboard" class="card hidden">
+<h2>Dashboard</h2>
+<p style="font-size:13px">Welcome: <b id="duser"></b></p>
+<p style="font-size:12px;color:#94a3b8">Email: <span id="demail"></span> | Phone: <span id="dphone"></span></p>
+<p style="font-size:12px">Status: <b id="dstatus" style="color:#00ff88"></b></p>
+<div class="paybox"><p style="font-size:11px;color:#94a3b
