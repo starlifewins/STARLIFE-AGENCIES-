@@ -1,5 +1,27 @@
-<!DOCTYPE html><html><body style="background:black;color:white;padding:20px;font-family:sans-serif">
-<h1>ADMIN TEST</h1>
-<button onclick="alert('BUTTON INAFANYA!')" style="padding:20px;width:100%;background:blue;color:white;font-size:20px">BONGO HAPA</button>
-<script>alert('ADMIN LOADED OK');</script>
-</body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN</title>
+<style>body{background:#000;color:#fff;font-family:system-ui;padding:10px}.box{background:#131a33;padding:15px;border-radius:12px;max-width:500px;margin:auto}button{width:100%;padding:14px;margin:6px 0;border:none;border-radius:8px;background:#6a5cff;color:#fff;font-weight:800;font-size:16px}.card{background:#1d264d;padding:12px;border-radius:10px;margin:12px 0}</style></head><body>
+<div class="box"><h2 style="text-align:center;color:#6a5cff">STARLIFE ADMIN</h2><button onclick="loadData()">🔄 REFRESH PENDING</button><div id="list"></div></div>
+<script>
+function getAll(){return JSON.parse(localStorage.getItem('S')||'[]')}
+function saveAll(v){localStorage.setItem('S',JSON.stringify(v))}
+function loadData(){
+ let all=getAll(); let pending=all.filter(x=>x.paid==1 && x.ap!=1);
+ let box=document.getElementById('list');
+ if(pending.length==0){box.innerHTML='<p style="text-align:center;color:#888;padding:20px">No pending users on this phone<br><br><small>Jisajili kwanza kwa main site kwa simu hii ndio umuone hapa</small></p>';return;}
+ box.innerHTML='';
+ pending.forEach(function(u){
+   let div=document.createElement('div'); div.className='card';
+   let info=document.createElement('div');
+   info.innerHTML='<b>'+u.f+'</b> ('+u.u+')<br>Phone: '+u.ph+'<br>CODE: <b style="color:yellow;font-size:18px">'+u.mc+'</b><br><br>';
+   let btn=document.createElement('button'); btn.textContent='✅ APPROVE '+u.u;
+   btn.onclick=function(){ doApprove(u.u); };
+   div.appendChild(info); div.appendChild(btn); box.appendChild(div);
+ });
+}
+function doApprove(uname){
+ let all=getAll(); let user=all.find(x=>x.u==uname); if(!user)return;
+ user.ap=1; if(user.ref){ let refUser=all.find(x=>x.u==user.ref); if(refUser){refUser.bal=(refUser.bal||0)+100;} }
+ saveAll(all); alert(uname+' APPROVED - 100 sent to referral'); loadData();
+}
+loadData();
+</script></body></html>
