@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>STARLIFE AGENCIES</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#070d22;color:#fff;display:flex;min-height:100vh}.sidebar{width:240px;background:#0a122c;padding:15px;position:fixed;height:100vh;overflow:auto;z-index:99}.sidebar h2{color:#a78bfa}.menu div{padding:12px;border-radius:8px;margin:4px 0;cursor:pointer}.menu div.active,.menu div:hover{background:#6d28d9}.main{margin-left:240px;flex:1;padding:15px}.topbar{display:flex;justify-content:space-between;background:#0f1a3a;padding:12px;border-radius:12px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:15px 0}.card{padding:15px;border-radius:12px}.c1{background:linear-gradient(135deg,#2a1a6b,#6d28d9)}.c2{background:#0f2a5a}.c3{background:#0a3d2e}.c4{background:#5a3410}.c5{background:#4a1030}.box{background:#0f1a3a;padding:15px;border-radius:12px;margin:10px 0}button{padding:11px;border:none;border-radius:8px;color:#fff;font-weight:700;width:100%;margin:5px 0;background:#6d28d9}input{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;background:#1c2447;color:#fff}.sec{display:none}.sec.active{display:block}table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #222;font-size:13px}.linkbox{background:#000;padding:8px;border-radius:6px;color:#22c55e;word-break:break-all;font-size:12px}@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0}}</style>
-</head>
-<body>
-<div class="sidebar" id="side"><h2>⭐ Starlife</h2><div class="menu" id="menu"><div class="active" onclick="go('dash')">🏠 Dashboard</div><div onclick="go('profile')">👤 My Profile</div><div onclick="go('packages')">📦 Packages</div><div onclick="go('products')">🎁 Products</div><div onclick="go('viewers')">👁️ Viewers Report</div><div onclick="go('earnings')">💰 Earnings</div><div onclick="go('referrals')">👥 Referrals</div><div onclick="go('payments')">📄 Payment History</div><div onclick="go('support')">🎧 Support</div><div onclick="go('settings')">⚙️ Settings</div><div onclick="logout()" style="background:#3a1010;margin-top:20px">🚪 Logout</div></div></div>
-<div class="main"><div class="topbar"><div><span onclick="toggleSide()" style="cursor:pointer">☰</span> Welcome, <span id="uname">User</span></div><div><b>Starlife Agencies</b></div></div>
-<div id="sec-dash" class="sec active"><div class="cards"><div class="card c1">Earnings<br><b id="earn">KSh 0</b></div><div class="card c2">Viewers<br><b id="view">0</b></div><div class="card c3">Package<br><b id="pkg">VIP</b></div><div class="card c4">Referrals<br><b id="refs">0</b></div><div class="card c5">Pending<br><b id="pend">0</b></div></div><div class="box"><b>Referral Link</b><div class="linkbox" id="reflink"></div><button onclick="copyL()">COPY LINK</button></div><div class="box"><button onclick="go('products')">View Products</button><button onclick="go('viewers')">Submit Viewers</button><button onclick="go('payments')">Request Withdraw</button></div></div>
-<div id="sec-profile" class="sec"><div class="box"><h3>My Profile</h3><p id="pinfo"></p></div></div>
-<div id="sec-packages" class="sec"><div class="box"><h3>Packages</h3><div class="box" style="border:1px solid #2563eb">REGULAR - 200 <button onclick="buyPkg('REGULAR')">Activate</button></div><div class="box" style="border:1px solid #6d28d9">VIP - 250 <button onclick="buyPkg('VIP')">Activate</button></div><div class="box" style="border:1px solid orange">GOLD - 500 <button onclick="buyPkg('GOLD')">Upgrade</button></div></div></div>
-<div id="sec-products" class="sec"><div class="box"><h3>Products</h3><div id="prodlist"></div></div></div>
-<div id="sec-viewers" class="sec"><div class="box"><h3>Viewers Report</h3><input id="vname" placeholder="Viewer Name"><button onclick="addViewer()">Submit + Earn 100</button><div id="vlist"></div></div></div>
-<div id="sec-earnings" class="sec"><div class="box"><h3>Earnings</h3><table id="etable"></table></div></div>
-<div id="sec-referrals" class="sec"><div class="box"><h3>Referrals</h3><div id="reflist"></div></div></div>
-<div id="sec-payments" class="sec"><div class="box"><h3>Payment History & Withdraw</h3><input id="wam" placeholder="Amount Min 300"><input id="wph" placeholder="M-Pesa"><button onclick="reqWD()">REQUEST</button><table id="paytable"></table></div></div>
-<div id="sec-support" class="sec"><div class="box"><h3>Support</h3><p>WhatsApp: 07xxxxxxx</p></div></div>
-<div id="sec-settings" class="sec"><div class="box"><h3>Settings</h3><input id="sps" type="password" placeholder="New Password"><button onclick="changePass()">Change</button></div></div>
-</div>
-<script>
-let G=()=>JSON.parse(localStorage.getItem('S')||'[]'),SV=v=>localStorage.setItem('S',JSON.stringify(v)),CU=()=>localStorage.getItem('CU')||'naomy';
-function go(id){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');document.querySelectorAll('.menu div').forEach(d=>d.classList.remove('active'));document.getElementById('side').classList.remove('open');loadAll()}
-function toggleSide(){document.getElementById('side').classList.toggle('open')}
-function loadAll(){let all=G(),me=all.find(x=>x.u==CU())||{f:'Naomy',u:CU(),bal:0,ph:'0712',pkg:'VIP',viewers:[],earn:[],pays:[]};if(!all.find(x=>x.u==CU())){all.push(me);SV(all)}document.getElementById('uname').innerText=me.f.split(' ')[0];document.getElementById('earn').innerText='KSh '+(me.bal||0);document.getElementById('view').innerText=(me.viewers||[]).length;document.getElementById('pkg').innerText=me.pkg;document.getElementById('refs').innerText=all.filter(x=>x.ref==CU()).length;document.getElementById('pend').innerText=me.wdReq||0;document.getElementById('reflink').innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+CU();document.getElementById('pinfo').innerHTML=`Name: ${me.f}<br>User: ${me.u}<br>Phone: ${me.ph}<br>Bal: ${me.bal}`;loadProds();loadRefs();loadViewers();loadEarn();loadPays()}
-function copyL(){navigator.clipboard.writeText(document.getElementById('reflink').innerText);alert('Copied')}
-function buyPkg(p){let all=G(),me=all.find(x=>x.u==CU());me.pkg=p;SV(all);loadAll();alert(p+' Active')}
-function loadProds(){document.getElementById('prodlist').innerHTML=[1,2,3].map(i=>`<div class="box">Product ${i} <button onclick="viewProd(${i})" style="width:auto">View +100</button></div>`).join('')}
-function viewProd(i){let all=G(),me=all.find(x=>x.u==CU());me.bal=(me.bal||0)+100;me.earn=me.earn||[];me.earn.push({d:new Date().toLocaleDateString(),from:'Prod'+i,am:100});SV(all);loadAll();alert('+100')}
-function addViewer(){let n=document.getElementById('vname').value;if(!n)return;let all=G(),me=all.find(x=>x.u==CU());me.viewers.push({name:n,date:new Date().toLocaleDateString()});me.bal+=100;me.earn.push({d:new Date().toLocaleDateString(),from:n,am:100});SV(all);loadAll();loadViewers()}
-function loadViewers(){let me=(G().find(x=>x.u==CU())||{
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#070d22;color:#fff;display:flex;min-height:100vh}
+.sidebar{width:240px;background:#0a122c;padding:15px;position:fixed;height:100vh;overflow:auto;z-index:99}
+.sidebar h2{color:#a78bfa}
+.menu div{padding:12px;border-radius:8px;margin:5px 0;cursor:pointer;background:#0f1a3a}
+.menu div.active,.menu div:hover{background:#6d28d9}
+.main{margin-left:240px;flex:1;padding:15px}
+.topbar{display:flex;justify-content:space-between;background:#0f1a3a;padding:12px;border-radius:12px;align-items:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:15px 0}
+.card{padding:15px;border-radius:12px}
+.c1{background:linear-gradient(135deg,#2a1a6b,#6d28d9)}.c2{background:#0f2a5a}.c3{background:#0a3d2e}.c4{background:#5a3410}.c5{background:#4a1030}
+.box{background:#0f1a3a;padding:15px;border-radius:12px;margin:10px 0}
+button{padding:12px;border:none;border-radius:8px;background:#6d28d9;color:#fff;font-weight:800;width:100%;margin:6px 0;cursor:pointer}
+input{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;background:#1c2447;color:#fff}
+.sec{display:none}.sec.active{display:block}
+.linkbox{background:#000;padding:10px;border-radius:8px;color:#22c55e;word-break:break-all;font-size:12px}
+table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #222;font-size:13px;text-align:left}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.3s;position:fixed}.sidebar.open{transform:translateX(0)}.main{margin-left:0}}
+</style></head><body>
+<div class="sidebar" id="side"><h2>⭐ Starlife Agencies</h2>
+<div class="menu">
+<div class="active" onclick="go('dash')">🏠 Dashboard</div>
+<div onclick="go('profile')">👤 My Profile</div>
+<div onclick="go('packages')">📦 Packages</div>
+<div onclick="go('products')">🎁 Products</div>
+<div onclick="go('viewers')">👁️ Viewers Report</div>
+<div onclick="go('earnings')">💰 Earnings</div>
+<div onclick="go('referrals')">👥 Referrals</div>
+<div onclick="go('payments')">📄 Payment History</div>
+<div onclick="go('support')">🎧 Support</div>
+<div onclick="go('settings')">⚙️ Settings</div>
+<div onclick="logout()" style="background:#3a1010;margin-top:25px">🚪 Logout</div>
+</div></div>
+<div class="main">
+<div class="topbar"><div><span onclick="document.getElementById('side').classList.toggle('open')" style="cursor:pointer">☰ </span>Welcome, <b id="uname">Naomy</b></div><div>Starlife</div></div>
+
+<div id="sec-dash" class="sec active">
+<div class="cards">
+<div class="card c1">Total Earnings<br><b id="earn">KSh 0</b></div>
+<div class="card c2">Viewers<br><b id="view">0</b></div
