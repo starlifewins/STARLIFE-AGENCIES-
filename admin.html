@@ -53,4 +53,17 @@ function load(){
 }
 function approveUser(u){
  var a=G(); var m=a.find(x=>x.u==u); m.ap=1;
- if(m.ref){var r=a.find(x=>x.u==m.ref); if(r) r.bal=(r.bal||0)+
+ if(m.ref){var r=a.find(x=>x.u==m.ref); if(r) r.bal=(r.bal||0)+100}
+ S(a); alert(u+' APPROVED!'); load();
+}
+function rejectUser(u){
+ var a=G().filter(x=>x.u!=u); S(a); alert('Rejected'); load();
+}
+if(localStorage.getItem('ADMIN')=='yes'){
+ document.getElementById('loginA').classList.add('hide');
+ document.getElementById('dashA').classList.remove('hide');
+ load();
+}
+</script>
+</body>
+</html>
