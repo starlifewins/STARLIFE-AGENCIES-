@@ -1,27 +1,66 @@
-<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>STARLIFE</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#0a1028;color:#fff;display:flex}.sd{width:285px;background:#0f1735;position:fixed;height:100vh;overflow:auto;padding:14px;border-right:1px solid #1e2a5a;z-index:99}.mn div{padding:10px 12px;border-radius:10px;margin:3px 0;cursor:pointer;color:#7a8ab0;font-size:13px}.mn div.a{background:#5a33ff;color:#fff;font-weight:700}.main{margin-left:285px;flex:1}.tb{background:#0f1735;padding:14px 20px;display:flex;justify-content:space-between;border-bottom:1px solid #1e2a5a}.cr{padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.ca{border-radius:12px;padding:14px}.bx{background:#121c3f;border:1px solid #1e2a5a;border-radius:10px;padding:10px;margin-bottom:10px}.btn{padding:9px;border:none;border-radius:8px;background:#5a33ff;color:#fff;font-weight:700;width:100%;margin:4px 0;cursor:pointer}.sec{display:none}.sec.ac{display:block}input{width:100%;padding:9px;background:#0a1028;border:1px solid #1e2a5a;color:#fff;border-radius:6px;margin:4px 0}@media(max-width:900px){.sd{transform:translateX(-100%);transition:.3s}.sd.o{transform:translateX(0)}.main{margin-left:0}}</style></head><body>
-<div class=sd id=sd><h3 style=color:#a78bfa>STARLIFE AGENCIES</h3><small style=color:#7a8ab0>Affiliate Program</small><div class=mn><div class=a data-g=dash>Dashboard</div><div data-g=click>Clink and Earn</div><div data-g=yt>YouTube Videos</div><div data-g=tk>TikTok Videos</div><div data-g=ig>Instagram Reels</div><div data-g=math>Maths 10Q</div><div data-g=triv>Trivia 10Q</div><div style=border-top:1px solid #1e2a5a;margin:8px 0></div><b style=color:#fff;font-size:10px;padding:6px>WITHDRAWALS</b><div data-g=wbal>Withdraw Balance</div><div data-g=wyt>Withdraw YouTube</div><div data-g=wtk>Withdraw TikTok</div><div data-g=wig>Withdraw Instagram</div><div data-g=wact>Withdraw Activity</div><div id=lo style=background:#3a1020;color:#ff6b6b;margin-top:10px>Logout</div></div></div>
-<div class=main><div class=tb><span id=tg style=background:#1a244e;padding:7px 12px;border-radius:10px;cursor:pointer>☰</span><b>Abraham Koech</b></div>
-<div id=dash class="sec ac"><div style=padding:14px><h2>Welcome back, Abraham!</h2></div><div class=cr><div class=ca style=background:#4a2bc2><small>Commission</small><b>KES 4,850</b></div><div class=ca style=background:#0f6b5a><small>Balance</small><b id=bt>KES 3200</b><br><button id=gw style=background:#1ecfa0;border:none;padding:5px 12px;border-radius:12px>Withdraw</button></div></div></div>
-<div id=click class=sec style=padding:12px><div class=bx><h3>Clink and Earn 50</h3><p>Clicks <b id=cc>0/20</b> <b id=ce>KES 0</b></p><button class=btn id=cb>CLICK KES 50</button><div id=cm style=color:#4ade80></div></div></div>
-<div id=yt class=sec style=padding:12px><div class=bx><h3>YouTube Earn 20</h3><div id=yl></div></div></div>
-<div id=tk class=sec style=padding:12px><div class=bx><h3>TikTok Earn 20</h3><div id=tl></div></div></div>
-<div id=ig class=sec style=padding:12px><div class=bx><h3>Instagram Earn 20</h3><div id=il></div></div></div>
-<div id=math class=sec style=padding:12px><div class=bx><h3>Maths 10Q</h3><div id=mq></div><button class=btn id=ms>Start Maths</button><div id=mr></div></div></div>
-<div id=triv class=sec style=padding:12px><div class=bx><h3>Trivia 10Q</h3><div id=tq></div><button class=btn id=ts>Start Trivia</button><div id=tr></div></div></div>
-<div id=wbal class=sec style=padding:12px><div class=bx><h3>Withdraw Balance Min 300</h3><p><b id=w1>3200</b></p><input id=a1 type=number placeholder=Amount><button class=btn id=wb style=background:#10b981>REQUEST</button><div id=h1></div></div></div>
-<div id=wyt class=sec style=padding:12px><div class=bx><h3>Withdraw YT Min 100</h3><p><b id=w2>0</b></p><input id=a2 type=number><button class=btn id=w2b style=background:red>WITHDRAW YT</button><div id=h2></div></div></div>
-<div id=wtk class=sec style=padding:12px><div class=bx><h3>Withdraw TK</h3><p><b id=w3>0</b></p><input id=a3 type=number><button class=btn id=w3b style=background:#000>WITHDRAW TK</button><div id=h3></div></div></div>
-<div id=wig class=sec style=padding:12px><div class=bx><h3>Withdraw IG</h3><p><b id=w4>0</b></p><input id=a4 type=number><button class=btn id=w4b style=background:#E1306C>WITHDRAW IG</button><div id=h4></div></div></div>
-<div id=wact class=sec style=padding:12px><div class=bx><h3>Withdraw Activity</h3><p><b id=w5>0</b></p><input id=a5 type=number><button class=btn id=w5b style=background:#10b981>WITHDRAW ACT</button><div id=h5></div></div></div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE AGENCIES</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#080c2a;color:#fff;display:flex}
+.s{width:250px;background:#10163a;position:fixed;height:100vh;overflow:auto;padding:8px;border-right:1px solid #1e2a5a;z-index:9}
+.m div{padding:6px 9px;border-radius:7px;margin:1px 0;cursor:pointer;color:#6b7bb0;font-size:11px;display:flex;gap:6px}
+.m div.a{background:#5a33ff;color:#fff;font-weight:700}
+.main{margin-left:250px;flex:1}
+.t{padding:7px 10px;display:flex;justify-content:space-between;background:#0e1330;border-bottom:1px solid #1e2a5a}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:6px}
+.c{border-radius:10px;padding:9px;font-size:11px;background:#111738}
+.r{display:grid;grid-template-columns:1.4fr.9fr;gap:6px;padding:0 6px;margin-bottom:6px}
+.b{background:#111738;border:1px solid #1e2a5a;border-radius:8px;padding:8px;margin-bottom:6px;font-size:11px}
+.btn{padding:5px;border:none;border-radius:5px;background:#5a33ff;color:#fff;font-weight:700;width:100%;cursor:pointer;font-size:11px}
+.sec{display:none}.sec.ac{display:block}
+input{width:100%;padding:4px;background:#0a1028;border:1px solid #1e2a5a;color:#fff;border-radius:4px;margin:2px 0;font-size:11px}
+.k{background:#0a4d2e;color:#1ecfa0;padding:1px 5px;border-radius:6px;font-size:8px}
+@media(max-width:900px){.s{transform:translateX(-100%)}.s.o{transform:translateX(0)}.main{margin-left:0}.g{grid-template-columns:1fr 1fr}.r{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class=s id=s>
+<h3 style=color:#8b7bff;font-size:11px>⭐ STARLIFE AGENCIES</h3>
+<div id=m class=m style=margin-top:6px>
+<div class=a data-g=dash>🏠 Dashboard</div>
+<div data-g=click>🖱️ Clink and Earn</div>
+<div data-g=yt>▶️ YouTube Videos</div>
+<div data-g=tk>🎵 TikTok Videos</div>
+<div data-g=ig>📸 Instagram Reels</div>
+<div data-g=math>➗ Maths 10Q</div>
+<div data-g=triv>🧠 Trivia 10Q</div>
+<div data-g=avi>✈️ Aviator Signals</div>
+<div data-g=forex>📈 Free Forex Classes</div>
+<div data-g=odds>⚽ Sure Odds</div>
+<div data-g=payc>💳 Pay for Client</div>
+<div data-g=team>👥 Team</div>
+<div style=border-top:1px solid #1e2a5a;margin:5px 0></div>
+<b style=font-size:8px;color:#fff;padding:3px>WALLET</b>
+<div data-g=wbal>💰 Withdraw Balance</div>
+<div data-g=wyt>▶️ Withdraw YouTube</div>
+<div data-g=wtk>🎵 Withdraw TikTok</div>
+<div data-g=wig>📸 Withdraw Instagram</div>
+<div data-g=wact>🎯 Withdraw Activity</div>
+<div id=lo style=background:#2a1430;color:#ff6b8a;margin-top:5px>🚪 Logout</div>
 </div>
-<script>
-K='SLB';D=id=>document.getElementById(id);function G(){try{return JSON.parse(localStorage.getItem(K)||'{"m":3200,"y":0,"t":0,"i":0,"c":0,"ma":0,"tr":0,"cc":0}')}catch(e){return{m:3200,y:0,t:0,i:0,c:0,ma:0,tr:0,cc:0}}}function S(o){localStorage.setItem(K,JSON.stringify(o))}function U(){let d=G(),a=(d.c||0)+(d.ma||0)+(d.tr||0);D('bt').innerText='KES '+d.m;D('w1').innerText=d.m;D('w2').innerText=d.y;D('w3').innerText=d.t;D('w4').innerText=d.i;D('w5').innerText=a;D('cc').innerText=(d.cc||0)+'/20';D('ce').innerText='KES '+(d.c||0)}
-function go(id){document.querySelectorAll('.sec').forEach(x=>x.classList.remove('ac'));D(id).classList.add('ac');document.querySelectorAll('.mn div').forEach(x=>x.classList.remove('a'));let t=document.querySelector('[data-g="'+id+'"]');if(t)t.classList.add('a');D('sd').classList.remove('o');U()}
-function earn(k,v){let d=G();d[k]+=v;d.m+=v;S(d);U();alert('Earned '+v)}
-function W(t,i){let b=D(t+i);let c=10;b.disabled=true;let iv=setInterval(()=>{b.innerText=c+'s';c--;if(c<0){clearInterval(iv);let d=G();if(t=='yt')d.y+=20;else if(t=='tk')d.t+=20;else d.i+=20;d.m+=20;S(d);b.innerText='Earned 20';b.style.background='#10b981';U()}},1000)}
-function WD(x){let d=G();let ids={m:'a1',y:'a2',t:'a3',i:'a4',a:'a5'};let am=parseInt(D(ids[x]).value);let bals={m:d.m,y:d.y,t:d.t,i:d.i,a:(d.c||0)+(d.ma||0)+(d.tr||0)};let bal=bals[x];let min=x=='m'?300:100;if(!am||am<min){alert('Min '+min);return}if(bal<am){alert('Low');return}if(x=='m')d.m-=am;else if(x=='y'){d.y-=am;d.m-=am}else if(x=='t'){d.t-=am;d.m-=am}else if(x=='i'){d.i-=am;d.m-=am}else{let need=am;let a=Math.min(d.c||0,need);d.c-=a;need-=a;a=Math.min(d.ma||0,need);d.ma-=a;need-=a;a=Math.min(d.tr||0,need);d.tr-=a;d.m-=am}S(d);let hs={m:'h1',y:'h2',t:'h3',i:'h4',a:'h5'};D(hs[x]).innerHTML+='<div class=bx>Withdraw '+am+' Pending</div>';U();alert('Requested '+am)}
-function L(){let y=D('yl');y.innerHTML='';for(let i=1;i<=3;i++)y.innerHTML+='<div class=bx style=display:flex;justify-content:space-between><b>YT '+i+'</b><button id=yt'+i+' class=btn style=width:auto;background:red;padding:6px>Watch 20</button></div>';for(let i=1;i<=3;i++)D('yt'+i).onclick=()=>W('yt',i);let t=D('tl');t.innerHTML='';for(let i=1;i<=3;i++)t.innerHTML+='<div class=bx style=display:flex;justify-content:space-between><b>TK '+i+'</b><button id=tk'+i+' class=btn style=width:auto;background:#000;padding:6px>Watch 20</button></div>';for(let i=1;i<=3;i++)D('tk'+i).onclick=()=>W('tk',i);let ig=D('il');ig.innerHTML='';for(let i=1;i<=3;i++)ig.innerHTML+='<div class=bx style=display:flex;justify-content:space-between><b>IG '+i+'</b><button id=ig'+i+' class=btn style=width:auto;background:#E1306C;padding:6px>Watch 20</button></div>';for(let i=1;i<=3;i++)D('ig'+i).onclick=()=>W('ig',i)}
-function MQ(){let qs=[['5+7=?','12'],['10*2=?','20'],['15-6=?','9'],['8*8=?','64'],['100/4=?','25'],['9+9=?','18'],['12*3=?','36'],['20-8=?','12'],['7*6=?','42'],['50/5=?','10']];let h='';qs.forEach((q,i)=>{h+='<div class=bx style=display:flex;justify-content:space-between><span>'+q[0]+'</span><input id=q'+i+' style=width:60px;margin:0></div>'});h+='<button class=btn id=qm>Submit</button>';D('mq').innerHTML=h;window.QS=qs;D('qm').onclick=()=>{let c=0;for(let i=0;i<QS.length;i++)if(D('q'+i).value.trim()==QS[i][1])c++;let e=c*10;earn('ma',e);D('mr').innerHTML='Got '+c+'/10 Earn '+e;D('mq').innerHTML=''}}
-function TQ(){let qs=[['Capital Kenya?','Nairobi'],['2+2*2=?','6'],['Largest?','Jupiter'],['Sky?','Blue'],['Continents?','7'],['Fastest?','Cheetah'],['H2O?','Water'],['Sun?','East'],['5*5=?','25'],['Year?','2025']];let h='';qs.forEach((q,i)=>{h+='<div class=bx style=display:flex;justify-content:space-between><span>'+q[0]+'</span><input id=r'+i+' style=width:60px;margin:0></div>'});h+='<button class=btn id=qt>Submit</button>';D('tq').innerHTML=h;window.QT=qs;D('qt').onclick=()=>{let c=0;for(let i=0;i<QT.length;i++)if(D('r'+i).value.trim().toLowerCase()==QT[i][1].toLowerCase())c++;let e=c*10;earn('tr',e);D('tr').innerHTML='Got '+c+'/10 Earn '+e;D('tq').innerHTML=''}}
-document.addEventListener('DOMContentLoaded',()=>{D('tg').onclick=()=>D('sd').classList.toggle('o');document.querySelectorAll('[data-g]').forEach(el=>el.onclick=()=>go(el.dataset.g));D('lo').onclick=()=>{localStorage.clear();location.reload()};D('gw').onclick=()=>go('wbal');D('cb').onclick=function(){let d=G();if((d.cc||0)>=20){alert('Limit');return}this.disabled=true;this.innerText='...';setTimeout(()=>{let d2=G();d2.cc++;d2.c+=50;d2.m+=50;S(d2);D('cm').innerHTML='Earned 50';this.disabled=false;this.innerText='CLICK KES 50';U()},500)};D('ms').onclick=MQ;D('ts').onclick=TQ;D('wb').onclick=()=>WD('m');D('w2b').onclick=()=>WD('y');D('w3b').onclick=()=>WD('t');D('w4b').onclick=()=>WD('i');D('w5b').onclick=()=>WD('a');L();U()});
-</script></body></html>
+</div>
+<div class=main>
+<div class=t><span id=tg style=background:#1a244e;padding:3px 7px;border-radius:5px;cursor:pointer>☰</span><b style=font-size:10px>Abraham Koech</b></div>
+<div id=dash class="sec ac">
+<div style=padding:6px><h3>👋 Welcome back, Abraham!</h3></div>
+<div class=g>
+<div class=c style=background:linear-gradient(135deg,#3b1fa8,#2a157a)><small>Referrals</small><b>12</b></div>
+<div class=c style=background:linear-gradient(135deg,#1a4bb5,#173a8a)><small>Commission</small><b>KES 4,850</b></div>
+<div class=c style=background:linear-gradient(135deg,#0f6b5a,#0d4a3e)><small>Balance</small><b id=bt>KES 3,200</b></div>
+<div class=c style=background:linear-gradient(135deg,#b86e0e,#8a4f08)><small>Level</small><b>Level 1</b></div>
+</div>
+<div class=r>
+<div class=b><b>📊 Earnings</b><div style=height:30px;background:linear-gradient(90deg,#7c5cff,transparent);margin-top:4px></div><small style=color:#6b7bb0>Sep30-Oct6</small></div>
+<div class=b><b>💰 Commission Structure</b><div style=margin-top:4px;line-height:17px><div style=display:flex;justify-content:space-between;background:#1a1040;padding:2px 5px;border-radius:4px><span>L1</span><b>KES 100</b></div><div style=display:flex;justify-content:space-between><span>L2</span><b>KES 20</b></div><div style=display:flex;justify-content:space-between;background:#1a1040;padding:2px 5px;border-radius:4px><span>L3</span><b>KES 10</b></div></div></div>
+</div>
+<div class=r style=grid-template-columns:1fr 1fr><div class=b><b>
