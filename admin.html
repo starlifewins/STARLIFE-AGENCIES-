@@ -1,27 +1,33 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN</title>
-<style>body{background:#000;color:#fff;font-family:system-ui;padding:10px}.box{background:#131a33;padding:15px;border-radius:12px;max-width:500px;margin:auto}button{width:100%;padding:14px;margin:6px 0;border:none;border-radius:8px;background:#6a5cff;color:#fff;font-weight:800;font-size:16px}.card{background:#1d264d;padding:12px;border-radius:10px;margin:12px 0}</style></head><body>
-<div class="box"><h2 style="text-align:center;color:#6a5cff">STARLIFE ADMIN</h2><button onclick="loadData()">🔄 REFRESH PENDING</button><div id="list"></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN - STARLIFE</title>
+<style>body{background:#000;color:#fff;font-family:system-ui;padding:10px}.box{background:#111a33;padding:15px;border-radius:12px;max-width:600px;margin:auto}button{padding:10px 15px;border:none;border-radius:6px;background:#6a5cff;color:#fff;font-weight:700;margin:5px}.card{background:#1d264d;padding:12px;border-radius:10px;margin:10px 0}.tab{display:flex;gap:5px;margin:10px 0}.tab button{background:#222}.tab button.active{background:#6a5cff}</style>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head><body><div class="box">
+<h2 style="text-align:center;color:#6a5cff">STARLIFE SUPER ADMIN</h2>
+<div class="tab"><button id="t1" class="active" onclick="showTab('pending')">Pending Join</button><button id="t2" onclick="showTab('all')">All Clients</button><button id="t3" onclick="showTab('withdraw')">Withdrawals</button></div>
+<div id="list">Loading...</div></div>
 <script>
-function getAll(){return JSON.parse(localStorage.getItem('S')||'[]')}
-function saveAll(v){localStorage.setItem('S',JSON.stringify(v))}
+const firebaseConfig = { apiKey: "AIzaSyDummy", authDomain: "starlife-123.firebaseapp.com", databaseURL: "https://starlife-123-default-rtdb.firebaseio.com", projectId: "starlife-123" };
+firebase.initializeApp(firebaseConfig); const db=firebase.database();
+let currentTab='pending';
+function showTab(t){currentTab=t; document.querySelectorAll('.tab button').forEach(b=>b.classList.remove('active')); document.getElementById(t=='pending'?'t1':t=='all'?'t2':'t3').classList.add('active'); loadData();}
 function loadData(){
- let all=getAll(); let pending=all.filter(x=>x.paid==1 && x.ap!=1);
- let box=document.getElementById('list');
- if(pending.length==0){box.innerHTML='<p style="text-align:center;color:#888;padding:20px">No pending users on this phone<br><br><small>Jisajili kwanza kwa main site kwa simu hii ndio umuone hapa</small></p>';return;}
- box.innerHTML='';
- pending.forEach(function(u){
-   let div=document.createElement('div'); div.className='card';
-   let info=document.createElement('div');
-   info.innerHTML='<b>'+u.f+'</b> ('+u.u+')<br>Phone: '+u.ph+'<br>CODE: <b style="color:yellow;font-size:18px">'+u.mc+'</b><br><br>';
-   let btn=document.createElement('button'); btn.textContent='✅ APPROVE '+u.u;
-   btn.onclick=function(){ doApprove(u.u); };
-   div.appendChild(info); div.appendChild(btn); box.appendChild(div);
+ db.ref('users').on('value', snap=>{
+  let users=[]; snap.forEach(c=>{users.push({key:c.key, ...c.val()})});
+  let filtered = currentTab=='pending' ? users.filter(u=>u.paid==1 && !u.approved) : currentTab=='withdraw' ? users.filter(u=>u.withdrawReq) : users;
+  let html = filtered.length==0 ? '<p style="text-align:center;color:#888">No data in '+currentTab+'</p>' : '';
+  filtered.forEach(u=>{
+    html+=`<div class="card"><b>${u.fullname||''}</b> (${u.username})<br>Phone:${u.phone||''}<br>Code:<b style="color:yellow">${u.mpesa||''}</b><br>Bal: KSh ${u.balance||0}<br>
+    ${currentTab=='pending'?`<button onclick="approveUser('${u.key}','${u.referredBy||''}')">✅ APPROVE 200</button>`:''}
+    ${currentTab=='withdraw'?`<b>Withdraw: ${u.withdrawReq} KSh</b><br><button onclick="approveWithdraw('${u.key}')">✅ APPROVE WITHDRAW</button><button onclick="rejectWithdraw('${u.key}')" style="background:red">REJECT</button>`:''}
+    ${currentTab=='all'?`<small>Approved:${u.approved?'YES':'NO'} | Ref:${u.referredBy||'none'}</small>`:''}
+    </div>`;
+  });
+  document.getElementById('list').innerHTML=html;
  });
 }
-function doApprove(uname){
- let all=getAll(); let user=all.find(x=>x.u==uname); if(!user)return;
- user.ap=1; if(user.ref){ let refUser=all.find(x=>x.u==user.ref); if(refUser){refUser.bal=(refUser.bal||0)+100;} }
- saveAll(all); alert(uname+' APPROVED - 100 sent to referral'); loadData();
-}
-loadData();
+function approveUser(key,ref){ db.ref('users/'+key).update({approved:true}); if(ref){ db.ref('users').orderByChild('username').equalTo(ref).once('value',s=>{s.forEach(c=>{let b=(c.val().balance||0)+100; db.ref('users/'+c.key).update({balance:b})})}) } alert('Approved!'); }
+function approveWithdraw(key){ db.ref('users/'+key).once('value',s=>{let u=s.val(); let newBal=(u.balance||0)-(u.withdrawReq||0); db.ref('users/'+key).update({balance:newBal, withdrawReq:null, lastWithdraw:u.withdrawReq}); alert('Withdrawal Approved!');})}
+function rejectWithdraw(key){ db.ref('users/'+key).update({withdrawReq:null}); alert('Rejected'); }
+showTab('pending');
 </script></body></html>
