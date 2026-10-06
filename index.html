@@ -1,58 +1,13 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#070d22;color:#fff;display:flex;min-height:100vh}
-.sidebar{width:230px;background:#0a122c;padding:15px;position:fixed;height:100vh;overflow:auto}
-.sidebar h2{color:#a78bfa}.menu{margin-top:20px}.menu div{padding:12px 10px;border-radius:8px;margin:4px 0;cursor:pointer}.menu div.active{background:#6d28d9}
-.main{margin-left:230px;flex:1;padding:15px}
-.topbar{display:flex;justify-content:space-between;align-items:center;background:#0f1a3a;padding:12px;border-radius:12px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:15px 0}
-.card{padding:15px;border-radius:12px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#070d22;color:#fff;display:flex;min-height:100vh}
+.sidebar{width:240px;background:#0a122c;padding:15px;position:fixed;height:100vh;overflow:auto;z-index:10}
+.sidebar h2{color:#a78bfa}.menu div{padding:12px;border-radius:8px;margin:4px 0;cursor:pointer;display:flex;gap:8px}.menu div.active,.menu div:hover{background:#6d28d9}
+.main{margin-left:240px;flex:1;padding:15px}.topbar{display:flex;justify-content:space-between;background:#0f1a3a;padding:12px;border-radius:12px;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:15px 0}.card{padding:15px;border-radius:12px}
 .c1{background:linear-gradient(135deg,#2a1a6b,#6d28d9)}.c2{background:#0f2a5a}.c3{background:#0a3d2e}.c4{background:#5a3410}.c5{background:#4a1030}
-.grid2{display:grid;grid-template-columns:2fr 1fr;gap:12px}
-.box{background:#0f1a3a;padding:15px;border-radius:12px;margin:8px 0}
-button{padding:10px 14px;border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;width:100%;margin:5px 0}
-.purple{background:#6d28d9}.blue{background:#2563eb}.green{background:#16a34a}.orange{background:#ea580c}
-.linkbox{background:#000;padding:8px;border-radius:6px;font-size:12px;color:#22c55e;word-break:break-all}
-@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.grid2{grid-template-columns:1fr}}
-</style></head><body>
-<div class="sidebar"><h2>⭐ Starlife<br><small style="font-size:12px;color:#aaa">Agencies - Watch • Share • Earn</small></h2>
-<div class="menu"><div class="active">🏠 Dashboard</div><div>👤 My Profile</div><div>📦 Packages</div><div>🎁 Products</div><div>👁️ Viewers Report</div><div>💰 Earnings</div><div>👥 Referrals</div><div>📄 Payment History</div><div>🎧 Support</div><div>⚙️ Settings</div></div>
-<div class="box" style="margin-top:15px;background:#151f4a"><b style="color:#c084fc">Grow Your Network</b><p style="font-size:12px;margin:8px 0">Invite friends and build bigger team. Earn more!</p><button class="purple">🔗 Get Your Link</button></div>
-</div>
-<div class="main">
-<div class="topbar"><div><h2>Welcome back, <span id="uname">Naomy</span>! 👋<br><small style="font-size:12px;color:#aaa">Your hard work brings real rewards. Keep sharing, keep viewing and keep earning!</small></h2></div><div style="text-align:right"><h2>Starlife <span style="color:#a78bfa">Agencies</span></h2><small>Earn by Viewing • Advertise Products • Build Your Future</small></div></div>
-
-<div class="cards">
-<div class="card c1">💼 Total Earnings<br><b style="font-size:22px" id="earn">KSh 0</b><br><small>↑ 12% vs last 7 days</small></div>
-<div class="card c2">👁️ Total Viewers<br><b style="font-size:22px" id="view">0</b><br><small>↑ 18% vs last 7 days</small></div>
-<div class="card c3">📦 Active Packages<br><b style="font-size:22px">VIP</b><br><small id="exp">Expires: 12 Nov 2026</small></div>
-<div class="card c4">👥 Total Referrals<br><b style="font-size:22px" id="refs">0</b><br><small id="lvl">Level 1:0 | Level 2:0 | Level 3:0</small></div>
-<div class="card c5">⏰ Pending Payments<br><b style="font-size:22px" id="pend">KSh 0</b><br><small>Awaiting admin approval</small></div>
-</div>
-
-<div class="grid2">
-<div class="box"><b>Earnings Overview</b><canvas id="chart" height="140" style="width:100%;margin-top:10px"></canvas>
-<div style="margin-top:15px"><b>Your Packages</b>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
-<div class="box" style="background:#12204a;border:1px solid #2563eb;text-align:center">👑 REGULAR<br>Fee KSh 200<br>Earn KSh 100/view<br><button class="blue" style="margin-top:8px">Active</button></div>
-<div class="box" style="background:#1a124a;border:1px solid #6d28d9;text-align:center">⭐ VIP<br>Fee KSh 250<br>Earn KSh 120/view<br><button class="purple" style="margin-top:8px">Active</button></div>
-<div class="box" style="background:#2a1f0a;border:1px solid #f59e0b;text-align:center">💎 GOLD<br>Fee KSh 500<br>Earn KSh 150/view<br><button style="background:#f59e0b;margin-top:8px">Upgrade</button></div>
-</div></div></div>
-
-<div><div class="box"><b>Quick Actions</b>
-<button class="purple">🔗 Get Your Affiliate Link ></button>
-<button class="blue">📦 View Products ></button>
-<button class="green">👁️ Submit Viewers ></button>
-<button class="orange">💰 Request Withdrawal ></button>
-</div>
-<div class="box"><b>🔗 Your Referral Link</b><div class="linkbox" id="reflink">https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=naomy</div><button class="purple" style="width:auto;float:right;margin-top:5px" onclick="copyLink()">Copy</button><br><small style="color:#aaa">Share your link and earn commissions when others join</small></div>
-<div class="box"><b>⭐ Top Products</b><div style="display:flex;gap:10px;margin-top:8px"><div style="width:60px;height:60px;background:#222;border-radius:8px"></div><div>Smart TV 50"<br><small>Earn KSh 150/view</small><br><button class="purple" style="padding:6px">View Product</button></div></div></div>
-</div>
-</div>
-</div>
-<script>
-function G(){return JSON.parse(localStorage.getItem('S')||'[]')}
-let curUser=localStorage.getItem('CU')||'naomy'; let users=G(); let me=users.find(x=>x.u==curUser)||{f:'Naomy',u:'naomy',bal:0};
-document.getElementById('uname').innerText=me.f.split(' ')[0]||'Naomy'; document.getElementById('earn').innerText='KSh '+(me.bal||0);
-document.getElementById('refs').innerText=users.filter(x=>x.ref==curUser).length; document.getElementById('reflink').innerText='https://starlif
+.box{background:#0f1a3a;padding:15px;border-radius:12px;margin:10px 0}button{padding:11px 14px;border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;width:100%;margin:5px 0;background:#6d28d9}
+input{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;background:#1c2447;color:#fff}.linkbox{background:#000;padding:8px;border-radius:6px;color:#22c55e;word-break:break-all;font-size:12px}
+.sec{display:none}.sec.active{display:block}
+table{width:100%;border-collapse:collapse;margin-top:10px}th,td{padding:8px;text-align:left;border-bottom:1px solid #222;font-size:13px}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.3
