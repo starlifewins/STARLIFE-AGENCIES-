@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN</title>
-<style>body{background:#000;color:#fff;font-family:system-ui;padding:10px}.box{background:#131a33;padding:15px;border-radius:12px;max-width:500px;margin:auto}button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:8px;background:#6a5cff;color:#fff;font-weight:800}.card{background:#1d264d;padding:10px;border-radius:8px;margin:8px 0}</style>
-</head><body><div class="box"><h2 style="text-align:center;color:#6a5cff">ADMIN PANEL</h2>
-<button onclick="location.reload()">REFRESH</button><div id="list"></div></div>
-<script>
-function G(){return JSON.parse(localStorage.getItem('S')||'[]')}
-function S(v){localStorage.setItem('S',JSON.stringify(v))}
-function load(){
- var a=G(); var p=a.filter(x=>x.paid&&!x.ap);
- var el=document.getElementById('list');
- if(!p.length){el.innerHTML='<p>No pending. Hakuna mtu amelipa bado kwa simu hii.</p><p style="font-size:11px;color:#aaa">KUMBUKA: Admin inaona watu waliojisajili kwa simu hii pekee. Kama mtu amejisajili kwa simu ingine, simu yako haimuoni kwa sababu GitHub ni localStorage tu.</p>';return;}
- el.innerHTML=p.map(x=>`<div class="card"><b>${x.f}</b> (${x.u})<br>
+<!DOCTYPE html><html><body style="background:black;color:white;padding:20px;font-family:sans-serif">
+<h1>ADMIN TEST</h1>
+<button onclick="alert('BUTTON INAFANYA!')" style="padding:20px;width:100%;background:blue;color:white;font-size:20px">BONGO HAPA</button>
+<script>alert('ADMIN LOADED OK');</script>
+</body></html>
