@@ -16,58 +16,41 @@ button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;backgr
 <body>
 <div class="box">
 <h2 style="text-align:center;color:#6a5cff">STARLIFE ADMIN ONLY</h2>
-
 <div id="loginA">
-<input id="au" placeholder="Admin Username">
-<input id="ap" type="password" placeholder="Admin Password">
-<button id="bA">LOGIN ADMIN</button>
+<input id="au" placeholder="Admin Username" value="admin">
+<input id="ap" type="password" placeholder="Admin Password" value="admin123">
+<button id="bA" onclick="loginAdmin()">LOGIN ADMIN</button>
 <p style="font-size:11px;text-align:center">Default: admin / admin123</p>
 </div>
-
 <div id="dashA" class="hide">
 <h3>Pending KSh 200 Payments</h3>
-<button id="bShow">🔄 REFRESH</button>
-<div id="list"></div>
+<button onclick="load()">🔄 REFRESH</button>
+<div id="list" style="margin-top:10px"></div>
 <button onclick="localStorage.clear();location.reload()" style="background:#333">Logout</button>
 </div>
 </div>
-
 <script>
-let G=()=>JSON.parse(localStorage.getItem('S')||'[]'), S=v=>localStorage.setItem('S',JSON.stringify(v));
-let loginA=document.getElementById('loginA'), dashA=document.getElementById('dashA');
-
-document.getElementById('bA').onclick=()=>{
- if(au.value.trim()=='admin' && ap.value.trim()=='admin123'){
+function G(){return JSON.parse(localStorage.getItem('S')||'[]')}
+function S(v){localStorage.setItem('S',JSON.stringify(v))}
+function loginAdmin(){
+ var u=document.getElementById('au').value.trim();
+ var p=document.getElementById('ap').value.trim();
+ if(u=='admin' && p=='admin123'){
    localStorage.setItem('ADMIN','yes');
-   loginA.classList.add('hide'); dashA.classList.remove('hide');
+   document.getElementById('loginA').classList.add('hide');
+   document.getElementById('dashA').classList.remove('hide');
    load();
- } else alert('Wrong admin');
-};
-
-function load(){
- let a=G(); let p=a.filter(x=>x.paid&&!x.ap);
- document.getElementById('list').innerHTML=p.map(x=>`
- <div class="card">
- <b>${x.f}</b> (${x.u})<br>
- Email: ${x.e}<br>
- Phone: ${x.ph}<br>
- CODE: <b style="color:yellow">${x.mc}</b><br>
- Ref: ${x.ref||'NONE'}<br>
- <button onclick="ap('${x.u}')">✅ APPROVE 200</button>
- <button onclick="rj('${x.u}')" style="background:#a00">❌ REJECT</button>
- </div>`).join('')||'No pending payments - hakuna mtu amelipa 200';
+ } else { alert('Wrong! Use admin / admin123'); }
 }
-
-window.ap=u=>{
- let a=G(); let m=a.find(x=>x.u==u); m.ap=1;
- if(m.ref){let r=a.find(x=>x.u==m.ref); if(r) r.bal=(r.bal||0)+100}
- S(a); alert(u+' APPROVED!'); load();
-};
-window.rj=u=>{let a=G().filter(x=>x.u!=u); S(a); alert('Rejected'); load()};
-
-document.getElementById('bShow').onclick=load;
-
-if(localStorage.getItem('ADMIN')=='yes'){loginA.classList.add('hide');dashA.classList.remove('hide');load()}
-</script>
-</body>
-</html>
+function load(){
+ var a=G(); var pending=a.filter(x=>x.paid && !x.ap);
+ var html='';
+ if(!pending.length) html='No pending - hakuna mtu amelipa 200 bado';
+ else pending.forEach(x=>{
+   html+=`<div class="card"><b>${x.f}</b> (${x.u})<br>Email:${x.e}<br>Phone:${x.ph}<br>CODE:<b style="color:yellow">${x.mc}</b><br>Ref:${x.ref||'NONE'}<br><button onclick="approveUser('${x.u}')">✅ APPROVE 200</button> <button onclick="rejectUser('${x.u}')" style="background:#a00">❌ REJECT</button></div>`;
+ });
+ document.getElementById('list').innerHTML=html;
+}
+function approveUser(u){
+ var a=G(); var m=a.find(x=>x.u==u); m.ap=1;
+ if(m.ref){var r=a.find(x=>x.u==m.ref); if(r) r.bal=(r.bal||0)+
