@@ -2,86 +2,125 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Starlife Agencies</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Starlife Admin Full</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0a0e1f;color:#fff;display:flex}
-.side{width:240px;background:#0f1429;position:fixed;height:100vh;padding:10px}
-.item{padding:11px;border-radius:10px;margin:3px 0;color:#94a3b8;cursor:pointer;font-weight:700}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
+body{background:#0a0e1f;color:#fff;display:flex;min-height:100vh}
+.side{width:240px;background:#0f1429;position:fixed;height:100vh;padding:10px;z-index:10;left:0;top:0;transition:.3s}
+.side.mhide{transform:translateX(-100%);pointer-events:none}
+.item{padding:11px;border-radius:10px;margin:3px 0;color:#94a3b8;font-weight:700;cursor:pointer;font-size:13px}
 .item.active{background:#6a5cff;color:#fff}
-.main{margin-left:240px;flex:1}
-.top{height:56px;background:#0f1429;border-bottom:1px solid #1e293b;display:flex;justify-content:space-between;align-items:center;padding:0 12px}
-.wel{background:linear-gradient(90deg,#2d4bff,#7c3aed,#ff3bd4,#00d4ff);border-radius:14px;margin:12px;padding:16px;display:flex;justify-content:space-between}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 12px}
-.sc{background:#131a33;border:1px solid #1e293b;border-radius:12px;padding:12px;display:flex;gap:10px}
-.card{background:#131a33;border:1px solid #1e293b;border-radius:12px;padding:14px}
-.pkg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-.pb{border-radius:12px;padding:12px;border:1px solid}
-.reg{background:#0e1a33;border-color:#1e40af}.vip{background:#1a1433;border-color:#7c3aed}.gold{background:#2a2110;border-color:#ca8a04}
-.btn{width:100%;padding:10px;border:none;border-radius:8px;font-weight:800;cursor:pointer}
-.y{background:#6a5cff;color:#fff}.hide{display:none!important}
-input{width:100%;padding:10px;margin:5px 0;border-radius:8px;background:#0a0e1f;border:1px solid #1e293b;color:#fff}
-@media(max-width:900px){.side{transform:translateX(-100%);z-index:99;transition:.3s}.side.open{transform:translateX(0)}.main{margin-left:0}.stats{grid-template-columns:1fr 1fr}}
+.main{margin-left:240px;flex:1;min-height:100vh;width:100%}
+.top{height:56px;background:#0f1429;border-bottom:1px solid #1e293b;display:flex;justify-content:space-between;align-items:center;padding:0 12px;position:sticky;top:0;z-index:5}
+.card{background:#131a33;border:1px solid #1e293b;border-radius:12px;padding:18px;margin:12px;position:relative;z-index:1}
+.btn{width:100%;padding:16px;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-size:16px;z-index:999}
+.y{background:#6a5cff;color:#fff}
+.g{background:#00d084;color:#000}
+.r{background:#ef4444;color:#fff}
+.hide{display:none!important}
+input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#0a0e1f;border:1px solid #2a3655;color:#fff;font-size:16px}
+.tab{display:flex;gap:8px;margin-bottom:12px}
+.tab div{flex:1;text-align:center;padding:12px;background:#0f1429;border-radius:10px;cursor:pointer;border:1px solid #1e293b}
+.tab .active{background:#6a5cff;color:#fff}
+@media(max-width:900px){.side{transform:translateX(-100%);pointer-events:none}.side.open{transform:translateX(0);pointer-events:auto}.main{margin-left:0}}
 </style>
 </head>
 <body>
-<div class="side" id="s">
-<b>★ Starlife Agencies</b><br><small style="color:#94a3b8">Earn • Advertise • Grow</small><br><br>
+<div class="side mhide" id="s">
+<div style="display:flex;gap:8px;padding:8px 0 14px"><div style="width:32px;height:32px;background:linear-gradient(135deg,#6a5cff,#ec4899);border-radius:8px;display:flex;align-items:center;justify-content:center">★</div><div><b>Starlife</b><b style="color:#a855f7"> Agencies</b></div></div>
 <div class="item active" onclick="go('d',this)">🏠 Dashboard</div>
-<div class="item" onclick="go('aff',this)">🔗 Affiliate Links</div>
-<div class="item" onclick="go('ref',this)">👥 My Referrals</div>
-<div class="item" id="am" style="display:none" onclick="go('a',this)">👑 Admin</div>
-<div class="item" onclick="logout()">🚪 Logout</div>
+<div class="item" onclick="go('prod',this)">📦 Products</div>
+<div class="item" onclick="go('aff',this)">🔗 Affiliate</div>
+<div class="item" onclick="go('view',this)">📊 Viewers</div>
+<div class="item" onclick="go('ref',this)">👥 Referrals</div>
+<div class="item" onclick="go('payh',this)">💳 Withdraw</div>
+<div class="item hide" id="am" onclick="go('a',this)" style="border:2px solid #22c55e;color:#22c55e">👑 Admin Approve</div>
+<div class="item" onclick="logout()" style="color:#ef4444">🚪 Logout</div>
 </div>
 <div class="main">
-<div class="top"><b>Your Success is Our Priority 🚀</b><div style="display:flex;gap:10px"><b id="uname2">Member</b><button onclick="s.classList.toggle('open')" style="background:#1e293b;color:#fff;border:none;padding:5px 8px;border-radius:5px">☰</button></div></div>
-<div id="auth" class="card" style="max-width:400px;margin:20px auto"><h3 style="color:#a855f7;text-align:center">STARLIFE - SIGN UP</h3><input id="fn" placeholder="Full Name"><input id="un" placeholder="Username"><input id="em" placeholder="Email"><input id="ph" placeholder="Phone"><input id="ps" type="password" placeholder="Password"><input id="cps" type="password" placeholder="Confirm"><button class="btn y" onclick="su()">SIGN UP</button><div id="lb" class="hide"><input id="lu" placeholder="Username"><input id="lp" type="password" placeholder="Password"><button class="btn y" onclick="li()">LOGIN</button><br><small>admin / admin123</small></div><p style="text-align:center;font-size:11px;margin-top:6px">Have account? <b style="color:#6a5cff" onclick="lb.classList.remove('hide')">Log in</b></p></div>
-<div id="pay" class="card hide" style="max-width:400px;margin:20px auto;text-align:center"><h3 style="color:#22c55e">Pay 150</h3><p>Paybill 714777 Acc 440200282954</p><p>Hi <b id="pname"></b></p><input id="mc" placeholder="M-Pesa CODE"><button class="btn y" onclick="submitPay()">SUBMIT</button></div>
+<div class="top"><b>Starlife</b><div style="display:flex;gap:8px"><b id="uname2">Guest</b><button onclick="toggleSide()" style="background:#1e293b;color:#fff;border:none;padding:8px 12px;border-radius:6px">☰</button></div></div>
+
+<div id="auth" class="card" style="max-width:430px;margin:20px auto">
+<h3 style="color:#a855f7;text-align:center">STARLIFE AGENCIES</h3>
+<div class="tab"><div id="tab1" class="active" onclick="showTab(1)">SIGN UP</div><div id="tab2" onclick="showTab(2)">LOG IN</div></div>
+<div id="rb" class="hide" style="background:#052e16;padding:8px;border-radius:6px;font-size:12px;margin-bottom:8px">Ref: <b id="rbn"></b></div>
+<div id="signupBox">
+<input id="fn" placeholder="Full Name *">
+<input id="un" placeholder="Username *">
+<input id="em" placeholder="Email *">
+<input id="ph" placeholder="Phone *">
+<input id="ps" type="password" placeholder="Password *">
+<input id="cps" type="password" placeholder="Confirm *">
+<button class="btn y" onclick="su()">SIGN UP - TAP HERE</button>
+</div>
+<div id="loginBox" class="hide">
+<input id="lu" placeholder="Username *">
+<input id="lp" type="password" placeholder="Password *">
+<button class="btn y" onclick="li()">LOG IN - TAP HERE</button>
+<p style="font-size:11px;text-align:center;margin-top:8px;color:#94a3b8">admin / admin123</p>
+</div>
+</div>
+
+<div id="pay" class="card hide" style="max-width:430px;margin:20px auto;text-align:center">
+<h3 style="color:#22c55e">✅ Account Created!</h3>
+<p style="margin:10px 0">Hi <b id="pname"></b>, pay <b>KSh 150</b></p>
+<div style="background:#052e16;border:1px dashed #22c55e;padding:12px;border-radius:10px;text-align:left;margin:10px 0;font-size:13px">Paybill: <b>714777</b><br>Account: <b>440200282954</b><br>Amount: <b>150 KES</b></div>
+<p style="font-size:11px;color:#facc15">Lazima uingize M-PESA CODE</p>
+<input id="mc" placeholder="M-PESA CODE *" style="border:2px solid #22c55e;text-transform:uppercase">
+<button class="btn g" onclick="submitPay()">SUBMIT CODE</button>
+</div>
+
+<div id="wait" class="card hide" style="max-width:430px;margin:20px auto;text-align:center">
+<h2 style="color:#facc15">⏳ Waiting Approval</h2>
+<p style="margin:12px 0">Hi <b id="wname"></b> CODE <b id="wcode" style="color:#22c55e"></b></p>
+<div style="background:#0a0e1f;padding:10px;border-radius:8px;margin:12px 0;border:1px solid #1e293b"><small>CODE: <span id="wcode2"></span><br>Phone: <span id="wphone"></span></small></div>
+<button class="btn y" onclick="checkStatus()">CHECK IF APPROVED</button><br><br>
+<button class="btn r" onclick="logout()">Logout</button>
+</div>
+
 <div id="app" class="hide">
 <div id="d">
-<div class="wel"><div><h2>Welcome back, <span id="hu">Member</span>! 👋</h2><small>Keep sharing products, get more viewers, and increase your earnings!</small></div><div style="font-size:36px">🤝</div></div>
-<div class="stats">
-<div class="sc"><div><small>Total Earnings</small><h3 id="bal">KSh 4,250</h3><small>Pending: KSh <span id="pend">1,200</span></small></div></div>
-<div class="sc"><div><small>Total Viewers</small><h3 id="viewers">2,480</h3><small>Last 7 days</small></div></div>
-<div class="sc"><div><small>Active Package</small><h3>VIP</h3><small>Expires: 12 Nov 2026</small></div></div>
-<div class="sc"><div><small>Total Referrals</small><h3 id="tre">12</h3><small>Level 1: 8 | Level 2: 3 | Level 3: 1</small></div></div>
+<div style="background:linear-gradient(90deg,#2d4bff,#6a3aff,#b23cff,#00d4ff);border-radius:14px;margin:12px;padding:16px;display:flex;justify-content:space-between"><div><h2>Welcome <span id="hu">Member</span>! 👋</h2><small id="status">ACTIVE</small></div><div style="font-size:36px">🤝</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 12px">
+<div class="card" style="margin:0"><small>Total Earnings</small><h3 id="bal">KSh 4,250</h3></div>
+<div class="card" style="margin:0"><small>Viewers</small><h3 id="viewers">2480</h3></div>
+<div class="card" style="margin:0"><small>Package</small><h3>VIP</h3></div>
+<div class="card" style="margin:0"><small>Referrals</small><h3 id="tre">0</h3></div>
 </div>
-<div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;margin:10px 12px">
-<div class="card"><b>Your Earnings Overview</b><br><canvas id="chart" width="600" height="180" style="margin-top:10px"></canvas></div>
-<div class="card"><b>Quick Actions</b><br><br><button class="btn y" style="text-align:left">🔗 Get Your Affiliate Link</button><br><br><button class="btn y" style="background:#1d4ed8;text-align:left">📦 View Products</button><br><br><button class="btn y" style="background:#16a34a;text-align:left">👁️ Submit Viewers</button><br><br><button class="btn y" style="background:#ca8a04;text-align:left">💳 Request Withdrawal</button></div>
+<div class="card"><b>Your Referral Link</b><p id="rl" style="font-size:11px;color:#22c55e;background:#0a0e1f;padding:8px;border-radius:6px;word-break:break-all;margin:8px 0"></p><button class="btn y" onclick="copyR()">Copy Link</button></div>
 </div>
-<div style="display:grid;grid-template-columns:1.7fr 1fr;gap:10px;margin:0 12px 12px">
-<div>
-<div class="card"><b>Your Packages</b><div class="pkg"><div class="pb reg"><b>Regular</b><br><small>Activation Fee</small><h4>KSh 200</h4><small>Earnings per View KSh 100</small><br><button class="btn y" style="background:#1d4ed8;margin-top:6px">Active</button></div><div class="pb vip"><b>VIP - Popular</b><br><small>Activation Fee</small><h4>KSh 250</h4><small>Earnings per View KSh 130</small><br><button class="btn y" style="margin-top:6px">Active</button></div><div class="pb gold"><b>Gold</b><br><small>Activation Fee</small><h4>KSh 500</h4><small>Earnings per View KSh 150</small><br><button class="btn y" style="background:#ca8a04;color:#000;margin-top:6px">Upgrade</button></div></div></div>
-<div class="card"><b>Recent Activity</b><br><br><small>06 Oct 2026 - Viewers Submitted (250) - KSh 1,250 - Confirmed<br>05 Oct 2026 - Referral Bonus (Level 1) - KSh 200 - Confirmed<br>04 Oct 2026 - Package Activation (VIP) - KSh 250 - Completed<br>03 Oct 2026 - Viewers Submitted (180) - KSh 900 - Confirmed</small></div>
+
+<div id="prod" class="hide"><div class="card"><h3>📦 Products</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div style="background:#0f1429;border:1px solid #1e293b;border-radius:12px;padding:10px;text-align:center"><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f367d8?w=300" style="width:100%;height:80px;object-fit:cover;border-radius:8px"><b>Smart TV</b><br><button class="btn y" style="margin-top:6px" onclick="downloadP('TV')">⬇️ Download</button></div><div style="background:#0f1429;border:1px solid #1e293b;border-radius:12px;padding:10px;text-align:center"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300" style="width:100%;height:80px;object-fit:cover;border-radius:8px"><b>Laptop</b><br><button class="btn y" style="margin-top:6px" onclick="downloadP('Laptop')">⬇️ Download</button></div></div></div></div>
+
+<div id="view" class="hide"><div class="card"><h3>📊 Viewers</h3><input id="vc" type="number" placeholder="Viewers e.g. 100"><button class="btn g" onclick="submitV()">Submit - Earn 100/view</button></div></div>
+
+<div id="aff" class="hide"><div class="card"><h3>🔗 Affiliate</h3><p id="rl2" style="color:#22c55e;font-size:11px;word-break:break-all;background:#0a0e1f;padding:6px;border-radius:6px"></p><button class="btn y" onclick="copyR()">COPY</button><div id="rlist" style="font-size:11px"></div></div></div>
+
+<div id="ref" class="hide"><div class="card"><h3>👥 Referrals 100/20/30</h3><div id="rlist2"></div></div></div>
+
+<div id="payh" class="hide"><div class="card"><h3>💳 Withdraw Min 300</h3>Bal <b id="bal2">KSh 0</b><input id="wamt" type="number" placeholder="Amount"><input id="wph" placeholder="M-Pesa Phone"><button class="btn y" onclick="doW()">REQUEST WITHDRAW</button><div id="wlist" style="font-size:11px;margin-top:8px"></div></div></div>
+
+<div id="a" class="hide"><div class="card"><h3>👑 Admin - Activation & Withdraw</h3>
+<div class="tab"><div id="atab1" class="active" onclick="showATab(1)">ACTIVATIONS</div><div id="atab2" onclick="showATab(2)">WITHDRAWS</div></div>
+<div id="abox1"><h4 style="color:#22c55e">Pending M-PESA CODE Activations</h4><div id="aal" style="margin-top:8px"></div></div>
+<div id="abox2" class="hide"><h4 style="color:#facc15">Pending Withdraw Requests</h4><div id="awl" style="margin-top:8px"></div></div>
+</div></div>
+
 </div>
-<div>
-<div class="card"><b>Your Referral Link</b><p id="rl" style="font-size:10px;color:#22c55e;word-break:break-all;background:#0a0e1f;padding:6px;border-radius:6px;margin:6px 0"></p><button class="btn y" onclick="copyR()">Copy</button></div>
-<div class="card" style="margin-top:10px"><b>Latest News & Updates</b><br><br><small><b>06 Oct</b> New Gold Package Launched! More earning opportunities<br><br><b>04 Oct</b> Referral Bonus Increased! Earn up to 3 levels<br><br><b>01 Oct</b> New Products Available for your posts</small></div>
-<div class="card" style="margin-top:10px;background:linear-gradient(90deg,#6a5cff,#ec4899)"><b>Starlife Advert Today's Product</b><br><small>Smart TV 50" - Post • Share • Earn</small></div>
 </div>
-</div>
-</div>
-<div id="aff" class="hide"><div class="card"><h3>Affiliate Links</h3><p id="rl2" style="color:#22c55e;font-size:11px;word-break:break-all"></p><div id="rlist" style="font-size:11px">None</div></div></div>
-<div id="ref" class="hide"><div class="card"><h3>My Referrals</h3><div id="rlist2" style="font-size:11px">None</div></div></div>
-<div id="a" class="hide"><div class="card"><h3>Admin Approve</h3><div id="aal" style="font-size:11px">None</div></div></div>
-</div>
-</div>
+
 <script>
+document.getElementById('s').classList.add('mhide');
 let rp=new URLSearchParams(location.search).get('ref');
-function su(){let f=fn.value.trim(),u=un.value.trim(),e=em.value.trim(),p=ph.value.trim(),a=ps.value,b=cps.value;if(!f||!u||!e||!p||!a||!b)return alert('Jaza zote');let us=JSON.parse(localStorage.getItem('u')||'[]');if(us.find(x=>x.f==u))return alert('Taken');us.push({f:u,fn:f,em:e,ph:p,pw:a,ref:rp||null,ac:false,paid:false,ex:0,tw:0,pw:0,mc:''});localStorage.setItem('u',JSON.stringify(us));localStorage.setItem('c',u);auth.classList.add('hide');pay.classList.remove('hide');pname.innerText=u}
-function submitPay(){let m=mc.value.trim().toUpperCase();if(m.length<5)return alert('CODE');let us=JSON.parse(localStorage.getItem('u')||'[]');let c=localStorage.getItem('c');let me=us.find(x=>x.f==c);me.mc=m;me.paid=true;localStorage.setItem('u',JSON.stringify(us));pay.classList.add('hide');showApp()}
-function li(){let u=lu.value.trim(),p=lp.value;if(u=='admin'&&p=='admin123'){localStorage.setItem('c','admin');auth.classList.add('hide');pay.classList.add('hide');showApp();return}let us=JSON.parse(localStorage.getItem('u')||'[]');let f=us.find(x=>x.f==u&&x.pw==p);if(!f)return alert('Wrong');localStorage.setItem('c',f.f);if(!f.paid){auth.classList.add('hide');pay.classList.remove('hide');return}showApp()}
-function showApp(){auth.classList.add('hide');pay.classList.add('hide');app.classList.remove('hide');load()}
-function load(){let c=localStorage.getItem('c');if(c=='admin'){hu.innerText='ADMIN';uname2.innerText='ADMIN';am.style.display='block';loadA();draw();return}let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==c);if(!me)return;hu.innerText=me.f;uname2.innerText=me.f;let b=location.origin+location.pathname;if(b.includes('index.html'))b=b.replace('index.html','');if(!b.endsWith('/'))b+='/';rl.innerText=b+'?ref='+me.f;if(rl2)rl2.innerText=rl.innerText;draw()}
-function go(id,el){document.querySelectorAll('#app>div').forEach(s=>s.classList.add('hide'));document.getElementById(id).classList.remove('hide');if(el){document.querySelectorAll('.side .item').forEach(l=>l.classList.remove('active'));el.classList.add('active')}s.classList.remove('open')}
-function copyR(){navigator.clipboard.writeText(rl.innerText).then(()=>alert('Copied'))}
-function loadA(){let us=JSON.parse(localStorage.getItem('u')||'[]');let pa=us.filter(x=>x.paid&&!x.ac);aal.innerHTML=pa.length?pa.map(u=>u.f+' CODE:'+u.mc+' Ref:'+(u.ref||'NONE')+' <button onclick="approveA(\''+u.f+'\')">APPROVE</button>').join('<br>'):'None'}
-function approveA(u){let us=JSON.parse(localStorage.getItem('u')||'[]');let user=us.find(x=>x.f==u);user.ac=true;let L1=us.find(x=>x.f==user.ref);if(L1){L1.ex+=100;let L2=us.find(x=>x.f==L1.ref);if(L2){L2.ex+=20;let L3=us.find(x=>x.f==L2.ref);if(L3)L3.ex+=30}}localStorage.setItem('u',JSON.stringify(us));loadA()}
-function logout(){localStorage.removeItem('c');location.reload()}
-function draw(){let c=document.getElementById('chart');if(!c)return;let ctx=c.getContext('2d');ctx.clearRect(0,0,600,180);ctx.strokeStyle='#a855f7';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(20,140);ctx.lineTo(100,110);ctx.lineTo(180,105);ctx.lineTo(260,70);ctx.lineTo(340,60);ctx.lineTo(420,30);ctx.lineTo(520,10);ctx.stroke()}
-let cur=localStorage.getItem('c');if(cur){let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==cur);if(cur=='admin'||me){if(me&&!me.paid){auth.classList.add('hide');pay.classList.remove('hide')}else{showApp()}}}
-</script>
-</body>
-</html>
+if(rp){document.getElementById('rb').classList.remove('hide');document.getElementById('rbn').innerText=rp}
+function toggleSide(){let s=document.getElementById('s');s.classList.toggle('open');s.classList.toggle('mhide');}
+function showTab(n){document.getElementById('signupBox').classList.toggle('hide',n!=1);document.getElementById('loginBox').classList.toggle('hide',n!=2);document.getElementById('tab1').classList.toggle('active',n==1);document.getElementById('tab2').classList.toggle('active',n==2);}
+function showATab(n){document.getElementById('abox1').classList.toggle('hide',n!=1);document.getElementById('abox2').classList.toggle('hide',n!=2);document.getElementById('atab1').classList.toggle('active',n==1);document.getElementById('atab2').classList.toggle('active',n==2);}
+function su(){let fn=document.getElementById('fn').value.trim(),un=document.getElementById('un').value.trim(),em=document.getElementById('em').value.trim(),ph=document.getElementById('ph').value.trim(),ps=document.getElementById('ps').value.trim(),cps=document.getElementById('cps').value.trim();if(!fn||!un||!em||!ph||!ps||!cps){alert('Jaza zote 6');return}if(em.indexOf('@')==-1){alert('Email must have @');return}if(ps!=cps){alert('Password mismatch');return}let us=[];try{us=JSON.parse(localStorage.getItem('u')||'[]')}catch(e){us=[]}if(us.find(x=>x.f.toLowerCase()==un.toLowerCase())){alert('Username taken');showTab(2);return}us.push({f:un,fn:fn,em:em,ph:ph,pw:ps,ref:rp||null,ac:false,paid:false,ex:0,mc:''});localStorage.setItem('u',JSON.stringify(us));localStorage.setItem('c',un);alert('Account '+un+' created!');document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.remove('hide');document.getElementById('pname').innerText=un;}
+function submitPay(){let m=document.getElementById('mc').value.trim().toUpperCase();if(m.length<5){alert('Enter M-PESA CODE');return}let us=JSON.parse(localStorage.getItem('u')||'[]');if(us.find(x=>x.mc==m&&m!='')){alert('CODE used');return}let c=localStorage.getItem('c');let me=us.find(x=>x.f==c);me.mc=m;me.paid=true;me.ac=false;localStorage.setItem('u',JSON.stringify(us));alert('CODE '+m+' received');document.getElementById('pay').classList.add('hide');showWait(me);}
+function showWait(me){document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.add('hide');document.getElementById('app').classList.add('hide');document.getElementById('wait').classList.remove('hide');document.getElementById('wname').innerText=me.f;document.getElementById('wcode').innerText=me.mc;document.getElementById('wcode2').innerText=me.mc;document.getElementById('wphone').innerText=me.ph;}
+function checkStatus(){let c=localStorage.getItem('c');let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==c);if(me.ac){alert('Approved!');document.getElementById('wait').classList.add('hide');showApp();}else{alert('Still pending: '+me.mc);}}
+function li(){let un=document.getElementById('lu').value.trim(),ps=document.getElementById('lp').value.trim();if(!un||!ps){alert('Enter both');return}if(un=='admin'&&ps=='admin123'){localStorage.setItem('c','admin');document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.add('hide');document.getElementById('wait').classList.add('hide');showApp();return}let us=JSON.parse(localStorage.getItem('u')||'[]');let f=us.find(x=>x.f==un&&x.pw==ps);if(!f){alert('Wrong, sign up first');showTab(1);return}localStorage.setItem('c',f.f);if(!f.paid){document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.remove('hide');document.getElementById('pname').innerText=f.f;return}if(!f.ac){showWait(f);return}showApp();}
+function showApp(){document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.add('hide');document.getElementById('wait').classList.add('hide');document.getElementById('app').classList.remove('hide');load();}
+function load(){let c=localStorage.getItem('c');if(!c)return;if(c=='admin'){document.getElementById('hu').innerText='ADMIN';document.getElementById('uname2').innerText='ADMIN';document.getElementById('am').classList.remove('hide');document.getElementById('
