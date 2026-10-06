@@ -1,1 +1,73 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE ADMIN FINAL</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#0f172a;color:#fff;padding:12px}.card{background:#fff;color:#000;border-radius:12px;padding:12px;margin-bottom:10px}</style></head><body><div id="login" style="max-width:340px;margin:60px auto;background:#1e293b;padding:20px;border-radius:16px;text-align:center"><h3>ADMIN - STARLIFE</h3><input id="pw" type="password" placeholder="Password" style="width:100%;padding:10px;border-radius:10px;margin-top:12px"><button onclick="if(document.getElementById('pw').value==='Alfuu2024'){login.style.display='none';main.style.display='block';load()}else alert('Wrong')" style="width:100%;padding:10px;background:#7c3aed;color:#fff;border:none;border-radius:10px;margin-top:10px;font-weight:700">LOGIN</button></div><div id="main" style="display:none;max-width:600px;margin:0 auto"><h3>Pending Withdraws</h3><div id="p" style="margin-top:10px"></div><hr style="margin:15px 0;border-color:#334155"><h3>Approved</h3><div id="a" style="margin-top:10px"></div><hr style="margin:15px 0;border-color:#334155"><h3>Rejected</h3><div id="r" style="margin-top:10px"></div></div><script>function load(){let d=JSON.parse(localStorage.getItem('starlife_withdraw_requests')||'[]');let pe=d.filter(x=>x.status=='pending'),ap=d.filter(x=>x.status=='paid'),re=d.filter(x=>x.status=='rejected');document.getElementById('p').innerHTML=pe.length?pe.map(x=>`<div class=card><b>KES ${x.amount}</b> - ${x.username}<br>Phone: <b>${x.phone}</b> - ${x.name}<br><small>${x.id}</small><br><button onclick="approve('${x.id}')" style="background:green;color:#fff;padding:8px 12px;border:none;border-radius:8px;margin-top:6px">Approve</button> <button onclick="reject('${x.id}')" style="background:red;color:#fff;padding:8px 12px;border:none;border-radius:8px">Reject</button></div>`).join(''):'No pending';document.getElementById('a').innerHTML=ap.map(x=>`<div class=card>${x.username} - ${x.phone} - KES ${x.amount} - PAID</div>`).join('')||'None';document.getElementById('r').innerHTML=re.map(x=>`<div class=card>${x.username} - ${x.phone} - KES ${x.amount} - REJECTED</div>`).join('')||'None'}function approve(id){let d=JSON.parse(localStorage.getItem('starlife_withdraw_requests')||'[]');let i=d.findIndex(x=>x.id==id);d[i].status='paid';localStorage.setItem('starlife_withdraw_requests',JSON.stringify(d));load()}function reject(id){let d=JSON.parse(localStorage.getItem('starlife_withdraw_requests')||'[]');let i=d.findIndex(x=>x.id==id);d[i].status='rejected';localStorage.setItem('starlife_withdraw_requests',JSON.stringify(d));load()}</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADMIN - STARLIFE</title>
+<style>
+body{background:#000;color:#fff;font-family:system-ui;padding:12px}
+.box{background:#131a33;padding:20px;border-radius:12px;max-width:500px;margin:auto}
+input{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #333;background:#0a0e1f;color:#fff;box-sizing:border-box}
+button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;background:#6a5cff;color:#fff;font-weight:800}
+.card{background:#1d264d;padding:10px;border-radius:8px;margin:8px 0}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="box">
+<h2 style="text-align:center;color:#6a5cff">STARLIFE ADMIN ONLY</h2>
+
+<div id="loginA">
+<input id="au" placeholder="Admin Username">
+<input id="ap" type="password" placeholder="Admin Password">
+<button id="bA">LOGIN ADMIN</button>
+<p style="font-size:11px;text-align:center">Default: admin / admin123</p>
+</div>
+
+<div id="dashA" class="hide">
+<h3>Pending KSh 200 Payments</h3>
+<button id="bShow">🔄 REFRESH</button>
+<div id="list"></div>
+<button onclick="localStorage.clear();location.reload()" style="background:#333">Logout</button>
+</div>
+</div>
+
+<script>
+let G=()=>JSON.parse(localStorage.getItem('S')||'[]'), S=v=>localStorage.setItem('S',JSON.stringify(v));
+let loginA=document.getElementById('loginA'), dashA=document.getElementById('dashA');
+
+document.getElementById('bA').onclick=()=>{
+ if(au.value.trim()=='admin' && ap.value.trim()=='admin123'){
+   localStorage.setItem('ADMIN','yes');
+   loginA.classList.add('hide'); dashA.classList.remove('hide');
+   load();
+ } else alert('Wrong admin');
+};
+
+function load(){
+ let a=G(); let p=a.filter(x=>x.paid&&!x.ap);
+ document.getElementById('list').innerHTML=p.map(x=>`
+ <div class="card">
+ <b>${x.f}</b> (${x.u})<br>
+ Email: ${x.e}<br>
+ Phone: ${x.ph}<br>
+ CODE: <b style="color:yellow">${x.mc}</b><br>
+ Ref: ${x.ref||'NONE'}<br>
+ <button onclick="ap('${x.u}')">✅ APPROVE 200</button>
+ <button onclick="rj('${x.u}')" style="background:#a00">❌ REJECT</button>
+ </div>`).join('')||'No pending payments - hakuna mtu amelipa 200';
+}
+
+window.ap=u=>{
+ let a=G(); let m=a.find(x=>x.u==u); m.ap=1;
+ if(m.ref){let r=a.find(x=>x.u==m.ref); if(r) r.bal=(r.bal||0)+100}
+ S(a); alert(u+' APPROVED!'); load();
+};
+window.rj=u=>{let a=G().filter(x=>x.u!=u); S(a); alert('Rejected'); load()};
+
+document.getElementById('bShow').onclick=load;
+
+if(localStorage.getItem('ADMIN')=='yes'){loginA.classList.add('hide');dashA.classList.remove('hide');load()}
+</script>
+</body>
+</html>
