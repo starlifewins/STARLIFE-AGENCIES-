@@ -1,162 +1,58 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE</title>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES</title>
 <style>
-body{background:#0a0e1f;color:#fff;font-family:system-ui;padding:12px}
-.box{background:#131a33;padding:20px;border-radius:14px;max-width:420px;margin:auto}
-h2{text-align:center;color:#6a5cff;margin:5px}
-input{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #333;background:#0a0e1f;color:#fff;box-sizing:border-box}
-button{width:100%;padding:13px;margin:8px 0;border-radius:8px;border:none;background:#6a5cff;color:#fff;font-weight:800;font-size:15px}
-.hide{display:none}
-.pay{background:#0f1a3d;border:1px dashed #6a5cff;padding:12px;border-radius:8px;text-align:center;margin:10px 0}
-.card{background:#1d264d;padding:10px;border-radius:8px;margin:6px 0}
-a{color:#6a5cff}
-</style>
-</head>
-<body>
-<div class="box">
-<h2>STARLIFE AGENCIES</h2>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#070d22;color:#fff;display:flex;min-height:100vh}
+.sidebar{width:230px;background:#0a122c;padding:15px;position:fixed;height:100vh;overflow:auto}
+.sidebar h2{color:#a78bfa}.menu{margin-top:20px}.menu div{padding:12px 10px;border-radius:8px;margin:4px 0;cursor:pointer}.menu div.active{background:#6d28d9}
+.main{margin-left:230px;flex:1;padding:15px}
+.topbar{display:flex;justify-content:space-between;align-items:center;background:#0f1a3a;padding:12px;border-radius:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:15px 0}
+.card{padding:15px;border-radius:12px}
+.c1{background:linear-gradient(135deg,#2a1a6b,#6d28d9)}.c2{background:#0f2a5a}.c3{background:#0a3d2e}.c4{background:#5a3410}.c5{background:#4a1030}
+.grid2{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.box{background:#0f1a3a;padding:15px;border-radius:12px;margin:8px 0}
+button{padding:10px 14px;border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;width:100%;margin:5px 0}
+.purple{background:#6d28d9}.blue{background:#2563eb}.green{background:#16a34a}.orange{background:#ea580c}
+.linkbox{background:#000;padding:8px;border-radius:6px;font-size:12px;color:#22c55e;word-break:break-all}
+@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.grid2{grid-template-columns:1fr}}
+</style></head><body>
+<div class="sidebar"><h2>⭐ Starlife<br><small style="font-size:12px;color:#aaa">Agencies - Watch • Share • Earn</small></h2>
+<div class="menu"><div class="active">🏠 Dashboard</div><div>👤 My Profile</div><div>📦 Packages</div><div>🎁 Products</div><div>👁️ Viewers Report</div><div>💰 Earnings</div><div>👥 Referrals</div><div>📄 Payment History</div><div>🎧 Support</div><div>⚙️ Settings</div></div>
+<div class="box" style="margin-top:15px;background:#151f4a"><b style="color:#c084fc">Grow Your Network</b><p style="font-size:12px;margin:8px 0">Invite friends and build bigger team. Earn more!</p><button class="purple">🔗 Get Your Link</button></div>
+</div>
+<div class="main">
+<div class="topbar"><div><h2>Welcome back, <span id="uname">Naomy</span>! 👋<br><small style="font-size:12px;color:#aaa">Your hard work brings real rewards. Keep sharing, keep viewing and keep earning!</small></h2></div><div style="text-align:right"><h2>Starlife <span style="color:#a78bfa">Agencies</span></h2><small>Earn by Viewing • Advertise Products • Build Your Future</small></div></div>
 
-<!-- 1. SIGN UP -->
-<div id="s1">
-<input id="fn" placeholder="Full Name">
-<input id="un" placeholder="Username">
-<input id="em" type="email" placeholder="Email">
-<input id="ph" type="tel" placeholder="Phone Number">
-<input id="pw" type="password" placeholder="Password">
-<input id="pw2" type="password" placeholder="Confirm Password">
-<button id="bSignup">SIGN UP</button>
-<p style="text-align:center">Have account? <a href="#" id="toLogin">Log in</a></p>
+<div class="cards">
+<div class="card c1">💼 Total Earnings<br><b style="font-size:22px" id="earn">KSh 0</b><br><small>↑ 12% vs last 7 days</small></div>
+<div class="card c2">👁️ Total Viewers<br><b style="font-size:22px" id="view">0</b><br><small>↑ 18% vs last 7 days</small></div>
+<div class="card c3">📦 Active Packages<br><b style="font-size:22px">VIP</b><br><small id="exp">Expires: 12 Nov 2026</small></div>
+<div class="card c4">👥 Total Referrals<br><b style="font-size:22px" id="refs">0</b><br><small id="lvl">Level 1:0 | Level 2:0 | Level 3:0</small></div>
+<div class="card c5">⏰ Pending Payments<br><b style="font-size:22px" id="pend">KSh 0</b><br><small>Awaiting admin approval</small></div>
 </div>
 
-<!-- LOGIN -->
-<div id="l1" class="hide">
-<input id="lu" placeholder="Username">
-<input id="lp" type="password" placeholder="Password">
-<button id="bLogin">LOG IN</button>
-<p style="text-align:center">No account? <a href="#" id="toSignup">Sign up</a></p>
-</div>
+<div class="grid2">
+<div class="box"><b>Earnings Overview</b><canvas id="chart" height="140" style="width:100%;margin-top:10px"></canvas>
+<div style="margin-top:15px"><b>Your Packages</b>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+<div class="box" style="background:#12204a;border:1px solid #2563eb;text-align:center">👑 REGULAR<br>Fee KSh 200<br>Earn KSh 100/view<br><button class="blue" style="margin-top:8px">Active</button></div>
+<div class="box" style="background:#1a124a;border:1px solid #6d28d9;text-align:center">⭐ VIP<br>Fee KSh 250<br>Earn KSh 120/view<br><button class="purple" style="margin-top:8px">Active</button></div>
+<div class="box" style="background:#2a1f0a;border:1px solid #f59e0b;text-align:center">💎 GOLD<br>Fee KSh 500<br>Earn KSh 150/view<br><button style="background:#f59e0b;margin-top:8px">Upgrade</button></div>
+</div></div></div>
 
-<!-- 2. PAYMENT -->
-<div id="p1" class="hide">
-<h3 style="text-align:center">PAYMENT - KSh 200</h3>
-<div class="pay">
-<p>LIPA NA M-PESA PAYBILL</p>
-<p>Paybill: <b style="color:yellow;font-size:20px">714777</b></p>
-<p>Account: <b style="color:yellow;font-size:18px">440200282954</b></p>
-<p>Amount: <b>KSh 200</b></p>
+<div><div class="box"><b>Quick Actions</b>
+<button class="purple">🔗 Get Your Affiliate Link ></button>
+<button class="blue">📦 View Products ></button>
+<button class="green">👁️ Submit Viewers ></button>
+<button class="orange">💰 Request Withdrawal ></button>
 </div>
-<p>Baada ya kulipa, weka M-PESA CODE hapa chini:</p>
-<input id="mc" placeholder="M-PESA CODE e.g QJH...">
-<button id="bPay">SUBMIT CODE</button>
+<div class="box"><b>🔗 Your Referral Link</b><div class="linkbox" id="reflink">https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=naomy</div><button class="purple" style="width:auto;float:right;margin-top:5px" onclick="copyLink()">Copy</button><br><small style="color:#aaa">Share your link and earn commissions when others join</small></div>
+<div class="box"><b>⭐ Top Products</b><div style="display:flex;gap:10px;margin-top:8px"><div style="width:60px;height:60px;background:#222;border-radius:8px"></div><div>Smart TV 50"<br><small>Earn KSh 150/view</small><br><button class="purple" style="padding:6px">View Product</button></div></div></div>
 </div>
-
-<!-- 3. WAITING -->
-<div id="w1" class="hide">
-<h3>Waiting Approval</h3>
-<p>CODE: <b id="cShow" style="color:yellow"></b></p>
-<button id="bCheck">CHECK IF APPROVED</button>
-<button onclick="localStorage.clear();location.reload()">Logout</button>
 </div>
-
-<!-- 4. DASHBOARD - YESTERDAY -->
-<div id="d1" class="hide">
-<h3 id="hello"></h3>
-<div style="background:#1d264d;padding:12px;border-radius:8px">
-<p>Balance: KSh <b id="bal">0</b></p>
-<p>Referrals: <b id="refs">0</b></p>
-</div>
-<p>Your Referral Link:</p>
-<p id="rl" style="color:#0f0;font-size:11px;word-break:break-all;background:#000;padding:8px;border-radius:6px"></p>
-<button onclick="navigator.clipboard.writeText(document.getElementById('rl').innerText);alert('Copied')">COPY LINK</button>
-
-<div id="admin" class="hide" style="border:2px solid #6a5cff;padding:10px;margin-top:12px;border-radius:8px">
-<h4>ADMIN</h4>
-<button id="bShow">Show Activations</button>
-<div id="list"></div>
-</div>
-
-<h4 style="margin-top:15px">Withdraw</h4>
-<input id="wa" type="number" placeholder="Amount Min 300">
-<input id="wp" placeholder="M-Pesa Phone">
-<button id="bWith">REQUEST</button>
-<div id="wh" style="font-size:12px;margin-top:8px"></div>
-
-<button id="bLogout" style="background:#333;margin-top:15px">Logout</button>
-</div>
-
 </div>
 <script>
-let G=()=>JSON.parse(localStorage.getItem('S')||'[]'), S=v=>localStorage.setItem('S',JSON.stringify(v));
-let s1=document.getElementById('s1'), l1=document.getElementById('l1'), p1=document.getElementById('p1'), w1=document.getElementById('w1'), d1=document.getElementById('d1');
-
-toLogin.onclick=e=>{e.preventDefault();s1.classList.add('hide');l1.classList.remove('hide')};
-toSignup.onclick=e=>{e.preventDefault();l1.classList.add('hide');s1.classList.remove('hide')};
-
-bSignup.onclick=()=>{
- let fn=document.getElementById('fn').value.trim(), un=document.getElementById('un').value.trim(), em=document.getElementById('em').value.trim(), ph=document.getElementById('ph').value.trim(), pw=document.getElementById('pw').value.trim(), pw2=document.getElementById('pw2').value.trim();
- if(!fn||!un||!em||!ph||!pw||!pw2)return alert('Jaza zote');
- if(pw!==pw2)return alert('Password hazifanani');
- let a=G(); if(a.find(x=>x.u==un))return alert('Username taken');
- let ref=new URLSearchParams(location.search).get('ref')||'';
- a.push({f:fn,u:un,e:em,ph:ph,pw:pw,mc:'',paid:0,ap:0,bal:0,ref:ref}); S(a);
- localStorage.setItem('C',un);
- s1.classList.add('hide'); p1.classList.remove('hide');
-};
-
-bPay.onclick=()=>{
- let code=document.getElementById('mc').value.trim().toUpperCase(); if(code.length<4)return alert('Weka CODE');
- let cur=localStorage.getItem('C'); let a=G(); let me=a.find(x=>x.u==cur); me.mc=code; me.paid=1; S(a);
- p1.classList.add('hide'); w1.classList.remove('hide'); cShow.innerText=code;
-};
-
-bCheck.onclick=()=>{
- let cur=localStorage.getItem('C'); let me=G().find(x=>x.u==cur);
- if(me&&me.ap){w1.classList.add('hide');d1.classList.remove('hide');load(me.u)} else alert('Bado - Admin haja-approve');
-};
-
-bLogin.onclick=()=>{
- let un=lu.value.trim(), pw=lp.value.trim();
- if(un=='admin'&&pw=='admin123'){localStorage.setItem('C','admin');s1.classList.add('hide');l1.classList.add('hide');d1.classList.remove('hide');admin.classList.remove('hide');hello.innerText='Admin';rl.innerText=location.href.split('?')[0]+'?ref=admin';return}
- let me=G().find(x=>x.u==un&&x.pw==pw); if(!me)return alert('Wrong');
- localStorage.setItem('C',me.u);
- s1.classList.add('hide');l1.classList.add('hide');
- if(!me.paid)p1.classList.remove('hide');
- else if(!me.ap){w1.classList.remove('hide');cShow.innerText=me.mc}
- else{d1.classList.remove('hide');load(me.u)}
-};
-
-function load(u){
- let a=G(); let me=a.find(x=>x.u==u); if(!me)return;
- hello.innerText='Hello '+me.f;
- bal.innerText=me.bal||0;
- refs.innerText=a.filter(x=>x.ref==u).length;
- rl.innerText=location.origin+location.pathname+'?ref='+u;
-}
-
-bShow.onclick=()=>{
- let a=G(); let p=a.filter(x=>x.paid&&!x.ap);
- list.innerHTML=p.map(x=>`<div class="card">${x.f} (${x.u})<br>${x.ph}<br>CODE:<b style="color:yellow">${x.mc}</b> Ref:${x.ref||'NONE'}<br><button onclick="ap('${x.u}')">APPROVE</button> <button onclick="rj('${x.u}')">REJECT</button></div>`).join('')||'No pending';
-};
-window.ap=u=>{let a=G(); let m=a.find(x=>x.u==u); m.ap=1; if(m.ref){let r=a.find(x=>x.u==m.ref); if(r)r.bal=(r.bal||0)+100} S(a); alert(u+' approved'); bShow.click()};
-window.rj=u=>{let a=G().filter(x=>x.u!=u); S(a); bShow.click()};
-
-bWith.onclick=()=>{
- let amt=parseInt(wa.value), ph=wp.value.trim(); if(amt<300)return alert('Min 300');
- let cur=localStorage.getItem('C'); let w=JSON.parse(localStorage.getItem('W')||'[]'); w.push({u:cur,amt:amt,ph:ph}); localStorage.setItem('W',JSON.stringify(w)); alert('Requested');
-};
-
-bLogout.onclick=()=>{localStorage.removeItem('C');location.reload()};
-
-// auto
-let cur=localStorage.getItem('C');
-if(cur){
- let a=G(); if(cur=='admin'){s1.classList.add('hide');l1.classList.add('hide');d1.classList.remove('hide');admin.classList.remove('hide');hello.innerText='Admin';rl.innerText=location.origin+location.pathname+'?ref=admin'}
- else{let me=a.find(x=>x.u==cur); if(me){s1.classList.add('hide');l1.classList.add('hide'); if(!me.paid)p1.classList.remove('hide'); else if(!me.ap){w1.classList.remove('hide');cShow.innerText=me.mc} else{d1.classList.remove('hide');load(cur)}}}
-}
-</script>
-</body>
-                </html>
+function G(){return JSON.parse(localStorage.getItem('S')||'[]')}
+let curUser=localStorage.getItem('CU')||'naomy'; let users=G(); let me=users.find(x=>x.u==curUser)||{f:'Naomy',u:'naomy',bal:0};
+document.getElementById('uname').innerText=me.f.split(' ')[0]||'Naomy'; document.getElementById('earn').innerText='KSh '+(me.bal||0);
+document.getElementById('refs').innerText=users.filter(x=>x.ref==curUser).length; document.getElementById('reflink').innerText='https://starlif
