@@ -1,91 +1,40 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE AGENCIES</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#070e2a;color:#fff;display:flex}
-.side{width:280px;background:#0c1433;position:fixed;height:100vh;overflow:auto;padding:12px;border-right:1px solid #1a2550;z-index:99}
-.menu div{padding:9px 11px;border-radius:9px;margin:2px 0;cursor:pointer;color:#7a7fb0;font-size:12.5px;display:flex;gap:8px}
-.menu div.active{background:#5a33ff;color:#fff}.menu div:hover{background:#16204a;color:#fff}
-.main{margin-left:280px;flex:1;padding:14px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
-.card{padding:14px;border-radius:12px}.card b{font-size:18px;display:block}.c1{background:linear-gradient(135deg,#3b2aa8,#5a33ff)}.c2{background:linear-gradient(135deg,#1042a0,#1e6bff)}.c3{background:linear-gradient(135deg,#0a6a5a,#0bb88a)}.c4{background:linear-gradient(135deg,#a05a00,#ff8c00)}
-.box{background:#101a3e;border:1px solid #1e2d5e;padding:12px;border-radius:12px;margin-bottom:10px}
-.btn{padding:10px;border:none;border-radius:9px;background:#5a33ff;color:#fff;font-weight:700;width:100%;margin:5px 0;cursor:pointer}
-.btn2{width:auto;padding:6px 12px;font-size:12px}.sec{display:none}.sec.active{display:block}
-.link{background:#070e2a;border:1px solid #1e2d5e;padding:8px;border-radius:8px;color:#4ade80;font-size:11px;word-break:break-all}
-input{width:100%;padding:10px;background:#070e2a;border:1px solid #1e2d5e;color:#fff;border-radius:8px;margin:5px 0}
-@media(max-width:1000px){.side{transform:translateX(-100%);transition:.3s}.side.open{transform:translateX(0)}.main{margin-left:0}.cards{grid-template-columns:1fr 1fr}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
+body{background:#0a1028;color:#fff;display:flex}
+.side{width:285px;background:#0f1735;position:fixed;height:100vh;overflow:auto;padding:14px;border-right:1px solid #1e2a5a;z-index:99}
+.menu div{padding:10px 12px;border-radius:10px;margin:3px 0;cursor:pointer;color:#7a8ab0;font-size:13px;display:flex;gap:10px}
+.menu div.active{background:#5a33ff;color:#fff;font-weight:700}.menu div:hover{background:#1a244e;color:#fff}
+.main{margin-left:285px;flex:1;padding:0;background:#0a1028;min-height:100vh}
+.topbar{background:#0f1735;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2a5a}
+.welcome{padding:20px}.cards{padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:14px 0}
+.card{border-radius:14px;padding:16px}.card b{font-size:26px;display:block;margin:6px 0}
+.c1{background:linear-gradient(135deg,#4a2bc2,#3a1a8a);border:1px solid #5a3bd0}
+.c2{background:linear-gradient(135deg,#1e4bb5,#15367f);border:1px solid #2a5fd0}
+.c3{background:linear-gradient(135deg,#0f6b5a,#0a4d41);border:1px solid #14a080}
+.c4{background:linear-gradient(135deg,#b56a0a,#8a4f08);border:1px solid #d08015}
+.withdraw-btn{background:#1ecfa0;color:#003d2e;border:none;padding:6px 14px;border-radius:20px;font-weight:700;font-size:12px;margin-top:8px;cursor:pointer}
+.grid{padding:0 20px;display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+.box{background:#121c3f;border:1px solid #1e2a5a;border-radius:14px;padding:14px;margin-bottom:14px}
+.level-badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:800;display:inline-block}
+.l1{background:#7c3aed;color:#fff}.l2{background:#0ea5e9;color:#fff}.l3{background:#10b981;color:#fff}
+.link-box{background:#0a1028;border:1px solid #1e2a5a;padding:10px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;margin:10px 0}
+.copy-btn{background:#5a33ff;color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;cursor:pointer}
+.share-btn{background:#5a33ff;width:100%;border:none;padding:10px;border-radius:10px;color:#fff;font-weight:700;margin-top:8px;cursor:pointer}
+table{width:100%;border-collapse:collapse}th{color:#7a8ab0;font-size:11px;text-align:left;padding:8px}td{padding:10px 6px;font-size:12px;border-top:1px solid #1e2a5a}
+.status{background:#0f5d3a;color:#4ade80;padding:3px 10px;border-radius:20px;font-size:10px}
+.quick{display:grid;gap:8px}.quick button{padding:10px;border:none;border-radius:10px;color:#fff;font-weight:600;font-size:12px;text-align:left;cursor:pointer}
+.q1{background:linear-gradient(90deg,#5a33ff,#7c3aed)}.q2{background:linear-gradient(90deg,#0ea5e9,#2563eb)}.q3{background:linear-gradient(90deg,#10b981,#059669)}.q4{background:linear-gradient(90deg,#4f46e5,#3730a3)}.q5{background:linear-gradient(90deg,#be185d,#9d174d)}
+.banner{margin:14px 20px;background:linear-gradient(90deg,#4c1d95,#5a33ff,#4c1d95);border-radius:14px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.start-btn{background:#fff;color:#5a33ff;border:none;padding:8px 16px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer}
+.sec{display:none}.sec.active{display:block}
+input{width:100%;padding:10px;background:#0a1028;border:1px solid #1e2a5a;color:#fff;border-radius:8px;margin:6px 0}
+.btn{padding:10px;border:none;border-radius:10px;background:#5a33ff;color:#fff;font-weight:700;width:100%;margin:6px 0;cursor:pointer}
+canvas{width:100%!important;height:180px!important}
+@media(max-width:1100px){.cards{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.side{transform:translateX(-100%);transition:.3s}.side.open{transform:translateX(0)}.main{margin-left:0}}
 </style></head><body>
-<div class="side" id="side"><h2 style="color:#a78bfa;font-size:16px">⭐ STARLIFE AGENCIES</h2><small style="color:#7a7fb0">Affiliate Program</small>
-<div class="menu">
-<div class="active" onclick="nav('dash')">🏠 Dashboard</div>
-<div onclick="nav('click')">🖱️ Clink and Earn</div>
-<div onclick="nav('yt')">▶️ YouTube Videos</div>
-<div onclick="nav('tk')">🎵 TikTok Videos</div>
-<div onclick="nav('ig')">📸 Instagram Reels</div>
-<div onclick="nav('math')">➗ Maths 10Q</div>
-<div onclick="nav('triv')">🧠 Trivia 10Q</div>
-<div onclick="nav('avi')">✈️ Aviator Signals</div>
-<div onclick="nav('forex')">📈 Forex Classes</div>
-<div onclick="nav('odds')">⚽ Sure Odds</div>
-<div onclick="nav('payc')">💳 Pay for Client</div>
-<div onclick="nav('team')">👥 Team</div>
-<div style="border-top:1px solid #1a2550;margin:8px 0"></div>
-<b style="color:#fff;font-size:11px;padding:8px;display:block">💸 WITHDRAWALS</b>
-<div onclick="nav('wbal')">💰 Withdraw Balance</div>
-<div onclick="nav('wyt')">▶️ Withdraw YouTube</div>
-<div onclick="nav('wtk')">🎵 Withdraw TikTok</div>
-<div onclick="nav('wig')">📸 Withdraw Instagram</div>
-<div onclick="nav('wact')">🎯 Withdraw Activity</div>
-<div style="border-top:1px solid #1a2550;margin:8px 0"></div>
-<div onclick="nav('link')">🔗 Affiliate Link</div>
-<div onclick="nav('refs')">👥 Referrals</div>
-<div onclick="nav('sup')">🎧 Support</div>
-<div onclick="localStorage.clear();location.reload()" style="background:#3a1020">🚪 Logout</div>
-</div></div>
+<div class="side" id="side"><h2 style="color:#a78bfa">⭐ STARLIFE AGENCIES</h2><small style="color:#7a8ab0">Affiliate Program</small>
+<div class="menu"><div class="active" onclick="nav('dash')">🏠 Dashboard</div><div onclick="nav('click')">🖱️ Clink and Earn</div><div onclick="nav('yt')">▶️ YouTube Videos</div><div onclick="nav('tk')">🎵 TikTok Videos</div><div onclick="nav('ig')">📸 Instagram Reels</div><div onclick="nav('math')">➗ Maths 10Q</div><div onclick="nav('triv')">🧠 Trivia 10Q</div><div onclick="nav('avi')">✈️ Aviator Signals</div><div onclick="nav('forex')">📈 Free Forex Classes</div><div onclick="nav('odds')">⚽ Sure Odds</div><div onclick="nav('payc')">💳 Pay for Client</div><div onclick="nav('team')">👥 Team</div><div style="border-top:1px solid #1e2a5a;margin:10px 0"></div><b style="color:#fff;font-size:11px;padding:6px 10px;display:block">💸 WITHDRAWALS</b><div onclick="nav('wbal')">💰 Withdraw Balance</div><div onclick="nav('wyt')">▶️ Withdraw YouTube</div><div onclick="nav('wtk')">🎵 Withdraw TikTok</div><div onclick="nav('wig')">📸 Withdraw Instagram</div><div onclick="nav('wact')">🎯 Withdraw Activity</div><div style="border-top:1px solid #1e2a5a;margin:10px 0"></div><div onclick="nav('link')">🔗 My Affiliate Link</div><div onclick="nav('refs')">👥 My Referrals</div><div onclick="nav('sup')">🎧 Support</div><div onclick="localStorage.clear();location.reload()" style="background:#3a1020">🚪 Logout</div></div></div>
 
 <div class="main">
-<div style="display:flex;justify-content:space-between"><h3>👋 Hi <span id="un">Abraham</span> <small style="color:#7a7fb0">| <span id="baltop">KES 0</span></small></h3><span onclick="side.classList.toggle('open')" style="background:#101a3e;padding:6px 10px;border-radius:8px;cursor:pointer">☰</span></div>
-
-<div id="dash" class="sec active">
-<div class="cards">
-<div class="card c1">💰 Main Bal<b id="b1">KES 0</b><small>YouTube+TikTok+IG</small></div>
-<div class="card c2">▶️ YouTube<b id="b2">KES 0</b><small id="c2">0 videos</small></div>
-<div class="card c3">🎵 TikTok<b id="b3">KES 0</b><small id="c3">0 videos</small></div>
-<div class="card c4">📸 Instagram<b id="b4">KES 0</b><small id="c4">0 reels</small></div>
-</div>
-<div class="cards"><div class="card c1">🖱️ Clink<b id="b5">KES 0</b></div><div class="card c2">➗ Maths<b id="b6">KES 0</b></div><div class="card c3">🧠 Trivia<b id="b7">KES 0</b></div><div class="card c4">🎯 Activity Total<b id="b8">KES 0</b></div></div>
-<div class="box"><b>🔗 Link</b><div class="link" id="link"></div><button class="btn" onclick="navigator.clipboard.writeText(link.innerText);alert('Copied')">Copy</button></div>
-</div>
-
-<div id="click" class="sec"><div class="box"><h3>🖱️ Clink and Earn - KES 50 per click</h3><p>Balance: <b id="cb1">KES 0</b></p><button class="btn" onclick="addEarn('click',50)">CLICK TO EARN 50</button></div></div>
-<div id="yt" class="sec"><div class="box"><h3>▶️ YouTube - Earn 20 per video</h3><p>Balance: <b id="yb">KES 0</b> | <button class="btn btn2" onclick="nav('wyt')">Withdraw YouTube</button></p><div id="ytlist"></div></div></div>
-<div id="tk" class="sec"><div class="box"><h3>🎵 TikTok - Earn 20 per video</h3><p>Balance: <b id="tb">KES 0</b> | <button class="btn btn2" onclick="nav('wtk')">Withdraw TikTok</button></p><div id="tklist"></div></div></div>
-<div id="ig" class="sec"><div class="box"><h3>📸 Instagram Reels - Earn 20 per reel</h3><p>Balance: <b id="ib">KES 0</b> | <button class="btn btn2" onclick="nav('wig')">Withdraw IG</button></p><div id="iglist"></div></div></div>
-<div id="math" class="sec"><div class="box"><h3>➗ Maths 10Q - 10 per correct</h3><div id="mq"></div><button class="btn" onclick="startMath()">Start Maths</button><p>Balance: <b id="mb">KES 0</b></p></div></div>
-<div id="triv" class="sec"><div class="box"><h3>🧠 Trivia 10Q</h3><div id="tq"></div><button class="btn" onclick="startTriv()">Start Trivia</button><p>Balance: <b id="trb">KES 0</b></p></div></div>
-<div id="avi" class="sec"><div class="box"><h3>✈️ Aviator Signals</h3><div style="text-align:center"><div id="aviSig" style="font-size:38px;color:#0fcf7a;font-weight:800">2.45x</div><button class="btn" onclick="genAvi()">New Signal</button></div></div></div>
-<div id="forex" class="sec"><div class="box"><h3>📈 Forex Classes</h3><div id="fx"></div></div></div>
-<div id="odds" class="sec"><div class="box"><h3>⚽ Sure Odds 3.76</h3><p>Arsenal Over 1.5, Man City GG, Real Madrid Win</p></div></div>
-<div id="payc" class="sec"><div class="box"><h3>💳 Pay for Client</h3><input id="cname" placeholder="Client Name"><button class="btn" onclick="addEarn('click',100)">Pay & Earn 100</button></div></div>
-<div id="team" class="sec"><div class="box"><h3>👥 Team - 12 Referrals</h3></div></div>
-<div id="wbal" class="sec"><div class="box"><h3>💰 Withdraw Main Balance</h3><p>Available: <b id="wb1">KES 0</b></p><input id="wa1" placeholder="Amount Min 300"><input id="wp1" placeholder="M-Pesa 07..."><button class="btn" onclick="withdraw('main')">REQUEST WITHDRAWAL</button><div id="wh1"></div></div></div>
-<div id="wyt" class="sec"><div class="box"><h3>▶️ Withdraw YouTube</h3><p>YouTube Balance: <b id="wytb">KES 0</b></p><input id="wayt" placeholder="Amount Min 100"><input id="wpyt" placeholder="M-Pesa"><button class="btn" style="background:#ff0000" onclick="withdraw('yt')">WITHDRAW YOUTUBE</button><div id="whyt"></div></div></div>
-<div id="wtk" class="sec"><div class="box"><h3>🎵 Withdraw TikTok</h3><p>TikTok Balance: <b id="wtb">KES 0</b></p><input id="watk" placeholder="Amount Min 100"><input id="wptk" placeholder="M-Pesa"><button class="btn" style="background:#000" onclick="withdraw('tk')">WITHDRAW TIKTOK</button><div id="whtk"></div></div></div>
-<div id="wig" class="sec"><div class="box"><h3>📸 Withdraw Instagram</h3><p>Instagram Balance: <b id="wigb">KES 0</b></p><input id="waig" placeholder="Amount Min 100"><input id="wpig" placeholder="M-Pesa"><button class="btn" style="background:#E1306C" onclick="withdraw('ig')">WITHDRAW INSTAGRAM</button><div id="whig"></div></div></div>
-<div id="wact" class="sec"><div class="box"><h3>🎯 Withdraw Activity</h3><p>Activity Balance: <b id="wacb">KES 0</b></p><input id="waac" placeholder="Amount Min 100"><input id="wpac" placeholder="M-Pesa"><button class="btn" style="background:#0a6a5a" onclick="withdraw('act')">WITHDRAW ACTIVITY</button><div id="whac"></div></div></div>
-<div id="link" class="sec"><div class="box"><h3>🔗 Affiliate Link</h3><div class="link" id="link2"></div></div></div>
-<div id="refs" class="sec"><div class="box"><h3>Referrals</h3><p>12 referrals</p></div></div>
-<div id="sup" class="sec"><div class="box"><h3>Support</h3><p>0712 345 678</p></div></div>
-</div>
-<script>
-let K='STARV2',G=()=>JSON.parse(localStorage.getItem(K)||'{"main":3200,"yt":0,"tk":0,"ig":0,"click":0,"math":0,"triv":0,"hist":[]}'),S=o=>localStorage.setItem(K,JSON.stringify(o));
-function nav(id){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.menu div').forEach(d=>d.classList.remove('active'));if(event)event.target.classList.add('active');side.classList.remove('open');upd()}
-function addEarn(t,am){let d=G();d[t]=(d[t]||0)+am;if(t=='yt'||t=='tk'||t=='ig'){d.main=(d.main||0)+am}if(t=='click'||t=='math'||t=='triv'){d.main=(d.main||0)+am}d.hist.push({t,a:am});S(d);upd();alert('Earned KES '+am+' from '+t.toUpperCase())}
-function upd(){let d=G();let act=(d.click||0)+(d.math||0)+(d.triv||0);document.getElementById('b1').innerText='KES '+(d.main||0);document.getElementById('b2').innerText='KES '+(d.yt||0);document.getElementById('b3').innerText='KES '+(d.tk||0);document.getElementById('b4').innerText='KES '+(d.ig||0);document.getElementById('b5').innerText='KES '+(d.click||0);document.getElementById('b6').innerText='KES '+(d.math||0);document.getElementById('b7').innerText='KES '+(d.triv||0);document.getElementById('b8').innerText='KES '+act;document.getElementById('baltop').innerText='KES '+(d.main||0);document.getElementById('wb1').innerText='KES '+(d.main||0);document.getElementById('yb').innerText='KES '+(d.yt||0);document.getElementById('tb').innerText='KES '+(d.tk||0);document.getElementById('ib').innerText='KES '+(d.ig||0);document.getElementById('cb1').innerText='KES '+(d.click||0);document.getElementById('mb').innerText='KES '+(d.math||0);document.getElementById('trb').innerText='KES '+(d.triv||0);document.getElementById('wytb').innerText='KES '+(d.yt||0);document.getElementById('wtb').innerText='KES '+(d.tk||0);document.getElementById('wigb').innerText='KES '+(d.ig||0);document.getElementById('wacb').innerText='KES '+act;document.getElementById('link').innerText='https://starlife.agencies/ref/AbrahamKoech';document.getElementById('link2').innerText='https://starlife.agencies/ref/AbrahamKoech';}
-function withdraw(type){let d=G();let min=type=='main'?300:100;let map={main:'wa1',yt:'wayt',tk:'watk',ig:'waig',act:'waac'};let am=parseInt(document.getElementById(map[type]).value);let bal={main:d.main,yt:d.yt,tk:d.tk,ig:d.ig,act:(d.click||0)+(d.math||0)+(d.triv||0)}[type];if(!am||am<min)return alert('Min KES '+min);if(bal<am)return alert('Low balance KES '+bal);if(type=='main'){d.main-=am}else if(type=='yt'){d.yt-=am;d.main-=am}else if(type=='tk'){d.tk-=am;d.main-=am}else if(type=='ig'){d.ig-=am;d.main-=am}else if(type=='act'){let need=am;let take=Math.min(d.click||0,need);d.click-=take;need-=take;take=Math.min(d.math||0,need);d.math-=take;need-=take;take=Math.min(d.triv||0,need);d.triv-=take;d.main-=am}S(d);upd();let wh={main:'wh1',yt:'whyt',tk:'whtk',ig:'whig',act:'whac'}[type];document.getElementById(wh).innerHTML+='<div class=box>Withdraw KES '+am+' Pending</div>';alert('Withdraw KES '+am+' from '+type+' requested!')}
-function genAvi(){document.getElementById('aviSig').innerText=(Math.random()*8+1.2).toFixed(2)+'x'}
-function startMath(){let qs=[['5+7=?','12'],['10*2=?','20'],['15-6=?','9'],['8*8=?','64'],['100/4=?','25'],['9+9=?','18'],['12*3=?','36'],['20-8=?','12'],['7*6=?','42'],['50/5=?','10']];let h=qs.map((q,i)=>'<div>'+(i+1)+'. '+q[0]+' <input id=m'+i+' style="width:70px;padding:5px"></div>').join('')+'<button class=btn onclick="chkM()">Submit</button>';document.getElementById('mq').innerHTML=h;window.MQ=qs}
-function chkM(){let c=0;MQ.forEach((q,i)=>{if(document.getElementById('m'+i).value==q[1])c++});addEarn('math',c*10)}
-function startTriv(){let qs=[['Capital of Kenya?','Nairobi'],['2+2*2?','6'],['Largest planet?','Jupiter'],['Sky color?','Blue'],['Continents?','7'],['Fastest animal?','Cheetah'],['H2O?','Water'],['Sun from?','East'],['5*5?','25'],['Year?','2025']];let h=qs.map((q,i)=>'<div>'+(i+1)+'. '+q[0]+' <input id=t'+i+' style="width:80px;padding:5px"></div>').join('')+'<button class=btn onclick="chkT()">Submit</button>';document.getElementById('tq').innerHTML=h;window.TQ=qs}
-function chkT(){let c=0;TQ.forEach((q,i)=>{if(document.getElementById('t'+i).value.toLowerCase()==q[1].toLowerCase())c++});addEarn('triv',c*10)}
-function loadLists(){document.getElementById('ytlist').innerHTML=[1,2,3,4,5].map(i=>'<div class=box style="display:flex;justify-content:space-between">▶️ YT Video '+i+' <button class=btn style="width:auto;background:#ff0000;padding:6px 12px" onclick="addEarn(\'yt\',20)">Watch +20</button></div>').join('');document.getElementById('tklist').innerHTML=[1,2,3,4,5].map(i=>'<div class=box style="display:flex;justify-content:space-between">🎵 TikTok '+i+' <button class=btn style="width:auto;background:#000;padding:6px 12px" onclick="addEarn(\'tk\',20)">Watch +20</button></div>').join('');document.getElementById('iglist').innerHTML=[1,2,3,4,5].map(i=>'<div class=box style="display:flex;justify-content:space-between">📸 IG Reel '+i+' <button class=btn style="width:auto;background:#E1306C;padding:6px 12px" onclick="addEarn(\'ig\',20)">Watch +20</button></div>').join('');document.getElementById('fx').innerHTML=['Forex 1','Forex 2','Forex 3','Forex 4'].map(t=>'<div class=box>'+t+' <button class=btn style="width:auto" onclick="addEarn(\'click\',30)">Watch +30</button></div>').join('');}
-loadLists();upd();
-</script></body></html>
+<div class="topbar"><div style="display:flex;gap:10px;align-items:center"><span onclick="side.classList.toggle('open')" style="background:#1a244e;padding:6px 10px;border-radius:8px;cursor:pointer">☰</span><div style="background:#121c3f;border:1px solid #1e2a5a;padding:6px 12px;border-radius:10px;display:flex;gap:8px;align-items:center"><span>📅</span><div><small style="font-size:11px">Today</small><div style="font-size:12px;font-weight:700">Oct 6, 2025</div></div></div></div><div style="display:flex;gap:14px;align-items:center">🔔<div style="display:flex;gap:8px;align-items:center"><div style="width:32px;height:32px;background:#5a33ff;border-radius:50%;display:flex;align-items:center;justify-content:center">👤</div><div><div style="font-size:13px;font-weight:700">Abraham Koech</div><small style="color:#7a8ab0;font
