@@ -40,7 +40,6 @@ input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#0a0e1f
 </div>
 <div class="main">
 <div class="top"><b>Starlife</b><div style="display:flex;gap:8px"><b id="uname2">Guest</b><button onclick="toggleSide()" style="background:#1e293b;color:#fff;border:none;padding:8px 12px;border-radius:6px">☰</button></div></div>
-
 <div id="auth" class="card" style="max-width:430px;margin:20px auto">
 <h3 style="color:#a855f7;text-align:center">STARLIFE AGENCIES</h3>
 <div class="tab"><div id="tab1" class="active" onclick="showTab(1)">SIGN UP</div><div id="tab2" onclick="showTab(2)">LOG IN</div></div>
@@ -61,7 +60,6 @@ input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#0a0e1f
 <p style="font-size:11px;text-align:center;margin-top:8px;color:#94a3b8">admin / admin123</p>
 </div>
 </div>
-
 <div id="pay" class="card hide" style="max-width:430px;margin:20px auto;text-align:center">
 <h3 style="color:#22c55e">✅ Account Created!</h3>
 <p style="margin:10px 0">Hi <b id="pname"></b>, pay <b>KSh 150</b></p>
@@ -70,7 +68,6 @@ input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#0a0e1f
 <input id="mc" placeholder="M-PESA CODE *" style="border:2px solid #22c55e;text-transform:uppercase">
 <button class="btn g" onclick="submitPay()">SUBMIT CODE</button>
 </div>
-
 <div id="wait" class="card hide" style="max-width:430px;margin:20px auto;text-align:center">
 <h2 style="color:#facc15">⏳ Waiting Approval</h2>
 <p style="margin:12px 0">Hi <b id="wname"></b> CODE <b id="wcode" style="color:#22c55e"></b></p>
@@ -78,7 +75,6 @@ input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#0a0e1f
 <button class="btn y" onclick="checkStatus()">CHECK IF APPROVED</button><br><br>
 <button class="btn r" onclick="logout()">Logout</button>
 </div>
-
 <div id="app" class="hide">
 <div id="d">
 <div style="background:linear-gradient(90deg,#2d4bff,#6a3aff,#b23cff,#00d4ff);border-radius:14px;margin:12px;padding:16px;display:flex;justify-content:space-between"><div><h2>Welcome <span id="hu">Member</span>! 👋</h2><small id="status">ACTIVE</small></div><div style="font-size:36px">🤝</div></div>
@@ -90,37 +86,7 @@ input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#0a0e1f
 </div>
 <div class="card"><b>Your Referral Link</b><p id="rl" style="font-size:11px;color:#22c55e;background:#0a0e1f;padding:8px;border-radius:6px;word-break:break-all;margin:8px 0"></p><button class="btn y" onclick="copyR()">Copy Link</button></div>
 </div>
-
 <div id="prod" class="hide"><div class="card"><h3>📦 Products</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div style="background:#0f1429;border:1px solid #1e293b;border-radius:12px;padding:10px;text-align:center"><img src="https://images.unsplash.com/photo-1593359677879-a4bb92f367d8?w=300" style="width:100%;height:80px;object-fit:cover;border-radius:8px"><b>Smart TV</b><br><button class="btn y" style="margin-top:6px" onclick="downloadP('TV')">⬇️ Download</button></div><div style="background:#0f1429;border:1px solid #1e293b;border-radius:12px;padding:10px;text-align:center"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300" style="width:100%;height:80px;object-fit:cover;border-radius:8px"><b>Laptop</b><br><button class="btn y" style="margin-top:6px" onclick="downloadP('Laptop')">⬇️ Download</button></div></div></div></div>
-
 <div id="view" class="hide"><div class="card"><h3>📊 Viewers</h3><input id="vc" type="number" placeholder="Viewers e.g. 100"><button class="btn g" onclick="submitV()">Submit - Earn 100/view</button></div></div>
-
 <div id="aff" class="hide"><div class="card"><h3>🔗 Affiliate</h3><p id="rl2" style="color:#22c55e;font-size:11px;word-break:break-all;background:#0a0e1f;padding:6px;border-radius:6px"></p><button class="btn y" onclick="copyR()">COPY</button><div id="rlist" style="font-size:11px"></div></div></div>
-
-<div id="ref" class="hide"><div class="card"><h3>👥 Referrals 100/20/30</h3><div id="rlist2"></div></div></div>
-
-<div id="payh" class="hide"><div class="card"><h3>💳 Withdraw Min 300</h3>Bal <b id="bal2">KSh 0</b><input id="wamt" type="number" placeholder="Amount"><input id="wph" placeholder="M-Pesa Phone"><button class="btn y" onclick="doW()">REQUEST WITHDRAW</button><div id="wlist" style="font-size:11px;margin-top:8px"></div></div></div>
-
-<div id="a" class="hide"><div class="card"><h3>👑 Admin - Activation & Withdraw</h3>
-<div class="tab"><div id="atab1" class="active" onclick="showATab(1)">ACTIVATIONS</div><div id="atab2" onclick="showATab(2)">WITHDRAWS</div></div>
-<div id="abox1"><h4 style="color:#22c55e">Pending M-PESA CODE Activations</h4><div id="aal" style="margin-top:8px"></div></div>
-<div id="abox2" class="hide"><h4 style="color:#facc15">Pending Withdraw Requests</h4><div id="awl" style="margin-top:8px"></div></div>
-</div></div>
-
-</div>
-</div>
-
-<script>
-document.getElementById('s').classList.add('mhide');
-let rp=new URLSearchParams(location.search).get('ref');
-if(rp){document.getElementById('rb').classList.remove('hide');document.getElementById('rbn').innerText=rp}
-function toggleSide(){let s=document.getElementById('s');s.classList.toggle('open');s.classList.toggle('mhide');}
-function showTab(n){document.getElementById('signupBox').classList.toggle('hide',n!=1);document.getElementById('loginBox').classList.toggle('hide',n!=2);document.getElementById('tab1').classList.toggle('active',n==1);document.getElementById('tab2').classList.toggle('active',n==2);}
-function showATab(n){document.getElementById('abox1').classList.toggle('hide',n!=1);document.getElementById('abox2').classList.toggle('hide',n!=2);document.getElementById('atab1').classList.toggle('active',n==1);document.getElementById('atab2').classList.toggle('active',n==2);}
-function su(){let fn=document.getElementById('fn').value.trim(),un=document.getElementById('un').value.trim(),em=document.getElementById('em').value.trim(),ph=document.getElementById('ph').value.trim(),ps=document.getElementById('ps').value.trim(),cps=document.getElementById('cps').value.trim();if(!fn||!un||!em||!ph||!ps||!cps){alert('Jaza zote 6');return}if(em.indexOf('@')==-1){alert('Email must have @');return}if(ps!=cps){alert('Password mismatch');return}let us=[];try{us=JSON.parse(localStorage.getItem('u')||'[]')}catch(e){us=[]}if(us.find(x=>x.f.toLowerCase()==un.toLowerCase())){alert('Username taken');showTab(2);return}us.push({f:un,fn:fn,em:em,ph:ph,pw:ps,ref:rp||null,ac:false,paid:false,ex:0,mc:''});localStorage.setItem('u',JSON.stringify(us));localStorage.setItem('c',un);alert('Account '+un+' created!');document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.remove('hide');document.getElementById('pname').innerText=un;}
-function submitPay(){let m=document.getElementById('mc').value.trim().toUpperCase();if(m.length<5){alert('Enter M-PESA CODE');return}let us=JSON.parse(localStorage.getItem('u')||'[]');if(us.find(x=>x.mc==m&&m!='')){alert('CODE used');return}let c=localStorage.getItem('c');let me=us.find(x=>x.f==c);me.mc=m;me.paid=true;me.ac=false;localStorage.setItem('u',JSON.stringify(us));alert('CODE '+m+' received');document.getElementById('pay').classList.add('hide');showWait(me);}
-function showWait(me){document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.add('hide');document.getElementById('app').classList.add('hide');document.getElementById('wait').classList.remove('hide');document.getElementById('wname').innerText=me.f;document.getElementById('wcode').innerText=me.mc;document.getElementById('wcode2').innerText=me.mc;document.getElementById('wphone').innerText=me.ph;}
-function checkStatus(){let c=localStorage.getItem('c');let us=JSON.parse(localStorage.getItem('u')||'[]');let me=us.find(x=>x.f==c);if(me.ac){alert('Approved!');document.getElementById('wait').classList.add('hide');showApp();}else{alert('Still pending: '+me.mc);}}
-function li(){let un=document.getElementById('lu').value.trim(),ps=document.getElementById('lp').value.trim();if(!un||!ps){alert('Enter both');return}if(un=='admin'&&ps=='admin123'){localStorage.setItem('c','admin');document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.add('hide');document.getElementById('wait').classList.add('hide');showApp();return}let us=JSON.parse(localStorage.getItem('u')||'[]');let f=us.find(x=>x.f==un&&x.pw==ps);if(!f){alert('Wrong, sign up first');showTab(1);return}localStorage.setItem('c',f.f);if(!f.paid){document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.remove('hide');document.getElementById('pname').innerText=f.f;return}if(!f.ac){showWait(f);return}showApp();}
-function showApp(){document.getElementById('auth').classList.add('hide');document.getElementById('pay').classList.add('hide');document.getElementById('wait').classList.add('hide');document.getElementById('app').classList.remove('hide');load();}
-function load(){let c=localStorage.getItem('c');if(!c)return;if(c=='admin'){document.getElementById('hu').innerText='ADMIN';document.getElementById('uname2').innerText='ADMIN';document.getElementById('am').classList.remove('hide');document.getElementById('
+<div id="ref" class="hide"><div class="card"><h3>👥 Referrals 100
