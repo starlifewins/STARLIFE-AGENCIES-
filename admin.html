@@ -1,33 +1,26 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN - STARLIFE</title>
-<style>body{background:#000;color:#fff;font-family:system-ui;padding:10px}.box{background:#111a33;padding:15px;border-radius:12px;max-width:600px;margin:auto}button{padding:10px 15px;border:none;border-radius:6px;background:#6a5cff;color:#fff;font-weight:700;margin:5px}.card{background:#1d264d;padding:12px;border-radius:10px;margin:10px 0}.tab{display:flex;gap:5px;margin:10px 0}.tab button{background:#222}.tab button.active{background:#6a5cff}</style>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-</head><body><div class="box">
-<h2 style="text-align:center;color:#6a5cff">STARLIFE SUPER ADMIN</h2>
-<div class="tab"><button id="t1" class="active" onclick="showTab('pending')">Pending Join</button><button id="t2" onclick="showTab('all')">All Clients</button><button id="t3" onclick="showTab('withdraw')">Withdrawals</button></div>
-<div id="list">Loading...</div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN</title>
+<style>body{background:#000;color:#fff;font-family:system-ui;padding:8px}.box{background:#121a33;padding:12px;border-radius:12px;max-width:600px;margin:auto}button{padding:10px 14px;border:none;border-radius:7px;background:#6a5cff;color:#fff;font-weight:700;margin:4px}.card{background:#1e284d;padding:10px;border-radius:9px;margin:9px 0;border-left:4px solid #6a5cff}.tabs{display:flex;gap:4px}.tabs button{background:#222}.tabs button.on{background:#6a5cff}</style></head><body>
+<div class="box"><h2 style="text-align:center;color:#6a5cff;margin:5px">STARLIFE ADMIN</h2>
+<div class="tabs"><button id="b1" class="on" onclick="setTab('pending')">PENDING</button><button id="b2" onclick="setTab('all')">ALL JOINED</button><button id="b3" onclick="setTab('wd')">WITHDRAW</button></div>
+<button onclick="location.reload()" style="width:100%;margin-top:8px">🔄 REFRESH</button>
+<div id="list"></div></div>
 <script>
-const firebaseConfig = { apiKey: "AIzaSyDummy", authDomain: "starlife-123.firebaseapp.com", databaseURL: "https://starlife-123-default-rtdb.firebaseio.com", projectId: "starlife-123" };
-firebase.initializeApp(firebaseConfig); const db=firebase.database();
-let currentTab='pending';
-function showTab(t){currentTab=t; document.querySelectorAll('.tab button').forEach(b=>b.classList.remove('active')); document.getElementById(t=='pending'?'t1':t=='all'?'t2':'t3').classList.add('active'); loadData();}
-function loadData(){
- db.ref('users').on('value', snap=>{
-  let users=[]; snap.forEach(c=>{users.push({key:c.key, ...c.val()})});
-  let filtered = currentTab=='pending' ? users.filter(u=>u.paid==1 && !u.approved) : currentTab=='withdraw' ? users.filter(u=>u.withdrawReq) : users;
-  let html = filtered.length==0 ? '<p style="text-align:center;color:#888">No data in '+currentTab+'</p>' : '';
-  filtered.forEach(u=>{
-    html+=`<div class="card"><b>${u.fullname||''}</b> (${u.username})<br>Phone:${u.phone||''}<br>Code:<b style="color:yellow">${u.mpesa||''}</b><br>Bal: KSh ${u.balance||0}<br>
-    ${currentTab=='pending'?`<button onclick="approveUser('${u.key}','${u.referredBy||''}')">✅ APPROVE 200</button>`:''}
-    ${currentTab=='withdraw'?`<b>Withdraw: ${u.withdrawReq} KSh</b><br><button onclick="approveWithdraw('${u.key}')">✅ APPROVE WITHDRAW</button><button onclick="rejectWithdraw('${u.key}')" style="background:red">REJECT</button>`:''}
-    ${currentTab=='all'?`<small>Approved:${u.approved?'YES':'NO'} | Ref:${u.referredBy||'none'}</small>`:''}
-    </div>`;
-  });
-  document.getElementById('list').innerHTML=html;
+function G(){return JSON.parse(localStorage.getItem('S')||'[]')}function SV(v){localStorage.setItem('S',JSON.stringify(v))}
+let tab='pending';
+function setTab(t){tab=t; document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('on')); document.getElementById(t=='pending'?'b1':t=='all'?'b2':'b3').classList.add('on'); render();}
+function render(){
+ let all=G(); let box=document.getElementById('list');
+ let list = tab=='pending'? all.filter(x=>x.paid==1 && x.ap!=1) : tab=='wd'? all.filter(x=>x.wdReq) : all;
+ if(list.length==0){box.innerHTML='<p style="text-align:center;color:#888;padding:15px">No '+tab+' on this phone.<br><br>CLIENT lazima ajisajili kwa SIMU HII ndio umuone hapa.<br><small>GitHub haiunganishi simu mbili bila Firebase</small></p>';return;}
+ box.innerHTML='';
+ list.forEach(u=>{
+  let d=document.createElement('div'); d.className='card';
+  d.innerHTML='<b>'+u.f+'</b> ('+u.u+')<br>Phone:'+(u.ph||'')+'<br>Code:<b style="color:yellow">'+(u.mc||'')+'</b><br>Bal: '+(u.bal||0)+ (u.wdReq?' <br><b style="color:#ff6b6b">Wants WD: '+u.wdReq+'</b>':'')+'<br>';
+  if(tab=='pending'){let b=document.createElement('button'); b.textContent='✅ APPROVE JOIN'; b.onclick=function(){let a=G();let m=a.find(x=>x.u==u.u);m.ap=1;if(m.ref){let r=a.find(x=>x.u==m.ref);if(r)r.bal=(r.bal||0)+100}SV(a);render()}; d.appendChild(b);}
+  if(tab=='wd'){let b1=document.createElement('button'); b1.textContent='✅ APPROVE WD'; b1.onclick=function(){let a=G();let m=a.find(x=>x.u==u.u);m.bal=(m.bal||0)-(m.wdReq||0);m.wdReq=null;SV(a);render()}; let b2=document.createElement('button'); b2.textContent='REJECT'; b2.style.background='red'; b2.onclick=function(){let a=G();let m=a.find(x=>x.u==u.u);m.wdReq=null;SV(a);render()}; d.appendChild(b1); d.appendChild(b2);}
+  if(tab=='all'){let s=document.createElement('small'); s.textContent=' Status: '+(u.ap?'Approved':'Not Approved')+' | Ref:'+(u.ref||'none'); d.appendChild(s);}
+  box.appendChild(d);
  });
 }
-function approveUser(key,ref){ db.ref('users/'+key).update({approved:true}); if(ref){ db.ref('users').orderByChild('username').equalTo(ref).once('value',s=>{s.forEach(c=>{let b=(c.val().balance||0)+100; db.ref('users/'+c.key).update({balance:b})})}) } alert('Approved!'); }
-function approveWithdraw(key){ db.ref('users/'+key).once('value',s=>{let u=s.val(); let newBal=(u.balance||0)-(u.withdrawReq||0); db.ref('users/'+key).update({balance:newBal, withdrawReq:null, lastWithdraw:u.withdrawReq}); alert('Withdrawal Approved!');})}
-function rejectWithdraw(key){ db.ref('users/'+key).update({withdrawReq:null}); alert('Rejected'); }
-showTab('pending');
+render();
 </script></body></html>
