@@ -1,44 +1,31 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE AGENCIES</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#070d22;color:#fff;display:flex;min-height:100vh}
-.sidebar{width:240px;background:#0a122c;padding:15px;position:fixed;height:100vh;overflow:auto;z-index:99}
-.sidebar h2{color:#a78bfa}
-.menu div{padding:12px;border-radius:8px;margin:5px 0;cursor:pointer;background:#0f1a3a}
-.menu div.active,.menu div:hover{background:#6d28d9}
-.main{margin-left:240px;flex:1;padding:15px}
-.topbar{display:flex;justify-content:space-between;background:#0f1a3a;padding:12px;border-radius:12px;align-items:center}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:15px 0}
-.card{padding:15px;border-radius:12px}
-.c1{background:linear-gradient(135deg,#2a1a6b,#6d28d9)}.c2{background:#0f2a5a}.c3{background:#0a3d2e}.c4{background:#5a3410}.c5{background:#4a1030}
-.box{background:#0f1a3a;padding:15px;border-radius:12px;margin:10px 0}
-button{padding:12px;border:none;border-radius:8px;background:#6d28d9;color:#fff;font-weight:800;width:100%;margin:6px 0;cursor:pointer}
-input{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none;background:#1c2447;color:#fff}
-.sec{display:none}.sec.active{display:block}
-.linkbox{background:#000;padding:10px;border-radius:8px;color:#22c55e;word-break:break-all;font-size:12px}
-table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #222;font-size:13px;text-align:left}
-@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.3s;position:fixed}.sidebar.open{transform:translateX(0)}.main{margin-left:0}}
-</style></head><body>
-<div class="sidebar" id="side"><h2>⭐ Starlife Agencies</h2>
-<div class="menu">
-<div class="active" onclick="go('dash')">🏠 Dashboard</div>
-<div onclick="go('profile')">👤 My Profile</div>
-<div onclick="go('packages')">📦 Packages</div>
-<div onclick="go('products')">🎁 Products</div>
-<div onclick="go('viewers')">👁️ Viewers Report</div>
-<div onclick="go('earnings')">💰 Earnings</div>
-<div onclick="go('referrals')">👥 Referrals</div>
-<div onclick="go('payments')">📄 Payment History</div>
-<div onclick="go('support')">🎧 Support</div>
-<div onclick="go('settings')">⚙️ Settings</div>
-<div onclick="logout()" style="background:#3a1010;margin-top:25px">🚪 Logout</div>
-</div></div>
-<div class="main">
-<div class="topbar"><div><span onclick="document.getElementById('side').classList.toggle('open')" style="cursor:pointer">☰ </span>Welcome, <b id="uname">Naomy</b></div><div>Starlife</div></div>
-
-<div id="sec-dash" class="sec active">
-<div class="cards">
-<div class="card c1">Total Earnings<br><b id="earn">KSh 0</b></div>
-<div class="card c2">Viewers<br><b id="view">0</b></div
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name=viewport content="width=device-width,initial-scale=1"><title>STARLIFE</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}body{background:#070d22;color:#fff;display:flex}.s{width:220px;background:#0a122c;padding:12px;position:fixed;height:100vh;overflow:auto;z-index:9}.s h2{color:#a78bfa}.m div{padding:11px;border-radius:8px;margin:4px 0;background:#0f1a3a;cursor:pointer}.m div:hover{background:#6d28d9}.main{margin-left:220px;flex:1;padding:12px}.box{background:#0f1a3a;padding:12px;border-radius:10px;margin:8px 0}button{width:100%;padding:11px;border:none;border-radius:8px;background:#6d28d9;color:#fff;font-weight:700;margin:5px 0}input{width:100%;padding:11px;border:none;border-radius:8px;background:#1c2447;color:#fff;margin:5px 0}.sec{display:none}.sec.a{display:block}.cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}.card{padding:12px;border-radius:10px;background:#2a1a6b}.lk{background:#000;padding:8px;color:#0f0;font-size:11px;word-break:break-all}</style></head><body>
+<div class=s id=sb><h2>⭐ Starlife</h2><div class=m><div onclick="g('d')">🏠 Dash</div><div onclick="g('p')">👤 Profile</div><div onclick="g('k')">📦 Packages</div><div onclick="g('r')">🎁 Products</div><div onclick="g('v')">👁️ Viewers</div><div onclick="g('e')">💰 Earnings</div><div onclick="g('f')">👥 Referrals</div><div onclick="g('w')">📄 Payments</div><div onclick="g('s')">🎧 Support</div><div onclick="g('t')">⚙️ Settings</div><div onclick="localStorage.clear();location.reload()" style="background:#3a1010">🚪 Logout</div></div></div>
+<div class=main><div class=box><span onclick="sb.classList.toggle('a')" style="cursor:pointer">☰</span> Hi <b id=n>Naomy</b> | <span id=b>KSh 0</span></div>
+<div id=d class="sec a"><div class=cards><div class=card>Earn<br><b id=e1>0</b></div><div class=card>Viewers<br><b id=e2>0</b></div><div class=card>Refs<br><b id=e3>0</b></div><div class=card>Pkg<br><b id=e4>VIP</b></div></div><div class=box>Link<div class=lk id=l></div><button onclick="navigator.clipboard.writeText(l.innerText);alert('Copied')">COPY</button></div><div class=box><button onclick="g('r')">View Products</button><button onclick="g('v')">Add Viewer</button><button onclick="g('w')">Withdraw</button></div></div>
+<div id=p class=sec><div class=box><h3>Profile</h3><p id=pi></p><input id=up placeholder="New Phone"><button onclick="uP()">Update</button></div></div>
+<div id=k class=sec><div class=box><h3>Packages</h3><button onclick="bP('REGULAR')">REGULAR 200</button><button onclick="bP('VIP')">VIP 250</button><button onclick="bP('GOLD')">GOLD 500</button></div></div>
+<div id=r class=sec><div class=box><h3>Products</h3><div id=rl></div></div></div>
+<div id=v class=sec><div class=box><h3>Viewers</h3><input id=vn placeholder="Name"><button onclick="aV()">Submit +100</button><div id=vl></div></div></div>
+<div id=e class=sec><div class=box><h3>Earnings</h3><div id=el></div></div></div>
+<div id=f class=sec><div class=box><h3>Referrals</h3><div id=fl></div></div></div>
+<div id=w class=sec><div class=box><h3>Withdraw</h3><input id=wa placeholder="Amount min 300"><input id=wp placeholder="M-Pesa"><button onclick="rW()">REQUEST</button><div id=wl></div></div></div>
+<div id=s class=sec><div class=box><h3>Support</h3><p>WhatsApp: 0712xxxx</p></div></div>
+<div id=t class=sec><div class=box><h3>Settings</h3><input id=np type=password placeholder="New Pass"><button onclick="cP()">Change</button></div></div>
+</div>
+<script>
+G=()=>JSON.parse(localStorage.S||'[]');S=v=>localStorage.S=JSON.stringify(v);U=()=>localStorage.C||'naomy';
+function g(x){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('a'));document.getElementById(x).classList.add('a')}
+function L(){let a=G();let m=a.find(x=>x.u==U());if(!m){m={f:'Naomy Guest',u:U(),ph:'0712',bal:0,pkg:'VIP',vw:[],er:[],py:[]};a.push(m);S(a)}n.innerText=m.f.split(' ')[0];b.innerText='KSh '+(m.bal||0);e1.innerText=m.bal;e2.innerText=m.vw.length;e3.innerText=a.filter(x=>x.ref==U()).length;e4.innerText=m.pkg;l.innerText='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+U();pi.innerHTML='Name:'+m.f+'<br>User:'+m.u+'<br>Phone:'+m.ph+'<br>Bal:'+m.bal;wp.value=m.ph;R();V();E();F();W()}
+function uP(){let a=G(),m=a.find(x=>x.u==U());m.ph=up.value||m.ph;S(a);L()}
+function bP(p){let a=G(),m=a.find(x=>x.u==U());m.pkg=p;S(a);L();alert(p+' Active')}
+function R(){rl.innerHTML=[1,2,3].map(i=>'<div class=box>Product '+i+' <button onclick="vP('+i+')">View +100</button></div>').join('')}
+function vP(i){let a=G(),m=a.find(x=>x.u==U());m.bal+=100;m.er.push('Product '+i+' +100');S(a);L()}
+function aV(){let a=G(),m=a.find(x=>x.u==U());if(!vn.value)return;m.vw.push(vn.value);m.bal+=100;m.er.push(vn.value+' +100');S(a);L();V()}
+function V(){let m=G().find(x=>x.u==U());vl.innerHTML=m.vw.map(x=>'<div class=box>'+x+'</div>').join('')}
+function E(){let m=G().find(x=>x.u==U());el.innerHTML=m.er.map(x=>'<div class=box>'+x+'</div>').join('')}
+function F(){let a=G(),r=a.filter(x=>x.ref==U());fl.innerHTML=r.map(x=>'<div class=box>'+x.f+'-'+x.u+'</div>').join('')||'No refs'}
+function rW(){let a=G(),m=a.find(x=>x.u==U());let am=parseInt(wa.value);if(am<300||m.bal<am)return alert('Low or min 300');m.bal-=am;m.py.push(am+' Pending');S(a);L();W()}
+function W(){let m=G().find(x=>x.u==U());wl.innerHTML=m.py.map(x=>'<div class=box>'+x+'</div>').join('')}
+function cP(){let a=G(),m=a.find(x=>x.u==U());m.pass=np.value;S(a);alert('Changed')}
+L()
+</script></body></html>
