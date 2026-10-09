@@ -1,40 +1,64 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STARLIFE</title>
-<style>body{font-family:Arial;background:#f0f2f5;margin:0;padding:10px}.card{background:#fff;padding:12px;border-radius:12px;margin:10px 0}button{padding:12px;border:0;border-radius:8px;background:#000;color:#fff;font-weight:700;width:100%;margin-top:6px}input,select{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc;box-sizing:border-box}</style></head><body>
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE AGENCIES</title>
+<style>body{font-family:Arial;background:#f0f2f5;margin:0;padding:10px}.card{background:#fff;padding:14px;border-radius:12px;margin:10px 0;box-shadow:0 2px 8px #0001}button{padding:12px;border:0;border-radius:8px;background:#000;color:#fff;font-weight:700;width:100%;margin-top:8px}input,select{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc;box-sizing:border-box}.paybox{background:#e8f8f5;border:2px dashed #27ae60;padding:10px;border-radius:10px;text-align:center;font-weight:800}</style></head><body>
 <h2>⭐ STARLIFE AGENCIES</h2>
-<div id="auth" class="card"><h3>Join / Login</h3>
-<input id="jName" placeholder="Full Name"><input id="jPhone" placeholder="Phone 07..."><input id="jPass" type="password" placeholder="Password (remember this)">
-<select id="jPkg"><option value="200|100">Regular 200</option><option value="350|120">VIP 350</option><option value="500|150">GOLD 500</option></select>
-<input id="jMpesa" placeholder="M-Pesa Code"><button onclick="join()">JOIN NOW</button><button onclick="login()" style="background:#444">LOGIN (Use same phone & password)</button><div id="loginHelp" style="color:red;font-size:12px;margin-top:6px"></div></div>
+<div class="paybox">PAYBILL 714777 ACC 440200282954 - 0762221240</div>
+<div id="auth" class="card">
+<h3>Join / Login</h3>
+<input id="jName" placeholder="Full Name">
+<input id="jPhone" placeholder="Phone 07...">
+<input id="jPass" type="password" placeholder="Password (remember!)">
+<select id="jPkg"><option value="200|100">Regular 200 - 100/view</option><option value="350|120">VIP 350 - 120/view</option><option value="500|150">GOLD 500 - 150/view</option></select>
+<input id="jMpesa" placeholder="M-Pesa Code">
+<button onclick="join()">JOIN NOW</button>
+<button onclick="login()" style="background:#444">LOGIN</button>
+<div id="loginHelp" style="color:red;font-size:13px;margin-top:6px"></div>
+</div>
 <div id="dash" style="display:none"></div>
 <script>
-let D=JSON.parse(localStorage.getItem('STAR_V7')||'{"users":[],"withdraws":[],"subs":[],"curr":null}');
-let U=null;const ADMIN_WA='254762221240';
-function save(){localStorage.setItem('STAR_V7',JSON.stringify(D))}
-function hash(p){return btoa(unescape(encodeURIComponent(p)))}
-function join(){const n=jName.value.trim(),ph=jPhone.value.trim(),pa=jPass.value.trim(),pkg=jPkg.value,code=jMpesa.value.trim();
-if(!n||!ph||!pa||!code){alert('Jaza zote');return}
-if(D.users.find(u=>u.phone===ph)){alert('Huyu alishajiunga! Tumia LOGIN badala ya JOIN');return}
-const [pr,rt]=pkg.split('|');D.users.push({name:n,phone:ph,passHash:hash(pa),rawPass:pa,mpesa:code,pkg:pr,rate:+rt,bal:0,views:0,cashClaimed:false,status:'pending',joinedAt:new Date().toLocaleString()});D.curr=ph;save();U=D.users.find(u=>u.phone===ph);renderDash();alert('Umejiunga! Subiri approval');location.reload()}
-function login(){const ph=jPhone.value.trim(),pa=jPass.value.trim();
-if(!ph||!pa){loginHelp.innerHTML='Weka phone na password';return}
-const u=D.users.find(x=>x.phone===ph);
-if(!u){loginHelp.innerHTML='Simu haijapatikana. JOIN kwanza. Users in this phone: '+(D.users.map(x=>x.phone).join(', ')||'none');return}
-if(u.passHash!==hash(pa)){loginHelp.innerHTML='Password si sahihi. Ulitumia: '+u.rawPass?.length+' chars';return}
-D.curr=ph;save();U=u;renderDash();location.reload()}
-function renderDash(){const dash=document.getElementById('dash'),auth=document.getElementById('auth');
-if(!D.curr){auth.style.display='block';dash.style.display='none';return}
-U=D.users.find(x=>x.phone===D.curr);if(!U){auth.style.display='block';dash.style.display='none';return}
-auth.style.display='none';dash.style.display='block';
-dash.innerHTML=`<div class="card"><b>${U.name}</b> - ${U.status} - PKG ${U.pkg} (${U.rate}/view) - Bal ${U.bal} KES <button onclick="logout()" style="background:#c00">Logout</button></div>
-<div class="card" style="background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;text-align:center"><h3>CASHBACK 5500</h3><p>${U.cashClaimed?'CLAIMED':U.status!=='active'?'Wait approval':'Available'}</p><button onclick="claimCash()" ${U.cashClaimed||U.status!=='active'?'disabled':''} style="background:#fff;color:#e67e22">CLAIM 5500</button></div>
-<div class="card"><h3>📦 PRODUCTS</h3>${['Laptop','Television','Phones','Computer','Bike','Car'].map(p=>`<div style="border:2px solid #000;padding:8px;margin:6px 0;border-radius:8px;text-align:center">💻 ${p}<br>STARLIFE AGENCIES Paybill 714777<br><button onclick="downloadP('${p}')" style="background:#25D366">Download ${p} Advert</button></div>`).join('')}</div>
-<div class="card"><h3>Submit Viewers</h3><select id="selProd"><option>Laptop</option><option>Television</option><option>Phones</option><option>Computer</option><option>Bike</option><option>Car</option></select><input id="viewerCount" type="number" placeholder="Viewers"><button onclick="submitV()" style="background:#27ae60">Submit</button><div id="vMsg"></div></div>
-<div class="card"><h3>Withdraw</h3><input id="wAmount" type="number" placeholder="Min 500"><input id="wPhone" placeholder="M-Pesa"><button onclick="reqW()">Withdraw to 0762221240</button></div>
-<div class="card" style="background:#111;color:#fff"><h3>Admin</h3><input id="aPass" type="password" placeholder="••••••••"><button onclick="aLogin()">Unlock</button><div id="aContent" style="display:none;background:#fff;color:#000;padding:10px;margin-top:8px;border-radius:8px"></div></div>`;}
+let D=JSON.parse(localStorage.getItem('STAR_FINAL')||'{"users":[],"withdraws":[],"subs":[],"curr":null}');
+let U=null;const WA='254762221240';
+function save(){localStorage.setItem('STAR_FINAL',JSON.stringify(D))}
+function hash(p){return btoa(p)}
+function join(){
+ const n=jName.value.trim(),ph=jPhone.value.trim(),pa=jPass.value.trim(),code=jMpesa.value.trim(),pkg=jPkg.value;
+ if(!n||!ph||!pa||!code){alert('Jaza zote');return}
+ if(D.users.find(u=>u.phone===ph)){alert('Already joined - use LOGIN');return}
+ const [price,rate]=pkg.split('|');
+ D.users.push({name:n,phone:ph,pass:pa,passHash:hash(pa),mpesa:code,pkg:price,rate:+rate,bal:0,views:0,cash:false,status:'pending',joinedAt:new Date().toLocaleString()});
+ D.curr=ph;save();location.reload();
+}
+function login(){
+ const ph=jPhone.value.trim(),pa=jPass.value.trim();
+ if(!ph||!pa){loginHelp.textContent='Weka phone na password';return}
+ const u=D.users.find(x=>x.phone===ph);
+ if(!u){loginHelp.textContent='Hujajoin kwa simu hii. Bonyeza JOIN kwanza.';return}
+ if(u.passHash!==hash(pa) && u.pass!==pa){loginHelp.textContent='Password si sahihi. Jaribu: '+u.pass;return}
+ D.curr=ph;save();location.reload();
+}
+function render(){
+ if(!D.curr){return}
+ U=D.users.find(x=>x.phone===D.curr);
+ if(!U){D.curr=null;save();return}
+ document.getElementById('auth').style.display='none';
+ const dash=document.getElementById('dash');dash.style.display='block';
+ dash.innerHTML=`
+ <div class="card"><b>${U.name}</b> | ${U.phone} | PKG:${U.pkg} | ${U.status} | Bal:<b>${U.bal}</b> <button onclick="logout()" style="background:#c00">Logout</button></div>
+ <div class="card" style="background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;text-align:center"><h3>CASHBACK 5500</h3><p>${U.cash?'CLAIMED':U.status!=='active'?'Wait approval':'Ready'}</p><button onclick="claim()" style="background:#fff;color:#e67e22" ${U.cash?'disabled':''}>CLAIM 5500</button></div>
+ <div class="card"><h3>📦 Products - Download Advert</h3>
+ ${['Laptop','Television','Phones','Computer','Bike','Car'].map(p=>`<div style="border:2px solid #000;border-radius:8px;padding:8px;margin:6px 0;text-align:center">⭐ STARLIFE ${p}<br><button onclick="dl('${p}')" style="background:#25D366">📥 Download ${p}</button></div>`).join('')}
+ </div>
+ <div class="card"><h3>Submit Viewers</h3><select id="selProd"><option>Laptop</option><option>Television</option><option>Phones</option><option>Computer</option><option>Bike</option><option>Car</option></select><input id="vc" type="number" placeholder="Viewers e.g 20"><button onclick="sub()" style="background:#27ae60">Submit & Earn</button></div>
+ <div class="card"><h3>Withdraw</h3><input id="wA" type="number" placeholder="Min 500"><input id="wP" placeholder="M-Pesa number"><button onclick="withd()">Request Withdraw</button></div>
+ <div class="card" style="background:#111;color:#fff"><h3>Admin</h3><input id="aP" type="password" placeholder="••••••••"><button onclick="admin()">Unlock</button><div id="aC" style="display:none;background:#fff;color:#000;padding:10px;border-radius:8px;margin-top:8px"></div></div>
+ `;
+}
 function logout(){D.curr=null;save();location.reload()}
-function claimCash(){if(U.status!=='active')return alert('Wait approval');if(U.cashClaimed)return;U.bal+=5500;U.cashClaimed=true;save();renderDash()}
-function downloadP(n){const c=document.createElement('canvas');c.width=600;c.height=350;const x=c.getContext('2d');x.fillStyle='#000';x.fillRect(0,0,600,350);x.fillStyle='#fff';x.font='bold 32px Arial';x.fillText('STARLIFE AGENCIES',120,50);x.font='28px Arial';x.fillText(n,200,110);x.fillText('Paybill 714777 Acc 440200282954',30,200);x.fillText('Call 0762221240',150,250);const a=document.createElement('a');a.href=c.toDataURL();a.download='STARLIFE-'+n+'.png';a.click();}
-function submitV(){const p=document.getElementById('selProd').value,vc=+document.getElementById('viewerCount').value;if(!vc)return alert('weka viewers');if(U.status!=='active')return alert('Wait approval');const earn=vc*U.rate;U.bal+=earn;U.views=(U.views||0)+vc;D.subs.push({phone:U.phone,name:U.name,product:p,viewers:vc,earn:earn,date:new Date().toLocaleString()});save();renderDash();document.getElementById('vMsg').innerHTML='✅ +'+earn+' KES';window.open('https://wa.me/'+ADMIN_WA+'?text='+encodeURIComponent(p+' '+vc+' viewers '+earn+' from '+U.name),'_blank')}
-function reqW(){const amt=+document.getElementById('wAmount').value,mp=document.getElementById('wPhone').value;if(amt<500)return alert('Min 500');if(U.bal<amt)return alert('Low bal');D.withdraws.push({phone:U.phone,name:U.name,amount:amt,mpesaPhone:mp,date:new Date().toLocaleString(),status:'pending'});U.bal-=amt;save();renderDash();window.open('https://wa.me/'+ADMIN_WA+'?text=WITHDRAW '+amt+' from '+U.name+' '+U.phone+' to '+mp,'_blank')}
-function aLogin(){if(document.getElementById('aPass').value!=='STARLIFE714777')return alert('Wrong');const c=document.getElementById('aContent');c.style.display='block';c.innerHTML='<b>Users in THIS phone:</b><br>'+D.users.map(u=>`${u.name} ${u.phone} Pass:${u.rawPass} Bal:${u.bal} Status:${u.status} <button onclick="approveUser('${u.phone}')">Approve</button>`).join('<br>')+'<br><br><b>Withdraws:</b><br>'+D.withdraws.map(w=>`${w.name} ${w.amount} to ${w.mpesaPhone} ${w.status}`).join('<br>')}
-function approveUser(ph){const u=D.users.find(x=>x.phone===ph);u.status='active';save();alert('Approved '+ph
+function claim(){if(U.status!=='active'){alert('Wait approval');return}if(U.cash){return}U.bal+=5500;U.cash=true;save();render();alert('5500 added')}
+function dl(name){const c=document.createElement('canvas');c.width=600;c.height=350;const ctx=c.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,600,350);ctx.fillStyle='#fff';ctx.font='bold 30px Arial';ctx.fillText('STARLIFE AGENCIES',120,40);ctx.fillText(name,220,100);ctx.font='20px Arial';ctx.fillText('Paybill 714777 Acc 440200282954',50,180);ctx.fillText('Contact 0762221240',150,220);const a=document.createElement('a');a.href=c.toDataURL();a.download='STARLIFE-'+name+'.png';a.click()}
+function sub(){const p=document.getElementById('selProd').value,vc=+document.getElementById('vc').value;if(!vc)return alert('weka viewers');if(U.status!=='active')return alert('Wait approval');const earn=vc*U.rate;U.bal+=earn;U.views+=vc;D.subs.push({phone:U.phone,name:U.name,product:p,viewers:vc,earn:earn,date:new Date().toLocaleString()});save();render();window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(p+' '+vc+' viewers = '+earn+' from '+U.name+' '+U.phone),'_blank')}
+function withd(){const a=+document.getElementById('wA').value,p=document.getElementById('wP').value;if(a<500)return alert('Min 500');if(U.bal<a)return alert('Low bal');D.withdraws.push({phone:U.phone,name:U.name,amount:a,to:p,date:new Date().toLocaleString(),status:'pending'});U.bal-=a;save();render();window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('WITHDRAW '+a+' from '+U.name+' '+U.phone+' to '+p),'_blank')}
+function admin(){if(document.getElementById('aP').value!=='STARLIFE714777')return alert('Wrong');const c=document.getElementById('aC');c.style.display='block';c.innerHTML='<b>Users in this phone:</b><br>'+D.users.map(u=>`${u.name} ${u.phone} Pass:${u.pass} Bal:${u.bal} Status:${u.status} <button onclick="D.users.find(x=>x.phone==='${u.phone}').status='active';save();render();">Approve</button>`).join('<br>')+'<br><br><b>Withdraws</b><br>'+D.withdraws.map(w=>`${w.name} ${w.amount} to ${w.to} [${w.status}]`).join('<br>')}
+render();
+</script></body></html>
