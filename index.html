@@ -2,120 +2,125 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NEXTILIATE AGENCIES</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#0a1222;color:#fff;display:flex}
-.sidebar{width:260px;background:#111c34;position:fixed;height:100vh;padding:14px 12px;border-right:1px solid #1e2e50;overflow-y:auto}
+.sidebar{width:260px;background:#111c34;position:fixed;height:100vh;padding:14px 12px;border-right:1px solid #1e2e50;overflow-y:auto;z-index:100;transition:0.3s}
 .logo{color:#8b7bff;font-weight:900;font-size:16px}
-.sub{color:#6b7a9a;font-size:11px;margin-bottom:16px;margin-left:20px}
+.sub{color:#6b7a9a;font-size:11px;margin:4px 0 16px 20px}
 .item{padding:11px 14px;border-radius:10px;color:#7a8aa8;font-size:13px;margin-bottom:3px;cursor:pointer;display:flex;gap:8px}
 .item.active{background:#5e47ff;color:#fff;font-weight:700}
 .divider{margin:16px 0 6px 0;padding:10px 14px 6px 14px;border-top:1px solid #1e2e50;color:#fff;font-weight:800;font-size:11px}
 .main{margin-left:260px;flex:1;padding:16px;background:#0a1222;min-height:100vh}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.hamburger{font-size:26px;display:none;cursor:pointer}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{border-radius:14px;padding:16px}
-.card h5{font-size:10px;color:#cbd5e1;letter-spacing:0.5px}
-.card h2{font-size:22px;margin:6px 0}
+.card{border-radius:14px;padding:16px;color:#fff}
 .box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:14px;margin-top:14px}
-.btn{padding:12px;border-radius:10px;border:none;background:#5e47ff;color:#fff;font-weight:700;width:100%;margin-top:10px;cursor:pointer}
+.btn{width:100%;padding:12px;border-radius:10px;border:none;background:#5e47ff;color:#fff;font-weight:700;margin-top:10px;cursor:pointer}
 .input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:8px}
-@media(max-width:800px){.sidebar{display:none}.main{margin-left:0}.cards{grid-template-columns:1fr 1fr}}
+.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:90}
+@media(max-width:800px){
+.sidebar{left:-270px}
+.sidebar.active{left:0}
+.main{margin-left:0}
+.hamburger{display:block}
+.overlay.active{display:block}
+.cards{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<div class="sidebar">
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<div class="sidebar" id="sidebar">
 <div class="logo">⭐ NEXTILIATE AGENCIES</div>
 <div class="sub">Affiliate Program</div>
-<div class="item active">🏠 Dashboard</div>
-<div class="item">🖱️ Clink and Earn</div>
-<div class="item">▶️ YouTube Videos</div>
-<div class="item">🎵 TikTok Videos</div>
-<div class="item">📸 Instagram Reels</div>
-<div class="item">➗ Maths 10Q</div>
-<div class="item">🧠 Trivia 10Q</div>
-<div class="item">✈️ Aviator Signals</div>
-<div class="item">📈 Free Forex Classes</div>
-<div class="item">⚽ Sure Odds</div>
-<div class="item">💳 Pay for Client</div>
-<div class="item">👥 Team</div>
+<div class="item active" onclick="showPage('dashboard')">🏠 Dashboard</div>
+<div class="item" onclick="alert('Clink and Earn - Soon')">🖱️ Clink and Earn</div>
+<div class="item" onclick="alert('YouTube - Soon')">▶️ YouTube Videos</div>
+<div class="item" onclick="alert('TikTok - Soon')">🎵 TikTok Videos</div>
+<div class="item" onclick="alert('Instagram - Soon')">📸 Instagram Reels</div>
+<div class="item" onclick="alert('Maths - Soon')">➗ Maths 10Q</div>
+<div class="item" onclick="alert('Trivia - Soon')">🧠 Trivia 10Q</div>
+<div class="item" onclick="alert('Aviator - Soon')">✈️ Aviator Signals</div>
+<div class="item" onclick="alert('Forex - Soon')">📈 Free Forex Classes</div>
+<div class="item" onclick="alert('Odds - Soon')">⚽ Sure Odds</div>
+<div class="item" onclick="alert('Pay for Client')">💳 Pay for Client</div>
+<div class="item" onclick="alert('Team - Soon')">👥 Team</div>
 <div class="divider">💸 WITHDRAWALS</div>
-<div class="item">💰 Withdraw Balance</div>
-<div class="item">▶️ Withdraw YouTube</div>
-<div class="item">🎵 Withdraw TikTok</div>
-<div class="item">📸 Withdraw Instagram</div>
-<div class="item">🎯 Withdraw Activity</div>
+<div class="item" onclick="alert('Withdraw - Soon')">💰 Withdraw Balance</div>
+<div class="item" onclick="alert('Withdraw YT - Soon')">▶️ Withdraw YouTube</div>
+<div class="item" onclick="alert('Withdraw TT - Soon')">🎵 Withdraw TikTok</div>
+<div class="item" onclick="alert('Withdraw IG - Soon')">📸 Withdraw Instagram</div>
+<div class="item" onclick="alert('Withdraw Activity - Soon')">🎯 Withdraw Activity</div>
 </div>
 
 <div class="main">
+<div class="top">
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+<div>
 <h3>Welcome Abraham! 🎉</h3>
-<p style="font-size:12px;color:#7a8aa8;margin:4px 0 14px 0">Track your progress and earn more</p>
+<p style="font-size:11px;color:#7a8aa8">Affiliate Member</p>
+</div>
+<div style="text-align:right"><b style="font-size:12px">Abraham Koech</b></div>
+</div>
 
 <div class="cards">
 <div class="card" style="background:linear-gradient(135deg,#3b2dd6,#5e47ff)">
-<h5>EXPENSES</h5>
-<h2>KES 200</h2>
-<small>✓ Registration Paid</small>
+<p style="font-size:10px">EXPENSES</p>
+<h2 style="margin:6px 0">KES 200</h2>
+<small>✓ Paid</small>
 </div>
 <div class="card" style="background:linear-gradient(135deg,#1e40af,#3b82f6)">
-<h5>ACCOUNT BALANCE</h5>
-<h2 id="bal">KES 4,850</h2>
-<small style="color:#bbf7d0">↑ +KES 1,200 this week</small>
+<p style="font-size:10px">ACCOUNT BALANCE</p>
+<h2 id="bal" style="margin:6px 0">KES 4,850</h2>
+<small>+1,200 week</small>
 </div>
 <div class="card" style="background:linear-gradient(135deg,#065f46,#10b981)">
-<h5>TOTAL WITHDRAWAL</h5>
-<h2>KES 2,400</h2>
-<small>Successfully withdrawn</small>
+<p style="font-size:10px">TOTAL WITHDRAWAL</p>
+<h2 style="margin:6px 0">KES 2,400</h2>
+<small>Withdrawn</small>
 </div>
 <div class="card" style="background:linear-gradient(135deg,#92400e,#f59e0b)">
-<h5>PENDING WITHDRAWAL</h5>
-<h2>KES 600</h2>
-<small>⏳ Processing...</small>
+<p style="font-size:10px">PENDING WITHDRAWAL</p>
+<h2 style="margin:6px 0">KES 600</h2>
+<small>Processing</small>
 </div>
 </div>
 
 <div class="box">
 <b>🔗 Link for Client</b>
-<p style="font-size:11px;color:#7a8aa8;margin:6px 0">Share this referral link to your clients</p>
 <div style="display:flex;gap:6px;margin-top:8px">
-<input id="clink" value="https://nextiliate.agencies/ref/AbrahamKoech" readonly style="flex:1;padding:10px;border-radius:8px;background:#0a1222;border:1px solid #1e2e50;color:#fff;font-size:12px">
-<button onclick="copyLink()" style="padding:10px 14px;border-radius:8px;background:#5e47ff;color:#fff;border:none;font-weight:700">Copy</button>
+<input id="clink" value="https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=AbrahamKoech" readonly style="flex:1;padding:10px;border-radius:8px;background:#0a1222;border:1px solid #1e2e50;color:#fff;font-size:11px">
+<button onclick="copyLink()" style="padding:10px 14px;border-radius:8px;background:#5e47ff;color:#fff;border:none">Copy</button>
 </div>
-<button class="btn" onclick="shareLink()">📤 Share Link to Client</button>
-
-<div style="background:#0a1222;border:1px solid #1e2e50;border-radius:12px;padding:12px;margin-top:12px">
-<h4 style="font-size:13px">💳 Pay for Client</h4>
-<p style="font-size:11px;color:#7a8aa8;margin:4px 0">Lipa kwa client Paybill 714777</p>
 <input id="phone" class="input" placeholder="Client Phone 07...">
-<input id="amount" class="input" placeholder="Amount" value="200">
 <button class="btn" style="background:#10b981" onclick="payClient()">Pay KES 200 & Earn KES 100</button>
-<p style="font-size:10px;color:#6b7a9a;text-align:center;margin-top:8px">Paybill <b style="color:#fde68a">714777</b> Account <b style="color:#fff">440200282954</b></p>
-</div>
+<p style="font-size:10px;color:#6b7a9a;text-align:center;margin-top:8px">Paybill <b style="color:#fde68a">714777</b> Account <b>440200282954</b></p>
 </div>
 
 </div>
 
 <script>
-function copyLink(){
-  navigator.clipboard.writeText(document.getElementById('clink').value);
-  alert('Link Copied!');
+function toggleMenu(){
+document.getElementById('sidebar').classList.toggle('active');
+document.getElementById('overlay').classList.toggle('active');
 }
-function shareLink(){
-  if(navigator.share){
-    navigator.share({title:'Join NEXTILIATE',url:document.getElementById('clink').value});
-  } else {
-    copyLink();
-  }
+function copyLink(){
+navigator.clipboard.writeText(document.getElementById('clink').value);
+alert('Link Copied!');
 }
 function payClient(){
-  let p=document.getElementById('phone').value;
-  if(!p){alert('Weka Phone ya Client');return;}
-  alert('Paid KES 200 for '+p+' - You earned KES 100!');
-  let balEl=document.getElementById('bal');
-  let cur=parseInt(balEl.innerText.replace(/[^0-9]/g,''))||4850;
-  balEl.innerText='KES '+(cur+100);
+let p=document.getElementById('phone').value;
+if(!p){alert('Weka Phone');return;}
+alert('Paid 200 for '+p+' Earned 100!');
+let b=document.getElementById('bal');
+let cur=parseInt(b.innerText.replace(/[^0-9]/g,''))+100;
+b.innerText='KES '+cur;
 }
 </script>
 
