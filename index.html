@@ -6,188 +6,23 @@
 <title>NEXTILIATE AGENCIES</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0a1222;color:#fff;display:flex;min-height:100vh}
-.sidebar{width:280px;background:#111c34;position:fixed;height:100vh;overflow-y:auto;padding:14px 12px;transition:0.3s;z-index:100;border-right:1px solid #1e2e50}
-.logo{color:#8b7bff;font-weight:900;font-size:18px;display:flex;gap:8px}
-.sub{color:#6b7a9a;font-size:12px;margin:4px 0 16px 26px}
-.item{padding:12px 14px;border-radius:10px;color:#7a8aa8;font-size:14px;display:flex;gap:10px;align-items:center;margin-bottom:3px;cursor:pointer}
+body{background:#0a1222;color:#fff;display:flex}
+.sidebar{width:260px;background:#111c34;position:fixed;height:100vh;padding:14px 12px;border-right:1px solid #1e2e50;overflow-y:auto;z-index:20}
+.logo{color:#8b7bff;font-weight:900;font-size:17px}
+.sub{color:#6b7a9a;font-size:11px;margin:4px 0 18px 20px}
+.item{padding:12px 14px;border-radius:10px;color:#7a8aa8;font-size:13.5px;display:flex;gap:10px;margin-bottom:3px;cursor:pointer}
 .item.active{background:#5e47ff;color:#fff;font-weight:700}
-.item:hover{background:#1c2a4a;color:#fff}
-.divider{margin:18px 0 8px 0;color:#fff;font-weight:800;font-size:11px;letter-spacing:1.2px;padding:10px 14px 6px 14px;border-top:1px solid #1e2e50}
-.main{margin-left:280px;flex:1;padding:18px;background:#0a1222;min-height:100vh}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.card{background:linear-gradient(135deg,#1e4fd8,#173aa8);border-radius:18px;padding:20px;margin-bottom:14px}
-.card2{background:linear-gradient(135deg,#b45309,#92400e)}
-.page{display:none}
-.page.active{display:block}
-.btn{padding:12px 18px;border-radius:10px;border:none;background:#5e47ff;color:#fff;font-weight:700;cursor:pointer;width:100%;margin-top:10px}
-.btn:disabled{opacity:0.5}
-.video-box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.hamburger{display:none;font-size:26px;cursor:pointer}
-.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:90}
-@media(max-width:800px){.sidebar{left:-290px}.sidebar.active{left:0}.main{margin-left:0}.hamburger{display:block}.overlay.active{display:block}}
-</style>
-</head>
-<body>
-
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-
-<div class="sidebar" id="sidebar">
-<div class="logo">⭐ NEXTILIATE AGENCIES</div>
-<div class="sub">Affiliate Program</div>
-
-<div class="item active" onclick="showPage('dashboard',this)">🏠 Dashboard</div>
-<div class="item" onclick="showPage('clink',this)">🖱️ Clink and Earn</div>
-<div class="item" onclick="showPage('youtube',this)">▶️ YouTube Videos</div>
-<div class="item" onclick="showPage('tiktok',this)">🎵 TikTok Videos</div>
-<div class="item" onclick="showPage('instagram',this)">📸 Instagram Reels</div>
-<div class="item" onclick="showPage('maths',this)">➗ Maths 10Q</div>
-<div class="item" onclick="showPage('trivia',this)">🧠 Trivia 10Q</div>
-<div class="item" onclick="showPage('aviator',this)">✈️ Aviator Signals</div>
-<div class="item" onclick="showPage('forex',this)">📈 Free Forex Classes</div>
-<div class="item" onclick="showPage('odds',this)">⚽ Sure Odds</div>
-<div class="item" onclick="showPage('payclient',this)">💳 Pay for Client</div>
-<div class="item" onclick="showPage('team',this)">👥 Team</div>
-
-<div class="divider">💸 WITHDRAWALS</div>
-<div class="item" onclick="showPage('w_balance',this)">💰 Withdraw Balance</div>
-<div class="item" onclick="showPage('w_youtube',this)">▶️ Withdraw YouTube</div>
-<div class="item" onclick="showPage('w_tiktok',this)">🎵 Withdraw TikTok</div>
-<div class="item" onclick="showPage('w_instagram',this)">📸 Withdraw Instagram</div>
-<div class="item" onclick="showPage('w_activity',this)">🎯 Withdraw Activity</div>
-</div>
-
-<div class="main">
-<div class="top">
-<div class="hamburger" onclick="toggleMenu()">☰</div>
-<div style="text-align:right">
-<div style="font-weight:700" id="userName">Abraham Koech</div>
-<div style="font-size:12px;color:#7a8aa8">NEXTILIATE Member</div>
-</div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard" class="page active">
-<h1 style="font-size:28px">Welcome Abraham! 🎉</h1>
-<p style="color:#7a8aa8;margin:6px 0 18px 0">Earn more with NEXTILIATE Agencies</p>
-
-<div class="card">
-<div style="font-size:12px;opacity:0.8">Total Commission Earned</div>
-<h1 style="font-size:38px;margin:8px 0" id="totalBal">KES 4,850</h1>
-<div style="font-size:12px;color:#4ade80" id="weekText">+ KES 200 this week</div>
-</div>
-
-<div class="card card2">
-<div style="font-size:12px;opacity:0.9">Commission Level</div>
-<h1 style="font-size:38px;margin:8px 0">Level 1</h1>
-<div style="font-size:13px" id="refCount">25 referrals</div>
-</div>
-
-<div style="background:#111c34;border:1px solid #1e2e50;border-radius:16px;padding:16px">
-<div style="display:flex;justify-content:space-between"><span>Earnings Chart</span><select style="background:#0a1222;color:#fff;border:1px solid #1e2e50;padding:6px;border-radius:8px"><option>Last 7 Days</option></select></div>
-<div style="margin-top:20px;height:80px;display:flex;align-items:end;gap:8px"><div style="flex:1;background:#5e47ff;height:40%;border-radius:6px"></div><div style="flex:1;background:#5e47ff;height:70%;border-radius:6px"></div><div style="flex:1;background:#5e47ff;height:50%;border-radius:6px"></div><div style="flex:1;background:#5e47ff;height:90%;border-radius:6px"></div><div style="flex:1;background:#5e47ff;height:60%;border-radius:6px"></div></div>
-</div>
-</div>
-
-<!-- CLINK AND EARN -->
-<div id="clink" class="page">
-<h2>🖱️ Clink and Earn - KES 10 per click</h2>
-<div id="clinkBox" style="margin-top:14px"></div>
-</div>
-
-<!-- YOUTUBE -->
-<div id="youtube" class="page">
-<h2>▶️ YouTube Videos - KES 20 per video</h2>
-<div style="margin-top:14px" id="ytBox"></div>
-</div>
-
-<!-- TIKTOK -->
-<div id="tiktok" class="page">
-<h2>🎵 TikTok Videos - KES 15 per video</h2>
-<div style="margin-top:14px" id="ttBox"></div>
-</div>
-
-<!-- INSTAGRAM -->
-<div id="instagram" class="page">
-<h2>📸 Instagram Reels - KES 15 per reel</h2>
-<div style="margin-top:14px" id="igBox"></div>
-</div>
-
-<!-- MATHS -->
-<div id="maths" class="page">
-<h2>➗ Maths 10Q - KES 100</h2>
-<div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px" id="mathsQ"></div>
-</div>
-
-<!-- TRIVIA -->
-<div id="trivia" class="page">
-<h2>🧠 Trivia 10Q - KES 100</h2>
-<div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px" id="triviaQ"></div>
-</div>
-
-<!-- AVIATOR -->
-<div id="aviator" class="page"><h2>✈️ Aviator Signals</h2><div style="background:#111c34;padding:20px;border-radius:16px;margin-top:14px;text-align:center"><h1 style="color:#4ade80">2.45x 🚀</h1><p style="color:#7a8aa8;margin-top:10px">Next signal in: <span id="timer">60s</span></p><button class="btn" onclick="addBal(50)">Claim KES 50 Signal Bonus</button></div></div>
-
-<!-- FOREX -->
-<div id="forex" class="page"><h2>📈 Free Forex Classes</h2><div style="margin-top:14px"><div class="video-box"><span>Lesson 1: What is Forex?</span><button class="btn" style="width:auto;padding:8px 14px" onclick="addBal(30)">Watch +30</button></div><div class="video-box"><span>Lesson 2: Candlesticks</span><button class="btn" style="width:auto;padding:8px 14px" onclick="addBal(30)">Watch +30</button></div></div></div>
-
-<!-- SURE ODDS -->
-<div id="odds" class="page"><h2>⚽ Sure Odds - Daily 3 Odds</h2><div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px"><p>Man City vs Arsenal - 1X</p><p>Liverpool vs Chelsea - Over 1.5</p><p>Barcelona vs Real - BTTS Yes</p><p style="margin-top:12px;color:#4ade80;font-weight:700">Total Odds: 3.45</p><button class="btn" onclick="addBal(20)">Unlock +20</button></div></div>
-
-<!-- PAY FOR CLIENT -->
-<div id="payclient" class="page">
-<h2>💳 Pay for Client</h2>
-<div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px">
-<p style="color:#7a8aa8;font-size:13px">Lipa kwa client wako, u-earn commission</p>
-<div style="margin-top:12px;background:#0a1222;padding:14px;border-radius:12px;text-align:center;border:1px solid #1e2e50">
-<b>M-PESA PAYBILL</b><br><span style="font-size:22px;font-weight:900;color:#fde68a">714777</span><br>ACCOUNT: <b>440200282954</b><br><small>Amount: 150</small>
-</div>
-<input id="clientPhone" placeholder="Client Phone 07..." style="width:100%;padding:12px;border-radius:10px;border:1px solid #1e2e50;background:#0a1222;color:#fff;margin-top:12px">
-<button class="btn" onclick="payClient()">Pay & Earn 100</button>
-</div>
-</div>
-
-<!-- TEAM -->
-<div id="team" class="page"><h2>👥 My Team - 25 Referrals</h2><div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px"><p>Referral Link:</p><div style="background:#0a1222;padding:10px;border-radius:8px;margin:10px 0;font-size:13px;word-break:break-all" id="refLink">https://nextiliate.github.io/?ref=ABRAHAM</div><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('refLink').innerText);alert('Link Copied!')">Copy Link</button></div></div>
-
-<!-- WITHDRAWALS -->
-<div id="w_balance" class="page"><h2>💰 Withdraw Balance</h2><div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px"><p>Available: <b id="wBal">KES 4,850</b></p><input placeholder="M-Pesa Number" style="width:100%;padding:12px;border-radius:10px;border:1px solid #1e2e50;background:#0a1222;color:#fff;margin-top:12px"><input placeholder="Amount" style="width:100%;padding:12px;border-radius:10px;border:1px solid #1e2e50;background:#0a1222;color:#fff;margin-top:10px"><button class="btn" onclick="alert('Withdrawal Request Sent! Admin will pay in 10 mins')">Request Withdrawal</button></div></div>
-<div id="w_youtube" class="page"><h2>▶️ Withdraw YouTube Earnings</h2><div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px"><p>YouTube Balance: <b>KES 320</b></p><button class="btn" onclick="alert('YouTube Withdrawal Sent!')">Withdraw</button></div></div>
-<div id="w_tiktok" class="page"><h2>🎵 Withdraw TikTok Earnings</h2><div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px"><p>TikTok Balance: <b>KES 180</b></p><button class="btn" onclick="alert('TikTok Withdrawal Sent!')">Withdraw</button></div></div>
-<div id="w_instagram" class="page"><h2>📸 Withdraw Instagram Earnings</h2><div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px"><p>Instagram Balance: <b>KES 150</b></p><button class="btn" onclick="alert('Instagram Withdrawal Sent!')">Withdraw</button></div></div>
-<div id="w_activity" class="page"><h2>🎯 Withdraw Activity Earnings</h2><div style="background:#111c34;padding:18px;border-radius:16px;margin-top:14px"><p>Activity Balance: <b>KES 600</b></p><button class="btn" onclick="alert('Activity Withdrawal Sent!')">Withdraw</button></div></div>
-
-</div>
-
-<script>
-let balance = parseInt(localStorage.getItem('next_bal')||'4850');
-updateBal();
-function updateBal(){document.getElementById('totalBal').innerText='KES '+balance.toLocaleString();document.getElementById('wBal').innerText='KES '+balance.toLocaleString();localStorage.setItem('next_bal',balance)}
-function addBal(amt){balance+=amt;updateBal();alert('+' + amt + ' Added! New Balance: KES ' + balance)}
-function showPage(id,el){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-document.querySelectorAll('.item').forEach(i=>i.classList.remove('active'));
-if(el) el.classList.add('active');
-if(window.innerWidth<=800) toggleMenu();
-}
-function toggleMenu(){document.getElementById('sidebar').classList.toggle('active');document.getElementById('overlay').classList.toggle('active')}
-
-// Generate Clink
-let clinkHTML='';for(let i=1;i<=8;i++){clinkHTML+=`<div class="video-box"><span>Advert Link ${i} - example.com/page${i}</span><button class="btn" style="width:auto;padding:8px 14px" onclick="this.disabled=true;this.innerText='Done +10';addBal(10)">Clink</button></div>`}document.getElementById('clinkBox').innerHTML=clinkHTML;
-let ytHTML='';for(let i=1;i<=5;i++){ytHTML+=`<div class="video-box"><span>YouTube Video ${i} - Watch 30 sec</span><button class="btn" style="width:auto;padding:8px 14px" onclick="this.disabled=true;this.innerText='Watched +20';addBal(20)">Watch</button></div>`}document.getElementById('ytBox').innerHTML=ytHTML;
-let ttHTML='';for(let i=1;i<=5;i++){ttHTML+=`<div class="video-box"><span>TikTok Video ${i}</span><button class="btn" style="width:auto;padding:8px 14px" onclick="this.disabled=true;this.innerText='Done +15';addBal(15)">Watch</button></div>`}document.getElementById('ttBox').innerHTML=ttHTML;
-let igHTML='';for(let i=1;i<=5;i++){igHTML+=`<div class="video-box"><span>Instagram Reel ${i}</span><button class="btn" style="width:auto;padding:8px 14px" onclick="this.disabled=true;this.innerText='Done +15';addBal(15)">Watch</button></div>`}document.getElementById('igBox').innerHTML=igHTML;
-
-document.getElementById('mathsQ').innerHTML=`<p>1. 5+7 = ?</p><button class="btn" onclick="addBal(10)">12</button><button class="btn" style="background:#111c34;border:1px solid #1e2e50;margin-top:6px">10</button><p style="margin-top:14px">2. 12x3 = ?</p><button class="btn" onclick="addBal(10)">36</button>`;
-document.getElementById('triviaQ').innerHTML=`<p>Capital of Kenya?</p><button class="btn" onclick="addBal(10)">Nairobi</button><button class="btn" style="background:#111c34;border:1px solid #1e2e50;margin-top:6px">Mombasa</button>`;
-
-function payClient(){
-let p=document.getElementById('clientPhone').value;
-if(!p){alert('Weka Phone ya Client');return;}
-alert('Paid for '+p+' - You earned KES 100!');addBal(100);
-}
-let t=60;setInterval(()=>{t--;if(t<0)t=60;let el=document.getElementById('timer');if(el)el.innerText=t+'s'},1000);
-</script>
-</body>
-</html>
+.divider{margin:16px 0 6px 0;padding:10px 14px 6px 14px;border-top:1px solid #1e2e50;color:#fff;font-weight:800;font-size:11px}
+.main{margin-left:260px;flex:1;padding:18px;background:#0a1222}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{border-radius:16px;padding:18px;background:#111c34;border:1px solid #1e2e50}
+.card h5{font-size:11px;color:#7a8aa8;letter-spacing:1px}
+.card h2{font-size:26px;margin:8px 0}
+.card small{font-size:11px}
+.c-exp{background:linear-gradient(135deg,#3b2dd6,#5e47ff)}
+.c-bal{background:linear-gradient(135deg,#1e40af,#3b82f6)}
+.c-total{background:linear-gradient(135deg,#065f46,#10b981)}
+.c-pending{background:linear-gradient(135deg,#92400e,#f59e0b)}
+.link-box{background:#111c34;border:1px solid #1e2e50;border-radius:16px;padding:18px;margin-top:16px}
+.input{width:100%;padding:12px;border-radius:10px;background:#
