@@ -3,29 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin - NEXTILIATE</title>
+<title>Admin - NEXTILIATE PRO</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0a1222;color:#fff;padding:16px}
-.box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:14px;margin-top:10px}
-.btn{padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:700;margin:4px}
-.btn-green{background:#10b981;color:#fff}.btn-red{background:#ef4444;color:#fff}
+body{background:#0a1222;color:#fff;padding:12px}
+.box{background:#111c34;border:1px solid #1e2e50;border-radius:12px;padding:12px;margin-top:12px}
+.btn{padding:8px 12px;border-radius:8px;border:none;font-weight:700;margin:3px}
+.g{background:#10b981;color:#fff}.r{background:#ef4444;color:#fff}.b{background:#5e47ff;color:#fff}
+input{width:100%;padding:10px;border-radius:8px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:6px}
+h3{font-size:14px;margin-bottom:6px}
+small{color:#7a8aa8}
 </style>
 </head>
 <body>
-<h2>⭐ NEXTILIATE ADMIN - NO PASSWORD</h2>
-<div class="box"><h3>📋 Pending</h3><div id="pending"></div></div>
-<div class="box"><h3>✅ Approved</h3><div id="approved"></div></div>
-<script>
-function getUsers(){return JSON.parse(localStorage.getItem('allUsers')||'{}');}
-function saveUsers(u){localStorage.setItem('allUsers',JSON.stringify(u));}
-function load(){let users=getUsers();let p=document.getElementById('pending'),a=document.getElementById('approved');p.innerHTML='';a.innerHTML='';let hasP=false,hasA=false;
-Object.values(users).forEach(user=>{
-if(user.paid=='yes'&&user.approved=='no'){hasP=true;let d=document.createElement('div');d.className='box';d.style.background='#0a1222';d.innerHTML='<b>'+user.fullname+'</b> @'+user.username+'<br>Phone:'+user.phone+' Mpesa:'+(user.mpesa||'')+'<br><button class="btn btn-green" onclick="approve(\''+user.username.toLowerCase()+'\')">Approve</button>';p.appendChild(d);}
-if(user.paid=='yes'&&user.approved=='yes'){hasA=true;let d=document.createElement('div');d.className='box';d.style.background='#0a1222';d.innerHTML=user.fullname+' @'+user.username;a.appendChild(d);}
-});if(!hasP)p.innerHTML='No pending';if(!hasA)a.innerHTML='No approved';}
-function approve(k){let u=getUsers();u[k].approved='yes';saveUsers(u);load();}
-load();
+<h2>⭐ ADMIN PRO - All Clients</h2>
+<small>Version inaoona clients wote</small>
+
+<div id="login" class="box">
+<input id="u" placeholder="Username admin">
+<input id="p" type="password" placeholder="Password admin123">
+<button class="btn b" style="width:100%" onclick="login()">LOGIN</button>
+<p id="err" style="color:red;font-size:12px"></p>
+</div>
+
+<div id="panel" style="display:none">
+<div class="box"><h3>🔔 Pending New Members (<span id="c1">0</span>)</h3><div id="pending">Loading...</div></div>
+<div class="box"><h3>✅ Approved Members (<span id="c2">0</span>)</h3><div id="approved"></div></div>
+<div class="box"><h3>💸 Withdraw Requests (<span id="c3">0</span>)</h3><div id="wreq"></div></div>
+<button class="btn r" onclick="logout()">Logout</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDemo-Replace-With-Yours",
+  authDomain: "starlife-demo.firebaseapp.com",
+  projectId: "starlife-demo",
+  storageBucket: "starlife-demo.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.login = function(){
+ let u=document.getElementById('u').value.trim();
+ let p=document.getElementById('p').value.trim();
+ if(u==='admin' && p==='admin123'){
+   document.getElementById('login').style.display='none';
+   document.getElementById('panel').style.display='block';
+   loadAll();
+ } else {
+   document.getElementById('err').innerText='Wrong! Use admin / admin123';
+ }
+}
+window.logout = function(){ location.reload(); }
+
+async function loadAll(){
+ const snap = await getDocs(collection(db,"users"));
+ let pend='', appr='', w='', n1=0,n2=0,n3=0;
+ snap.forEach(d=>{
+  let x=d.data(); let id=d.id;
+  if(x.paid==='yes' && x.approved==='no'){
+   n1++; pend+=`<div class="box" style="background:#0a1222"><b>${x.fullname}</b> @${x.username}<br>Phone:${x.phone} Mpesa:${x.mpesa||'-'}<br><button class="btn g" onclick="approve('${id}')">Approve</button><button class="btn r" onclick="reject('${id}')">Reject</button></div>`;
+  }
+  if(x.approved==='yes'){
+   n2++; appr+=`<div style="padding:6px;border-bottom:1px solid #1e2e50">${x.fullname} @${x.username} - KES ${x.balance||0}</div>`;
+  }
+  if(x.withdrawReq){
+   n3++; w+=`<div class="box" style="background:#0a1222">${x.username} anataka KES ${x.withdrawReq} <br>Phone:${x.phone}<br><button class="btn g" onclick="approveW('${id}')">Approve W</button><button class="btn r" onclick="rejectW('${id}')">Reject W</button></div>`;
+  }
+ });
+ document.getElementById('pending').innerHTML=pend||'No pending';
+ document.getElementById('approved').innerHTML=appr||'No approved';
+ document.getElementById('wreq').innerHTML=w||'No withdraw';
+ document.getElementById('c1').innerText=n1; document.getElementById('c2').innerText=n2; document.getElementById('c3').innerText=n3;
+}
+window.approve = async(id)=>{ await updateDoc(doc(db,"users",id),{approved:'yes'}); alert('Approved!'); loadAll(); }
+window.reject = async(id)=>{ if(!confirm('Reject?'))return; await deleteDoc(doc(db,"users",id)); alert('Rejected'); loadAll(); }
+window.approveW = async(id)=>{ await updateDoc(doc(db,"users",id),{withdrawReq:null,balance:0}); alert('Withdraw approved'); loadAll(); }
+window.rejectW = async(id)=>{ await updateDoc(doc(db,"users",id),{withdrawReq:null}); alert('Withdraw rejected'); loadAll(); }
 </script>
 </body>
 </html>
