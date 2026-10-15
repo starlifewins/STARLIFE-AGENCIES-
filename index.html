@@ -11,13 +11,13 @@ body{background:#0a1222;color:#fff;min-height:100vh}
 .auth-box{background:#111c34;border:1px solid #1e2e50;border-radius:16px;padding:22px;width:100%;max-width:410px}
 .logo-big{color:#8b7bff;font-weight:900;font-size:21px;text-align:center}
 .input{width:100%;padding:13px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:10px;font-size:14px}
-.btn{width:100%;padding:13px;border-radius:10px;border:none;background:#5e47ff;color:#fff;font-weight:700;margin-top:12px;cursor:pointer;font-size:15px}
+.btn{width:100%;padding:13px;border-radius:10px;border:none;background:#5e47ff;color:#fff;font-weight:700;margin-top:12px;cursor:pointer}
 .btn-green{background:#10b981}.btn-red{background:#ef4444}
 .link{color:#8b7bff;font-size:13px;text-align:center;margin-top:12px;cursor:pointer;display:block}
 .hidden{display:none}
 .sidebar{width:260px;background:#111c34;position:fixed;height:100vh;padding:14px 12px;border-right:1px solid #1e2e50;overflow-y:auto;z-index:100;transition:0.3s}
 .logo{color:#8b7bff;font-weight:900;font-size:15px}
-.item{padding:11px 14px;border-radius:10px;color:#7a8aa8;font-size:13px;margin-bottom:3px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.item{padding:11px 14px;border-radius:10px;color:#7a8aa8;font-size:13px;margin-bottom:3px;cursor:pointer;display:flex;gap:8px}
 .item.active{background:#5e47ff;color:#fff}
 .main{margin-left:260px;flex:1;padding:16px;min-height:100vh}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -32,115 +32,75 @@ body{background:#0a1222;color:#fff;min-height:100vh}
 </style>
 </head>
 <body>
-<div id="authPage" class="auth-wrap"><div class="auth-box"><div class="logo-big">⭐ NEXTILIATE AGENCIES</div><div id="regForm"><h3>Create Account</h3><input id="r_fullname" class="input" placeholder="Full Name"><input id="r_username" class="input" placeholder="Username"><input id="r_phone" class="input" placeholder="Phone 07..."><input id="r_email" class="input" type="email" placeholder="Email"><input id="r_pass" class="input" type="password" placeholder="Password"><input id="r_cpass" class="input" type="password" placeholder="Confirm Password"><button class="btn" onclick="doRegister()">Sign Up</button><span class="link" onclick="showLogin()">Already have account? Log In</span></div><div id="loginForm" class="hidden"><h3>Welcome Back</h3><input id="l_user" class="input" placeholder="Username or Email"><input id="l_pass" class="input" type="password" placeholder="Password"><button class="btn" onclick="doLogin()">Log In</button><span class="link" onclick="showReg()">Don't have account? Sign Up</span></div><p id="authMsg" style="font-size:13px;margin-top:10px;text-align:center"></p></div></div>
-<div id="payPage" class="auth-wrap hidden"><div class="auth-box" style="text-align:center"><div class="logo-big">💳 Activation Fee</div><h2 style="margin:10px 0">KES 200</h2><div class="box" style="text-align:left;margin:14px 0"><p>Paybill: <b style="color:#fde68a;font-size:18px">714777</b></p><p>Account: <b>440200282954</b></p><p>Amount: <b>KES 200</b></p></div><input id="mpesaCode" class="input" placeholder="M-Pesa Code e.g QH..."><button class="btn btn-green" onclick="confirmPayment()">✅ Confirm Payment</button><button class="btn" style="background:#1e2e50" onclick="skipPay()">Demo Pay</button><p id="payMsg" style="font-size:13px;margin-top:10px"></p></div></div>
-<div id="pendingPage" class="auth-wrap hidden"><div class="auth-box" style="text-align:center"><div class="logo-big">⏳ PENDING APPROVAL</div><h3 id="pendingName" style="margin:12px 0"></h3><p id="pendingText" style="color:#7a8aa8;font-size:13px;line-height:1.5"></p><button class="btn" style="background:#1e2e50;margin-top:16px" onclick="checkApproval()">🔄 Check if Approved</button><button class="btn btn-red" onclick="logout()">Logout</button></div></div>
-<div id="appPage" class="hidden"><div class="overlay" id="overlay" onclick="toggleMenu()"></div><div class="sidebar" id="sidebar"><div class="logo">⭐ NEXTILIATE</div><div style="color:#6b7a9a;font-size:11px;margin:4px 0 16px 20px">Hi <span id="sideUser">User</span></div><div class="item active" onclick="showAppPage('dashboard',this)">🏠 Dashboard</div><div class="item" onclick="showAppPage('tasks',this)">🎮 Tasks & Spin</div><div class="item" onclick="showAppPage('referrals',this)">👥 My Referrals</div><div class="item" onclick="showAppPage('payclient',this)">💳 Pay for Client</div><div class="item" onclick="showAppPage('transactions',this)">📊 Transactions</div><div class="item" onclick="showAppPage('withdraw',this)">💰 Withdraw</div><div class="item" onclick="showAppPage('support',this)">💬 Support</div><div class="item" onclick="logout()">🚪 Logout</div></div><div class="main"><div class="top"><div class="hamburger" onclick="toggleMenu()">☰</div><div><h3 id="welcome">Welcome! 🎉</h3><p id="welcomeSub" style="font-size:11px;color:#7a8aa8"></p></div><div style="font-size:12px" id="topBal">KES 0</div></div><div id="dashboard" class="page active"><div class="cards"><div class="card" style="background:linear-gradient(135deg,#3b2dd6,#5e47ff)"><p style="font-size:10px">EXPENSES</p><h2>KES 200</h2><small>✓ Paid</small></div><div class="card" style="background:linear-gradient(135deg,#1e40af,#3b82f6)"><p style="font-size:10px">BALANCE</p><h2 id="bal">KES 0</h2></div><div class="card" style="background:linear-gradient(135deg,#065f46,#10b981)"><p style="font-size:10px">TOTAL WITHDRAWN</p><h2 id="totalW">KES 0</h2></div><div class="card" style="background:linear-gradient(135deg,#92400e,#f59e0b)"><p style="font-size:10px">PENDING</p><h2 id="pendW">KES 0</h2></div></div><div class="box"><b>🔗 Your Referral Link</b><div style="display:flex;gap:6px;margin-top:8px"><input id="clink" readonly style="flex:1;padding:10px;border-radius:8px;background:#0a1222;border:1px solid #1e2e50;color:#fff;font-size:11px"><button onclick="copyLink()" style="padding:10px 14px;border-radius:8px;background:#5e47ff;color:#fff;border:none">Copy</button></div></div></div><div id="tasks" class="page"><div class="box"><h3>🎮 Daily Tasks</h3><div style="display:grid;gap:8px;margin-top:10px"><div class="box" style="margin:0"><p>🎡 Spin Wheel - Earn KES 50</p><button class="btn btn-green" onclick="earnTask(50)">Spin Now</button></div><div class="box" style="margin:0"><p>📺 Watch Video - Earn KES 20</p><button class="btn" onclick="earnTask(20)">Watch</button></div><div class="box" style="margin:0"><p>✅ Daily Login - Earn KES 10</p><button class="btn" onclick="earnTask(10)">Claim</button></div></div></div></div><div id="referrals" class="page"><div class="box"><h3>👥 My Referrals</h3><div id="refList" style="margin-top:10px"></div></div></div><div id="payclient" class="page"><div class="box"><h3>💳 Pay for Client - Earn 100</h3><input id="cPhone" class="input" placeholder="Client Phone 07..."><button class="btn btn-green" onclick="payClient()">Pay 200 & Earn 100</button></div></div><div id="transactions" class="page"><div class="box"><h3>📊 History</h3><div id="history" style="margin-top:10px"></div></div></div><div id="withdraw" class="page"><div class="box" style="background:linear-gradient(135deg,#1e40af,#3b82f6);border:none"><p>Available</p><h1 id="wBal">KES 0</h1></div><div class="box"><input id="wAmount" type="number" class="input" placeholder="Amount Min 300"><input id="wPhone" class="input" placeholder="M-Pesa 07..."><button class="btn btn-green" onclick="doWithdraw()">Withdraw Now</button><p id="wMsg" style="font-size:12px;margin-top:8px"></p></div></div><div id="support" class="page"><div class="box"><h3>💬 Support</h3><p style="font-size:13px;margin:8px 0">WhatsApp: 0700000000<br>Email: support@nextiliate.com</p></div></div></div></div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, getDocs, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-// ==== WEKA CONFIG YAKO HAPA ====
-const firebaseConfig = {
-  apiKey: "PASTE YOUR API KEY HERE",
-  authDomain: "PASTE HERE",
-  projectId: "PASTE HERE",
-  storageBucket: "PASTE HERE",
-  messagingSenderId: "PASTE HERE",
-  appId: "PASTE HERE"
-};
-// ================================
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-window.db=db; window.doc=doc; window.setDoc=setDoc; window.getDoc=getDoc; window.updateDoc=updateDoc; window.collection=collection; window.addDoc=addDoc; window.getDocs=getDocs; window.query=query; window.where=where; window.onSnapshot=onSnapshot;
-
+<div id="authPage" class="auth-wrap"><div class="auth-box"><div class="logo-big">⭐ NEXTILIATE</div><div id="regForm"><h3>Create Account</h3><input id="r_fullname" class="input" placeholder="Full Name"><input id="r_username" class="input" placeholder="Username"><input id="r_phone" class="input" placeholder="Phone 07..."><input id="r_email" class="input" type="email" placeholder="Email"><input id="r_pass" class="input" type="password" placeholder="Password"><input id="r_cpass" class="input" type="password" placeholder="Confirm Password"><button class="btn" onclick="doRegister()">Sign Up</button><span class="link" onclick="showLogin()">Already have account? Log In</span></div><div id="loginForm" class="hidden"><h3>Welcome Back</h3><input id="l_user" class="input" placeholder="Username or Email"><input id="l_pass" class="input" type="password" placeholder="Password"><button class="btn" onclick="doLogin()">Log In</button><span class="link" onclick="showReg()">Don't have account? Sign Up</span></div><p id="authMsg" style="font-size:13px;margin-top:10px;text-align:center"></p></div></div>
+<div id="payPage" class="auth-wrap hidden"><div class="auth-box" style="text-align:center"><div class="logo-big">💳 Activation Fee</div><h2>KES 200</h2><div class="box" style="text-align:left"><p>Paybill: <b style="color:#fde68a;font-size:18px">714777</b></p><p>Account: <b>440200282954</b></p></div><input id="mpesaCode" class="input" placeholder="M-Pesa Code QH..."><button class="btn btn-green" onclick="confirmPayment()">Confirm Payment</button><button class="btn" style="background:#1e2e50" onclick="skipPay()">Demo Pay (Test)</button><p id="payMsg" style="font-size:13px;margin-top:10px"></p></div></div>
+<div id="pendingPage" class="auth-wrap hidden"><div class="auth-box" style="text-align:center"><div class="logo-big">⏳ PENDING</div><h3 id="pendingName"></h3><p id="pendingText" style="color:#7a8aa8;font-size:13px"></p><button class="btn" style="background:#1e2e50;margin-top:16px" onclick="checkApproval()">Check if Approved</button><button class="btn btn-red" onclick="logout()">Logout</button></div></div>
+<div id="appPage" class="hidden"><div class="overlay" id="overlay" onclick="toggleMenu()"></div><div class="sidebar" id="sidebar"><div class="logo">⭐ NEXTILIATE</div><div style="color:#6b7a9a;font-size:11px;margin:4px 0 16px 20px" id="sideUser"></div><div class="item active" onclick="showAppPage('dashboard',this)">🏠 Dashboard</div><div class="item" onclick="showAppPage('tasks',this)">🎮 Tasks</div><div class="item" onclick="showAppPage('referrals',this)">👥 Referrals</div><div class="item" onclick="showAppPage('payclient',this)">💳 Pay for Client</div><div class="item" onclick="showAppPage('transactions',this)">📊 Transactions</div><div class="item" onclick="showAppPage('withdraw',this)">💰 Withdraw</div><div class="item" onclick="logout()">🚪 Logout</div></div><div class="main"><div class="top"><div class="hamburger" onclick="toggleMenu()">☰</div><div><h3 id="welcome"></h3><p id="welcomeSub" style="font-size:11px;color:#7a8aa8"></p></div><div style="font-size:12px" id="topBal"></div></div><div id="dashboard" class="page active"><div class="cards"><div class="card" style="background:linear-gradient(135deg,#3b2dd6,#5e47ff)"><p style="font-size:10px">EXPENSES</p><h2>KES 200</h2><small>✓ Paid</small></div><div class="card" style="background:linear-gradient(135deg,#1e40af,#3b82f6)"><p style="font-size:10px">BALANCE</p><h2 id="bal">KES 0</h2></div><div class="card" style="background:linear-gradient(135deg,#065f46,#10b981)"><p style="font-size:10px">TOTAL WITHDRAWN</p><h2 id="totalW">KES 0</h2></div><div class="card" style="background:linear-gradient(135deg,#92400e,#f59e0b)"><p style="font-size:10px">PENDING</p><h2 id="pendW">KES 0</h2></div></div><div class="box"><b>🔗 Your Referral Link</b><div style="display:flex;gap:6px;margin-top:8px"><input id="clink" readonly style="flex:1;padding:10px;border-radius:8px;background:#0a1222;border:1px solid #1e2e50;color:#fff;font-size:11px"><button onclick="copyLink()" style="padding:10px 14px;border-radius:8px;background:#5e47ff;color:#fff;border:none">Copy</button></div></div></div><div id="tasks" class="page"><div class="box"><h3>🎮 Tasks</h3><div style="display:grid;gap:8px;margin-top:10px"><div class="box" style="margin:0"><p>🎡 Spin - KES 50</p><button class="btn btn-green" onclick="earnTask(50)">Spin</button></div><div class="box" style="margin:0"><p>📺 Video - KES 20</p><button class="btn" onclick="earnTask(20)">Watch</button></div></div></div></div><div id="referrals" class="page"><div class="box"><h3>👥 Referrals</h3><div id="refList"></div></div></div><div id="payclient" class="page"><div class="box"><h3>💳 Pay for Client - Earn 100</h3><input id="cPhone" class="input" placeholder="Client Phone"><button class="btn btn-green" onclick="payClient()">Pay 200 & Earn 100</button></div></div><div id="transactions" class="page"><div class="box"><h3>📊 History</h3><div id="history"></div></div></div><div id="withdraw" class="page"><div class="box" style="background:linear-gradient(135deg,#1e40af,#3b82f6);border:none"><p>Available</p><h1 id="wBal">KES 0</h1></div><div class="box"><input id="wAmount" type="number" class="input" placeholder="Amount Min 300"><input id="wPhone" class="input" placeholder="M-Pesa 07..."><button class="btn btn-green" onclick="doWithdraw()">Withdraw</button><p id="wMsg" style="font-size:12px;margin-top:8px"></p></div></div></div></div>
+<script>
+function getUsers(){return JSON.parse(localStorage.getItem('allUsers')||'{}');}
+function saveUsers(u){localStorage.setItem('allUsers',JSON.stringify(u));}
+function getHist(){return JSON.parse(localStorage.getItem('hist')||'[]');}
+function saveHistA(h){localStorage.setItem('hist',JSON.stringify(h));}
 window.showLogin=()=>{document.getElementById('regForm').classList.add('hidden');document.getElementById('loginForm').classList.remove('hidden');}
 window.showReg=()=>{document.getElementById('loginForm').classList.add('hidden');document.getElementById('regForm').classList.remove('hidden');}
-
-window.doRegister=async()=>{
+window.doRegister=()=>{
  let f=document.getElementById('r_fullname').value.trim(),u=document.getElementById('r_username').value.trim(),p=document.getElementById('r_phone').value.trim(),e=document.getElementById('r_email').value.trim(),pw=document.getElementById('r_pass').value,cp=document.getElementById('r_cpass').value,m=document.getElementById('authMsg');
  if(!f||!u||!p||!e||!pw||!cp){m.style.color='#ef4444';m.innerText='❌ Jaza kila kitu!';return;}
  if(pw!=cp){m.style.color='#ef4444';m.innerText='❌ Passwords hazifanani!';return;}
- m.style.color='#f59e0b';m.innerText='⏳ Creating...';
- try{
-  let userDoc=await getDoc(doc(db,"users",u.toLowerCase()));
-  if(userDoc.exists()){m.style.color='#ef4444';m.innerText='❌ Username ipo!';return;}
-  await setDoc(doc(db,"users",u.toLowerCase()),{fullname:f,username:u,phone:p,email:e,password:pw,paid:"no",approved:"no",balance:0,totalW:0,pendW:0,created:Date.now()});
-  localStorage.setItem('currentUser',JSON.stringify({fullname:f,username:u,phone:p,email:e}));
-  m.style.color='#10b981';m.innerText='✅ Created!';
-  setTimeout(()=>{document.getElementById('authPage').classList.add('hidden');document.getElementById('payPage').classList.remove('hidden');},500);
- }catch(err){m.style.color='#ef4444';m.innerText='❌ '+err.message;}
+ let users=getUsers();
+ if(users[u.toLowerCase()]){m.style.color='#ef4444';m.innerText='❌ Username ipo!';return;}
+ users[u.toLowerCase()]={fullname:f,username:u,phone:p,email:e,password:pw,paid:"no",approved:"no",balance:0,totalW:0,pendW:0};
+ saveUsers(users);
+ localStorage.setItem('currentUser',JSON.stringify(users[u.toLowerCase()]));
+ m.style.color='#10b981';m.innerText='✅ Created!';
+ setTimeout(()=>{document.getElementById('authPage').classList.add('hidden');document.getElementById('payPage').classList.remove('hidden');},500);
 }
-
-window.doLogin=async()=>{
+window.doLogin=()=>{
  let u=document.getElementById('l_user').value.trim(),pw=document.getElementById('l_pass').value,m=document.getElementById('authMsg');
- if(!u||!pw){m.innerText='❌ Jaza!';return;}
- m.style.color='#f59e0b';m.innerText='⏳ Checking...';
- try{
-  let q=query(collection(db,"users"),where("username","==",u));
-  let snap=await getDocs(q);
-  if(snap.empty){q=query(collection(db,"users"),where("email","==",u));snap=await getDocs(q);}
-  if(snap.empty){m.style.color='#ef4444';m.innerText='❌ User not found!';return;}
-  let userData=null; snap.forEach(d=>{userData=d.data();});
-  if(userData.password!=pw){m.style.color='#ef4444';m.innerText='❌ Wrong password!';return;}
-  localStorage.setItem('currentUser',JSON.stringify(userData));
-  if(userData.paid=='yes' && userData.approved=='yes'){openApp(userData);}else if(userData.paid=='yes'){showPending(userData);}else{document.getElementById('authPage').classList.add('hidden');document.getElementById('payPage').classList.remove('hidden');}
- }catch(err){m.style.color='#ef4444';m.innerText='❌ '+err.message;}
+ let users=getUsers(); let found=null;
+ Object.values(users).forEach(x=>{if(x.username.toLowerCase()==u.toLowerCase()||x.email.toLowerCase()==u.toLowerCase()) found=x;});
+ if(!found){m.style.color='#ef4444';m.innerText='❌ User not found!';return;}
+ if(found.password!=pw){m.style.color='#ef4444';m.innerText='❌ Wrong password!';return;}
+ localStorage.setItem('currentUser',JSON.stringify(found));
+ if(found.paid=='yes' && found.approved=='yes') openApp(found); else if(found.paid=='yes') showPending(found); else {document.getElementById('authPage').classList.add('hidden');document.getElementById('payPage').classList.remove('hidden');}
 }
-
 window.showPending=(cur)=>{
  document.getElementById('authPage').classList.add('hidden');document.getElementById('payPage').classList.add('hidden');document.getElementById('pendingPage').classList.remove('hidden');
- document.getElementById('pendingName').innerText='Hi '+cur.fullname.split(' ')[0]+'!';
- document.getElementById('pendingText').innerHTML='Umelipa KES 200<br>Mpesa: <b>'+(cur.mpesa||'')+'</b><br><br>Admin bado haja ku-approve.<br>Username: '+cur.username;
- window._pendingUser=cur;
- onSnapshot(doc(db,"users",cur.username.toLowerCase()),(d)=>{if(d.exists() && d.data().approved=='yes'){openApp(d.data());}});
+ document.getElementById('pendingName').innerText='Hi '+cur.fullname.split(' ')[0]+'!';document.getElementById('pendingText').innerHTML='Umelipa KES 200<br>Code: '+(cur.mpesa||'')+'<br><br>Admin bado haja ku-approve.<br>Tuma screenshot WhatsApp.';
 }
-
-window.confirmPayment=async()=>{
+window.confirmPayment=()=>{
  let code=document.getElementById('mpesaCode').value.trim(),msg=document.getElementById('payMsg');
- if(!code||code.length<4){msg.style.color='#ef4444';msg.innerText='❌ Weka M-Pesa Code!';return;}
- let cur=JSON.parse(localStorage.getItem('currentUser'));
- msg.style.color='#f59e0b';msg.innerText='⏳ Saving...';
- try{
-  await updateDoc(doc(db,"users",cur.username.toLowerCase()),{paid:"yes",mpesa:code,approved:"no"});
-  let updated=(await getDoc(doc(db,"users",cur.username.toLowerCase()))).data();
-  localStorage.setItem('currentUser',JSON.stringify(updated));
-  msg.style.color='#10b981';msg.innerText='✅ Sent! Waiting Admin...';
-  setTimeout(()=>{showPending(updated);},800);
- }catch(e){msg.style.color='#ef4444';msg.innerText='❌ '+e.message;}
+ if(!code||code.length<4){msg.style.color='#ef4444';msg.innerText='❌ Weka Code!';return;}
+ let cur=JSON.parse(localStorage.getItem('currentUser')); let users=getUsers();
+ users[cur.username.toLowerCase()].paid="yes"; users[cur.username.toLowerCase()].mpesa=code; users[cur.username.toLowerCase()].approved="no";
+ saveUsers(users); localStorage.setItem('currentUser',JSON.stringify(users[cur.username.toLowerCase()]));
+ msg.style.color='#10b981';msg.innerText='✅ Sent! Waiting Admin...'; setTimeout(()=>showPending(users[cur.username.toLowerCase()]),800);
 }
-window.skipPay=async()=>{
- let cur=JSON.parse(localStorage.getItem('currentUser'));
- await updateDoc(doc(db,"users",cur.username.toLowerCase()),{paid:"yes",mpesa:"DEMO123",approved:"no"});
- let updated=(await getDoc(doc(db,"users",cur.username.toLowerCase()))).data();
- showPending(updated);
+window.skipPay=()=>{
+ let cur=JSON.parse(localStorage.getItem('currentUser')); let users=getUsers();
+ users[cur.username.toLowerCase()].paid="yes"; users[cur.username.toLowerCase()].mpesa="DEMO123"; users[cur.username.toLowerCase()].approved="no";
+ saveUsers(users); showPending(users[cur.username.toLowerCase()]);
 }
-window.checkApproval=async()=>{
- let cur=JSON.parse(localStorage.getItem('currentUser'));
- let d=await getDoc(doc(db,"users",cur.username.toLowerCase()));
- if(d.exists() && d.data().approved=='yes'){openApp(d.data());}else{alert('⏳ Bado haja-approve!');}
+window.checkApproval=()=>{
+ let cur=JSON.parse(localStorage.getItem('currentUser')); let users=getUsers(); let u=users[cur.username.toLowerCase()];
+ if(u.approved=='yes') openApp(u); else alert('⏳ Bado! Admin haja-approve. Tumia admin.html ku-approve.');
 }
-
-window.openApp=async(cur)=>{
+window.openApp=(cur)=>{
  document.getElementById('authPage').classList.add('hidden');document.getElementById('payPage').classList.add('hidden');document.getElementById('pendingPage').classList.add('hidden');document.getElementById('appPage').classList.remove('hidden');
- document.getElementById('sideUser').innerText=cur.username;document.getElementById('welcome').innerText='Welcome '+cur.fullname.split(' ')[0]+'! 🎉';document.getElementById('welcomeSub').innerText='@'+cur.username+' | '+cur.phone;document.getElementById('clink').value='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+cur.username;
- window._curU=cur.username.toLowerCase();window._userBal=cur.balance||0;window._totalW=cur.totalW||0;window._pendW=cur.pendW||0;
- updateDash();loadHistory();
- onSnapshot(doc(db,"users",window._curU),(snap)=>{if(snap.exists()){let d=snap.data();window._userBal=d.balance||0;window._totalW=d.totalW||0;window._pendW=d.pendW||0;updateDash();}});
+ document.getElementById('sideUser').innerText=cur.username;document.getElementById('welcome').innerText='Welcome '+cur.fullname.split(' ')[0]+'! 🎉';document.getElementById('welcomeSub').innerText='@'+cur.username;document.getElementById('clink').value='https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref='+cur.username;
+ window._curU=cur.username.toLowerCase();window._bal=cur.balance||0;window._totalW=cur.totalW||0;window._pendW=cur.pendW||0; updateDash(); loadHistory();
 }
-window.updateDash=()=>{document.getElementById('bal').innerText='KES '+window._userBal;document.getElementById('wBal').innerText='KES '+window._userBal;document.getElementById('topBal').innerText='KES '+window._userBal;document.getElementById('totalW').innerText='KES '+window._totalW;document.getElementById('pendW').innerText='KES '+window._pendW;}
-window.loadHistory=async()=>{let q=query(collection(db,"transactions"),where("username","==",window._curU));let snap=await getDocs(q);let h=document.getElementById('history');h.innerHTML='';let arr=[];snap.forEach(d=>arr.push(d.data()));arr.sort((a,b)=>b.time-a.time).forEach(item=>{let d=document.createElement('div');d.className='txn';d.innerHTML='<span>KES '+item.amt+' - '+(item.phone||item.type)+'</span><span style="color:'+(item.status=='Success'||item.status=='Earned'?'#10b981':'#f59e0b')+'">'+item.status+'</span>';h.appendChild(d);});}
-window.saveHist=async(amt,phone,status,type)=>{await addDoc(collection(db,"transactions"),{username:window._curU,amt,phone,status,type:type||'',time:Date.now()});loadHistory();}
+window.updateDash=()=>{document.getElementById('bal').innerText='KES '+window._bal;document.getElementById('wBal').innerText='KES '+window._bal;document.getElementById('topBal').innerText='KES '+window._bal;document.getElementById('totalW').innerText='KES '+window._totalW;document.getElementById('pendW').innerText='KES '+window._pendW;}
+window.loadHistory=()=>{let h=getHist().filter(x=>x.username==window._curU);let div=document.getElementById('history');div.innerHTML='';h.reverse().forEach(i=>{let d=document.createElement('div');d.className='txn';d.innerHTML='<span>KES '+i.amt+' - '+(i.phone||i.type)+'</span><span style="color:'+(i.status=='Success'||i.status=='Earned'?'#10b981':'#f59e0b')+'">'+i.status+'</span>';div.appendChild(d);});}
+window.saveHist=(amt,phone,status,type)=>{let h=getHist();h.push({username:window._curU,amt,phone,status,type,time:Date.now()});saveHistA(h);loadHistory();}
 window.showAppPage=(p,el)=>{document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('.item').forEach(e=>e.classList.remove('active'));if(el)el.classList.add('active');if(window.innerWidth<=800)toggleMenu();}
 window.toggleMenu=()=>{document.getElementById('sidebar').classList.toggle('active');document.getElementById('overlay').classList.toggle('active');}
 window.copyLink=()=>{navigator.clipboard.writeText(document.getElementById('clink').value);alert('Copied!');}
-window.earnTask=async(amt)=>{window._userBal+=amt;await updateDoc(doc(db,"users",window._curU),{balance:window._userBal});updateDash();await saveHist(amt,'Task','Earned','Task');alert('Earned KES '+amt);}
-window.payClient=async()=>{let ph=document.getElementById('cPhone').value.trim();if(!ph){alert('Weka Phone');return;}window._userBal+=100;await updateDoc(doc(db,"users",window._curU),{balance:window._userBal});updateDash();await saveHist(100,ph,'Earned','Referral');alert('Earned 100 from '+ph);}
-window.doWithdraw=async()=>{let amt=parseInt(document.getElementById('wAmount').value);let phone=document.getElementById('wPhone').value.trim();let msg=document.getElementById('wMsg');if(!amt||amt<300){msg.style.color='#ef4444';msg.innerText='❌ Min 300';return;}if(amt>window._userBal){msg.style.color='#ef4444';msg.innerText='❌ Balance haitoshi!';return;}window._userBal-=amt;window._pendW+=amt;await updateDoc(doc(db,"users",window._curU),{balance:window._userBal,pendW:window._pendW});updateDash();await saveHist(amt,phone,'Processing');msg.style.color='#10b981';msg.innerText='✅ KES '+amt+' to '+phone+' - Waiting Admin!';document.getElementById('wAmount').value='';}
+window.earnTask=(amt)=>{window._bal+=amt;let users=getUsers();users[window._curU].balance=window._bal;saveUsers(users);updateDash();saveHist(amt,'Task','Earned','Task');alert('Earned '+amt);}
+window.payClient=()=>{let ph=document.getElementById('cPhone').value.trim();if(!ph){alert('Weka Phone');return;}window._bal+=100;let users=getUsers();users[window._curU].balance=window._bal;saveUsers(users);updateDash();saveHist(100,ph,'Earned','Referral');alert('Earned 100');}
+window.doWithdraw=()=>{let amt=parseInt(document.getElementById('wAmount').value);let phone=document.getElementById('wPhone').value.trim();let msg=document.getElementById('wMsg');if(!amt||amt<300){msg.style.color='#ef4444';msg.innerText='❌ Min 300';return;}if(amt>window._bal){msg.style.color='#ef4444';msg.innerText='❌ Balance low!';return;}window._bal-=amt;window._pendW+=amt;let users=getUsers();users[window._curU].balance=window._bal;users[window._curU].pendW=window._pendW;saveUsers(users);updateDash();saveHist(amt,phone,'Processing');msg.style.color='#10b981';msg.innerText='✅ Sent!';document.getElementById('wAmount').value='';}
 window.logout=()=>{localStorage.removeItem('currentUser');location.reload();}
-let cur=localStorage.getItem('currentUser');if(cur){let u=JSON.parse(cur);getDoc(doc(db,"users",u.username.toLowerCase())).then(d=>{if(!d.exists())return;let data=d.data();if(data.paid=='yes' && data.approved=='yes'){openApp(data);}else if(data.paid=='yes'){showPending(data);}else{document.getElementById('authPage').classList.add('hidden');document.getElementById('payPage').classList.remove('hidden');}});}
+let cur=localStorage.getItem('currentUser');if(cur){let u=JSON.parse(cur);let users=getUsers();let data=users[u.username.toLowerCase()];if(data){if(data.paid=='yes'&&data.approved=='yes')openApp(data);else if(data.paid=='yes')showPending(data);}}
 </script>
 </body>
 </html>
