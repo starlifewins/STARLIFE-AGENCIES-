@@ -8,10 +8,11 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#0a1222;color:#fff;display:flex}
 .sidebar{width:260px;background:#111c34;position:fixed;height:100vh;padding:14px 12px;border-right:1px solid #1e2e50;overflow-y:auto;z-index:100;transition:0.3s}
-.logo{color:#8b7bff;font-weight:900;font-size:16px}
+.logo{color:#8b7bff;font-weight:900;font-size:15px}
 .sub{color:#6b7a9a;font-size:11px;margin:4px 0 16px 20px}
 .item{padding:11px 14px;border-radius:10px;color:#7a8aa8;font-size:13px;margin-bottom:3px;cursor:pointer;display:flex;gap:8px}
 .item.active{background:#5e47ff;color:#fff;font-weight:700}
+.item:hover{background:#1e2e50;color:#fff}
 .divider{margin:16px 0 6px 0;padding:10px 14px 6px 14px;border-top:1px solid #1e2e50;color:#fff;font-weight:800;font-size:11px}
 .main{margin-left:260px;flex:1;padding:16px;background:#0a1222;min-height:100vh}
 .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -20,15 +21,15 @@ body{background:#0a1222;color:#fff;display:flex}
 .card{border-radius:14px;padding:16px;color:#fff}
 .box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:14px;margin-top:14px}
 .btn{width:100%;padding:12px;border-radius:10px;border:none;background:#5e47ff;color:#fff;font-weight:700;margin-top:10px;cursor:pointer}
-.input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:8px}
+.btn-green{background:#10b981}
+.btn:disabled{background:#2a344d;color:#6b7a9a}
+.input,select{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:8px}
+.page{display:none}.page.active{display:block}
+.txn{padding:10px;border-bottom:1px solid #1e2e50;font-size:12px;display:flex;justify-content:space-between}
 .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:90}
 @media(max-width:800px){
-.sidebar{left:-270px}
-.sidebar.active{left:0}
-.main{margin-left:0}
-.hamburger{display:block}
-.overlay.active{display:block}
-.cards{grid-template-columns:1fr 1fr}
+.sidebar{left:-270px}.sidebar.active{left:0}.main{margin-left:0}
+.hamburger{display:block}.overlay.active{display:block}
 }
 </style>
 </head>
@@ -39,57 +40,34 @@ body{background:#0a1222;color:#fff;display:flex}
 <div class="sidebar" id="sidebar">
 <div class="logo">⭐ NEXTILIATE AGENCIES</div>
 <div class="sub">Affiliate Program</div>
-<div class="item active" onclick="showPage('dashboard')">🏠 Dashboard</div>
-<div class="item" onclick="alert('Clink and Earn - Soon')">🖱️ Clink and Earn</div>
-<div class="item" onclick="alert('YouTube - Soon')">▶️ YouTube Videos</div>
-<div class="item" onclick="alert('TikTok - Soon')">🎵 TikTok Videos</div>
-<div class="item" onclick="alert('Instagram - Soon')">📸 Instagram Reels</div>
-<div class="item" onclick="alert('Maths - Soon')">➗ Maths 10Q</div>
-<div class="item" onclick="alert('Trivia - Soon')">🧠 Trivia 10Q</div>
-<div class="item" onclick="alert('Aviator - Soon')">✈️ Aviator Signals</div>
-<div class="item" onclick="alert('Forex - Soon')">📈 Free Forex Classes</div>
-<div class="item" onclick="alert('Odds - Soon')">⚽ Sure Odds</div>
-<div class="item" onclick="alert('Pay for Client')">💳 Pay for Client</div>
-<div class="item" onclick="alert('Team - Soon')">👥 Team</div>
+<div class="item active" id="m-dashboard" onclick="showPage('dashboard')">🏠 Dashboard</div>
+<div class="item" onclick="showPage('clink')">🖱️ Clink and Earn</div>
+<div class="item" onclick="showPage('youtube')">▶️ YouTube Videos</div>
+<div class="item" onclick="showPage('tiktok')">🎵 TikTok Videos</div>
+<div class="item" onclick="showPage('instagram')">📸 Instagram Reels</div>
+<div class="item" onclick="showPage('payclient')">💳 Pay for Client</div>
+<div class="item" onclick="showPage('team')">👥 Team</div>
 <div class="divider">💸 WITHDRAWALS</div>
-<div class="item" onclick="alert('Withdraw - Soon')">💰 Withdraw Balance</div>
-<div class="item" onclick="alert('Withdraw YT - Soon')">▶️ Withdraw YouTube</div>
-<div class="item" onclick="alert('Withdraw TT - Soon')">🎵 Withdraw TikTok</div>
-<div class="item" onclick="alert('Withdraw IG - Soon')">📸 Withdraw Instagram</div>
-<div class="item" onclick="alert('Withdraw Activity - Soon')">🎯 Withdraw Activity</div>
+<div class="item" id="m-withdraw" onclick="showPage('withdraw')">💰 Withdraw Balance</div>
+<div class="item" onclick="showPage('withdraw')">▶️ Withdraw YouTube</div>
+<div class="item" onclick="showPage('withdraw')">🎵 Withdraw TikTok</div>
+<div class="item" onclick="showPage('withdraw')">📸 Withdraw Instagram</div>
 </div>
 
 <div class="main">
 <div class="top">
 <div class="hamburger" onclick="toggleMenu()">☰</div>
-<div>
-<h3>Welcome Abraham! 🎉</h3>
-<p style="font-size:11px;color:#7a8aa8">Affiliate Member</p>
-</div>
-<div style="text-align:right"><b style="font-size:12px">Abraham Koech</b></div>
+<div><h3 id="pageTitle">Welcome Abraham! 🎉</h3><p style="font-size:11px;color:#7a8aa8">Balance: <span id="balTop">KES 4,850</span></p></div>
+<div style="font-size:11px">Abraham</div>
 </div>
 
+<!-- DASHBOARD -->
+<div id="dashboard" class="page active">
 <div class="cards">
-<div class="card" style="background:linear-gradient(135deg,#3b2dd6,#5e47ff)">
-<p style="font-size:10px">EXPENSES</p>
-<h2 style="margin:6px 0">KES 200</h2>
-<small>✓ Paid</small>
-</div>
-<div class="card" style="background:linear-gradient(135deg,#1e40af,#3b82f6)">
-<p style="font-size:10px">ACCOUNT BALANCE</p>
-<h2 id="bal" style="margin:6px 0">KES 4,850</h2>
-<small>+1,200 week</small>
-</div>
-<div class="card" style="background:linear-gradient(135deg,#065f46,#10b981)">
-<p style="font-size:10px">TOTAL WITHDRAWAL</p>
-<h2 style="margin:6px 0">KES 2,400</h2>
-<small>Withdrawn</small>
-</div>
-<div class="card" style="background:linear-gradient(135deg,#92400e,#f59e0b)">
-<p style="font-size:10px">PENDING WITHDRAWAL</p>
-<h2 style="margin:6px 0">KES 600</h2>
-<small>Processing</small>
-</div>
+<div class="card" style="background:linear-gradient(135deg,#3b2dd6,#5e47ff)"><p style="font-size:10px">EXPENSES</p><h2 style="margin:6px 0">KES 200</h2><small>✓ Paid</small></div>
+<div class="card" style="background:linear-gradient(135deg,#1e40af,#3b82f6)"><p style="font-size:10px">ACCOUNT BALANCE</p><h2 id="bal" style="margin:6px 0">KES 4,850</h2><small id="balNote">Ready to withdraw</small></div>
+<div class="card" style="background:linear-gradient(135deg,#065f46,#10b981)"><p style="font-size:10px">TOTAL WITHDRAWAL</p><h2 id="totalW" style="margin:6px 0">KES 2,400</h2><small>Withdrawn</small></div>
+<div class="card" style="background:linear-gradient(135deg,#92400e,#f59e0b)"><p style="font-size:10px">PENDING WITHDRAWAL</p><h2 id="pendW" style="margin:6px 0">KES 600</h2><small>Processing</small></div>
 </div>
 
 <div class="box">
@@ -98,31 +76,126 @@ body{background:#0a1222;color:#fff;display:flex}
 <input id="clink" value="https://starlifewins.github.io/STARLIFE-AGENCIES-/?ref=AbrahamKoech" readonly style="flex:1;padding:10px;border-radius:8px;background:#0a1222;border:1px solid #1e2e50;color:#fff;font-size:11px">
 <button onclick="copyLink()" style="padding:10px 14px;border-radius:8px;background:#5e47ff;color:#fff;border:none">Copy</button>
 </div>
+<button class="btn" onclick="shareLink()">📤 Share Link</button>
+</div>
+</div>
+
+<!-- PAY FOR CLIENT -->
+<div id="payclient" class="page">
+<div class="box">
+<h3>💳 Pay for Client</h3>
+<p style="font-size:11px;color:#7a8aa8;margin:6px 0">Lipa KES 200 kwa client, upate KES 100</p>
 <input id="phone" class="input" placeholder="Client Phone 07...">
-<button class="btn" style="background:#10b981" onclick="payClient()">Pay KES 200 & Earn KES 100</button>
+<input id="amount" class="input" value="200" readonly>
+<button class="btn btn-green" onclick="payClient()">Pay KES 200 & Earn 100</button>
 <p style="font-size:10px;color:#6b7a9a;text-align:center;margin-top:8px">Paybill <b style="color:#fde68a">714777</b> Account <b>440200282954</b></p>
 </div>
+</div>
+
+<!-- WITHDRAW - HII NDIO INAFANYA KAZI -->
+<div id="withdraw" class="page">
+<div class="box" style="background:linear-gradient(135deg,#1e40af,#3b82f6);border:none">
+<p style="font-size:11px">Available Balance</p>
+<h1 id="wBal" style="margin:6px 0">KES 4,850</h1>
+<p style="font-size:11px">Min KES 300 | Max KES 10,000</p>
+</div>
+
+<div class="box">
+<h3>💰 Withdraw to M-Pesa</h3>
+<label style="font-size:11px;color:#7a8aa8">Withdrawal Amount</label>
+<input id="wAmount" type="number" class="input" placeholder="e.g 1000" min="300">
+<label style="font-size:11px;color:#7a8aa8">M-Pesa Number</label>
+<input id="wPhone" class="input" placeholder="07..." value="07">
+<label style="font-size:11px;color:#7a8aa8">Method</label>
+<select id="wMethod" class="input"><option>M-Pesa</option><option>Airtel Money</option></select>
+<button class="btn btn-green" id="withdrawBtn" onclick="doWithdraw()">💸 Withdraw Now</button>
+<p id="wMsg" style="font-size:12px;margin-top:8px;color:#10b981"></p>
+</div>
+
+<div class="box">
+<b>📜 Transaction History</b>
+<div id="history" style="margin-top:10px">
+<div class="txn"><span>Pending KES 600</span><span style="color:#f59e0b">⏳ Processing</span></div>
+<div class="txn"><span>Withdrawn KES 2,400</span><span style="color:#10b981">✓ Success</span></div>
+</div>
+</div>
+</div>
+
+<!-- OTHER PAGES -->
+<div id="clink-page" class="page"><div class="box"><h3>🖱️ Clink and Earn</h3><p style="font-size:13px;margin-top:8px">Click links to earn KES 10 per click!</p><button class="btn" onclick="earn(10)">Click & Earn KES 10</button></div></div>
+<div id="youtube" class="page"><div class="box"><h3>▶️ YouTube</h3><p>Watch video earn KES 20</p><button class="btn" onclick="earn(20)">Watch & Earn</button></div></div>
+<div id="tiktok" class="page"><div class="box"><h3>🎵 TikTok</h3><button class="btn" onclick="earn(20)">Watch & Earn KES 20</button></div></div>
+<div id="instagram" class="page"><div class="box"><h3>📸 Instagram</h3><button class="btn" onclick="earn(15)">Watch & Earn KES 15</button></div></div>
+<div id="team" class="page"><div class="box"><h3>👥 Team</h3><p>Your referrals: 12 | Active: 8</p></div></div>
 
 </div>
 
 <script>
+let bal = parseInt(localStorage.getItem('bal')) || 4850;
+let totalW = parseInt(localStorage.getItem('totalW')) || 2400;
+let pendW = parseInt(localStorage.getItem('pendW')) || 600;
+
+function updateUI(){
+ document.getElementById('bal').innerText='KES '+bal;
+ document.getElementById('wBal').innerText='KES '+bal;
+ document.getElementById('balTop').innerText='KES '+bal;
+ document.getElementById('totalW').innerText='KES '+totalW;
+ document.getElementById('pendW').innerText='KES '+pendW;
+ localStorage.setItem('bal',bal);
+ localStorage.setItem('totalW',totalW);
+ localStorage.setItem('pendW',pendW);
+}
+updateUI();
+
+function showPage(p){
+ document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
+ document.querySelectorAll('.sidebar.item').forEach(e=>e.classList.remove('active'));
+ let map={'dashboard':'dashboard','payclient':'payclient','withdraw':'withdraw','clink':'clink-page','youtube':'youtube','tiktok':'tiktok','instagram':'instagram','team':'team'};
+ let id=map[p]||p;
+ if(document.getElementById(id)) document.getElementById(id).classList.add('active');
+ if(p=='dashboard') document.getElementById('m-dashboard').classList.add('active');
+ if(p=='withdraw') document.getElementById('m-withdraw').classList.add('active');
+ document.getElementById('pageTitle').innerText = p.toUpperCase();
+ if(window.innerWidth<=800) toggleMenu();
+}
 function toggleMenu(){
-document.getElementById('sidebar').classList.toggle('active');
-document.getElementById('overlay').classList.toggle('active');
+ document.getElementById('sidebar').classList.toggle('active');
+ document.getElementById('overlay').classList.toggle('active');
 }
-function copyLink(){
-navigator.clipboard.writeText(document.getElementById('clink').value);
-alert('Link Copied!');
-}
+function copyLink(){navigator.clipboard.writeText(document.getElementById('clink').value);alert('Link Copied!');}
+function shareLink(){if(navigator.share){navigator.share({title:'NEXTILIATE',url:document.getElementById('clink').value})}else copyLink()}
 function payClient(){
-let p=document.getElementById('phone').value;
-if(!p){alert('Weka Phone');return;}
-alert('Paid 200 for '+p+' Earned 100!');
-let b=document.getElementById('bal');
-let cur=parseInt(b.innerText.replace(/[^0-9]/g,''))+100;
-b.innerText='KES '+cur;
+ let ph=document.getElementById('phone').value;
+ if(!ph){alert('Weka Phone');return;}
+ bal+=100; updateUI(); alert('Paid 200 for '+ph+' - You earned 100!');
+}
+function earn(a){bal+=a;updateUI();alert('Earned KES '+a+'! New Balance: KES '+bal);showPage('dashboard');}
+function doWithdraw(){
+ let amt=parseInt(document.getElementById('wAmount').value);
+ let phone=document.getElementById('wPhone').value;
+ let msg=document.getElementById('wMsg');
+ if(!amt||amt<300){msg.style.color='#ef4444';msg.innerText='❌ Minimum ni KES 300';return;}
+ if(amt>bal){msg.style.color='#ef4444';msg.innerText='❌ Balance haitoshi! Una KES '+bal;return;}
+ if(!phone||phone.length<10){msg.style.color='#ef4444';msg.innerText='❌ Weka M-Pesa number sahihi';return;}
+ // Deduct
+ bal-=amt; pendW+=amt;
+ updateUI();
+ // Add history
+ let h=document.getElementById('history');
+ let div=document.createElement('div');
+ div.className='txn';
+ div.innerHTML=`<span>KES ${amt} to ${phone}</span><span style="color:#f59e0b">⏳ Processing</span>`;
+ h.prepend(div);
+ msg.style.color='#10b981';
+ msg.innerText=`✅ Withdrawal ya KES ${amt} kwa ${phone} imetumwa! Itakuja kwa M-Pesa in 5 mins.`;
+ document.getElementById('wAmount').value='';
+ // Simulate success after 5 sec
+ setTimeout(()=>{
+   pendW-=amt; totalW+=amt;
+   div.innerHTML=`<span>KES ${amt} to ${phone}</span><span style="color:#10b981">✓ Success</span>`;
+   updateUI();
+ },5000);
 }
 </script>
-
 </body>
 </html>
