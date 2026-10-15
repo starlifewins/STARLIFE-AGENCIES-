@@ -9,27 +9,23 @@
 body{background:#0a1222;color:#fff;padding:16px}
 .box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:14px;margin-top:10px}
 .btn{padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:700;margin:4px}
-.btn-green{background:#10b981;color:#fff}.btn-red{background:#ef4444;color:#fff}.btn-blue{background:#5e47ff;color:#fff}
-.input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:8px}
+.btn-green{background:#10b981;color:#fff}.btn-red{background:#ef4444;color:#fff}
 </style>
 </head>
 <body>
-<h2>⭐ NEXTILIATE ADMIN - LOCAL</h2>
-<p style="color:#7a8aa8;font-size:12px">Inaonyesha tu wale walio-join kwa SIMU HII (same browser)</p>
-<div id="loginBox" class="box"><h3>Login</h3><input id="u" class="input" placeholder="admin"><input id="p" class="input" type="password" placeholder="admin123"><button class="btn btn-blue" style="width:100%;margin-top:10px" onclick="login()">Login</button></div>
-<div id="adminBox" style="display:none"><div class="box"><h3>📋 Pending Approvals</h3><div id="pending"></div></div><div class="box"><h3>✅ Approved Users</h3><div id="approved"></div></div><div class="box"><button class="btn btn-red" onclick="clearAll()">Clear All Data (Test)</button></div></div>
+<h2>⭐ NEXTILIATE ADMIN - NO PASSWORD</h2>
+<div class="box"><h3>📋 Pending</h3><div id="pending"></div></div>
+<div class="box"><h3>✅ Approved</h3><div id="approved"></div></div>
 <script>
 function getUsers(){return JSON.parse(localStorage.getItem('allUsers')||'{}');}
 function saveUsers(u){localStorage.setItem('allUsers',JSON.stringify(u));}
-function login(){let u=document.getElementById('u').value,p=document.getElementById('p').value;if(u=='admin'&&p=='admin123'){document.getElementById('loginBox').style.display='none';document.getElementById('adminBox').style.display='block';load();}else alert('Wrong!');}
-function load(){let users=getUsers();let pendDiv=document.getElementById('pending');let appDiv=document.getElementById('approved');pendDiv.innerHTML='';appDiv.innerHTML='';let hasP=false,hasA=false;
+function load(){let users=getUsers();let p=document.getElementById('pending'),a=document.getElementById('approved');p.innerHTML='';a.innerHTML='';let hasP=false,hasA=false;
 Object.values(users).forEach(user=>{
-if(user.paid=='yes' && user.approved=='no'){hasP=true;let d=document.createElement('div');d.className='box';d.style.background='#0a1222';d.innerHTML='<b>'+user.fullname+'</b> (@'+user.username+')<br>Phone: '+user.phone+'<br>Mpesa: '+(user.mpesa||'')+'<br><br><button class="btn btn-green" onclick="approve(\''+user.username.toLowerCase()+'\')">Approve</button><button class="btn btn-red" onclick="reject(\''+user.username.toLowerCase()+'\')">Reject</button>';pendDiv.appendChild(d);}
-if(user.paid=='yes' && user.approved=='yes'){hasA=true;let d=document.createElement('div');d.className='box';d.style.background='#0a1222';d.innerHTML='<b>'+user.fullname+'</b> (@'+user.username+') - KES '+(user.balance||0);appDiv.appendChild(d);}
-});if(!hasP)pendDiv.innerHTML='<p style="color:#7a8aa8">No pending</p>';if(!hasA)appDiv.innerHTML='<p style="color:#7a8aa8">No approved yet</p>';}
-function approve(key){let users=getUsers();users[key].approved='yes';users[key].balance=(users[key].balance||0)+0;saveUsers(users);alert('Approved '+users[key].username);load();}
-function reject(key){if(!confirm('Reject?'))return;let users=getUsers();users[key].paid='no';users[key].approved='no';saveUsers(users);load();}
-function clearAll(){if(confirm('Delete all users on this phone?')){localStorage.removeItem('allUsers');localStorage.removeItem('hist');load();alert('Cleared!');}}
+if(user.paid=='yes'&&user.approved=='no'){hasP=true;let d=document.createElement('div');d.className='box';d.style.background='#0a1222';d.innerHTML='<b>'+user.fullname+'</b> @'+user.username+'<br>Phone:'+user.phone+' Mpesa:'+(user.mpesa||'')+'<br><button class="btn btn-green" onclick="approve(\''+user.username.toLowerCase()+'\')">Approve</button>';p.appendChild(d);}
+if(user.paid=='yes'&&user.approved=='yes'){hasA=true;let d=document.createElement('div');d.className='box';d.style.background='#0a1222';d.innerHTML=user.fullname+' @'+user.username;a.appendChild(d);}
+});if(!hasP)p.innerHTML='No pending';if(!hasA)a.innerHTML='No approved';}
+function approve(k){let u=getUsers();u[k].approved='yes';saveUsers(u);load();}
+load();
 </script>
 </body>
 </html>
