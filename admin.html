@@ -20,54 +20,39 @@ th,td{padding:8px;border-bottom:1px solid #1e2e50;text-align:left}
 .badge-pending{background:#f59e0b;color:#000}
 .badge-ok{background:#10b981;color:#fff}
 </style>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-const firebaseConfig = {
-  apiKey: "PASTE YOUR API KEY HERE",
-  authDomain: "PASTE YOUR PROJECT.firebaseapp.com",
-  projectId: "PASTE YOUR PROJECT ID",
-  storageBucket: "PASTE YOUR PROJECT.appspot.com",
-  messagingSenderId: "PASTE ID",
-  appId: "PASTE APP ID"
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-window.db = db;
-window.fs = {collection, getDocs, doc, updateDoc, query, where, onSnapshot};
-</script>
 </head>
 <body>
-<div id="loginBox" class="box" style="max-width:380px;margin:50px auto;text-align:center">
+
+<div id="loginBox" class="box" style="max-width:380px;margin:40px auto;text-align:center">
 <h2>🔐 ADMIN LOGIN</h2>
-<input id="a_user" class="input" placeholder="Username admin">
-<input id="a_pass" class="input" type="password" placeholder="Password admin123">
+<p style="color:#7a8aa8;font-size:11px;margin:6px 0">admin / admin123</p>
+<input id="a_user" class="input" placeholder="admin">
+<input id="a_pass" class="input" type="password" placeholder="admin123">
 <button class="btn btn-blue" style="width:100%" onclick="adminLogin()">Login</button>
 <p id="msg" style="font-size:12px;margin-top:8px"></p>
-<p style="font-size:10px;color:#7a8aa8;margin-top:10px">Default: admin / admin123</p>
 </div>
 
 <div id="adminPanel" class="hidden">
-<h2>⭐ ADMIN PANEL - LIVE 🔴</h2>
-<p style="font-size:11px;color:#10b981">● Live - Auto updates when client pays</p>
+<h2>⭐ ADMIN PANEL - LOCAL</h2>
+<p style="font-size:11px;color:#7a8aa8">Test kwa phone moja - Incognito = client, Normal = admin</p>
 <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
 <button class="btn btn-blue" onclick="loadData()">🔄 Refresh</button>
 <button class="btn btn-red" onclick="adminLogout()">Logout</button>
-<button class="btn btn-green" onclick="window.open('https://starlifewins.github.io/STARLIFE-AGENCIES-/','_blank')">View Site</button>
+<button class="btn btn-green" onclick="window.open('index.html','_blank')">View Site</button>
 </div>
 
 <div class="box">
 <h3>👥 Pending Approvals (Paid KES 200)</h3>
-<table><thead><tr><th>Name</th><th>Username</th><th>Phone</th><th>Mpesa Code</th><th>Status</th><th>Action</th></tr></thead><tbody id="userTable"></tbody></table>
+<table><thead><tr><th>Name</th><th>User</th><th>Phone</th><th>Mpesa</th><th>Action</th></tr></thead><tbody id="userTable"></tbody></table>
 </div>
 
 <div class="box">
-<h3>💰 Pending Withdrawals</h3>
-<table><thead><tr><th>User</th><th>Amount</th><th>Phone</th><th>Status</th><th>Action</th></tr></thead><tbody id="withdrawTable"></tbody></table>
+<h3>💰 Withdrawals</h3>
+<div id="withdrawList"></div>
 </div>
 
 <div class="box">
-<h3>✅ All Approved Users</h3>
+<h3>✅ Approved Users</h3>
 <div id="approvedList" style="font-size:12px;margin-top:8px"></div>
 </div>
 </div>
@@ -80,78 +65,72 @@ function adminLogin(){
   document.getElementById('loginBox').classList.add('hidden');
   document.getElementById('adminPanel').classList.remove('hidden');
   loadData();
-  liveListen();
- }else{document.getElementById('msg').innerText='❌ Wrong! Use admin / admin123';}
+ }else{document.getElementById('msg').innerText='❌ Wrong! Use admin / admin123';document.getElementById('msg').style.color='#ef4444';}
 }
 function adminLogout(){localStorage.removeItem('isAdmin');location.reload();}
 
-async function loadData(){
- try{
-  let q = await fs.getDocs(fs.collection(db,"users"));
-  let tb=document.getElementById('userTable'); tb.innerHTML='';
-  let approvedDiv=document.getElementById('approvedList'); approvedDiv.innerHTML='';
-  q.forEach(docSnap=>{
-   let u=docSnap.data(); let id=docSnap.id;
-   if(u.paid &&!u.approved){
-    let tr=document.createElement('tr');
-    tr.innerHTML=`<td>${u.fullname}</td><td>${u.username}</td><td>${u.phone}</td><td>${u.mpesa}</td><td><span class="badge badge-pending">Pending</span></td><td><button class="btn btn-green" onclick="approveUser('${id}')">Approve</button> <button class="btn btn-red" onclick="rejectUser('${id}')">Reject</button></td>`;
-    tb.appendChild(tr);
-   }else if(u.approved){
-    approvedDiv.innerHTML+=`✅ ${u.fullname} (@${u.username}) - ${u.phone} - Bal KES ${u.balance||0}<br>`;
+function loadData(){
+ let users=JSON.parse(localStorage.getItem('users')||'[]');
+ let tb=document.getElementById('userTable'); tb.innerHTML='';
+ let approvedDiv=document.getElementById('approvedList'); approvedDiv.innerHTML='';
+ users.forEach(u=>{
+  let paid=localStorage.getItem('paid_'+u.username);
+  let approved=localStorage.getItem('approved_'+u.username);
+  let mpesa=localStorage.getItem('mpesa_'+u.username)||'';
+  if(paid=='yes' && approved!='yes'){
+   let tr=document.createElement('tr');
+   tr.innerHTML='<td>'+u.fullname+'</td><td>'+u.username+'</td><td>'+u.phone+'</td><td>'+mpesa+'</td><td><button class="btn btn-green" onclick="approveUser(\''+u.username+'\')">Approve</button> <button class="btn btn-red" onclick="rejectUser(\''+u.username+'\')">Reject</button></td>';
+   tb.appendChild(tr);
+  }else if(approved=='yes'){
+   approvedDiv.innerHTML+='✅ '+u.fullname+' (@'+u.username+') - '+u.phone+' - Bal KES '+(localStorage.getItem('bal_'+u.username)||0)+'<br>';
+  }
+ });
+ if(tb.innerHTML=='') tb.innerHTML='<tr><td colspan=5 style="color:#7a8aa8;text-align:center">No pending - Test na incognito register</td></tr>';
+ if(approvedDiv.innerHTML=='') approvedDiv.innerHTML='No approved yet';
+
+ let wDiv=document.getElementById('withdrawList'); wDiv.innerHTML='';
+ users.forEach(u=>{
+  let hist=JSON.parse(localStorage.getItem('hist_'+u.username)||'[]');
+  hist.forEach((h,idx)=>{
+   if(h.status=='Processing'){
+    wDiv.innerHTML+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #1e2e50;font-size:12px"><span>'+u.username+' - KES '+h.amt+' - '+h.phone+'</span><span><button class="btn btn-green" style="padding:4px 8px;font-size:10px" onclick="approveWithdraw(\''+u.username+'\','+idx+','+h.amt+')">Pay</button> <button class="btn btn-red" style="padding:4px 8px;font-size:10px" onclick="rejectWithdraw(\''+u.username+'\','+idx+','+h.amt+')">Reject</button></span></div>';
    }
   });
-  if(tb.innerHTML=='') tb.innerHTML='<tr><td colspan=6 style="color:#7a8aa8;text-align:center">No paid users pending</td></tr>';
-  if(approvedDiv.innerHTML=='') approvedDiv.innerHTML='No approved yet';
-
-  let wq = await fs.getDocs(fs.query(fs.collection(db,"withdrawals"), fs.where("status","==","Pending")));
-  let wtb=document.getElementById('withdrawTable'); wtb.innerHTML='';
-  wq.forEach(docSnap=>{
-   let w=docSnap.data(); let wid=docSnap.id;
-   let tr=document.createElement('tr');
-   tr.innerHTML=`<td>${w.username}</td><td>KES ${w.amount}</td><td>${w.phone}</td><td><span class="badge badge-pending">Pending</span></td><td><button class="btn btn-green" onclick="approveWithdraw('${wid}','${w.username}',${w.amount})">Pay</button> <button class="btn btn-red" onclick="rejectWithdraw('${wid}','${w.username}',${w.amount})">Reject</button></td>`;
-   wtb.appendChild(tr);
-  });
-  if(wtb.innerHTML=='') wtb.innerHTML='<tr><td colspan=5 style="color:#7a8aa8;text-align:center">No pending withdrawals</td></tr>';
- }catch(e){console.log(e);}
+ });
+ if(wDiv.innerHTML=='') wDiv.innerHTML='<p style="color:#7a8aa8;text-align:center;font-size:11px">No pending withdrawals</p>';
 }
 
-async function approveUser(id){
- await fs.updateDoc(fs.doc(db,"users",id),{approved:true});
- alert('✅ User Approved! Client ataingia automatically');
+function approveUser(username){
+ localStorage.setItem('approved_'+username,'yes');
+ alert('✅ '+username+' Approved! Akirudi atacheck na ataingia dashboard');
  loadData();
 }
-async function rejectUser(id){
- if(confirm('Reject this user?')){
-  await fs.updateDoc(fs.doc(db,"users",id),{paid:false,approved:false,mpesa:''});
+function rejectUser(username){
+ if(confirm('Reject '+username+'?')){
+  localStorage.setItem('paid_'+username,'no');localStorage.setItem('approved_'+username,'no');localStorage.setItem('mpesa_'+username,'');
   alert('Rejected');
   loadData();
  }
 }
-async function approveWithdraw(wid,username,amt){
- await fs.updateDoc(fs.doc(db,"withdrawals",wid),{status:"Success"});
- let q = await fs.getDocs(fs.query(fs.collection(db,"users"), fs.where("username","==",username)));
- if(!q.empty){
-  let u=q.docs[0]; let data=u.data();
-  await fs.updateDoc(fs.doc(db,"users",u.id),{pendW:Math.max(0,(data.pendW||0)-amt), totalW:(data.totalW||0)+amt});
- }
- alert('✅ Withdrawal KES '+amt+' Approved!');
+function approveWithdraw(username,idx,amt){
+ let hist=JSON.parse(localStorage.getItem('hist_'+username)||'[]');
+ if(hist[idx]){hist[idx].status='Success';localStorage.setItem('hist_'+username,JSON.stringify(hist));}
+ let totalW=parseInt(localStorage.getItem('totalW_'+username)||0)+amt;
+ let pendW=parseInt(localStorage.getItem('pendW_'+username)||0)-amt;if(pendW<0)pendW=0;
+ localStorage.setItem('totalW_'+username,totalW);localStorage.setItem('pendW_'+username,pendW);
+ alert('Withdrawal KES '+amt+' Approved!');
  loadData();
 }
-async function rejectWithdraw(wid,username,amt){
- await fs.updateDoc(fs.doc(db,"withdrawals",wid),{status:"Rejected"});
- let q = await fs.getDocs(fs.query(fs.collection(db,"users"), fs.where("username","==",username)));
- if(!q.empty){
-  let u=q.docs[0]; let data=u.data();
-  await fs.updateDoc(fs.doc(db,"users",u.id),{balance:(data.balance||0)+amt, pendW:Math.max(0,(data.pendW||0)-amt)});
- }
+function rejectWithdraw(username,idx,amt){
+ let hist=JSON.parse(localStorage.getItem('hist_'+username)||'[]');
+ if(hist[idx]){hist[idx].status='Rejected';localStorage.setItem('hist_'+username,JSON.stringify(hist));}
+ let bal=parseInt(localStorage.getItem('bal_'+username)||0)+amt;
+ let pendW=parseInt(localStorage.getItem('pendW_'+username)||0)-amt;if(pendW<0)pendW=0;
+ localStorage.setItem('bal_'+username,bal);localStorage.setItem('pendW_'+username,pendW);
  alert('Rejected - Money returned to '+username);
  loadData();
 }
-function liveListen(){
- fs.onSnapshot(fs.collection(db,"users"),()=>{loadData();});
- fs.onSnapshot(fs.query(fs.collection(db,"withdrawals"), fs.where("status","==","Pending")),()=>{loadData();});
-}
-if(localStorage.getItem('isAdmin')=='yes'){document.getElementById('loginBox').classList.add('hidden');document.getElementById('adminPanel').classList.remove('hidden');loadData();liveListen();}
+if(localStorage.getItem('isAdmin')=='yes'){document.getElementById('loginBox').classList.add('hidden');document.getElementById('adminPanel').classList.remove('hidden');loadData();}
 </script>
 </body>
 </html>
