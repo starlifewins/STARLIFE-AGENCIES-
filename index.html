@@ -1,118 +1,204 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>STARLIFE AGENCIES</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#0a1222;color:#fff}
 .box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:16px;margin:12px}
 .input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:10px}
-.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;cursor:pointer;margin-top:10px}
-.blue{background:#5e47ff;color:#fff}.green{background:#10b981;color:#fff}
-.sidebar{position:fixed;left:-220px;top:0;bottom:0;width:220px;background:#111c34;padding:12px;transition:.3s;z-index:99}
-.sidebar.open{left:0}
-.main{padding:12px}
-.card{background:#0a1222;border:1px solid #1e2e50;border-radius:12px;padding:12px;margin-top:10px}
-.topbar{background:#111c34;padding:10px;display:flex;justify-content:space-between}
-</style></head><body>
+.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;margin-top:10px;cursor:pointer}
+.blue{background:#5e47ff;color:#fff}
+.green{background:#10b981;color:#fff}
+.red{background:#ef4444;color:#fff}
+.card{background:#0a1222;border:1px solid #1e2e50;border-radius:10px;padding:10px;margin-top:8px}
+.top{background:#111c34;padding:10px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
 
-<div id="auth" class="box" style="max-width:400px;margin:50px auto">
+<!-- SIGNUP / LOGIN -->
+<div id="auth" class="box" style="max-width:400px;margin:30px auto">
 <h2>⭐ STARLIFE AGENCIES</h2>
+<p style="color:#7a8aa8;font-size:13px">Eldoret - Kenya</p>
 <input id="fn" class="input" placeholder="Full Name">
 <input id="ph" class="input" placeholder="Phone 07...">
 <input id="em" class="input" placeholder="Email">
 <input id="pw" class="input" type="password" placeholder="Password">
-<input id="cpw" class="input" type="password" placeholder="Confirm Password">
-<button class="btn blue" onclick="signup()">Sign Up</button>
-<button class="btn" style="background:#1e2e50;color:#fff" onclick="login()">Log In</button>
-<p id="msg" style="font-size:12px;color:#7a8aa8;margin-top:8px"></p>
+<button class="btn blue" onclick="doSignup()">Sign Up</button>
+<button class="btn" style="background:#1e2e50;color:#fff" onclick="doLogin()">Log In</button>
+<hr style="margin:15px 0;border-color:#1e2e50">
+<p style="font-size:12px">Admin? <a href="#" onclick="showAdminLogin()" style="color:#5e47ff">Login as Admin</a></p>
 </div>
 
-<div id="pay" class="box" style="max-width:500px;margin:40px auto;display:none">
-<h2>Pay KES 200 to Activate</h2>
+<!-- ADMIN LOGIN -->
+<div id="adminLogin" class="box" style="max-width:400px;margin:30px auto;display:none">
+<h3>Admin Login</h3>
+<input id="au" class="input" placeholder="Username = admin">
+<input id="ap" class="input" type="password" placeholder="Password = admin123">
+<button class="btn blue" onclick="adminLogin()">Login</button>
+<button class="btn" style="background:#1e2e50" onclick="showAuth()">Back</button>
+</div>
+
+<!-- PAYMENT -->
+<div id="pay" class="box" style="max-width:500px;margin:30px auto;display:none">
+<h2>Lipa KES 200</h2>
 <div class="card">Paybill: <b>714777</b><br>Account: <b>440200282954</b><br>Amount: <b>200</b></div>
-<input id="mpesa" class="input" placeholder="Mpesa Code e.g QGH5...">
-<button class="btn green" onclick="submitPay()">Submit Payment</button>
-<button class="btn" style="background:#1e2e50;color:#fff" onclick="logout()">Logout</button>
+<input id="mpesa" class="input" placeholder="Weka Mpesa Code">
+<button class="btn green" onclick="doPay()">Submit Payment</button>
+<button class="btn" style="background:#1e2e50" onclick="doLogout()">Logout</button>
+<p id="payStatus" style="margin-top:10px;color:#10b981"></p>
 </div>
 
+<!-- DASHBOARD -->
 <div id="dash" style="display:none">
-<div class="topbar"><span onclick="document.getElementById('side').classList.toggle('open')" style="cursor:pointer">☰ MENU</span><span id="uname">User</span></div>
-<div class="sidebar" id="side">
-<h3>STARLIFE</h3>
-<button class="btn" style="background:#1e2e50" onclick="show('home')">Dashboard</button>
-<button class="btn" style="background:#1e2e50" onclick="show('download')">Download Product</button>
-<button class="btn" style="background:#1e2e50" onclick="show('submit')">Submit Product</button>
-<button class="btn" style="background:#1e2e50" onclick="show('withdraw')">Withdraw</button>
-<button class="btn" style="background:#1e2e50" onclick="show('forex')">Forex</button>
-<button class="btn" style="background:#1e2e50" onclick="show('aviator')">Aviator</button>
-<button class="btn" style="background:#1e2e50" onclick="show('binary')">Binary</button>
-<button class="btn" style="background:#1e2e50" onclick="show('trivia')">Trivia</button>
-<button class="btn" style="background:#1e2e50" onclick="show('maths')">Maths</button>
-<button class="btn" style="background:#ef4444" onclick="logout()">Logout</button>
+<div class="top"><span>⭐ STARLIFE</span><span id="uname"></span></div>
+<div class="box"><h3>Dashboard</h3>
+<div class="card">Status: <span id="st">Active</span></div>
+<div class="card">Balance: KES <span id="bal">0</span></div>
+<div class="card">Expenses: 200</div>
 </div>
-<div class="main">
-<div id="s-home"><div class="box"><h3>Dashboard</h3><div class="card">Expenses: 200</div><div class="card">Total Withdrawal: <span id="tw">0</span></div><div class="card">Balance: KES <span id="bal">0</span></div><div class="card">Status: <span id="st">Pending</span></div></div></div>
-<div id="s-download" style="display:none"><div class="box"><h3>Download Products (Post on Whatsapp Status)</h3><div class="card"><img src="https://picsum.photos/seed/starlife1/400/200" style="width:100%;border-radius:10px"><p>Toyota Premio</p><button class="btn blue" onclick="dl()">Download Image</button></div><div class="card"><img src="https://picsum.photos/seed/starlife2/400/200" style="width:100%;border-radius:10px"><p>Samsung Radio</p><button class="btn blue" onclick="dl()">Download Image</button></div></div></div>
-<div id="s-submit" style="display:none"><div class="box"><h3>Submit Product Proof</h3><input id="proof" class="input" placeholder="Paste link or upload proof"><button class="btn green" onclick="alert('Submitted! Admin will check')">Submit to Admin</button></div></div>
-<div id="s-withdraw" style="display:none"><div class="box"><h3>Withdraw Earnings</h3><input class="input" placeholder="Amount min 500"><button class="btn green" onclick="alert('Withdraw request sent')">Request Withdraw</button></div></div>
-<div id="s-forex" style="display:none"><div class="box"><h3>Forex Classes</h3><p>Lesson 1: What is Forex...</p></div></div>
-<div id="s-aviator" style="display:none"><div class="box"><h3>Aviator Signals</h3><p>Signal: 2.1x</p></div></div>
-<div id="s-binary" style="display:none"><div class="box"><h3>Binary Trading</h3><p>Up/Down Signals</p></div></div>
-<div id="s-trivia" style="display:none"><div class="box"><h3>Trivia - Earn 50</h3><p>Q: Capital of Kenya? <br><button class="btn blue" onclick="alert('Correct! +50')">Nairobi</button></p></div></div>
-<div id="s-maths" style="display:none"><div class="box"><h3>Maths - Earn</h3><p>5+5=? <button class="btn blue" onclick="alert('Correct')">10</button></p></div></div>
+<div class="box"><h3>Download Products</h3>
+<div class="card"><p>Car Image</p><button class="btn blue" onclick="alert('Downloaded! Post on Whatsapp Status')">Download</button></div>
+<div class="card"><p>Radio Image</p><button class="btn blue" onclick="alert('Downloaded!')">Download</button></div>
 </div>
+<button class="btn red" style="max-width:500px;margin:12px" onclick="doLogout()">Logout</button>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<!-- ADMIN PANEL - UNAONA WOTE -->
+<div id="adminPanel" style="display:none;padding:12px">
+<h2>⭐ ADMIN - WOTE</h2>
+<button class="btn" style="background:#1e2e50;width:auto" onclick="showAuth()">Back to Home</button>
+<button class="btn blue" style="width:auto" onclick="loadAdmin()">Refresh</button>
+<div class="box"><h3>📋 Pending - Bado Hawaja Approve</h3><div id="pend"></div></div>
+<div class="box"><h3>✅ Approved</h3><div id="appr"></div></div>
+</div>
 
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+<script>
+function getUsers(){return JSON.parse(localStorage.getItem('star_users')||'[]')}
+function saveUsers(u){localStorage.setItem('star_users',JSON.stringify(u))}
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.signup = async function(){
-let fn=document.getElementById('fn').value, ph=document.getElementById('ph').value, em=document.getElementById('em').value.toLowerCase(), pw=document.getElementById('pw').value, cpw=document.getElementById('cpw').value;
+function doSignup(){
+let fn=document.getElementById('fn').value.trim()
+let ph=document.getElementById('ph').value.trim()
+let em=document.getElementById('em').value.toLowerCase().trim()
+let pw=document.getElementById('pw').value.trim()
 if(!fn||!ph||!em||!pw){alert('Jaza zote');return}
-if(pw!=cpw){alert('Password hazifanani');return}
-document.getElementById('msg').innerText='Creating account...';
-try{
-await setDoc(doc(db,"users",em),{fullname:fn,phone:ph,email:em,password:pw,mpesa:"",paid:"no",approved:"no",balance:0,time:Date.now()});
-localStorage.setItem('cur',em);
-document.getElementById('auth').style.display='none'; document.getElementById('pay').style.display='block';
-}catch(e){alert(e.message)}
+let users=getUsers()
+if(users.find(x=>x.email==em)){alert('Email tayari imetumika');return}
+users.push({fullname:fn,phone:ph,email:em,password:pw,mpesa:"",paid:"no",approved:"no",balance:0})
+saveUsers(users)
+localStorage.setItem('cur',em)
+alert('Account created! Lipa 200 sasa')
+showPay()
 }
-window.login = async function(){
-let em=document.getElementById('em').value.toLowerCase(), pw=document.getElementById('pw').value;
-let snap=await getDoc(doc(db,"users",em));
-if(snap.exists() && snap.data().password==pw){localStorage.setItem('cur',em); check();}
-else alert('Email au password si sahihi');
+
+function doLogin(){
+let em=document.getElementById('em').value.toLowerCase().trim()
+let pw=document.getElementById('pw').value.trim()
+let users=getUsers()
+let u=users.find(x=>x.email==em && x.password==pw)
+if(!u){alert('Email au password si sahihi');return}
+localStorage.setItem('cur',em)
+if(u.paid=="no") showPay()
+else if(u.paid=="yes" && u.approved=="no"){showPay(); document.getElementById('payStatus').innerText="Mpesa: "+u.mpesa+" - Waiting approval"}
+else showDash()
 }
-window.submitPay = async function(){
-let code=document.getElementById('mpesa').value; if(!code){alert('Weka Mpesa code');return}
-let cur=localStorage.getItem('cur');
-await updateDoc(doc(db,"users",cur),{mpesa:code,paid:"yes"});
-alert('Imetumwa kwa Admin!'); check();
+
+function doPay(){
+let code=document.getElementById('mpesa').value.trim()
+if(!code){alert('Weka Mpesa code');return}
+let cur=localStorage.getItem('cur')
+let users=getUsers()
+let i=users.findIndex(x=>x.email==cur)
+if(i>=0){users[i].mpesa=code; users[i].paid="yes"; saveUsers(users); document.getElementById('payStatus').innerText="Payment sent! Subiri admin aku-approve"; alert('Imetumwa kwa admin!')}
 }
-window.check = async function(){
-let cur=localStorage.getItem('cur'); if(!cur) return;
-let snap=await getDoc(doc(db,"users",cur)); if(!snap.exists()) return;
-let u=snap.data();
-document.getElementById('auth').style.display='none';
-if(u.paid=='no'){document.getElementById('pay').style.display='block';}
-else if(u.paid=='yes' && u.approved=='no'){document.getElementById('pay').innerHTML='<h3>Payment: '+u.mpesa+'</h3><p>Waiting Admin Approval...</p><button class="btn blue" onclick="location.reload()">Refresh Status</button><button class="btn" style="background:#1e2e50" onclick="logout()">Logout</button>'; document.getElementById('pay').style.display='block';}
-else{document.getElementById('pay').style.display='none'; document.getElementById('dash').style.display='block'; document.getElementById('uname').innerText=u.fullname; document.getElementById('bal').innerText=u.balance; document.getElementById('st').innerText='Active ✅';}
+
+function showPay(){
+document.getElementById('auth').style.display='none'
+document.getElementById('adminLogin').style.display='none'
+document.getElementById('dash').style.display='none'
+document.getElementById('adminPanel').style.display='none'
+document.getElementById('pay').style.display='block'
 }
-window.show = function(id){['home','download','submit','withdraw','forex','aviator','binary','trivia','maths'].forEach(s=>document.getElementById('s-'+s).style.display='none'); document.getElementById('s-'+id).style.display='block'; document.getElementById('side').classList.remove('open');}
-window.dl = function(){alert('Image Downloaded! Now post on Whatsapp Status');}
-window.logout = function(){localStorage.removeItem('cur'); location.reload();}
-check();
-</script></body></html>
+function showDash(){
+let cur=localStorage.getItem('cur')
+let users=getUsers()
+let u=users.find(x=>x.email==cur)
+if(!u) return
+document.getElementById('auth').style.display='none'
+document.getElementById('adminLogin').style.display='none'
+document.getElementById('pay').style.display='none'
+document.getElementById('adminPanel').style.display='none'
+document.getElementById('dash').style.display='block'
+document.getElementById('uname').innerText=u.fullname
+document.getElementById('bal').innerText=u.balance
+document.getElementById('st').innerText=u.approved=="yes"?"Active ✅":"Pending"
+}
+function showAuth(){
+document.getElementById('auth').style.display='block'
+document.getElementById('adminLogin').style.display='none'
+document.getElementById('pay').style.display='none'
+document.getElementById('dash').style.display='none'
+document.getElementById('adminPanel').style.display='none'
+}
+function showAdminLogin(){
+document.getElementById('auth').style.display='none'
+document.getElementById('adminLogin').style.display='block'
+}
+function doLogout(){localStorage.removeItem('cur'); location.reload()}
+
+function adminLogin(){
+let u=document.getElementById('au').value
+let p=document.getElementById('ap').value
+if(u=="admin" && p=="admin123"){showAdminPanel()} else alert('Wrong - admin / admin123')
+}
+function showAdminPanel(){
+document.getElementById('auth').style.display='none'
+document.getElementById('adminLogin').style.display='none'
+document.getElementById('pay').style.display='none'
+document.getElementById('dash').style.display='none'
+document.getElementById('adminPanel').style.display='block'
+loadAdmin()
+}
+function loadAdmin(){
+let users=getUsers()
+let pend=document.getElementById('pend')
+let appr=document.getElementById('appr')
+pend.innerHTML=''; appr.innerHTML=''
+let hasP=false, hasA=false
+users.forEach((u,idx)=>{
+if(u.paid=="yes" && u.approved=="no"){
+hasP=true
+let d=document.createElement('div'); d.className='card'
+d.innerHTML='<b>'+u.fullname+'</b><br>Phone: '+u.phone+'<br>Email: '+u.email+'<br>Mpesa: <b style="color:#10b981">'+u.mpesa+'</b><br><br><button class="btn green" onclick="approve('+idx+')">✅ Approve</button> <button class="btn red" onclick="reject('+idx+')">Reject</button>'
+pend.appendChild(d)
+}
+if(u.approved=="yes"){
+hasA=true
+let d=document.createElement('div'); d.className='card'
+d.innerHTML='✅ <b>'+u.fullname+'</b> - '+u.phone+' - '+u.email
+appr.appendChild(d)
+}
+})
+if(!hasP) pend.innerHTML='<p style="color:#7a8aa8">Hakuna pending</p>'
+if(!hasA) appr.innerHTML='<p style="color:#7a8aa8">Hakuna approved</p>'
+}
+function approve(i){let u=getUsers(); u[i].approved="yes"; saveUsers(u); loadAdmin()}
+function reject(i){let u=getUsers(); u[i].paid="no"; u[i].approved="no"; u[i].mpesa=""; saveUsers(u); loadAdmin()}
+
+// auto check
+let cur=localStorage.getItem('cur')
+if(cur){
+let users=getUsers(); let uu=users.find(x=>x.email==cur)
+if(uu){
+if(uu.paid=="no") showPay()
+else if(uu.approved=="no" && uu.paid=="yes") showPay()
+else showDash()
+}
+}
+</script>
+</body>
+</html>
