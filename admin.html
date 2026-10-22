@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin - STARLIFE AGENCIES</title>
+<title>Admin - STARLIFE</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#0a1222;color:#fff;padding:16px}
@@ -9,65 +9,63 @@ body{background:#0a1222;color:#fff;padding:16px}
 .btn-green{background:#10b981;color:#fff}.btn-red{background:#ef4444;color:#fff}.btn-blue{background:#5e47ff;color:#fff}
 .input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:8px}
 </style></head><body>
-
-<h2>⭐ STARLIFE ADMIN</h2>
-<p style="color:#7a8aa8;font-size:12px">LOCAL - Inaona wale wa SIMU HII pekee. Kwa wote Kenya, weka Firebase.</p>
+<h2>⭐ STARLIFE ADMIN - FIREBASE</h2>
+<p style="color:#10b981;font-size:12px">✅ Unaona clients WOTE Kenya mzima sasa</p>
 
 <div id="loginBox" class="box">
-<h3>Login Admin</h3>
-<input id="u" class="input" placeholder="Username - admin">
-<input id="p" class="input" type="password" placeholder="Password - admin123">
+<h3>Admin Login</h3>
+<input id="u" class="input" placeholder="admin"><input id="p" class="input" type="password" placeholder="admin123">
 <button class="btn btn-blue" style="width:100%;margin-top:10px" onclick="login()">Login</button>
 </div>
 
 <div id="adminBox" style="display:none">
-<div class="box"><h3>📋 Pending Payments (K200)</h3><div id="pending"></div></div>
-<div class="box"><h3>✅ Approved Users</h3><div id="approved"></div></div>
-<div class="box"><h3>📦 Product Submissions</h3><div id="products">No submissions yet (will come from Submit page)</div></div>
-<div class="box"><button class="btn btn-red" onclick="clearAll()">Clear All Data (Testing)</button></div>
+<div class="box"><h3>📋 Pending (K200)</h3><div id="pending">Loading...</div></div>
+<div class="box"><h3>✅ Approved</h3><div id="approved">Loading...</div></div>
 </div>
 
-<script>
-function getUsers(){return JSON.parse(localStorage.getItem('starlifeUsers')||'{}')}
-function saveUsers(u){localStorage.setItem('starlifeUsers',JSON.stringify(u))}
-function login(){
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDEMO-REPLACE-WITH-YOURS",
+  authDomain: "starlife-agencies.firebaseapp.com",
+  projectId: "starlife-agencies",
+  storageBucket: "starlife-agencies.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.login = function(){
 let u=document.getElementById('u').value,p=document.getElementById('p').value;
 if(u=='admin' && p=='admin123'){document.getElementById('loginBox').style.display='none';document.getElementById('adminBox').style.display='block';load();}
-else alert('Wrong! Use admin / admin123');
+else alert('Wrong');
 }
-function load(){
-let users=getUsers();
-let pendDiv=document.getElementById('pending');
-let appDiv=document.getElementById('approved');
-pendDiv.innerHTML=''; appDiv.innerHTML='';
-let hasP=false, hasA=false;
 
-Object.keys(users).forEach(key=>{
-let user=users[key];
-if(user.paid=='yes' && user.approved=='no'){
-hasP=true;
-let d=document.createElement('div'); d.className='box'; d.style.background='#0a1222';
-d.innerHTML='<b>'+user.fullname+'</b><br>Phone: '+user.phone+'<br>Email: '+user.email+'<br>Mpesa Code: <b style="color:#10b981">'+(user.mpesa||'')+'</b><br><br><button class="btn btn-green" onclick="approve(\''+key+'\')">✅ Approve & Activate</button><button class="btn btn-red" onclick="reject(\''+key+'\')">Reject</button>';
-pendDiv.appendChild(d);
+window.load = async function(){
+let snap=await getDocs(collection(db,"starlife_users"));
+let pend=document.getElementById('pending'); let appr=document.getElementById('approved');
+pend.innerHTML=''; appr.innerHTML='';
+snap.forEach(d=>{
+let u=d.data(); let key=d.id;
+if(u.paid=='yes' && u.approved=='no'){
+let div=document.createElement('div'); div.className='box'; div.style.background='#0a1222';
+div.innerHTML='<b>'+u.fullname+'</b><br>Phone:'+u.phone+'<br>Email:'+u.email+'<br>Mpesa:<b style="color:#10b981">'+u.mpesa+'</b><br><br><button class="btn btn-green" onclick="approve(\''+key+'\')">✅ Approve</button><button class="btn btn-red" onclick="reject(\''+key+'\')">Reject</button>';
+pend.appendChild(div);
 }
-if(user.approved=='yes'){
-hasA=true;
-let d=document.createElement('div'); d.className='box'; d.style.background='#0a1222';
-d.innerHTML='<b>'+user.fullname+'</b> ('+user.phone+')<br>Email: '+user.email+'<br>Balance: KES '+(user.balance||0)+'<br>Status: Active';
-appDiv.appendChild(d);
+if(u.approved=='yes'){
+let div=document.createElement('div'); div.className='box'; div.style.background='#0a1222';
+div.innerHTML='<b>'+u.fullname+'</b> '+u.phone+'<br>'+u.email;
+appr.appendChild(div);
 }
 });
-if(!hasP) pendDiv.innerHTML='<p style="color:#7a8aa8">No pending payments</p>';
-if(!hasA) appDiv.innerHTML='<p style="color:#7a8aa8">No approved yet</p>';
+if(pend.innerHTML=='') pend.innerHTML='No pending';
+if(appr.innerHTML=='') appr.innerHTML='No approved yet';
 }
-function approve(key){
-let users=getUsers(); users[key].approved='yes'; users[key].balance=0; saveUsers(users);
-alert('Approved '+users[key].fullname+' - Sasa ataingia Dashboard!');
-load();
-}
-function reject(key){
-if(!confirm('Reject this payment?')) return;
-let users=getUsers(); users[key].paid='no'; users[key].approved='no'; users[key].mpesa=''; saveUsers(users); load();
-}
-function clearAll(){if(confirm('Delete ALL users on this phone?')){localStorage.removeItem('starlifeUsers'); load(); alert('Cleared!');}}
+
+window.approve = async function(key){await updateDoc(doc(db,"starlife_users",key),{approved:"yes",balance:0}); alert('Approved!'); load();}
+window.reject = async function(key){await updateDoc(doc(db,"starlife_users",key),{paid:"no",approved:"no",mpesa:""}); load();}
 </script></body></html>
