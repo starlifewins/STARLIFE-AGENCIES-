@@ -14,97 +14,92 @@ body{background:#0a1222;color:#fff}
 .card{background:#0a1222;border:1px solid #1e2e50;border-radius:12px;padding:12px;margin-top:10px}
 </style></head><body>
 
-<!-- AUTH -->
 <div id="auth" class="box" style="max-width:400px;margin:40px auto">
 <h2>⭐ STARLIFE AGENCIES</h2>
-<p style="color:#7a8aa8;font-size:13px">Register to continue</p>
-<input id="fn" class="input" placeholder="Full Name">
-<input id="ph" class="input" placeholder="Phone Number">
-<input id="em" class="input" placeholder="Email">
-<input id="pw" class="input" type="password" placeholder="Password">
-<input id="cpw" class="input" type="password" placeholder="Confirm Password">
+<input id="fn" class="input" placeholder="Full Name"><input id="ph" class="input" placeholder="Phone Number"><input id="em" class="input" placeholder="Email"><input id="pw" class="input" type="password" placeholder="Password"><input id="cpw" class="input" type="password" placeholder="Confirm Password">
 <button class="btn btn-blue" onclick="signup()">Sign Up</button>
-<button class="btn" style="background:#1e2e50;color:#fff" onclick="login()">Log In (if has account)</button>
+<button class="btn" style="background:#1e2e50;color:#fff" onclick="login()">Log In</button>
+<p id="msg" style="color:#7a8aa8;font-size:12px;margin-top:10px"></p>
 </div>
 
-<!-- PAY -->
 <div id="pay" class="box" style="max-width:500px;margin:30px auto;display:none">
-<h2>Activation Fee KES 200</h2>
+<h2>Activation KES 200</h2>
 <div class="card"><b>Paybill:</b> 714777<br><b>Account:</b> 440200282954<br><b>Amount:</b> 200</div>
-<input id="mpesa" class="input" placeholder="Enter Mpesa Code e.g QGH...">
+<input id="mpesa" class="input" placeholder="Enter Mpesa Code">
 <button class="btn btn-green" onclick="submitPay()">Submit Payment & Claim</button>
-<p style="color:#7a8aa8;font-size:12px;margin-top:10px">Admin will verify your code. After approval you'll access dashboard.</p>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dash" style="display:none">
-<div class="sidebar" id="side">
-<h3>STARLIFE</h3>
+<div class="sidebar" id="side"><h3>STARLIFE</h3>
 <button class="btn" style="background:#1e2e50" onclick="showSec('home')">Dashboard</button>
 <button class="btn" style="background:#1e2e50" onclick="showSec('download')">Download Product</button>
 <button class="btn" style="background:#1e2e50" onclick="showSec('submit')">Submit Product</button>
 <button class="btn" style="background:#1e2e50" onclick="showSec('withdraw')">Withdraw</button>
-<button class="btn" style="background:#1e2e50" onclick="showSec('forex')">Free Forex Classes</button>
-<button class="btn" style="background:#1e2e50" onclick="showSec('aviator')">Aviator Signals</button>
-<button class="btn" style="background:#1e2e50" onclick="showSec('binary')">Binary Trading</button>
-<button class="btn" style="background:#1e2e50" onclick="showSec('trivia')">Trivia Questions</button>
-<button class="btn" style="background:#1e2e50" onclick="showSec('maths')">Maths Questions</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('forex')">Forex Classes</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('aviator')">Aviator</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('binary')">Binary</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('trivia')">Trivia</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('maths')">Maths</button>
 </div>
 <div class="main">
-<div id="sec-home"><div class="box"><h3>Dashboard</h3>
-<div class="card">Expenses: KES 200</div>
-<div class="card">Total Withdrawal: KES <span id="tw">0</span></div>
-<div class="card">Balance: KES <span id="bal">0</span></div>
-<div class="card" style="border-color:#10b981">Status: <span id="st">Active - Pending Verification</span></div>
+<div id="sec-home"><div class="box"><h3>Dashboard</h3><div class="card">Expenses: 200</div><div class="card">Total Withdrawal: <span id="tw">0</span></div><div class="card">Balance: <span id="bal">0</span></div><div class="card">Status: <span id="st">Pending</span></div></div></div>
+<div id="sec-download" style="display:none"><div class="box"><h3>Download Products</h3><div class="card"><img src="https://picsum.photos/seed/car1/400/200" style="width:100%;border-radius:10px"><p>Toyota Car</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div><div class="card"><img src="https://picsum.photos/seed/car2/400/200" style="width:100%;border-radius:10px"><p>Radio</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div></div></div>
+<div id="sec-submit" style="display:none"><div class="box"><h3>Submit Product</h3><input id="prodLink" class="input" placeholder="Product proof"><button class="btn btn-green" onclick="alert('Submitted to admin!')">Submit</button></div></div>
+<div id="sec-withdraw" style="display:none"><div class="box"><h3>Withdraw</h3><input class="input" placeholder="Amount"><button class="btn btn-green" onclick="alert('Withdraw request sent!')">Request</button></div></div>
+<div id="sec-forex" style="display:none"><div class="box"><h3>Forex Classes</h3><p>Free classes...</p></div></div>
+<div id="sec-aviator" style="display:none"><div class="box"><h3>Aviator Signals</h3><p>Signals...</p></div></div>
+<div id="sec-binary" style="display:none"><div class="box"><h3>Binary</h3><p>Binary...</p></div></div>
+<div id="sec-trivia" style="display:none"><div class="box"><h3>Trivia</h3><p>Q: Capital of Kenya? Nairobi</p></div></div>
+<div id="sec-maths" style="display:none"><div class="box"><h3>Maths</h3><p>12x12=144</p></div></div>
 </div></div>
 
-<div id="sec-download" style="display:none"><div class="box"><h3>Download Products</h3>
-<div class="card"><img src="https://picsum.photos/seed/car1/400/200" style="width:100%;border-radius:10px"><p>Toyota Car - Download</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div>
-<div class="card"><img src="https://picsum.photos/seed/car2/400/200" style="width:100%;border-radius:10px"><p>Radio & Electronics</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div>
-<div class="card"><img src="https://picsum.photos/seed/car3/400/200" style="width:100%;border-radius:10px"><p>Vehicle Accessories</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div>
-</div></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-<div id="sec-submit" style="display:none"><div class="box"><h3>Submit Product</h3>
-<input id="prodLink" class="input" placeholder="Paste product link / proof">
-<button class="btn btn-green" onclick="submitProd()">Submit for Review</button><p style="color:#7a8aa8;font-size:12px">Admin will review, no fake x100. Real commission after approval.</p>
-</div></div>
+// BADILISHA HII NA YAKO KUTOKA FIREBASE CONSOLE
+const firebaseConfig = {
+  apiKey: "AIzaSyDEMO-REPLACE-WITH-YOURS",
+  authDomain: "starlife-agencies.firebaseapp.com",
+  projectId: "starlife-agencies",
+  storageBucket: "starlife-agencies.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef"
+};
 
-<div id="sec-withdraw" style="display:none"><div class="box"><h3>Withdraw</h3><input class="input" placeholder="Amount"><input class="input" placeholder="Mpesa Number"><button class="btn btn-green" onclick="alert('Withdraw request sent to admin!')">Request Withdraw</button></div></div>
-<div id="sec-forex" style="display:none"><div class="box"><h3>Free Forex Classes</h3><p>Lesson 1: What is Forex...</p></div></div>
-<div id="sec-aviator" style="display:none"><div class="box"><h3>Aviator Signals</h3><p>Signals will be posted by admin.</p></div></div>
-<div id="sec-binary" style="display:none"><div class="box"><h3>Binary Trading</h3><p>Learn basics...</p></div></div>
-<div id="sec-trivia" style="display:none"><div class="box"><h3>Trivia Questions</h3><p>Q: Capital of Kenya? <br><button class="btn" style="background:#1e2e50" onclick="alert('Correct: Nairobi!')">Nairobi</button></p></div></div>
-<div id="sec-maths" style="display:none"><div class="box"><h3>Maths Questions</h3><p>Q: 12 x 12 = ?<br><button class="btn" style="background:#1e2e50" onclick="alert('144')">144</button></p></div></div>
-</div></div>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-<script>
-function getUsers(){return JSON.parse(localStorage.getItem('starlifeUsers')||'{}')}
-function saveUsers(u){localStorage.setItem('starlifeUsers',JSON.stringify(u))}
-function signup(){
-let fn=document.getElementById('fn').value, ph=document.getElementById('ph').value, em=document.getElementById('em').value, pw=document.getElementById('pw').value, cpw=document.getElementById('cpw').value;
-if(!fn||!ph||!em||!pw){alert('Fill all');return} if(pw!=cpw){alert('Passwords no match');return}
-let users=getUsers(); let key=em.toLowerCase(); users[key]={fullname:fn,phone:ph,email:em,password:pw,mpesa:'',paid:'no',approved:'no',balance:0};
-saveUsers(users); localStorage.setItem('currentUser',key);
+window.signup = async function(){
+let fn=emFn(), ph=document.getElementById('ph').value, em=document.getElementById('em').value.toLowerCase(), pw=document.getElementById('pw').value, cpw=document.getElementById('cpw').value;
+if(!fn||!ph||!em||!pw){alert('Fill all');return} if(pw!=cpw){alert('No match');return}
+document.getElementById('msg').innerText='Saving...';
+await setDoc(doc(db,"starlife_users",em),{fullname:fn,phone:ph,email:em,password:pw,mpesa:"",paid:"no",approved:"no",balance:0,created:new Date()});
+localStorage.setItem('currentUser',em);
 document.getElementById('auth').style.display='none'; document.getElementById('pay').style.display='block';
 }
-function login(){
-let em=document.getElementById('em').value, pw=document.getElementById('pw').value; let users=getUsers(); let key=em.toLowerCase();
-if(users[key] && users[key].password==pw){localStorage.setItem('currentUser',key); checkStatus();}else alert('Wrong email/password');
+window.login = async function(){
+let em=document.getElementById('em').value.toLowerCase(), pw=document.getElementById('pw').value;
+let snap=await getDoc(doc(db,"starlife_users",em));
+if(snap.exists() && snap.data().password==pw){localStorage.setItem('currentUser',em); checkStatus();}
+else alert('Wrong email/password');
 }
-function submitPay(){
-let code=document.getElementById('mpesa').value; if(!code){alert('Enter Mpesa Code');return}
-let cur=localStorage.getItem('currentUser'); let users=getUsers(); users[cur].mpesa=code; users[cur].paid='yes'; saveUsers(users);
-alert('Payment submitted! Wait admin approval.'); checkStatus();
+window.submitPay = async function(){
+let code=document.getElementById('mpesa').value; if(!code){alert('Enter Mpesa');return}
+let cur=localStorage.getItem('currentUser');
+await updateDoc(doc(db,"starlife_users",cur),{mpesa:code,paid:"yes"});
+alert('Payment sent! Waiting admin.'); checkStatus();
 }
-function checkStatus(){
-let cur=localStorage.getItem('currentUser'); if(!cur){return}
-let users=getUsers(); let u=users[cur];
+window.checkStatus = async function(){
+let cur=localStorage.getItem('currentUser'); if(!cur) return;
+let snap=await getDoc(doc(db,"starlife_users",cur)); if(!snap.exists()) return;
+let u=snap.data();
 document.getElementById('auth').style.display='none';
 if(u.paid=='no'){document.getElementById('pay').style.display='block';}
-else if(u.paid=='yes' && u.approved=='no'){document.getElementById('pay').innerHTML='<h3>Payment Received: '+u.mpesa+'</h3><p>Waiting admin approval...</p><button class="btn btn-blue" onclick="location.reload()">Refresh</button>'; document.getElementById('pay').style.display='block';}
-else{document.getElementById('pay').style.display='none'; document.getElementById('dash').style.display='block'; document.getElementById('st').innerText='Active - Approved';}
+else if(u.paid=='yes' && u.approved=='no'){document.getElementById('pay').innerHTML='<h3>Payment: '+u.mpesa+'</h3><p>Waiting approval...</p><button class="btn btn-blue" onclick="location.reload()">Refresh</button>'; document.getElementById('pay').style.display='block';}
+else{document.getElementById('pay').style.display='none'; document.getElementById('dash').style.display='block'; document.getElementById('st').innerText='Active';}
 }
-function showSec(id){['home','download','submit','withdraw','forex','aviator','binary','trivia','maths'].forEach(s=>document.getElementById('sec-'+s).style.display='none'); document.getElementById('sec-'+id).style.display='block';}
-function submitProd(){let l=document.getElementById('prodLink').value; if(!l){alert('Enter link');return} alert('Product submitted for admin review!');}
+function emFn(){return document.getElementById('fn').value}
+window.showSec = function(id){['home','download','submit','withdraw','forex','aviator','binary','trivia','maths'].forEach(s=>{let e=document.getElementById('sec-'+s); if(e) e.style.display='none';}); document.getElementById('sec-'+id).style.display='block';}
 checkStatus();
 </script></body></html>
