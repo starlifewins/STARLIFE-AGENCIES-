@@ -1,74 +1,110 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NEXTILIATE</title>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE AGENCIES</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0a1222;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
-.card{background:#111c34;border:1px solid #1e2e50;border-radius:16px;padding:20px;width:100%;max-width:360px}
-.input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:8px}
-.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:700;margin-top:12px;cursor:pointer}
+body{background:#0a1222;color:#fff}
+.box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:16px;margin:12px}
+.input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:10px}
+.btn{padding:12px;border-radius:10px;border:none;font-weight:800;cursor:pointer;width:100%;margin-top:10px}
 .btn-blue{background:#5e47ff;color:#fff}.btn-green{background:#10b981;color:#fff}
-h2{text-align:center;margin-bottom:10px}small{color:#7a8aa8;display:block;text-align:center;margin-bottom:10px}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:#111c34;padding:12px;display:none}
+.main{margin-left:0;padding:12px}
+@media(min-width:700px){.sidebar{display:block}.main{margin-left:230px}}
+.card{background:#0a1222;border:1px solid #1e2e50;border-radius:12px;padding:12px;margin-top:10px}
 </style></head><body>
-<div class="card">
-<h2>⭐ NEXTILIATE</h2>
-<small id="status">Sign up to join</small>
-<div id="form">
-<input id="fullname" class="input" placeholder="Full Name">
-<input id="username" class="input" placeholder="Username">
-<input id="phone" class="input" placeholder="Phone 07...">
-<input id="mpesa" class="input" placeholder="Mpesa Code">
-<input id="password" class="input" type="password" placeholder="Password">
-<button class="btn btn-blue" onclick="signup()">Sign Up & Pay 550</button>
-</div>
-<div id="dash" style="display:none;text-align:center">
-<h3 id="wel"></h3><p>Balance: KES <span id="bal">0</span></p>
-<p style="color:#f59e0b" id="pend">Waiting admin approval...</p>
-<button class="btn" style="background:#1e2e50;color:#fff" onclick="logout()">Logout</button>
-</div>
-</div>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDemo-Replace-With-Yours",
-  authDomain: "starlife-demo.firebaseapp.com",
-  projectId: "starlife-demo",
-  storageBucket: "starlife-demo.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef"
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+<!-- AUTH -->
+<div id="auth" class="box" style="max-width:400px;margin:40px auto">
+<h2>⭐ STARLIFE AGENCIES</h2>
+<p style="color:#7a8aa8;font-size:13px">Register to continue</p>
+<input id="fn" class="input" placeholder="Full Name">
+<input id="ph" class="input" placeholder="Phone Number">
+<input id="em" class="input" placeholder="Email">
+<input id="pw" class="input" type="password" placeholder="Password">
+<input id="cpw" class="input" type="password" placeholder="Confirm Password">
+<button class="btn btn-blue" onclick="signup()">Sign Up</button>
+<button class="btn" style="background:#1e2e50;color:#fff" onclick="login()">Log In (if has account)</button>
+</div>
 
-window.signup = async()=>{
- let fullname=document.getElementById('fullname').value.trim();
- let username=document.getElementById('username').value.trim().toLowerCase();
- let phone=document.getElementById('phone').value.trim();
- let mpesa=document.getElementById('mpesa').value.trim();
- let password=document.getElementById('password').value.trim();
- if(!fullname||!username||!phone||!password){alert('Jaza kila kitu');return;}
- try{
-  await setDoc(doc(db,"users",username),{
-   fullname,username,phone,mpesa,password,paid:'yes',approved:'no',balance:0,created:Date.now()
-  });
-  localStorage.setItem('user',username);
-  showDash(username);
-  alert('Success! Subiri admin aku-approve');
- }catch(e){alert('Error: '+e.message+' - Badilisha Firebase config')}
+<!-- PAY -->
+<div id="pay" class="box" style="max-width:500px;margin:30px auto;display:none">
+<h2>Activation Fee KES 200</h2>
+<div class="card"><b>Paybill:</b> 714777<br><b>Account:</b> 440200282954<br><b>Amount:</b> 200</div>
+<input id="mpesa" class="input" placeholder="Enter Mpesa Code e.g QGH...">
+<button class="btn btn-green" onclick="submitPay()">Submit Payment & Claim</button>
+<p style="color:#7a8aa8;font-size:12px;margin-top:10px">Admin will verify your code. After approval you'll access dashboard.</p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" style="display:none">
+<div class="sidebar" id="side">
+<h3>STARLIFE</h3>
+<button class="btn" style="background:#1e2e50" onclick="showSec('home')">Dashboard</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('download')">Download Product</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('submit')">Submit Product</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('withdraw')">Withdraw</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('forex')">Free Forex Classes</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('aviator')">Aviator Signals</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('binary')">Binary Trading</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('trivia')">Trivia Questions</button>
+<button class="btn" style="background:#1e2e50" onclick="showSec('maths')">Maths Questions</button>
+</div>
+<div class="main">
+<div id="sec-home"><div class="box"><h3>Dashboard</h3>
+<div class="card">Expenses: KES 200</div>
+<div class="card">Total Withdrawal: KES <span id="tw">0</span></div>
+<div class="card">Balance: KES <span id="bal">0</span></div>
+<div class="card" style="border-color:#10b981">Status: <span id="st">Active - Pending Verification</span></div>
+</div></div>
+
+<div id="sec-download" style="display:none"><div class="box"><h3>Download Products</h3>
+<div class="card"><img src="https://picsum.photos/seed/car1/400/200" style="width:100%;border-radius:10px"><p>Toyota Car - Download</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div>
+<div class="card"><img src="https://picsum.photos/seed/car2/400/200" style="width:100%;border-radius:10px"><p>Radio & Electronics</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div>
+<div class="card"><img src="https://picsum.photos/seed/car3/400/200" style="width:100%;border-radius:10px"><p>Vehicle Accessories</p><button class="btn btn-blue" onclick="alert('Downloaded!')">Download</button></div>
+</div></div>
+
+<div id="sec-submit" style="display:none"><div class="box"><h3>Submit Product</h3>
+<input id="prodLink" class="input" placeholder="Paste product link / proof">
+<button class="btn btn-green" onclick="submitProd()">Submit for Review</button><p style="color:#7a8aa8;font-size:12px">Admin will review, no fake x100. Real commission after approval.</p>
+</div></div>
+
+<div id="sec-withdraw" style="display:none"><div class="box"><h3>Withdraw</h3><input class="input" placeholder="Amount"><input class="input" placeholder="Mpesa Number"><button class="btn btn-green" onclick="alert('Withdraw request sent to admin!')">Request Withdraw</button></div></div>
+<div id="sec-forex" style="display:none"><div class="box"><h3>Free Forex Classes</h3><p>Lesson 1: What is Forex...</p></div></div>
+<div id="sec-aviator" style="display:none"><div class="box"><h3>Aviator Signals</h3><p>Signals will be posted by admin.</p></div></div>
+<div id="sec-binary" style="display:none"><div class="box"><h3>Binary Trading</h3><p>Learn basics...</p></div></div>
+<div id="sec-trivia" style="display:none"><div class="box"><h3>Trivia Questions</h3><p>Q: Capital of Kenya? <br><button class="btn" style="background:#1e2e50" onclick="alert('Correct: Nairobi!')">Nairobi</button></p></div></div>
+<div id="sec-maths" style="display:none"><div class="box"><h3>Maths Questions</h3><p>Q: 12 x 12 = ?<br><button class="btn" style="background:#1e2e50" onclick="alert('144')">144</button></p></div></div>
+</div></div>
+
+<script>
+function getUsers(){return JSON.parse(localStorage.getItem('starlifeUsers')||'{}')}
+function saveUsers(u){localStorage.setItem('starlifeUsers',JSON.stringify(u))}
+function signup(){
+let fn=document.getElementById('fn').value, ph=document.getElementById('ph').value, em=document.getElementById('em').value, pw=document.getElementById('pw').value, cpw=document.getElementById('cpw').value;
+if(!fn||!ph||!em||!pw){alert('Fill all');return} if(pw!=cpw){alert('Passwords no match');return}
+let users=getUsers(); let key=em.toLowerCase(); users[key]={fullname:fn,phone:ph,email:em,password:pw,mpesa:'',paid:'no',approved:'no',balance:0};
+saveUsers(users); localStorage.setItem('currentUser',key);
+document.getElementById('auth').style.display='none'; document.getElementById('pay').style.display='block';
 }
-async function showDash(username){
- let snap=await getDoc(doc(db,"users",username));
- if(!snap.exists())return;
- let x=snap.data();
- document.getElementById('form').style.display='none';
- document.getElementById('dash').style.display='block';
- document.getElementById('wel').innerText='Hi '+x.fullname;
- document.getElementById('bal').innerText=x.balance||0;
- document.getElementById('status').innerText=x.approved==='yes'?'Approved ✅':'Pending approval';
- document.getElementById('pend').style.display=x.approved==='yes'?'none':'block';
+function login(){
+let em=document.getElementById('em').value, pw=document.getElementById('pw').value; let users=getUsers(); let key=em.toLowerCase();
+if(users[key] && users[key].password==pw){localStorage.setItem('currentUser',key); checkStatus();}else alert('Wrong email/password');
 }
-window.logout=()=>{localStorage.removeItem('user');location.reload();}
-let saved=localStorage.getItem('user'); if(saved) showDash(saved);
+function submitPay(){
+let code=document.getElementById('mpesa').value; if(!code){alert('Enter Mpesa Code');return}
+let cur=localStorage.getItem('currentUser'); let users=getUsers(); users[cur].mpesa=code; users[cur].paid='yes'; saveUsers(users);
+alert('Payment submitted! Wait admin approval.'); checkStatus();
+}
+function checkStatus(){
+let cur=localStorage.getItem('currentUser'); if(!cur){return}
+let users=getUsers(); let u=users[cur];
+document.getElementById('auth').style.display='none';
+if(u.paid=='no'){document.getElementById('pay').style.display='block';}
+else if(u.paid=='yes' && u.approved=='no'){document.getElementById('pay').innerHTML='<h3>Payment Received: '+u.mpesa+'</h3><p>Waiting admin approval...</p><button class="btn btn-blue" onclick="location.reload()">Refresh</button>'; document.getElementById('pay').style.display='block';}
+else{document.getElementById('pay').style.display='none'; document.getElementById('dash').style.display='block'; document.getElementById('st').innerText='Active - Approved';}
+}
+function showSec(id){['home','download','submit','withdraw','forex','aviator','binary','trivia','maths'].forEach(s=>document.getElementById('sec-'+s).style.display='none'); document.getElementById('sec-'+id).style.display='block';}
+function submitProd(){let l=document.getElementById('prodLink').value; if(!l){alert('Enter link');return} alert('Product submitted for admin review!');}
+checkStatus();
 </script></body></html>
