@@ -3,66 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LOOP</title>
+<title>STARLIFE AGENCIES</title>
 </head>
 <body style="background:#020b1a;color:white;margin:0;font-family:sans-serif">
 <div style="max-width:480px;margin:auto;padding:20px">
 
-<h1 style="text-align:center;font-size:40px;font-weight:900;margin-top:30px">LOOP</h1>
-<p style="text-align:center;color:gold;font-size:14px">Paybill 714777 - Account 440200282954</p>
+<h1 style="text-align:center;font-size:38px;font-weight:900;margin-top:20px">STARLIFE</h1>
+<p style="text-align:center;color:gold;letter-spacing:3px;font-size:14px">AGENCIES</p>
+<p style="text-align:center;color:#aaa;font-size:13px;margin-top:10px">Paybill 714777 - Account 440200282954</p>
 
-<div id="a" style="margin-top:30px">
-<input id="fn" placeholder="Full Name" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
-<input id="un" placeholder="Username" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
-<input id="ph" placeholder="Phone Number" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
-<input id="pw" placeholder="Password" type="password" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
-<button onclick="goB()" style="width:100%;margin-top:20px;padding:18px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:18px">Create Account</button>
+<div id="a" style="margin-top:25px;background:rgba(255,255,255,0.06);padding:20px;border-radius:20px">
+<input id="fn" placeholder="Full Name" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
+<input id="un" placeholder="Username" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
+<input id="ph" placeholder="Phone Number" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
+<input id="pw" placeholder="Password" type="password" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
+<button onclick="a.style.display='none';b.style.display='block'" style="width:100%;margin-top:18px;padding:16px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:16px">Create Account</button>
+<p style="text-align:center;color:#888;font-size:12px;margin-top:12px">Already have account? <span style="color:gold">Login</span></p>
 </div>
 
-<div id="b" style="display:none;margin-top:30px">
-<h2 style="text-align:center;font-weight:900;font-size:20px">Choose Package</h2>
-<div onclick="goC(200)" style="margin-top:16px;background:#1e40af;padding:20px;border-radius:16px;font-weight:bold;cursor:pointer">💎 REGULAR - KSh 200<br><span style="font-size:12px">+ KSh 5800 Bonus</span></div>
-<div onclick="goC(300)" style="margin-top:12px;background:#6b21a8;padding:20px;border-radius:16px;font-weight:bold;cursor:pointer">👑 VIP - KSh 300<br><span style="font-size:12px">+ KSh 5800 Bonus</span></div>
-<div onclick="goC(650)" style="margin-top:12px;background:#854d0e;padding:20px;border-radius:16px;font-weight:bold;cursor:pointer">🥇 GOLD - KSh 650<br><span style="font-size:12px">+ KSh 5800 Bonus</span></div>
+<div id="b" style="display:none;margin-top:25px">
+<h2 style="text-align:center;font-weight:900;font-size:19px">Choose Your Package</h2>
+<p style="text-align:center;color:#888;font-size:13px">Unlock KSh 5800 Bonus</p>
+<div onclick="am.innerText='KSh 200';b.style.display='none';c.style.display='block'" style="margin-top:16px;background:#1e40af;border:2px solid #3b82f6;padding:18px;border-radius:16px;cursor:pointer"><b>💎 REGULAR</b> - KSh 200<br><span style="font-size:12px;color:#93c5fd">+ KSh 5800 Bonus + Daily Jobs</span></div>
+<div onclick="am.innerText='KSh 300';b.style.display='none';c.style.display='block'" style="margin-top:12px;background:#6b21a8;border:2px solid #a855f7;padding:18px;border-radius:16px;cursor:pointer"><b>👑 VIP</b> - KSh 300<br><span style="font-size:12px;color:#d8b4fe">+ KSh 5800 Bonus + Premium</span></div>
+<div onclick="am.innerText='KSh 650';b.style.display='none';c.style.display='block'" style="margin-top:12px;background:#854d0e;border:2px solid #eab308;padding:18px;border-radius:16px;cursor:pointer"><b>🥇 GOLD</b> - KSh 650<br><span style="font-size:12px;color:#fde68a">+ KSh 5800 Bonus + All Access</span></div>
 </div>
 
-<div id="c" style="display:none;margin-top:30px;background:white;color:black;border-radius:16px;overflow:hidden">
-<div style="background:green;color:white;padding:16px;text-align:center;font-weight:900">LOOP PAYMENT</div>
+<div id="c" style="display:none;margin-top:25px;background:white;color:black;border-radius:18px;overflow:hidden">
+<div style="background:#16a34a;color:white;padding:14px;text-align:center;font-weight:900">STARLIFE AGENCIES PAYMENT</div>
 <div style="padding:20px">
-<p><b>Paybill:</b> 714777</p>
-<p><b>Account:</b> 440200282954</p>
-<p><b>Name:</b> LOOP</p>
-<p><b>Amount:</b> <span id="am">KSh 200</span></p>
-<input id="mc" placeholder="MPESA Code or type PAID" style="width:100%;padding:16px;margin-top:16px;border:2px solid #ccc;border-radius:12px;font-size:16px;box-sizing:border-box">
-<button onclick="goD()" style="width:100%;margin-top:16px;padding:16px;background:gold;border:none;border-radius:50px;font-weight:900;font-size:16px">I Have Paid - Unlock</button>
+<p>Paybill: <b>714777</b></p>
+<p>Account No: <b>440200282954</b></p>
+<p>Account Name: <b>STARLIFE</b></p>
+<p>Amount: <b id="am">KSh 200</b></p>
+<div style="background:#fef3c7;padding:12px;border-radius:10px;margin-top:12px;font-size:13px">Go to M-Pesa > Lipa na M-Pesa > Paybill > Enter details above</div>
+<input id="mc" placeholder="Enter M-Pesa Code or type PAID" style="width:100%;padding:15px;margin-top:14px;border:2px solid #ccc;border-radius:12px;font-size:15px;box-sizing:border-box">
+<button onclick="if(mc.value==''){alert('Enter M-Pesa Code');return;}c.style.display='none';d.style.display='block'" style="width:100%;margin-top:14px;padding:15px;background:gold;border:none;border-radius:50px;font-weight:900">I Have Paid - Unlock Account</button>
 </div>
 </div>
 
-<div id="d" style="display:none;margin-top:30px;text-align:center">
-<h2 style="font-size:28px;font-weight:900">Welcome to LOOP 🎉</h2>
-<p style="color:gold;margin-top:12px;font-size:20px;font-weight:900">Bonus: KSh 5800</p>
-<button onclick="alert('KSh 5800 Withdraw Request Sent! Admin will pay via Paybill 714777')" style="width:100%;margin-top:20px;padding:18px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:18px">Withdraw KSh 5800</button>
-<p style="margin-top:30px;font-size:13px;color:#aaa">Admin: admin / 325812</p>
-<button onclick="location.reload()" style="margin-top:12px;background:none;border:1px solid white;color:white;padding:10px 20px;border-radius:50px">Logout</button>
+<div id="d" style="display:none;margin-top:25px;text-align:center">
+<h2 style="font-size:26px;font-weight:900">Welcome to STARLIFE! 🎉</h2>
+<p style="color:gold;margin-top:10px;font-size:20px;font-weight:900">Bonus Balance: KSh 5800</p>
+<p style="color:#aaa;font-size:13px;margin-top:6px">Your account is now active</p>
+<button onclick="alert('Withdraw KSh 5800 Request Sent! Admin will pay via Paybill 714777')" style="width:100%;margin-top:20px;padding:16px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:16px">Withdraw KSh 5800 to M-Pesa</button>
+<div style="margin-top:20px;background:rgba(255,255,255,0.06);padding:16px;border-radius:16px">
+<p style="font-size:12px;color:#888">Admin Panel: admin / 325812</p>
+<button onclick="location.reload()" style="margin-top:10px;background:none;border:1px solid #555;color:white;padding:8px 18px;border-radius:50px;font-size:13px">Logout</button>
+</div>
 </div>
 
 </div>
-<script>
-function goB(){
-if(document.getElementById('fn').value==""){alert("Enter Full Name");return;}
-document.getElementById('a').style.display="none";
-document.getElementById('b').style.display="block";
-}
-function goC(x){
-document.getElementById('am').innerText="KSh "+x;
-document.getElementById('b').style.display="none";
-document.getElementById('c').style.display="block";
-}
-function goD(){
-if(document.getElementById('mc').value==""){alert("Enter MPESA Code");return;}
-document.getElementById('c').style.display="none";
-document.getElementById('d').style.display="block";
-}
-</script>
 </body>
 </html>
