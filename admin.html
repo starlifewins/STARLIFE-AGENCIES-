@@ -1,50 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE ADMIN</title>
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN</title></head>
 <body style="background:#020b1a;color:white;margin:0;font-family:sans-serif">
 <div style="max-width:600px;margin:auto;padding:20px">
-<h1 style="text-align:center">STARLIFE ADMIN</h1>
-<div id="login" style="margin-top:30px;background:rgba(255,255,255,0.08);padding:20px;border-radius:16px">
-<input id="u" placeholder="Username" style="width:100%;padding:14px;border-radius:10px;border:none;box-sizing:border-box">
-<input id="p" placeholder="Password" type="password" style="width:100%;padding:14px;margin-top:10px;border-radius:10px;border:none;box-sizing:border-box">
-<button id="btn" style="width:100%;margin-top:12px;padding:14px;background:gold;border:none;border-radius:50px;font-weight:900">Login</button>
-<p style="text-align:center;color:#888;font-size:12px;margin-top:10px">admin / 325812</p>
-</div>
-<div id="panel" style="display:none;margin-top:20px">
-<h3>Pending Approvals</h3>
-<div id="list" style="margin-top:12px"></div>
-<button onclick="localStorage.clear();load();" style="margin-top:20px;background:none;border:1px solid #555;color:white;padding:8px 16px;border-radius:20px">Clear All</button>
-<br><br>
-<a href="index.html" style="color:gold">← Back to Main Site</a>
+<h1 style="text-align:center">⭐ STARLIFE ADMIN</h1>
+<p style="text-align:center;color:#4ade80">Direct Access - No Password Needed</p>
+<div style="margin-top:20px;background:rgba(255,255,255,0.08);padding:20px;border-radius:16px">
+<h3>Clients</h3>
+<div id="list"></div>
+<br><a href="index.html" style="color:gold">← Back</a>
 </div>
 </div>
 <script>
-document.getElementById('btn').onclick=function(){
-var user=document.getElementById('u').value.trim();
-var pass=document.getElementById('p').value.trim();
-if(user==='admin' && pass==='325812'){
-document.getElementById('login').style.display='none';
-document.getElementById('panel').style.display='block';
-load();
-}else{
-alert('Wrong! Username: admin Password: 325812 You typed: '+user+' / '+pass);
-}
-};
 function load(){
-let data=JSON.parse(localStorage.getItem('starlife_users')||'[]');
-let html='';
-if(data.length==0)html='<p style=color:#888>No payments yet.</p>';
-data.forEach((x,i)=>{
-html+=`<div style="background:white;color:black;padding:14px;border-radius:12px;margin-top:10px"><b>${x.name}</b> - ${x.phone}<br>Package: ${x.amount} - Code: ${x.code}<br><span style="font-size:12px">${x.time}</span><br><button onclick="approve(${i})" style="margin-top:8px;padding:8px 14px;background:green;color:white;border:none;border-radius:20px">Approve</button> <button onclick="del(${i})" style="padding:8px 14px;background:red;color:white;border:none;border-radius:20px">Reject</button></div>`;
-});
-document.getElementById('list').innerHTML=html;
+let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+let h=d.length==0?'<p style=color:#888>No clients yet</p>':'';
+d.forEach((x,i)=>{h+=`<div style="background:white;color:black;padding:12px;border-radius:10px;margin-top:10px"><b>${x.name}</b> ${x.phone} ${x.amount} Code:${x.code} <button onclick="let a=JSON.parse(localStorage.getItem('starlife_users')||'[]');a.splice(${i},1);localStorage.setItem('starlife_users',JSON.stringify(a));load()" style="background:green;color:white;border:none;padding:5px 10px;border-radius:10px">Approve</button></div>`});
+document.getElementById('list').innerHTML=h;
 }
-function approve(i){let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');alert('Approved '+d[i].name);del(i)}
-function del(i){let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');d.splice(i,1);localStorage.setItem('starlife_users',JSON.stringify(d));load()}
+load();
 </script>
 </body>
 </html>
