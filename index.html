@@ -7,15 +7,17 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
 body{background:#020b1a;color:white;min-height:100vh}
-.box{max-width:420px;margin:auto;padding:20px}
-.card{background:rgba(255,255,255,0.07);padding:20px;border-radius:20px;margin-top:20px;border:1px solid rgba(255,255,255,0.1)}
-input,select{width:100%;padding:14px;border-radius:12px;border:none;margin-top:10px;background:white;color:black}
-button{width:100%;padding:14px;border-radius:50px;border:none;margin-top:12px;font-weight:900;cursor:pointer}
+.box{max-width:440px;margin:auto;padding:16px}
+.card{background:rgba(255,255,255,0.07);padding:16px;border-radius:18px;margin-top:14px;border:1px solid rgba(255,255,255,0.1)}
+input{width:100%;padding:13px;border-radius:12px;border:none;margin-top:9px;background:white;color:black}
+button{width:100%;padding:13px;border-radius:50px;border:none;margin-top:10px;font-weight:900;cursor:pointer}
 .gold{background:gold;color:black}
 .green{background:#22c55e;color:white}
+.blue{background:#3b82f6;color:white}
 .hidden{display:none}
-.pkg{padding:12px;border-radius:12px;margin-top:8px;border:2px solid #333;cursor:pointer}
-.pkg.active{border-color:gold;background:rgba(255,215,0,0.1)}
+.pkg{padding:12px;border-radius:12px;margin-top:8px;border:2px solid #333;cursor:pointer;background:rgba(255,255,255,0.03)}
+.pkg.active{border-color:gold;background:rgba(255,215,0,0.15)}
+.stat{display:flex;justify-content:space-between;margin-top:8px;background:rgba(255,255,255,0.05);padding:10px;border-radius:10px}
 </style>
 </head>
 <body>
@@ -24,72 +26,88 @@ button{width:100%;padding:14px;border-radius:50px;border:none;margin-top:12px;fo
 <!-- REGISTER -->
 <div id="reg">
 <h1 style="text-align:center">⭐ STARLIFE AGENCIES</h1>
-<p style="text-align:center;color:#4ade80;margin-top:6px">Wote Kenya - Earn Online</p>
+<p style="text-align:center;color:#4ade80;margin-top:4px">Wote Kenya - Earn Per View</p>
 <div class="card">
-<h3>Step 1: Create Account</h3>
+<h3>Step 1: Register</h3>
 <input id="fn" placeholder="Full Name">
 <input id="un" placeholder="Username">
-<input id="em" placeholder="Email" type="email">
-<input id="ph" placeholder="Phone Number e.g 07...">
+<input id="em" placeholder="Email">
+<input id="ph" placeholder="Phone Number">
 <input id="pw" placeholder="Password" type="password">
 <input id="cpw" placeholder="Confirm Password" type="password">
 <h4 style="margin-top:12px">Choose Package</h4>
-<div class="pkg active" onclick="selPkg(this,'STARTER - KSh 650')" id="p1"><b>STARTER</b> - KSh 650 - Bonus 5800</div>
-<div class="pkg" onclick="selPkg(this,'PRO - KSh 1200')"><b>PRO</b> - KSh 1200 - Bonus 9500</div>
-<div class="pkg" onclick="selPkg(this,'PREMIUM - KSh 2500')"><b>PREMIUM</b> - KSh 2500 - Bonus 15000</div>
+<div class="pkg active" onclick="selPkg(this,'Regular',200,100)" id="p1">
+<b>REGULAR PACKAGE</b><br>
+<small>Activation KSh 200 - KSh 100 Per View</small>
+</div>
+<div class="pkg" onclick="selPkg(this,'VIP',250,120)">
+<b>VIP PACKAGE</b><br>
+<small>Activation KSh 250 - KSh 120 Per View</small>
+</div>
+<div class="pkg" onclick="selPkg(this,'Gold',500,150)">
+<b>GOLD PACKAGE</b><br>
+<small>Activation KSh 500 - KSh 150 Per View</small>
+</div>
 <button class="gold" onclick="signup()">Sign Up</button>
-<p style="text-align:center;margin-top:10px;font-size:13px">Already have? <span style="color:gold" onclick="showPay()">Login</span></p>
 </div>
 </div>
 
 <!-- PAYMENT -->
 <div id="pay" class="hidden">
-<h1 style="text-align:center">💳 Make Payment</h1>
+<h1 style="text-align:center">💳 Payment</h1>
 <div class="card">
-<p>Hi <b id="uName"></b>!</p>
-<p style="margin-top:8px">Package: <b id="uPkg" style="color:gold"></b></p>
-<div style="background:white;color:black;padding:14px;border-radius:12px;margin-top:14px;text-align:center">
-<b>M-PESA PAYBILL</b><br>
+<p>Hi <b id="uName"></b> - <span id="uPkg"></span></p>
+<div style="background:white;color:black;padding:14px;border-radius:12px;margin-top:12px;text-align:center">
+<b>LIPA NA M-PESA</b><br>
 Paybill: <b style="font-size:18px">714777</b><br>
 Account: <b>440200282954</b><br>
-Amount: <span id="uAmt" style="color:green;font-weight:900"></span>
+Amount: <b id="uAmt" style="color:green;font-size:18px"></b><br>
+<small>Per View: <b id="uPer"></b></small>
 </div>
-<input id="mpesa" placeholder="Enter M-Pesa Code e.g QGH...">
+<input id="mpesa" placeholder="Enter M-Pesa Code">
 <button class="gold" onclick="doPay()">I Have Paid - Unlock Dashboard</button>
-<button style="background:none;color:#888" onclick="showReg()">← Back</button>
 </div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dash" class="hidden">
-<h1 style="text-align:center">⭐ Dashboard</h1>
-<p style="text-align:center">Welcome <b id="dName"></b> (<span id="dUser"></span>)</p>
-<div class="card">
-<p>Package: <b id="dPkg"></b> - <span id="dStatus" style="color:gold">Pending Approval</span></p>
-<div style="background:linear-gradient(135deg,#16a34a,#22c55e);padding:16px;border-radius:16px;margin-top:12px;text-align:center">
-<p>Available Bonus</p>
-<h1>KSh <span id="bonus">5800</span></h1>
-<p style="font-size:12px">Withdrawable after task</p>
-</div>
-<button class="green" onclick="withdraw()">Withdraw KSh 5800</button>
+<h2 style="text-align:center">⭐ STARLIFE DASHBOARD</h2>
+<p style="text-align:center;font-size:13px"><span id="dName"></span> - <span id="dPkgShow"></span></p>
+
+<div class="card" style="background:linear-gradient(135deg,#f59e0b,#eab308);color:black">
+<h3>🎁 Claim Bonus</h3>
+<h1>KSh 5,500</h1>
+<p style="font-size:12px">Welcome Bonus - Claim Now!</p>
+<button class="green" onclick="claimBonus()" id="claimBtn">Claim Bonus 5,500</button>
+<p id="claimMsg" style="font-size:12px;margin-top:6px"></p>
 </div>
 
 <div class="card">
-<h3>📦 Today's Product</h3>
-<p style="font-size:13px;color:#ccc;margin-top:6px">Get product link, post and submit screenshot</p>
-<div style="background:white;color:black;padding:12px;border-radius:12px;margin-top:10px">
-<b id="prodName">STARLIFE Soap - Wote</b><br>
-<small id="prodLink">https://starlife.co.ke/product/soap-wote</small><br>
-<button style="padding:8px;margin-top:6px;background:black;color:white;border-radius:20px;width:auto" onclick="copyLink()">Copy Link</button>
+<div class="stat"><span>Total Earnings</span><b id="earn">KSh 0</b></div>
+<div class="stat"><span>Total Withdrawal</span><b id="withdrawTotal">KSh 0</b></div>
+<div class="stat"><span>Per View Rate</span><b id="perView">KSh 100</b></div>
+<div class="stat"><span>Views Done</span><b id="views">0</b></div>
+<div class="stat"><span>Status</span><b id="dStatus" style="color:gold">Pending</b></div>
+<button class="green" onclick="withdraw()">Withdraw Now</button>
 </div>
-<input id="proof" placeholder="Paste your Facebook/WhatsApp post link or proof">
-<button class="gold" onclick="submitTask()">Submit Task</button>
+
+<div class="card">
+<h3>📦 Product To Post</h3>
+<div style="background:white;color:black;padding:10px;border-radius:10px;margin-top:8px">
+<b id="prodName">STARLIFE Gold Soap - Wote</b><br>
+<small>Link:</small> <small id="prodLink" style="word-break:break-all">https://starlifewins.github.io/STARLIFE-AGENCIES-/product/soap</small><br>
+<button style="width:auto;padding:6px 12px;background:black;color:white;margin-top:6px" onclick="copyLink()">Copy Product Link</button>
+</div>
+<h4 style="margin-top:12px">📤 Submission of Viewers</h4>
+<input id="proof" placeholder="Paste your Post Link / Screenshot proof (FB, WhatsApp, TikTok)">
+<button class="blue" onclick="submitTask()">Submit View Proof</button>
 <p id="taskMsg" style="font-size:12px;color:#4ade80;margin-top:6px"></p>
+<div id="subList" style="margin-top:10px;font-size:12px;color:#aaa"></div>
 </div>
 
 <div class="card">
-<h3>Withdrawal History</h3>
-<div id="hist" style="font-size:13px;color:#aaa;margin-top:8px">No withdrawals yet</div>
+<h4>Withdrawal History</h4>
+<div id="hist" style="font-size:12px;margin-top:6px">No withdrawals yet</div>
 <button style="background:none;color:#888;font-size:12px" onclick="logout()">Logout</button>
 </div>
 </div>
@@ -97,32 +115,38 @@ Amount: <span id="uAmt" style="color:green;font-weight:900"></span>
 </div>
 
 <script>
-let pkg="STARTER - KSh 650", amt="650";
-function selPkg(el,p){
+let selPkgName="Regular", selAmt=200, selPer=100;
+function selPkg(el,name,amt,per){
 document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('active'));
-el.classList.add('active');pkg=p;amt=p.match(/\d+/)[0];
+el.classList.add('active');selPkgName=name;selAmt=amt;selPer=per;
 }
 function showReg(){reg.classList.remove('hidden');pay.classList.add('hidden');dash.classList.add('hidden')}
 function showPay(){reg.classList.add('hidden');pay.classList.remove('hidden');dash.classList.add('hidden')}
 function showDash(){reg.classList.add('hidden');pay.classList.add('hidden');dash.classList.remove('hidden')}
 
 function signup(){
-let fn=document.getElementById('fn').value, un=document.getElementById('un').value, em=document.getElementById('em').value, ph=document.getElementById('ph').value, pw=document.getElementById('pw').value, cpw=document.getElementById('cpw').value;
+let fn=fnEl().value, un=unEl().value, em=emEl().value, ph=phEl().value, pw=pwEl().value, cpw=cpwEl().value;
 if(!fn||!un||!em||!ph||!pw){alert('Jaza fields zote');return}
 if(pw!==cpw){alert('Passwords hazifanani');return}
 let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
 if(users.find(x=>x.username===un)){alert('Username inatumika');return}
-let user={fullname:fn,username:un,email:em,phone:ph,password:pw,package:pkg,amount:amt,mpesa:'',status:'Registered',bonus: pkg.includes('650')?'5800':pkg.includes('1200')?'9500':'15000',tasks:[],withdraws:[],time:new Date().toLocaleString()};
+let user={fullname:fn,username:un,email:em,phone:ph,password:pw,package:selPkgName,amount:selAmt,perView:selPer,mpesa:'',status:'Registered',bonusClaimed:false,earnings:0,totalWithdraw:0,views:0,tasks:[],withdraws:[],time:new Date().toLocaleString()};
 users.push(user);
 localStorage.setItem('starlife_users',JSON.stringify(users));
 localStorage.setItem('starlife_current',JSON.stringify(user));
-uName.innerText=fn;uPkg.innerText=pkg;uAmt.innerText='KSh '+amt;
+uName.innerText=fn;uPkg.innerText=selPkgName+' Package';uAmt.innerText='KSh '+selAmt;uPer.innerText='KSh '+selPer;
 showPay();
 }
+function fnEl(){return document.getElementById('fn')} 
+function unEl(){return document.getElementById('un')}
+function emEl(){return document.getElementById('em')}
+function phEl(){return document.getElementById('ph')}
+function pwEl(){return document.getElementById('pw')}
+function cpwEl(){return document.getElementById('cpw')}
 
 function doPay(){
 let code=document.getElementById('mpesa').value;
-if(code.length<5){alert('Weka M-Pesa Code sahihi');return}
+if(code.length<5){alert('Weka M-Pesa Code');return}
 let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
 let cur=JSON.parse(localStorage.getItem('starlife_current'));
 let idx=users.findIndex(x=>x.username===cur.username);
@@ -130,48 +154,65 @@ users[idx].mpesa=code;users[idx].status='Paid - Awaiting Approval';
 cur=users[idx];
 localStorage.setItem('starlife_users',JSON.stringify(users));
 localStorage.setItem('starlife_current',JSON.stringify(cur));
-loadDash(cur);
-showDash();
+loadDash(cur);showDash();
 }
 
 function loadDash(u){
-dName.innerText=u.fullname;dUser.innerText=u.username;dPkg.innerText=u.package;dStatus.innerText=u.status;bonus.innerText=u.bonus;
-let h='';if(u.withdraws.length==0)h='No withdrawals yet';else u.withdraws.forEach(w=>{h+=`<div>${w.amount} - ${w.status} - ${w.time}</div>`});
-hist.innerHTML=h;
-if(u.tasks.length>0)taskMsg.innerText='✅ Task Submitted - Waiting Approval';
+dName.innerText=u.fullname;dPkgShow.innerText=u.package+' - KSh '+u.perView+'/view';dStatus.innerText=u.status;
+perView.innerText='KSh '+u.perView;earn.innerText='KSh '+u.earnings;withdrawTotal.innerText='KSh '+u.totalWithdraw;views.innerText=u.views;
+let h='';if(u.withdraws.length==0)h='No withdrawals yet';else u.withdraws.forEach(w=>{h+=`<div>${w.amount} - ${w.status} - ${w.time}</div>`});hist.innerHTML=h;
+let s='';u.tasks.forEach(t=>{s+=`<div>✓ ${t.proof} - ${t.time} - +KSh ${u.perView}</div>`});subList.innerHTML=s;
+if(u.bonusClaimed){claimBtn.innerText='Bonus Claimed ✓';claimBtn.disabled=true;claimMsg.innerText='KSh 5,500 Added to earnings!';}
 }
 
-function withdraw(){
-let cur=JSON.parse(localStorage.getItem('starlife_current'));
-if(cur.status!=='Approved'){alert('Admin bado hajakapprove payment yako. Subiri approval.');return}
+function claimBonus(){
 let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+let cur=JSON.parse(localStorage.getItem('starlife_current'));
+if(cur.bonusClaimed){alert('Umesha claim');return}
 let idx=users.findIndex(x=>x.username===cur.username);
-users[idx].withdraws.push({amount:'KSh '+users[idx].bonus,status:'Requested',time:new Date().toLocaleString()});
+users[idx].bonusClaimed=true;users[idx].earnings+=5500;
 cur=users[idx];
 localStorage.setItem('starlife_users',JSON.stringify(users));
 localStorage.setItem('starlife_current',JSON.stringify(cur));
 loadDash(cur);
-alert('Withdrawal ya KSh '+cur.bonus+' imetumwa! Admin ata-approve na kulipa via M-Pesa.');
+alert('🎉 KSh 5,500 Bonus Claimed!');
+}
+
+function withdraw(){
+let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+let cur=JSON.parse(localStorage.getItem('starlife_current'));
+let idx=users.findIndex(x=>x.username===cur.username);
+if(cur.status!=='Approved'){alert('Admin bado hajakapprove payment yako');return}
+if(cur.earnings<=0){alert('Huna earnings za ku-withdraw');return}
+let amt=cur.earnings;
+users[idx].withdraws.push({amount:'KSh '+amt,status:'Requested',time:new Date().toLocaleString()});
+users[idx].totalWithdraw+=amt;users[idx].earnings=0;
+cur=users[idx];
+localStorage.setItem('starlife_users',JSON.stringify(users));
+localStorage.setItem('starlife_current',JSON.stringify(cur));
+loadDash(cur);
+alert('Withdrawal KSh '+amt+' sent! Admin ata-approve na kulipa via M-Pesa Paybill 714777');
 }
 
 function submitTask(){
 let p=document.getElementById('proof').value;
-if(!p){alert('Weka proof link');return}
+if(!p){alert('Weka post link proof');return}
 let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
 let cur=JSON.parse(localStorage.getItem('starlife_current'));
 let idx=users.findIndex(x=>x.username===cur.username);
 users[idx].tasks.push({proof:p,time:new Date().toLocaleString()});
+users[idx].views+=1;users[idx].earnings+=users[idx].perView;
 cur=users[idx];
 localStorage.setItem('starlife_users',JSON.stringify(users));
 localStorage.setItem('starlife_current',JSON.stringify(cur));
-taskMsg.innerText='✅ Submitted! Admin ata-review';
-alert('Task Submitted!');
+loadDash(cur);
+proof.value='';alert('View Submitted! +KSh '+cur.perView+' added');
 }
-function copyLink(){navigator.clipboard.writeText(document.getElementById('prodLink').innerText);alert('Link Copied!')}
-function logout(){localStorage.removeItem('starlife_current');showReg()}
+function copyLink(){navigator.clipboard.writeText(document.getElementById('prodLink').innerText);alert('Product Link Copied!')}
+function logout(){localStorage.removeItem('starlife_current');location.reload()}
 
 let cur=JSON.parse(localStorage.getItem('starlife_current')||'null');
-if(cur){if(cur.mpesa){loadDash(cur);showDash()}else{uName.innerText=cur.fullname;uPkg.innerText=cur.package;uAmt.innerText='KSh '+cur.amount;showPay()}}
+if(cur){if(cur.mpesa){loadDash(cur);showDash()}else{uName.innerText=cur.fullname;uPkg.innerText=cur.package;uAmt.innerText='KSh '+cur.amount;uPer.innerText='KSh '+cur.perView;showPay()}}
 </script>
 </body>
 </html>
