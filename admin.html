@@ -1,68 +1,39 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin STARLIFE</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0a1222;color:#fff;padding:14px}
-.box{background:#111c34;border:1px solid #1e2e50;border-radius:12px;padding:12px;margin-top:10px}
-.btn{padding:10px 14px;border-radius:8px;border:none;font-weight:800;margin:4px;cursor:pointer}
-.green{background:#10b981;color:#fff}.red{background:#ef4444;color:#fff}.blue{background:#5e47ff;color:#fff}
-.input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:8px}
-</style></head><body>
-<h2>⭐ STARLIFE ADMIN - WOTE KENYA</h2>
-<p style="color:#10b981;font-size:12px">✅ Firebase - Unaona clients wote popote Kenya</p>
-
-<div id="login" class="box"><h3>Login</h3><input id="u" class="input" placeholder="admin"><input id="p" class="input" type="password" placeholder="admin123"><button class="btn blue" style="width:100%;margin-top:10px" onclick="login()">Login</button></div>
-
-<div id="admin" style="display:none">
-<div class="box"><h3>📋 Pending Payments</h3><div id="pend">Loading...</div></div>
-<div class="box"><h3>✅ Approved Users</h3><div id="appr">Loading...</div></div>
-<button class="btn blue" onclick="load()">Refresh</button>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE ADMIN</title>
+</head>
+<body style="background:#020b1a;color:white;margin:0;font-family:sans-serif">
+<div style="max-width:600px;margin:auto;padding:20px">
+<h1 style="text-align:center">STARLIFE ADMIN PANEL</h1>
+<div id="login" style="margin-top:30px;background:rgba(255,255,255,0.06);padding:20px;border-radius:16px">
+<input id="u" placeholder="Username" style="width:100%;padding:14px;border-radius:10px;border:none;box-sizing:border-box">
+<input id="p" placeholder="Password" type="password" style="width:100%;padding:14px;margin-top:10px;border-radius:10px;border:none;box-sizing:border-box">
+<button onclick="if(u.value=='admin'&&p.value=='325812'){login.style.display='none';panel.style.display='block';load()}else{alert('Wrong! Use admin / 325812')}" style="width:100%;margin-top:12px;padding:14px;background:gold;border:none;border-radius:50px;font-weight:900">Login</button>
+<p style="text-align:center;color:#888;font-size:12px;margin-top:10px">admin / 325812</p>
 </div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.login = function(){
-if(document.getElementById('u').value=='admin' && document.getElementById('p').value=='admin123'){
-document.getElementById('login').style.display='none'; document.getElementById('admin').style.display='block'; load();
-} else alert('Wrong');
-}
-
-window.load = async function(){
-let snap=await getDocs(collection(db,"users"));
-let pend=document.getElementById('pend'); let appr=document.getElementById('appr');
-pend.innerHTML=''; appr.innerHTML='';
-let cP=0,cA=0;
-snap.forEach(d=>{
-let u=d.data(); let id=d.id;
-if(u.paid=='yes' && u.approved=='no'){
-cP++; let div=document.createElement('div'); div.className='box'; div.style.background='#0a1222';
-div.innerHTML='<b>'+u.fullname+'</b><br>📞 '+u.phone+'<br>📧 '+u.email+'<br>💰 Mpesa: <b style="color:#10b981">'+u.mpesa+'</b><br><br><button class="btn green" onclick="approve(\''+id+'\')">✅ APPROVE</button><button class="btn red" onclick="reject(\''+id+'\')">Reject</button>';
-pend.appendChild(div);
-}
-if(u.approved=='yes'){
-cA++; let div=document.createElement('div'); div.className='box'; div.style.background='#0a1222';
-div.innerHTML='✅ <b>'+u.fullname+'</b> - '+u.phone+'<br>'+u.email+' - KES '+u.balance;
-appr.appendChild(div);
-}
+<div id="panel" style="display:none;margin-top:20px">
+<h3>Pending Approvals</h3>
+<div id="list" style="margin-top:12px"></div>
+<button onclick="localStorage.clear();load();alert('Cleared')" style="margin-top:20px;background:none;border:1px solid #555;color:white;padding:8px 16px;border-radius:20px">Clear All</button>
+<br><br>
+<a href="index.html" style="color:gold">← Back to Main Site</a>
+</div>
+</div>
+<script>
+function load(){
+let data=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+let html='';
+if(data.length==0)html='<p style=color:#888>No payments yet. Users appear here when they enter M-Pesa code.</p>';
+data.forEach((x,i)=>{
+html+=`<div style="background:white;color:black;padding:14px;border-radius:12px;margin-top:10px"><b>${x.name}</b> - ${x.phone}<br>Package: ${x.amount} - Code: ${x.code}<br><span style="font-size:12px">${x.time}</span><br><button onclick="approve(${i})" style="margin-top:8px;padding:8px 14px;background:green;color:white;border:none;border-radius:20px">Approve ✓</button> <button onclick="del(${i})" style="padding:8px 14px;background:red;color:white;border:none;border-radius:20px">Reject</button></div>`;
 });
-if(cP==0) pend.innerHTML='Hakuna pending'; if(cA==0) appr.innerHTML='Hakuna approved';
+document.getElementById('list').innerHTML=html;
 }
-
-window.approve = async function(id){await updateDoc(doc(db,"users",id),{approved:"yes",balance:0}); alert('Approved!'); load();}
-window.reject = async function(id){await updateDoc(doc(db,"users",id),{paid:"no",approved:"no",mpesa:""}); load();}
-</script></body></html>
+function approve(i){let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');alert('Approved '+d[i].name+' - Pay KSh 5800 via Paybill 714777');del(i)}
+function del(i){let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');d.splice(i,1);localStorage.setItem('starlife_users',JSON.stringify(d));load()}
+</script>
+</body>
+</html>
