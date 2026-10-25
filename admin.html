@@ -1,23 +1,67 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN</title></head>
-<body style="background:#020b1a;color:white;margin:0;font-family:sans-serif">
-<div style="max-width:600px;margin:auto;padding:20px">
-<h1 style="text-align:center">⭐ STARLIFE ADMIN</h1>
-<p style="text-align:center;color:#4ade80">Direct Access - No Password Needed</p>
-<div style="margin-top:20px;background:rgba(255,255,255,0.08);padding:20px;border-radius:16px">
-<h3>Clients</h3>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STARLIFE ADMIN PANEL</title>
+<style>
+*{box-sizing:border-box;font-family:sans-serif}
+body{background:#020b1a;color:white;margin:0;padding:16px}
+.card{background:white;color:black;padding:14px;border-radius:14px;margin-top:10px}
+button{padding:8px 14px;border-radius:20px;border:none;font-weight:700;cursor:pointer;margin-right:6px}
+</style>
+</head>
+<body>
+<h1 style="text-align:center">⭐ STARLIFE ADMIN - WOTE KENYA</h1>
+<p style="text-align:center;color:#4ade80">Paybill 714777 / Acc 440200282954</p>
+
+<div style="max-width:800px;margin:auto">
+<div style="background:rgba(255,255,255,0.08);padding:16px;border-radius:16px;margin-top:16px">
+<h3>📋 All Clients (<span id="count">0</span>)</h3>
 <div id="list"></div>
-<br><a href="index.html" style="color:gold">← Back</a>
+</div>
+<div style="text-align:center;margin-top:16px">
+<a href="index.html" style="color:gold">← Client Site</a> | 
+<button onclick="if(confirm('Delete all?')){localStorage.clear();load()}" style="background:#333;color:white">Clear All Data</button>
 </div>
 </div>
+
 <script>
 function load(){
 let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');
-let h=d.length==0?'<p style=color:#888>No clients yet</p>':'';
-d.forEach((x,i)=>{h+=`<div style="background:white;color:black;padding:12px;border-radius:10px;margin-top:10px"><b>${x.name}</b> ${x.phone} ${x.amount} Code:${x.code} <button onclick="let a=JSON.parse(localStorage.getItem('starlife_users')||'[]');a.splice(${i},1);localStorage.setItem('starlife_users',JSON.stringify(a));load()" style="background:green;color:white;border:none;padding:5px 10px;border-radius:10px">Approve</button></div>`});
+document.getElementById('count').innerText=d.length;
+let h='';
+if(d.length==0)h='<p style=color:#888>No clients registered yet</p>';
+d.forEach((x,i)=>{
+h+=`<div class="card">
+<b>${x.fullname}</b> (${x.username})<br>
+📧 ${x.email} | 📱 ${x.phone}<br>
+📦 ${x.package} | 💰 Bonus KSh ${x.bonus}<br>
+💳 M-Pesa: <b>${x.mpesa||'Not Paid'}</b><br>
+Status: <b style="color:${x.status.includes('Approved')?'green':x.status.includes('Paid')?'orange':'red'}">${x.status}</b><br>
+Tasks: ${x.tasks.length} | Withdraws: ${x.withdraws.length}<br>
+${x.withdraws.map(w=>`Withdraw: ${w.amount} - ${w.status}`).join('<br>')}<br>
+<small>${x.time}</small><br>
+<div style="margin-top:8px">
+<button style="background:green;color:white" onclick="approve(${i})">Approve Payment</button>
+<button style="background:#16a34a;color:white" onclick="payUser(${i})">Approve & Pay KSh ${x.bonus}</button>
+<button style="background:red;color:white" onclick="del(${i})">Delete</button>
+</div>
+${x.tasks.length?`<div style="margin-top:6px;background:#eee;padding:6px;border-radius:8px">Last Proof: ${x.tasks[x.tasks.length-1].proof}</div>`:''}
+</div>`;
+});
 document.getElementById('list').innerHTML=h;
 }
+function approve(i){
+let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+d[i].status='Approved';localStorage.setItem('starlife_users',JSON.stringify(d));load();alert('Approved '+d[i].fullname);
+}
+function payUser(i){
+let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+if(d[i].withdraws.length>0){d[i].withdraws[d[i].withdraws.length-1].status='Paid';}
+d[i].status='Paid - KSh '+d[i].bonus;localStorage.setItem('starlife_users',JSON.stringify(d));load();alert('Paid KSh '+d[i].bonus+' to '+d[i].phone+' - Send via M-Pesa Paybill');
+}
+function del(i){let d=JSON.parse(localStorage.getItem('starlife_users')||'[]');d.splice(i,1);localStorage.setItem('starlife_users',JSON.stringify(d));load()}
 load();
 </script>
 </body>
