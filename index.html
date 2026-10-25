@@ -3,202 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE AGENCIES</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#0a1222;color:#fff}
-.box{background:#111c34;border:1px solid #1e2e50;border-radius:14px;padding:16px;margin:12px}
-.input{width:100%;padding:12px;border-radius:10px;background:#0a1222;border:1px solid #1e2e50;color:#fff;margin-top:10px}
-.btn{width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;margin-top:10px;cursor:pointer}
-.blue{background:#5e47ff;color:#fff}
-.green{background:#10b981;color:#fff}
-.red{background:#ef4444;color:#fff}
-.card{background:#0a1222;border:1px solid #1e2e50;border-radius:10px;padding:10px;margin-top:8px}
-.top{background:#111c34;padding:10px;display:flex;justify-content:space-between}
-</style>
+<title>Status Views Complete</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body style="background:#020b1a" class="text-white">
 
-<!-- SIGNUP / LOGIN -->
-<div id="auth" class="box" style="max-width:400px;margin:30px auto">
-<h2>⭐ STARLIFE AGENCIES</h2>
-<p style="color:#7a8aa8;font-size:13px">Eldoret - Kenya</p>
-<input id="fn" class="input" placeholder="Full Name">
-<input id="ph" class="input" placeholder="Phone 07...">
-<input id="em" class="input" placeholder="Email">
-<input id="pw" class="input" type="password" placeholder="Password">
-<button class="btn blue" onclick="doSignup()">Sign Up</button>
-<button class="btn" style="background:#1e2e50;color:#fff" onclick="doLogin()">Log In</button>
-<hr style="margin:15px 0;border-color:#1e2e50">
-<p style="font-size:12px">Admin? <a href="#" onclick="showAdminLogin()" style="color:#5e47ff">Login as Admin</a></p>
+<div class="bg-black border-b border-yellow-500/20 p-3 flex justify-between sticky top-0">
+<div class="flex items-center gap-2"><div class="w-9 h-9 bg-yellow-500 rounded-full flex items-center justify-center">👁️</div><div class="font-black text-[14px]">STATUS VIEWS</div></div>
+<div class="flex gap-2"><button onclick="showPage('admin')" class="text-[11px] border rounded-full px-3 py-1">Admin</button><button onclick="logout()" id="logoutBtn" class="hidden text-[11px] bg-red-600 rounded-full px-3 py-1">Logout</button></div>
 </div>
 
-<!-- ADMIN LOGIN -->
-<div id="adminLogin" class="box" style="max-width:400px;margin:30px auto;display:none">
-<h3>Admin Login</h3>
-<input id="au" class="input" placeholder="Username = admin">
-<input id="ap" class="input" type="password" placeholder="Password = admin123">
-<button class="btn blue" onclick="adminLogin()">Login</button>
-<button class="btn" style="background:#1e2e50" onclick="showAuth()">Back</button>
+<div class="max-w-[480px] mx-auto">
+
+<!-- REGISTER -->
+<div id="page-register" class="p-5">
+<h1 class="font-black text-2xl text-center mt-6">Create Account</h1>
+<div class="mt-6 bg-white text-black rounded-[20px] p-5 space-y-3">
+<input id="reg-fullname" placeholder="Full name" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<input id="reg-username" placeholder="Username" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<input id="reg-email" placeholder="Email" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<input id="reg-phone" placeholder="Phone number" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<input id="reg-pass" placeholder="Password" type="password" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<input id="reg-cpass" placeholder="Confirm password" type="password" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<button onclick="register()" class="w-full bg-black text-white rounded-full py-4 font-black">Sign Up</button>
+<p class="text-center text-[12px] text-zinc-500">Have account? <span onclick="showPage('login')" class="font-bold underline cursor-pointer">Login</span></p>
+</div>
+</div>
+
+<!-- LOGIN -->
+<div id="page-login" class="hidden p-5">
+<h1 class="font-black text-2xl text-center mt-10">Welcome Back</h1>
+<div class="mt-6 bg-white text-black rounded-[20px] p-5 space-y-3">
+<input id="login-username" placeholder="Username or Email" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<input id="login-pass" placeholder="Password" type="password" class="w-full bg-zinc-50 border rounded-xl px-4 py-3 text-sm">
+<button onclick="login()" class="w-full bg-black text-white rounded-full py-4 font-black">Login</button>
+</div>
+</div>
+
+<!-- PACKAGES -->
+<div id="page-packages" class="hidden p-4">
+<h2 class="font-black text-xl text-center mt-4">👑 Choose Package</h2>
+<div class="mt-5 space-y-3">
+<div onclick="selectPack('regular',200,100)" class="bg-blue-900 border-2 border-blue-500 rounded-2xl p-4 cursor-pointer"><b>💎 REGULAR</b><br>Fee KSh 200 | Earn KSh 100/view + KSh 5800 Bonus</div>
+<div onclick="selectPack('vip',300,120)" class="bg-purple-900 border-2 border-purple-500 rounded-2xl p-4 cursor-pointer"><b>👑 VIP</b><br>Fee KSh 300 | Earn KSh 120/view + KSh 5800 Bonus</div>
+<div onclick="selectPack('gold',650,150)" class="bg-yellow-900 border-2 border-yellow-500 rounded-2xl p-4 cursor-pointer"><b>🥇 GOLD</b><br>Fee KSh 650 | Earn KSh 150/view + KSh 5800 Bonus</div>
+</div>
 </div>
 
 <!-- PAYMENT -->
-<div id="pay" class="box" style="max-width:500px;margin:30px auto;display:none">
-<h2>Lipa KES 200</h2>
-<div class="card">Paybill: <b>714777</b><br>Account: <b>440200282954</b><br>Amount: <b>200</b></div>
-<input id="mpesa" class="input" placeholder="Weka Mpesa Code">
-<button class="btn green" onclick="doPay()">Submit Payment</button>
-<button class="btn" style="background:#1e2e50" onclick="doLogout()">Logout</button>
-<p id="payStatus" style="margin-top:10px;color:#10b981"></p>
+<div id="page-payment" class="hidden p-5">
+<h2 class="font-black text-xl text-center">💳 Make Payment</h2>
+<div class="mt-5 bg-white text-black rounded-2xl p-5">
+<div class="bg-yellow-50 border rounded-xl p-3 text-[13px]"><div>Package: <b id="pay-pack"></b></div><div>Amount: <b id="pay-amount"></b></div><div>Bonus: <b>KSh 5800</b></div></div>
+<input id="pay-code" placeholder="M-Pesa Code or PAID" class="mt-4 w-full border rounded-xl px-4 py-3 text-sm">
+<button onclick="submitPayment()" class="w-full bg-black text-white rounded-full py-4 font-black mt-3">I Have Paid</button>
+</div>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dash" style="display:none">
-<div class="top"><span>⭐ STARLIFE</span><span id="uname"></span></div>
-<div class="box"><h3>Dashboard</h3>
-<div class="card">Status: <span id="st">Active</span></div>
-<div class="card">Balance: KES <span id="bal">0</span></div>
-<div class="card">Expenses: 200</div>
-</div>
-<div class="box"><h3>Download Products</h3>
-<div class="card"><p>Car Image</p><button class="btn blue" onclick="alert('Downloaded! Post on Whatsapp Status')">Download</button></div>
-<div class="card"><p>Radio Image</p><button class="btn blue" onclick="alert('Downloaded!')">Download</button></div>
-</div>
-<button class="btn red" style="max-width:500px;margin:12px" onclick="doLogout()">Logout</button>
+<div id="page-dashboard" class="hidden p-3">
+<div class="bg-white/10 border border-yellow-500/20 rounded-2xl p-3 flex justify-between"><div><div class="text-[11px] text-yellow-500">Welcome,</div><div id="dash-name" class="font-black"></div></div><div class="text-right"><div class="text-[10px]">Bonus</div><div id="dash-bonus" class="font-black text-yellow-400">KSh 5800</div></div></div>
+<div class="grid grid-cols-2 gap-2 mt-3"><div class="bg-white/5 border rounded-xl p-3 text-center"><div class="text-[10px]">Total Views</div><div id="dash-views" class="font-black text-xl text-blue-400">0</div></div><div class="bg-white/5 border rounded-xl p-3 text-center"><div class="text-[10px]">Earnings</div><div id="dash-earn" class="font-black text-xl text-green-400">KSh 0</div></div></div>
+<div class="mt-4 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl p-4 text-black"><div class="font-black">🎁 Welcome Bonus KSh 5800</div><button id="bonusBtn" onclick="withdrawBonus()" class="mt-3 w-full bg-black text-yellow-400 rounded-full py-3 font-black">💸 Withdraw Bonus KSh 5800</button><div id="bonus-status" class="text-[11px] text-center mt-2 font-bold"></div></div>
+<div class="mt-4 bg-white/5 border rounded-2xl p-4"><div class="font-black">📦 Tasks <span id="taskCount" class="text-[10px] bg-yellow-500/20 px-2 rounded-full">0/3</span></div><div id="taskList" class="mt-3 space-y-2"></div><button onclick="showPage('products')" class="mt-3 w-full bg-white text-black rounded-full py-3 font-bold">🛒 Get Product & Submit</button></div>
 </div>
 
-<!-- ADMIN PANEL - UNAONA WOTE -->
-<div id="adminPanel" style="display:none;padding:12px">
-<h2>⭐ ADMIN - WOTE</h2>
-<button class="btn" style="background:#1e2e50;width:auto" onclick="showAuth()">Back to Home</button>
-<button class="btn blue" style="width:auto" onclick="loadAdmin()">Refresh</button>
-<div class="box"><h3>📋 Pending - Bado Hawaja Approve</h3><div id="pend"></div></div>
-<div class="box"><h3>✅ Approved</h3><div id="appr"></div></div>
+<!-- PRODUCTS -->
+<div id="page-products" class="hidden p-4">
+<h2 class="font-black">🛒 Get Products</h2>
+<div id="productList" class="mt-4 space-y-3"></div>
+<div class="mt-6 bg-white text-black rounded-2xl p-4"><h3 class="font-black">📤 Submit Proof</h3><select id="submit-product" class="mt-3 w-full border rounded-xl px-4 py-3 text-sm"><option>Select Product</option><option>Smart Watch</option><option>Power Bank</option><option>Speaker</option></select><input id="submit-link" placeholder="Link / Screenshot link" class="mt-2 w-full border rounded-xl px-4 py-3 text-sm"><input id="submit-views" placeholder="Views count" type="number" class="mt-2 w-full border rounded-xl px-4 py-3 text-sm"><button onclick="submitTask()" class="mt-3 w-full bg-black text-white rounded-full py-3 font-bold">Submit Task</button></div>
+<button onclick="showPage('dashboard')" class="mt-4 w-full border rounded-full py-3">← Back</button>
+</div>
+
+<!-- ADMIN -->
+<div id="page-admin" class="hidden p-4">
+<h2 class="font-black text-xl">🔐 Admin Panel</h2>
+<div id="admin-login" class="mt-4 bg-white text-black rounded-2xl p-5"><input id="admin-user" placeholder="admin" class="w-full border rounded-xl px-4 py-3 text-sm"><input id="admin-pass" placeholder="admin123" type="password" class="w-full border rounded-xl px-4 py-3 text-sm mt-2"><button onclick="adminLogin()" class="w-full bg-black text-white rounded-full py-3 font-bold mt-3">Login</button></div>
+<div id="admin-panel" class="hidden"><div class="grid grid-cols-3 gap-2 mt-4 text-center"><div class="bg-white/10 rounded-xl p-3"><div class="text-[10px]">Users</div><div id="a-users" class="font-black text-xl">0</div></div><div class="bg-yellow-500/20 rounded-xl p-3"><div class="text-[10px]">Pending Pay</div><div id="a-pay" class="font-black">0</div></div><div class="bg-green-500/20 rounded-xl p-3"><div class="text-[10px]">Withdrawals</div><div id="a-with" class="font-black">0</div></div></div><div class="mt-4 bg-white text-black rounded-2xl p-4"><h3 class="font-black">👥 Clients</h3><div id="admin-user-list" class="mt-3 space-y-2 text-[12px]"></div></div><div class="mt-4 bg-white text-black rounded-2xl p-4"><h3 class="font-black">💸 Bonus Withdrawals KSh 5800</h3><div id="admin-withdraw-list" class="mt-3 space-y-2 text-[12px]"></div></div><div class="mt-4 bg-white text-black rounded-2xl p-4"><h3 class="font-black">📦 Submissions</h3><div id="admin-task-list" class="mt-3 space-y-2 text-[12px]"></div></div></div>
+</div>
+
 </div>
 
 <script>
-function getUsers(){return JSON.parse(localStorage.getItem('star_users')||'[]')}
-function saveUsers(u){localStorage.setItem('star_users',JSON.stringify(u))}
-
-function doSignup(){
-let fn=document.getElementById('fn').value.trim()
-let ph=document.getElementById('ph').value.trim()
-let em=document.getElementById('em').value.toLowerCase().trim()
-let pw=document.getElementById('pw').value.trim()
-if(!fn||!ph||!em||!pw){alert('Jaza zote');return}
-let users=getUsers()
-if(users.find(x=>x.email==em)){alert('Email tayari imetumika');return}
-users.push({fullname:fn,phone:ph,email:em,password:pw,mpesa:"",paid:"no",approved:"no",balance:0})
-saveUsers(users)
-localStorage.setItem('cur',em)
-alert('Account created! Lipa 200 sasa')
-showPay()
-}
-
-function doLogin(){
-let em=document.getElementById('em').value.toLowerCase().trim()
-let pw=document.getElementById('pw').value.trim()
-let users=getUsers()
-let u=users.find(x=>x.email==em && x.password==pw)
-if(!u){alert('Email au password si sahihi');return}
-localStorage.setItem('cur',em)
-if(u.paid=="no") showPay()
-else if(u.paid=="yes" && u.approved=="no"){showPay(); document.getElementById('payStatus').innerText="Mpesa: "+u.mpesa+" - Waiting approval"}
-else showDash()
-}
-
-function doPay(){
-let code=document.getElementById('mpesa').value.trim()
-if(!code){alert('Weka Mpesa code');return}
-let cur=localStorage.getItem('cur')
-let users=getUsers()
-let i=users.findIndex(x=>x.email==cur)
-if(i>=0){users[i].mpesa=code; users[i].paid="yes"; saveUsers(users); document.getElementById('payStatus').innerText="Payment sent! Subiri admin aku-approve"; alert('Imetumwa kwa admin!')}
-}
-
-function showPay(){
-document.getElementById('auth').style.display='none'
-document.getElementById('adminLogin').style.display='none'
-document.getElementById('dash').style.display='none'
-document.getElementById('adminPanel').style.display='none'
-document.getElementById('pay').style.display='block'
-}
-function showDash(){
-let cur=localStorage.getItem('cur')
-let users=getUsers()
-let u=users.find(x=>x.email==cur)
-if(!u) return
-document.getElementById('auth').style.display='none'
-document.getElementById('adminLogin').style.display='none'
-document.getElementById('pay').style.display='none'
-document.getElementById('adminPanel').style.display='none'
-document.getElementById('dash').style.display='block'
-document.getElementById('uname').innerText=u.fullname
-document.getElementById('bal').innerText=u.balance
-document.getElementById('st').innerText=u.approved=="yes"?"Active ✅":"Pending"
-}
-function showAuth(){
-document.getElementById('auth').style.display='block'
-document.getElementById('adminLogin').style.display='none'
-document.getElementById('pay').style.display='none'
-document.getElementById('dash').style.display='none'
-document.getElementById('adminPanel').style.display='none'
-}
-function showAdminLogin(){
-document.getElementById('auth').style.display='none'
-document.getElementById('adminLogin').style.display='block'
-}
-function doLogout(){localStorage.removeItem('cur'); location.reload()}
-
-function adminLogin(){
-let u=document.getElementById('au').value
-let p=document.getElementById('ap').value
-if(u=="admin" && p=="admin123"){showAdminPanel()} else alert('Wrong - admin / admin123')
-}
-function showAdminPanel(){
-document.getElementById('auth').style.display='none'
-document.getElementById('adminLogin').style.display='none'
-document.getElementById('pay').style.display='none'
-document.getElementById('dash').style.display='none'
-document.getElementById('adminPanel').style.display='block'
-loadAdmin()
-}
-function loadAdmin(){
-let users=getUsers()
-let pend=document.getElementById('pend')
-let appr=document.getElementById('appr')
-pend.innerHTML=''; appr.innerHTML=''
-let hasP=false, hasA=false
-users.forEach((u,idx)=>{
-if(u.paid=="yes" && u.approved=="no"){
-hasP=true
-let d=document.createElement('div'); d.className='card'
-d.innerHTML='<b>'+u.fullname+'</b><br>Phone: '+u.phone+'<br>Email: '+u.email+'<br>Mpesa: <b style="color:#10b981">'+u.mpesa+'</b><br><br><button class="btn green" onclick="approve('+idx+')">✅ Approve</button> <button class="btn red" onclick="reject('+idx+')">Reject</button>'
-pend.appendChild(d)
-}
-if(u.approved=="yes"){
-hasA=true
-let d=document.createElement('div'); d.className='card'
-d.innerHTML='✅ <b>'+u.fullname+'</b> - '+u.phone+' - '+u.email
-appr.appendChild(d)
-}
-})
-if(!hasP) pend.innerHTML='<p style="color:#7a8aa8">Hakuna pending</p>'
-if(!hasA) appr.innerHTML='<p style="color:#7a8aa8">Hakuna approved</p>'
-}
-function approve(i){let u=getUsers(); u[i].approved="yes"; saveUsers(u); loadAdmin()}
-function reject(i){let u=getUsers(); u[i].paid="no"; u[i].approved="no"; u[i].mpesa=""; saveUsers(u); loadAdmin()}
-
-// auto check
-let cur=localStorage.getItem('cur')
-if(cur){
-let users=getUsers(); let uu=users.find(x=>x.email==cur)
-if(uu){
-if(uu.paid=="no") showPay()
-else if(uu.approved=="no" && uu.paid=="yes") showPay()
-else showDash()
-}
-}
+// FULL JS FROM PREVIOUS BUILD - shortened for WhatsApp
+let currentUser=null,selectedPack=null;
+function getUsers(){return JSON.parse(localStorage.getItem('sv_users')||'[]');}function saveUsers(u){localStorage.setItem('sv_users',JSON.stringify(u));}function getTasks(){return JSON.parse(localStorage.getItem('sv_tasks')||'[]');}function saveTasks(t){localStorage.setItem('sv_tasks',JSON.stringify(t));}function getWithdraws(){return JSON.parse(localStorage.getItem('sv_withdraws')||'[]');}function saveWithdraws(w){localStorage.setItem('sv_withdraws',JSON.stringify(w));}
+function showPage(p){['register','login','packages','payment','dashboard','products','admin'].forEach(id=>{let el=document.getElementById('page-'+id);if(el)el.classList.add('hidden');});document.getElementById('page-'+p).classList.remove('hidden');if(p==='dashboard')loadDashboard();if(p==='products')loadProducts();if(p==='admin')loadAdminStats();}
+function register(){let fn=document.getElementById('reg-fullname').value,un=document.getElementById('reg-username').value,em=document.getElementById('reg-email').value,ph=document.getElementById('reg-phone').value,pw=document.getElementById('reg-pass').value,cp=document.getElementById('reg-cpass').value;if(!fn||!un||!em||!ph||!pw){alert('Fill all');return;}if(pw!==cp){alert('Passwords not match');return;}let users=getUsers();if(users.find(u=>u.username===un)){alert('Username taken');return;}users.push({fullname:fn,username:un,email:em,phone:ph,password:pw,pack:null,paid:false,payCode:null,payApproved:false,views:0,earn:0,bonus:5800,bonusWithdrawn:false,bonusApproved:false,tasksCompleted:0});saveUsers(users);alert('Account created! Login now');showPage('login');}
+function login(){let un=document.getElementById('login-username').value,pw=document.getElementById('login-pass').value;let users=getUsers();let u=users.find(x=>(x.username===un||x.email===un)&&x.password===pw);if(!u){alert('Wrong login');return;}currentUser=u.username;localStorage.setItem('sv_current',currentUser);document.getElementById('logoutBtn').classList.remove('hidden');if(!u.paid)showPage('packages');else showPage('dashboard');}
+function selectPack(p,f,r){selectedPack={pack:p,fee:f,rate:r};document.getElementById('pay-pack').innerText=p.toUpperCase();document.getElementById('pay-amount').innerText='KSh '+f;showPage('payment');}
+function submitPayment(){let code=document.getElementById('pay-code').value.trim();if(!code){alert('Enter code or PAID');return;}let users=getUsers();let idx=users.findIndex(u=>u.username===currentUser||u.username===localStorage.getItem('sv_current'));if(idx===-1)idx=users.length-1;currentUser=users[idx].username;localStorage.setItem('sv_current',currentUser);users[idx].pack=selectedPack.pack;users[idx].packFee=selectedPack.fee;users[idx].rate=selectedPack.rate;users[idx].paid=true;users[idx].payCode=code;users[idx].payApproved=code.toUpperCase()==='PAID';saveUsers(users);alert(users[idx].payApproved?'✅ Payment verified! Dashboard unlocked with KSh 5800 bonus!':'Payment submitted! Wait admin approval');showPage('dashboard');}
+function loadDashboard(){let users=getUsers();let u=users.find(x=>x.username===localStorage.getItem('sv_current'));if(!u){showPage('login');return;}document.getElementById('dash-name').innerText=u.fullname;document.getElementById('dash-views').innerText=u.views;document.getElementById('dash-earn').innerText='KSh '+u.earn;document.getElementById('dash-bonus').innerText='KSh '+(u.bonusWithdrawn?'0':'5800');let btn=document.getElementById('bonusBtn'),st=document.getElementById('bonus-status');if(u.bonusWithdrawn){btn.innerText='✅ Bonus Withdrawn';btn.disabled=true;st.innerText=u.bonusApproved?'Paid ✓':'Waiting admin...';}else{btn.innerText='💸 Withdraw Bonus KSh 5800';btn.disabled=false;st.innerText='';}document.getElementById('taskCount').innerText=u.tasksCompleted+'/3';let list=document.getElementById('taskList');list.innerHTML='';for(let i=1;i<=3;i++){let done=i<=u.tasksCompleted;list.innerHTML+=`<div class="flex justify-between bg-black/40 border rounded-xl p-3"><div><div class="font-bold text-[12px]">Task ${i}: Post Product</div><div class="text-[10px] text-zinc-400">${done?'Completed ✓':'Pending'}</div></div><div class="text-[11px] ${done?'text-green-400':'text-yellow-400'}">${done?'Done':'Pending'}</div></div>`;}}
+function withdrawBonus(){let users=getUsers();let idx=users.findIndex(u=>u.username===localStorage.getItem('sv_current'));let u=users[idx];if(u.bonusWithdrawn){alert('Already withdrawn');return;}if(!u.payApproved){alert('Payment not approved');return;}let phone=prompt('Enter M-Pesa number for KSh 5800:','07...');if(!phone)return;let ws=getWithdraws();ws.push({username:u.username,fullname:u.fullname,phone:phone,amount:5800,status:'pending',time:new Date().toLocaleString()});saveWithdraws(ws);users[idx].bonusWithdrawn=true;saveUsers(users);alert('✅ Withdrawal KSh 5800 to '+phone+' submitted! Admin will pay');loadDashboard();}
+function loadProducts(){document.getElementById('productList').innerHTML=`<div class="bg-white/10 border rounded-2xl p-3 flex gap-3"><div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center text-black font-black">⌚</div><div><div class="font-bold">Smart Watch</div><div class="text-[11px] text-zinc-400">KSh 2500 • Commission 300</div><button onclick="copyProduct('Smart Watch KSh 2500 https://statusviews.com/p/watch')" class="mt-2 bg-white text-black text-[11px] px-3 py-1 rounded-full font-bold">Copy</button></div></div><div class="bg-white/10 border rounded-2xl p-3 flex gap-3"><div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center text-black">🔋</div><div><div class="font-bold">Power Bank</div><div class="text-[11px] text-zinc-400">KSh 1800 • Commission 200</div><button onclick="copyProduct('Power Bank KSh 1800 https://statusviews.com/p/powerbank')" class="mt-2 bg-white text-black text-[11px] px-3 py-1 rounded-full font-bold">Copy</button></div></div>`;}
+function copyProduct(t){navigator.clipboard.writeText(t);alert('Copied: '+t);}
+function submitTask(){let prod=document.getElementById('submit-product').value,link=document.getElementById('submit-link').value,views=document.getElementById('submit-views').value;if(prod==='Select Product'||!link||!views){alert('Fill all');return;}let tasks=getTasks();tasks.push({username:localStorage.getItem('sv_current'),product:prod,link:link,views:views,status:'pending',time:new Date().toLocaleString()});saveTasks(tasks);alert('Task submitted! Admin will approve');showPage('dashboard');}
+function adminLogin(){let u=document.getElementById('admin-user').value,p=document.getElementById('admin-pass').value;if(u==='admin'&&p==='admin123'){document.getElementById('admin-login').classList.add('hidden');document.getElementById('admin-panel').classList.remove('hidden');loadAdminStats();}else alert('Wrong');}
+function loadAdminStats(){let users=getUsers(),tasks=getTasks(),ws=getWithdraws();document.getElementById('a-users').innerText=users.length;document.getElementById('a-pay').innerText=users.filter(u=>!u.payApproved).length;document.getElementById('a-with').innerText=ws.filter(w=>w.status==='pending').length;let html='';users.forEach((u,i)=>{html+=`<div class="border rounded-xl p-3 flex justify-between"><div><b>${u.fullname}</b> (${u.username})<br><span class="text-[10px]">${u.phone} • ${u.pack} • ${u.payCode} • Approved:${u.payApproved?'Yes':'No'}</span></div><div>${!u.payApproved?`<button onclick="approvePay(${i})" class="bg-green-600 text-white px-3 py-1 rounded-full text-[10px]">Approve Pay</button>`:''}</div></div>`;});document.getElementById('admin-user-list').innerHTML=html;let wh='';ws.forEach((w,i)=>{wh+=`<div class="border rounded-xl p-3 flex justify-between"><div><b>${w.fullname}</b> • ${w.phone} • KSh ${w.amount} • ${w.status}</div>${w.status==='pending'?`<button onclick="approveWithdraw(${i})" class="bg-green-600 text-white px-3 py-1 rounded-full text-[10px]">Pay</button>`:'Paid'}</div>`;});document.getElementById('admin-withdraw-list').innerHTML=wh;let th='';tasks.forEach((t,i)=>{th+=`<div class="border rounded-xl p-3"><b>${t.username}</b> • ${t.product} • Views:${t.views}<br><a href="${t.link}" target="_blank" class="text-blue-600 underline">${t.link}</a> • ${t.status} ${t.status==='pending'?`<button onclick="approveTask(${i})" class="bg-green-600 text-white px-2 py-1 rounded-full text-[10px] ml-2">Approve & Pay</button>`:''}</div>`;});document.getElementById('admin-task-list').innerHTML=th;}
+function approvePay(i){let users=getUsers();users[i].payApproved=true;saveUsers(users);loadAdminStats();}
+function approveWithdraw(i){let ws=getWithdraws();ws[i].status='paid';saveWithdraws(ws);let users=getUsers();let idx=users.findIndex(u=>u.username===ws[i].username);if(idx!==-1){users[idx].bonusApproved=true;saveUsers(users);}alert('Marked as PAID - Now send M-Pesa manually KSh '+ws[i].amount+' to '+ws[i].phone);loadAdminStats();}
+function approveTask(i){let tasks=getTasks();tasks[i].status='approved';saveTasks(tasks);let users=getUsers();let idx=users.findIndex(u=>u.username===tasks[i].username);if(idx!==-1){let rate=users[idx].rate||100;users[idx].earn+=rate*parseInt(tasks[i].views);users[idx].views+=parseInt(tasks[i].views);users[idx].tasksCompleted+=1;saveUsers(users);}loadAdminStats();}
+function logout(){localStorage.removeItem('sv_current');document.getElementById('logoutBtn').classList.add('hidden');showPage('login');}
 </script>
 </body>
 </html>
