@@ -3,56 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STARLIFE AGENCIES</title>
+<title>STARLIFE AGENCIES - Wote Kenya</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#020b1a;color:white;min-height:100vh}
+.box{max-width:420px;margin:auto;padding:20px}
+.card{background:rgba(255,255,255,0.07);padding:20px;border-radius:20px;margin-top:20px;border:1px solid rgba(255,255,255,0.1)}
+input,select{width:100%;padding:14px;border-radius:12px;border:none;margin-top:10px;background:white;color:black}
+button{width:100%;padding:14px;border-radius:50px;border:none;margin-top:12px;font-weight:900;cursor:pointer}
+.gold{background:gold;color:black}
+.green{background:#22c55e;color:white}
+.hidden{display:none}
+.pkg{padding:12px;border-radius:12px;margin-top:8px;border:2px solid #333;cursor:pointer}
+.pkg.active{border-color:gold;background:rgba(255,215,0,0.1)}
+</style>
 </head>
-<body style="background:#020b1a;color:white;margin:0;font-family:sans-serif">
-<div style="max-width:480px;margin:auto;padding:20px">
+<body>
+<div class="box">
 
-<h1 style="text-align:center;font-size:38px;font-weight:900;margin-top:20px">STARLIFE</h1>
-<p style="text-align:center;color:gold;letter-spacing:3px;font-size:14px">AGENCIES</p>
-<p style="text-align:center;color:#aaa;font-size:13px;margin-top:10px">Paybill 714777 - Account 440200282954</p>
-
-<div id="a" style="margin-top:25px;background:rgba(255,255,255,0.06);padding:20px;border-radius:20px">
-<input id="fn" placeholder="Full Name" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
-<input id="un" placeholder="Username" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
-<input id="ph" placeholder="Phone Number" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
-<input id="pw" placeholder="Password" type="password" style="width:100%;padding:15px;margin-top:10px;border-radius:12px;border:none;font-size:15px;box-sizing:border-box">
-<button onclick="a.style.display='none';b.style.display='block'" style="width:100%;margin-top:18px;padding:16px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:16px">Create Account</button>
-<p style="text-align:center;color:#888;font-size:12px;margin-top:12px">Already have account? <span style="color:gold">Login</span></p>
-</div>
-
-<div id="b" style="display:none;margin-top:25px">
-<h2 style="text-align:center;font-weight:900;font-size:19px">Choose Your Package</h2>
-<p style="text-align:center;color:#888;font-size:13px">Unlock KSh 5800 Bonus</p>
-<div onclick="am.innerText='KSh 200';b.style.display='none';c.style.display='block'" style="margin-top:16px;background:#1e40af;border:2px solid #3b82f6;padding:18px;border-radius:16px;cursor:pointer"><b>💎 REGULAR</b> - KSh 200<br><span style="font-size:12px;color:#93c5fd">+ KSh 5800 Bonus + Daily Jobs</span></div>
-<div onclick="am.innerText='KSh 300';b.style.display='none';c.style.display='block'" style="margin-top:12px;background:#6b21a8;border:2px solid #a855f7;padding:18px;border-radius:16px;cursor:pointer"><b>👑 VIP</b> - KSh 300<br><span style="font-size:12px;color:#d8b4fe">+ KSh 5800 Bonus + Premium</span></div>
-<div onclick="am.innerText='KSh 650';b.style.display='none';c.style.display='block'" style="margin-top:12px;background:#854d0e;border:2px solid #eab308;padding:18px;border-radius:16px;cursor:pointer"><b>🥇 GOLD</b> - KSh 650<br><span style="font-size:12px;color:#fde68a">+ KSh 5800 Bonus + All Access</span></div>
-</div>
-
-<div id="c" style="display:none;margin-top:25px;background:white;color:black;border-radius:18px;overflow:hidden">
-<div style="background:#16a34a;color:white;padding:14px;text-align:center;font-weight:900">STARLIFE AGENCIES PAYMENT</div>
-<div style="padding:20px">
-<p>Paybill: <b>714777</b></p>
-<p>Account No: <b>440200282954</b></p>
-<p>Account Name: <b>STARLIFE</b></p>
-<p>Amount: <b id="am">KSh 200</b></p>
-<div style="background:#fef3c7;padding:12px;border-radius:10px;margin-top:12px;font-size:13px">Go to M-Pesa > Lipa na M-Pesa > Paybill > Enter details above</div>
-<input id="mc" placeholder="Enter M-Pesa Code or type PAID" style="width:100%;padding:15px;margin-top:14px;border:2px solid #ccc;border-radius:12px;font-size:15px;box-sizing:border-box">
-<button onclick="if(mc.value==''){alert('Enter M-Pesa Code');return;}c.style.display='none';d.style.display='block'" style="width:100%;margin-top:14px;padding:15px;background:gold;border:none;border-radius:50px;font-weight:900">I Have Paid - Unlock Account</button>
+<!-- REGISTER -->
+<div id="reg">
+<h1 style="text-align:center">⭐ STARLIFE AGENCIES</h1>
+<p style="text-align:center;color:#4ade80;margin-top:6px">Wote Kenya - Earn Online</p>
+<div class="card">
+<h3>Step 1: Create Account</h3>
+<input id="fn" placeholder="Full Name">
+<input id="un" placeholder="Username">
+<input id="em" placeholder="Email" type="email">
+<input id="ph" placeholder="Phone Number e.g 07...">
+<input id="pw" placeholder="Password" type="password">
+<input id="cpw" placeholder="Confirm Password" type="password">
+<h4 style="margin-top:12px">Choose Package</h4>
+<div class="pkg active" onclick="selPkg(this,'STARTER - KSh 650')" id="p1"><b>STARTER</b> - KSh 650 - Bonus 5800</div>
+<div class="pkg" onclick="selPkg(this,'PRO - KSh 1200')"><b>PRO</b> - KSh 1200 - Bonus 9500</div>
+<div class="pkg" onclick="selPkg(this,'PREMIUM - KSh 2500')"><b>PREMIUM</b> - KSh 2500 - Bonus 15000</div>
+<button class="gold" onclick="signup()">Sign Up</button>
+<p style="text-align:center;margin-top:10px;font-size:13px">Already have? <span style="color:gold" onclick="showPay()">Login</span></p>
 </div>
 </div>
 
-<div id="d" style="display:none;margin-top:25px;text-align:center">
-<h2 style="font-size:26px;font-weight:900">Welcome to STARLIFE! 🎉</h2>
-<p style="color:gold;margin-top:10px;font-size:20px;font-weight:900">Bonus Balance: KSh 5800</p>
-<p style="color:#aaa;font-size:13px;margin-top:6px">Your account is now active</p>
-<button onclick="alert('Withdraw KSh 5800 Request Sent! Admin will pay via Paybill 714777')" style="width:100%;margin-top:20px;padding:16px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:16px">Withdraw KSh 5800 to M-Pesa</button>
-<div style="margin-top:20px;background:rgba(255,255,255,0.06);padding:16px;border-radius:16px">
-<p style="font-size:12px;color:#888">Admin Panel: admin / 325812</p>
-<button onclick="location.reload()" style="margin-top:10px;background:none;border:1px solid #555;color:white;padding:8px 18px;border-radius:50px;font-size:13px">Logout</button>
+<!-- PAYMENT -->
+<div id="pay" class="hidden">
+<h1 style="text-align:center">💳 Make Payment</h1>
+<div class="card">
+<p>Hi <b id="uName"></b>!</p>
+<p style="margin-top:8px">Package: <b id="uPkg" style="color:gold"></b></p>
+<div style="background:white;color:black;padding:14px;border-radius:12px;margin-top:14px;text-align:center">
+<b>M-PESA PAYBILL</b><br>
+Paybill: <b style="font-size:18px">714777</b><br>
+Account: <b>440200282954</b><br>
+Amount: <span id="uAmt" style="color:green;font-weight:900"></span>
+</div>
+<input id="mpesa" placeholder="Enter M-Pesa Code e.g QGH...">
+<button class="gold" onclick="doPay()">I Have Paid - Unlock Dashboard</button>
+<button style="background:none;color:#888" onclick="showReg()">← Back</button>
+</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" class="hidden">
+<h1 style="text-align:center">⭐ Dashboard</h1>
+<p style="text-align:center">Welcome <b id="dName"></b> (<span id="dUser"></span>)</p>
+<div class="card">
+<p>Package: <b id="dPkg"></b> - <span id="dStatus" style="color:gold">Pending Approval</span></p>
+<div style="background:linear-gradient(135deg,#16a34a,#22c55e);padding:16px;border-radius:16px;margin-top:12px;text-align:center">
+<p>Available Bonus</p>
+<h1>KSh <span id="bonus">5800</span></h1>
+<p style="font-size:12px">Withdrawable after task</p>
+</div>
+<button class="green" onclick="withdraw()">Withdraw KSh 5800</button>
+</div>
+
+<div class="card">
+<h3>📦 Today's Product</h3>
+<p style="font-size:13px;color:#ccc;margin-top:6px">Get product link, post and submit screenshot</p>
+<div style="background:white;color:black;padding:12px;border-radius:12px;margin-top:10px">
+<b id="prodName">STARLIFE Soap - Wote</b><br>
+<small id="prodLink">https://starlife.co.ke/product/soap-wote</small><br>
+<button style="padding:8px;margin-top:6px;background:black;color:white;border-radius:20px;width:auto" onclick="copyLink()">Copy Link</button>
+</div>
+<input id="proof" placeholder="Paste your Facebook/WhatsApp post link or proof">
+<button class="gold" onclick="submitTask()">Submit Task</button>
+<p id="taskMsg" style="font-size:12px;color:#4ade80;margin-top:6px"></p>
+</div>
+
+<div class="card">
+<h3>Withdrawal History</h3>
+<div id="hist" style="font-size:13px;color:#aaa;margin-top:8px">No withdrawals yet</div>
+<button style="background:none;color:#888;font-size:12px" onclick="logout()">Logout</button>
 </div>
 </div>
 
 </div>
+
+<script>
+let pkg="STARTER - KSh 650", amt="650";
+function selPkg(el,p){
+document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('active'));
+el.classList.add('active');pkg=p;amt=p.match(/\d+/)[0];
+}
+function showReg(){reg.classList.remove('hidden');pay.classList.add('hidden');dash.classList.add('hidden')}
+function showPay(){reg.classList.add('hidden');pay.classList.remove('hidden');dash.classList.add('hidden')}
+function showDash(){reg.classList.add('hidden');pay.classList.add('hidden');dash.classList.remove('hidden')}
+
+function signup(){
+let fn=document.getElementById('fn').value, un=document.getElementById('un').value, em=document.getElementById('em').value, ph=document.getElementById('ph').value, pw=document.getElementById('pw').value, cpw=document.getElementById('cpw').value;
+if(!fn||!un||!em||!ph||!pw){alert('Jaza fields zote');return}
+if(pw!==cpw){alert('Passwords hazifanani');return}
+let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+if(users.find(x=>x.username===un)){alert('Username inatumika');return}
+let user={fullname:fn,username:un,email:em,phone:ph,password:pw,package:pkg,amount:amt,mpesa:'',status:'Registered',bonus: pkg.includes('650')?'5800':pkg.includes('1200')?'9500':'15000',tasks:[],withdraws:[],time:new Date().toLocaleString()};
+users.push(user);
+localStorage.setItem('starlife_users',JSON.stringify(users));
+localStorage.setItem('starlife_current',JSON.stringify(user));
+uName.innerText=fn;uPkg.innerText=pkg;uAmt.innerText='KSh '+amt;
+showPay();
+}
+
+function doPay(){
+let code=document.getElementById('mpesa').value;
+if(code.length<5){alert('Weka M-Pesa Code sahihi');return}
+let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+let cur=JSON.parse(localStorage.getItem('starlife_current'));
+let idx=users.findIndex(x=>x.username===cur.username);
+users[idx].mpesa=code;users[idx].status='Paid - Awaiting Approval';
+cur=users[idx];
+localStorage.setItem('starlife_users',JSON.stringify(users));
+localStorage.setItem('starlife_current',JSON.stringify(cur));
+loadDash(cur);
+showDash();
+}
+
+function loadDash(u){
+dName.innerText=u.fullname;dUser.innerText=u.username;dPkg.innerText=u.package;dStatus.innerText=u.status;bonus.innerText=u.bonus;
+let h='';if(u.withdraws.length==0)h='No withdrawals yet';else u.withdraws.forEach(w=>{h+=`<div>${w.amount} - ${w.status} - ${w.time}</div>`});
+hist.innerHTML=h;
+if(u.tasks.length>0)taskMsg.innerText='✅ Task Submitted - Waiting Approval';
+}
+
+function withdraw(){
+let cur=JSON.parse(localStorage.getItem('starlife_current'));
+if(cur.status!=='Approved'){alert('Admin bado hajakapprove payment yako. Subiri approval.');return}
+let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+let idx=users.findIndex(x=>x.username===cur.username);
+users[idx].withdraws.push({amount:'KSh '+users[idx].bonus,status:'Requested',time:new Date().toLocaleString()});
+cur=users[idx];
+localStorage.setItem('starlife_users',JSON.stringify(users));
+localStorage.setItem('starlife_current',JSON.stringify(cur));
+loadDash(cur);
+alert('Withdrawal ya KSh '+cur.bonus+' imetumwa! Admin ata-approve na kulipa via M-Pesa.');
+}
+
+function submitTask(){
+let p=document.getElementById('proof').value;
+if(!p){alert('Weka proof link');return}
+let users=JSON.parse(localStorage.getItem('starlife_users')||'[]');
+let cur=JSON.parse(localStorage.getItem('starlife_current'));
+let idx=users.findIndex(x=>x.username===cur.username);
+users[idx].tasks.push({proof:p,time:new Date().toLocaleString()});
+cur=users[idx];
+localStorage.setItem('starlife_users',JSON.stringify(users));
+localStorage.setItem('starlife_current',JSON.stringify(cur));
+taskMsg.innerText='✅ Submitted! Admin ata-review';
+alert('Task Submitted!');
+}
+function copyLink(){navigator.clipboard.writeText(document.getElementById('prodLink').innerText);alert('Link Copied!')}
+function logout(){localStorage.removeItem('starlife_current');showReg()}
+
+let cur=JSON.parse(localStorage.getItem('starlife_current')||'null');
+if(cur){if(cur.mpesa){loadDash(cur);showDash()}else{uName.innerText=cur.fullname;uPkg.innerText=cur.package;uAmt.innerText='KSh '+cur.amount;showPay()}}
+</script>
 </body>
 </html>
