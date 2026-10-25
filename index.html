@@ -4,62 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LOOP</title>
-<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body style="background:#020b1a;color:white">
-<div style="max-width:480px;margin:auto;padding:16px">
+<body style="background:#020b1a;color:white;margin:0;font-family:sans-serif">
+<div style="max-width:480px;margin:auto;padding:20px">
 
-<h1 style="text-align:center;font-size:36px;font-weight:900;margin-top:30px">LOOP</h1>
-<p style="text-align:center;color:gold">Paybill 714777 - Account 440200282954</p>
+<h1 style="text-align:center;font-size:40px;font-weight:900;margin-top:30px">LOOP</h1>
+<p style="text-align:center;color:gold;font-size:14px">Paybill 714777 - Account 440200282954</p>
 
-<div id="a">
-<input id="fn" placeholder="Full Name" style="width:100%;padding:14px;margin-top:20px;border-radius:12px;background:#111;color:white">
-<input id="un" placeholder="Username" style="width:100%;padding:14px;margin-top:10px;border-radius:12px;background:#111;color:white">
-<input id="ph" placeholder="Phone" style="width:100%;padding:14px;margin-top:10px;border-radius:12px;background:#111;color:white">
-<input id="pw" placeholder="Password" type="password" style="width:100%;padding:14px;margin-top:10px;border-radius:12px;background:#111;color:white">
-<button onclick="b()" style="width:100%;margin-top:16px;padding:16px;background:gold;color:black;border-radius:50px;font-weight:900">Create Account</button>
+<div id="a" style="margin-top:30px">
+<input id="fn" placeholder="Full Name" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
+<input id="un" placeholder="Username" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
+<input id="ph" placeholder="Phone Number" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
+<input id="pw" placeholder="Password" type="password" style="width:100%;padding:16px;margin-top:12px;border-radius:12px;border:none;font-size:16px;box-sizing:border-box">
+<button onclick="goB()" style="width:100%;margin-top:20px;padding:18px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:18px">Create Account</button>
 </div>
 
-<div id="b" style="display:none;margin-top:20px">
-<h2 style="text-align:center;font-weight:900">Choose Package</h2>
-<div onclick="c(200)" style="margin-top:12px;background:#1e40af;padding:16px;border-radius:16px">REGULAR - KSh 200</div>
-<div onclick="c(300)" style="margin-top:12px;background:#6b21a8;padding:16px;border-radius:16px">VIP - KSh 300</div>
-<div onclick="c(650)" style="margin-top:12px;background:#854d0e;padding:16px;border-radius:16px">GOLD - KSh 650</div>
+<div id="b" style="display:none;margin-top:30px">
+<h2 style="text-align:center;font-weight:900;font-size:20px">Choose Package</h2>
+<div onclick="goC(200)" style="margin-top:16px;background:#1e40af;padding:20px;border-radius:16px;font-weight:bold;cursor:pointer">💎 REGULAR - KSh 200<br><span style="font-size:12px">+ KSh 5800 Bonus</span></div>
+<div onclick="goC(300)" style="margin-top:12px;background:#6b21a8;padding:20px;border-radius:16px;font-weight:bold;cursor:pointer">👑 VIP - KSh 300<br><span style="font-size:12px">+ KSh 5800 Bonus</span></div>
+<div onclick="goC(650)" style="margin-top:12px;background:#854d0e;padding:20px;border-radius:16px;font-weight:bold;cursor:pointer">🥇 GOLD - KSh 650<br><span style="font-size:12px">+ KSh 5800 Bonus</span></div>
 </div>
 
-<div id="c" style="display:none;margin-top:20px;background:white;color:black;border-radius:16px;padding:0;overflow:hidden">
-<div style="background:green;color:white;padding:12px;text-align:center;font-weight:900">LOOP PAYMENT</div>
-<div style="padding:16px">
-<p>Paybill: <b>714777</b></p>
-<p>Account: <b>440200282954</b></p>
-<p>Name: <b>LOOP</b></p>
-<p>Amount: <b id="am">KSh 200</b></p>
-<input id="mc" placeholder="MPESA Code or PAID" style="width:100%;padding:12px;margin-top:12px;border:1px solid #ccc;border-radius:12px">
-<button onclick="d()" style="width:100%;margin-top:12px;padding:14px;background:gold;border-radius:50px;font-weight:900">I Have Paid</button>
+<div id="c" style="display:none;margin-top:30px;background:white;color:black;border-radius:16px;overflow:hidden">
+<div style="background:green;color:white;padding:16px;text-align:center;font-weight:900">LOOP PAYMENT</div>
+<div style="padding:20px">
+<p><b>Paybill:</b> 714777</p>
+<p><b>Account:</b> 440200282954</p>
+<p><b>Name:</b> LOOP</p>
+<p><b>Amount:</b> <span id="am">KSh 200</span></p>
+<input id="mc" placeholder="MPESA Code or type PAID" style="width:100%;padding:16px;margin-top:16px;border:2px solid #ccc;border-radius:12px;font-size:16px;box-sizing:border-box">
+<button onclick="goD()" style="width:100%;margin-top:16px;padding:16px;background:gold;border:none;border-radius:50px;font-weight:900;font-size:16px">I Have Paid - Unlock</button>
 </div>
 </div>
 
-<div id="d" style="display:none;margin-top:20px;text-align:center">
-<h2 style="font-size:24px;font-weight:900">Welcome to LOOP</h2>
-<p style="color:gold;margin-top:10px">Bonus: KSh 5800</p>
-<button onclick="alert('KSh 5800 Withdraw - Admin will pay')" style="width:100%;margin-top:16px;padding:14px;background:gold;color:black;border-radius:50px;font-weight:900">Withdraw KSh 5800</button>
-<p style="margin-top:20px;font-size:12px">Admin login: admin / 325812</p>
-<button onclick="location.reload()" style="margin-top:10px;border:1px solid white;padding:8px 16px;border-radius:50px">Logout</button>
+<div id="d" style="display:none;margin-top:30px;text-align:center">
+<h2 style="font-size:28px;font-weight:900">Welcome to LOOP 🎉</h2>
+<p style="color:gold;margin-top:12px;font-size:20px;font-weight:900">Bonus: KSh 5800</p>
+<button onclick="alert('KSh 5800 Withdraw Request Sent! Admin will pay via Paybill 714777')" style="width:100%;margin-top:20px;padding:18px;background:gold;color:black;border:none;border-radius:50px;font-weight:900;font-size:18px">Withdraw KSh 5800</button>
+<p style="margin-top:30px;font-size:13px;color:#aaa">Admin: admin / 325812</p>
+<button onclick="location.reload()" style="margin-top:12px;background:none;border:1px solid white;color:white;padding:10px 20px;border-radius:50px">Logout</button>
 </div>
 
 </div>
 <script>
-function b(){
-if(fn.value==""){alert("Fill name");return;}
-a.style.display="none";b.style.display="block";
+function goB(){
+if(document.getElementById('fn').value==""){alert("Enter Full Name");return;}
+document.getElementById('a').style.display="none";
+document.getElementById('b').style.display="block";
 }
-function c(x){
-am.innerText="KSh "+x;
-b.style.display="none";c.style.display="block";
+function goC(x){
+document.getElementById('am').innerText="KSh "+x;
+document.getElementById('b').style.display="none";
+document.getElementById('c').style.display="block";
 }
-function d(){
-if(mc.value==""){alert("Enter code");return;}
-c.style.display="none";d.style.display="block";
+function goD(){
+if(document.getElementById('mc').value==""){alert("Enter MPESA Code");return;}
+document.getElementById('c').style.display="none";
+document.getElementById('d').style.display="block";
 }
 </script>
 </body>
